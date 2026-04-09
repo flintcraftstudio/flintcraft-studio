@@ -2,8 +2,17 @@ package view
 
 import "time"
 
-// SiteName is the display name used in templates. Override per-project.
-const SiteName = "Standard Template"
+// SiteName is the display name used in templates.
+const SiteName = "FlintCraft Studio"
+
+// Tagline is the brand tagline displayed in the nav.
+const Tagline = "Still shaped by hand."
+
+// Contact info
+const (
+	Phone = "(406) 871-9875"
+	Email = "logan@fireflysoftware.dev"
+)
 
 // Tracking IDs and Turnstile site key, set once at startup from config.
 var (

@@ -2,12 +2,20 @@ package view
 
 templ Base(title, description string, body templ.Component) {
 	<!DOCTYPE html>
-	<html lang="en" class="bg-ff-dark text-ff-cream">
+	<html lang="en" class="bg-fc-birchwood text-fc-obsidian">
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<meta name="description" content={ description }/>
 			<title>{ title } | { SiteName }</title>
+			<!-- Favicons -->
+			<link rel="icon" href="/static/favicon/favicon.ico" sizes="32x32"/>
+			<link rel="icon" href="/static/favicon/favicon.svg" type="image/svg+xml"/>
+			<link rel="apple-touch-icon" href="/static/favicon/apple-touch-icon.png"/>
+			<link rel="manifest" href="/static/favicon/site.webmanifest"/>
+			<!-- Fonts -->
+			<link rel="preconnect" href="https://fonts.googleapis.com"/>
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 			if GtagID != "" {
 				<script async src={ "https://www.googletagmanager.com/gtag/js?id=" + GtagID }></script>
 				@gtagInit()
@@ -23,14 +31,12 @@ templ Base(title, description string, body templ.Component) {
 			<script src="/static/js/htmx.min.js" defer></script>
 			<script src="/static/js/alpine.min.js" defer></script>
 		</head>
-		<body class="min-h-screen font-body text-[15px] font-light antialiased">
-			<canvas id="firefly-canvas" class="pointer-events-none fixed inset-0 z-[5] h-full w-full"></canvas>
+		<body class="min-h-screen font-body text-[15px] font-light antialiased leading-[1.7]">
 			@Nav()
 			<main>
 				@body
 			</main>
 			@Footer()
-			<script src="/static/js/fireflies.js" defer></script>
 		</body>
 	</html>
 }

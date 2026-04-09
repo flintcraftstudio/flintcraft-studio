@@ -1,89 +1,196 @@
 package view
 
 templ HomePage() {
-	@Base("Home", "Fast, handcrafted websites built with Go and Tailwind CSS.", homeContent())
+	@Base("Home", "Custom websites and software for businesses that have outgrown their first site. Helena, Montana.", homeContent())
 }
 
 templ homeContent() {
 	<!-- Hero -->
-	<section class="relative overflow-hidden py-24 sm:py-32">
-		<div class="mx-auto max-w-5xl px-6 sm:px-12">
-			<p class="mb-4 text-[11px] font-medium uppercase tracking-[0.2em] text-ff-dusk">Client Name</p>
-			<h1 class="max-w-2xl font-display text-[42px] font-medium leading-tight tracking-tight text-ff-paper sm:text-[68px] sm:leading-[1.05]">
-				A headline that says something&nbsp;memorable.
+	<section class="bg-fc-birchwood py-20 sm:py-28">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			@eyebrow("FlintCraft Studio")
+			<h1 class="max-w-3xl font-display text-[48px] font-normal leading-[1.1] tracking-[-0.01em] text-fc-obsidian sm:text-[64px]">
+				<em class="italic">Carved for purpose.</em>
 			</h1>
-			<p class="mt-6 max-w-xl text-[15px] font-light leading-relaxed text-ff-ash">
-				Replace this with a short paragraph about the client. Keep it to two or three sentences that explain what they do and why visitors should care.
+			<p class="mt-6 max-w-xl text-[15px] font-light leading-[1.7] text-[#4a4239]">
+				WordPress, Wix, and Squarespace made it easy to get started. They make it expensive to stay. We build custom sites that replace all of it — for one monthly rate, no upfront cost, no runaround.
 			</p>
 			<div class="mt-10 flex flex-wrap gap-4">
-				<a href="/contact" class="rounded-sm bg-ff-dusk px-[26px] py-[13px] text-[12px] font-medium uppercase tracking-[0.12em] text-white transition hover:bg-ff-dusk-hover active:scale-[0.98]">
-					Get in touch
+				<a
+					href="/contact"
+					class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
+				>
+					Start a project
 				</a>
-				<a href="#services" class="rounded-sm px-[26px] py-[13px] text-[12px] font-medium uppercase tracking-[0.08em] text-ff-ash transition hover:text-ff-cream">
-					Learn more &gt;
+				<a
+					href="/work"
+					class="border-b-[1.5px] border-fc-ember px-0 py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
+				>
+					See our work &rarr;
 				</a>
 			</div>
 		</div>
-		<!-- Subtle radial glow -->
-		<div class="pointer-events-none absolute -right-20 -top-[60px] h-[420px] w-[500px] bg-[radial-gradient(at_65%_30%,#1e2d52_0%,#161a24_55%,transparent_80%)]"></div>
 	</section>
 
 	<!-- Stats -->
-	<section class="border-y border-ff-border">
-		<div class="mx-auto grid max-w-5xl grid-cols-2 divide-x divide-ff-border sm:grid-cols-4">
-			@stat("100%", "Uptime SLA")
-			@stat("< 1s", "Page loads")
-			@stat("0", "WordPress dependencies")
-			@stat("24h", "Support response")
+	<section class="border-y border-fc-slate-rim bg-fc-parchment">
+		<div class="mx-auto grid max-w-content grid-cols-2 divide-x divide-fc-slate-rim sm:grid-cols-4">
+			@stat("100%", "Deadlines met")
+			@stat("2", "Engineers — you always know who built it")
+			@stat("0", "Templates — every line written for you")
+			@stat("Same day", "Support response")
+		</div>
+	</section>
+
+	<!-- Credentialing -->
+	<section class="bg-fc-birchwood py-20 sm:py-24">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			<div class="max-w-2xl">
+				@eyebrow("Who we are")
+				<h2 class="font-display text-[32px] font-normal tracking-normal text-fc-obsidian sm:text-[40px]">
+					Small by design. Accountable by nature.
+				</h2>
+				<div class="mt-8 space-y-4 text-[15px] font-light leading-[1.7] text-[#4a4239]">
+					<p>
+						FlintCraft Studio is a small custom development studio in Helena, Montana. We build websites and software for small businesses that have outgrown the platforms they started on — or never wanted to start there in the first place.
+					</p>
+					<p>
+						Everything we ship is written from scratch. No WordPress. No plugins. No templates. No page builders. Clean, fast, maintainable code that we host, maintain, and stand behind.
+					</p>
+					<p>
+						We're small by design. Every project has a named owner. You'll always know who to call — and it won't be a support ticket.
+					</p>
+				</div>
+			</div>
 		</div>
 	</section>
 
 	<!-- Services -->
-	<section id="services" class="py-24 sm:py-[80px]">
-		<div class="mx-auto max-w-5xl px-6 sm:px-12">
-			@eyebrow("What we offer")
-			<h2 class="mb-12 font-display text-[36px] font-medium tracking-tight text-ff-paper sm:text-[52px]">Services</h2>
+	<section class="bg-fc-obsidian py-20 sm:py-24">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			@eyebrowDark("What we build")
+			<h2 class="mb-12 font-display text-[32px] font-normal text-fc-parchment sm:text-[40px]">Services</h2>
 			<div class="grid gap-6 sm:grid-cols-3">
-				@serviceCard("Websites", "Fast, responsive marketing sites handcrafted with modern tools. No bloated page builders.")
-				@serviceCard("Development", "Custom software built to solve your specific problems, not shoehorned into a template.")
-				@serviceCard("Support", "Ongoing maintenance, updates, and a real person to call when something needs to change.")
+				@serviceCard(
+					"Websites",
+					"We replace WordPress, Wix, Squarespace, and AI-generated sites with something actually built for your business. Custom code, no plugins, no templates. Hosted and maintained by the people who built it.",
+				)
+				@serviceCard(
+					"Software",
+					"Most off-the-shelf tools almost fit. We build custom tools your business owns outright. No recurring fees, no features you'll never use.",
+				)
+				@serviceCard(
+					"Ongoing support",
+					"Hosting, security, updates, and edits — handled. One monthly rate, no surprises. When something needs attention you call us directly. Not a help desk.",
+				)
+			</div>
+		</div>
+	</section>
+
+	<!-- Comparison -->
+	<section class="bg-fc-parchment py-20 sm:py-24">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			@eyebrow("Why switch")
+			<h2 class="mb-10 font-display text-[32px] font-normal text-fc-obsidian sm:text-[40px]">
+				Tired of WordPress? You're not alone.
+			</h2>
+			<div class="overflow-x-auto">
+				<table class="w-full text-left text-[13px]">
+					<thead>
+						<tr class="border-b border-fc-slate-rim">
+							<th class="pb-3 pr-6 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-trail-dust"></th>
+							<th class="pb-3 pr-6 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-trail-dust">WordPress / Wix / Squarespace</th>
+							<th class="pb-3 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-ember">FlintCraft Standard</th>
+						</tr>
+					</thead>
+					<tbody class="text-[#4a4239]">
+						@compRow("Monthly cost", "$150–$250+", "$375")
+						@compRow("Built for your business", "No", "Yes")
+						@compRow("Plugin dependencies", "Many", "None")
+						@compRow("Who maintains it", "Varies — often overseas", "Us. Same people who built it.")
+						@compRow("Response time", "24–72 hours", "Same day")
+						@compRow("SEO approach", "One-size plugin", "Written for your market")
+						@compRow("When it breaks", "Support ticket", "Phone call")
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+	<!-- Commitment -->
+	<section class="bg-fc-birchwood py-20 sm:py-24">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			<div class="max-w-2xl">
+				@eyebrow("Our commitment")
+				<h2 class="font-display text-[32px] font-normal text-fc-obsidian sm:text-[40px]">
+					A few things never change.
+				</h2>
+				<div class="mt-8 space-y-3 text-[15px] font-light leading-[1.7] text-[#4a4239]">
+					<p>We quote before we start. The rate doesn't change mid-engagement.</p>
+					<p>You'll never wonder who's working on your site.</p>
+					<p>We don't disappear after launch — that's the whole point of the monthly model.</p>
+				</div>
+				<p class="mt-6 font-display text-[15px] italic tracking-[0.02em] text-fc-ember">
+					"As durable as the mountains, and just as unlikely to move to San Francisco."
+				</p>
+				<p class="mt-1 text-[11px] font-medium uppercase tracking-[0.18em] text-fc-trail-dust">
+					Helena, MT &middot; Est. 2019
+				</p>
 			</div>
 		</div>
 	</section>
 
 	<!-- CTA -->
-	<section class="relative overflow-hidden border-t border-ff-border">
-		<div class="mx-auto max-w-5xl px-6 py-24 text-center sm:px-12 sm:py-[80px]">
-			<h2 class="font-display text-[36px] font-medium tracking-tight text-ff-paper">Ready to start?</h2>
-			<p class="mx-auto mt-4 max-w-md text-ff-ash">
-				Tell us about your project. We'll get back to you within one business day.
+	<section class="bg-fc-obsidian py-20 sm:py-24">
+		<div class="mx-auto max-w-content px-6 text-center lg:px-8">
+			<h2 class="font-display text-[32px] font-normal text-fc-parchment sm:text-[40px]">
+				Let's talk about your project.
+			</h2>
+			<p class="mx-auto mt-4 max-w-md text-[15px] font-light text-fc-trail-dust">
+				Tell us what platform you're on and what's frustrating you — that's enough to start. We'll tell you honestly whether a switch makes sense.
 			</p>
-			<a href="/contact" class="mt-10 inline-block rounded-sm bg-ff-dusk px-[26px] py-[13px] text-[12px] font-medium uppercase tracking-[0.12em] text-white transition hover:bg-ff-dusk-hover active:scale-[0.98]">
+			<a
+				href="/contact"
+				class="mt-10 inline-block rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
+			>
 				Start a project
 			</a>
 		</div>
-		<!-- Subtle radial glow -->
-		<div class="pointer-events-none absolute -bottom-20 -left-[60px] h-[380px] w-[480px] bg-[radial-gradient(at_30%_70%,#1e2d52_0%,#161a24_55%,transparent_80%)]"></div>
 	</section>
 }
 
 templ eyebrow(label string) {
-	<div class="mb-6 flex items-center gap-3">
-		<span class="block h-px w-7 bg-ff-dusk"></span>
-		<span class="text-[11px] font-medium uppercase tracking-[0.2em] text-ff-dusk">{ label }</span>
+	<div class="mb-4">
+		<div class="mb-2 h-px w-7 bg-fc-ember"></div>
+		<span class="text-[10px] font-medium uppercase tracking-[0.18em] text-fc-trail-dust">{ label }</span>
+	</div>
+}
+
+templ eyebrowDark(label string) {
+	<div class="mb-4">
+		<div class="mb-2 h-px w-7 bg-fc-ember"></div>
+		<span class="text-[10px] font-medium uppercase tracking-[0.18em] text-[#8a7d6e]">{ label }</span>
 	</div>
 }
 
 templ stat(value, label string) {
 	<div class="px-6 py-8 text-center">
-		<p class="font-display text-[22px] font-medium text-ff-paper">{ value }</p>
-		<p class="mt-1 text-[13px] text-ff-ash">{ label }</p>
+		<p class="font-display text-[22px] font-semibold text-fc-obsidian">{ value }</p>
+		<p class="mt-1 text-[12px] font-light text-fc-trail-dust">{ label }</p>
 	</div>
 }
 
 templ serviceCard(title, description string) {
-	<div class="rounded border border-ff-border bg-ff-panel p-7 transition hover:border-[#5b7ec452]">
-		<h3 class="mb-2 font-display text-[22px] font-medium text-ff-paper">{ title }</h3>
-		<p class="text-[13px] font-light leading-relaxed text-ff-ash">{ description }</p>
+	<div class="rounded-[6px] border border-fc-flint bg-fc-flint p-7">
+		<h3 class="mb-3 font-display text-[22px] font-normal text-fc-parchment">{ title }</h3>
+		<p class="text-[13px] font-light leading-[1.6] text-[#8a7d6e]">{ description }</p>
 	</div>
+}
+
+templ compRow(label, them, us string) {
+	<tr class="border-b border-fc-slate-rim">
+		<td class="py-3 pr-6 font-medium text-fc-obsidian">{ label }</td>
+		<td class="py-3 pr-6">{ them }</td>
+		<td class="py-3 font-medium text-fc-obsidian">{ us }</td>
+	</tr>
 }
