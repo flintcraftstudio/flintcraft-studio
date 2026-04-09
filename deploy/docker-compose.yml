@@ -1,0 +1,6 @@
+services:
+  app:
+    image: ghcr.io/firefly-software/flintcraft-studio:latest
+    restart: unless-stopped
+    ports:
+      - "8080:80"
