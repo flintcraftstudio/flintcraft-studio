@@ -13,7 +13,7 @@ templ homeContent() {
 				<em class="italic">Carved for purpose.</em>
 			</h1>
 			<p class="mt-6 max-w-xl text-[15px] font-light leading-[1.7] text-[#4a4239]">
-				WordPress, Wix, and Squarespace made it easy to get started. They make it expensive to stay. We build custom sites that replace all of it — for one monthly rate, no upfront cost, no runaround.
+				WordPress, Wix, and Squarespace made it easy to get started. They make it expensive to stay. Plugin subscriptions that break on updates. Overseas support teams that don't know your site. Template designs that look like everyone else's. We build custom sites that replace all of it — for one monthly rate, no upfront cost, no runaround.
 			</p>
 			<div class="mt-10 flex flex-wrap gap-4">
 				<a
@@ -61,6 +61,12 @@ templ homeContent() {
 						We're small by design. Every project has a named owner. You'll always know who to call — and it won't be a support ticket.
 					</p>
 				</div>
+				<p class="mt-8 font-display text-[15px] italic tracking-[0.02em] text-fc-ember">
+					"As durable as the mountains, and just as unlikely to move to San Francisco."
+				</p>
+				<p class="mt-1 text-[11px] font-medium uppercase tracking-[0.18em] text-fc-trail-dust">
+					Helena, MT &middot; Est. 2019
+				</p>
 			</div>
 		</div>
 	</section>
@@ -73,15 +79,24 @@ templ homeContent() {
 			<div class="grid gap-6 sm:grid-cols-3">
 				@serviceCard(
 					"Websites",
+					"The last website you'll have to think about.",
 					"We replace WordPress, Wix, Squarespace, and AI-generated sites with something actually built for your business. Custom code, no plugins, no templates. Hosted and maintained by the people who built it.",
+					"See our website work",
+					"/work",
 				)
 				@serviceCard(
 					"Software",
+					"Software that fits the way you actually work.",
 					"Most off-the-shelf tools almost fit. We build custom tools your business owns outright. No recurring fees, no features you'll never use.",
+					"See our software work",
+					"/work",
 				)
 				@serviceCard(
 					"Ongoing support",
+					"A developer on call. Not a ticket queue.",
 					"Hosting, security, updates, and edits — handled. One monthly rate, no surprises. When something needs attention you call us directly. Not a help desk.",
+					"Ask about support",
+					"/contact",
 				)
 			</div>
 		</div>
@@ -91,9 +106,12 @@ templ homeContent() {
 	<section class="bg-fc-parchment py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			@eyebrow("Why switch")
-			<h2 class="mb-10 font-display text-[32px] font-normal text-fc-obsidian sm:text-[40px]">
+			<h2 class="font-display text-[32px] font-normal text-fc-obsidian sm:text-[40px]">
 				Tired of WordPress? You're not alone.
 			</h2>
+			<p class="mb-10 mt-6 max-w-2xl text-[15px] font-light leading-[1.7] text-[#4a4239]">
+				A typical small business on WordPress is paying for managed hosting, a maintenance plan, a security plugin, an SEO plugin, a backup service, and a form builder — a stack that still breaks when a plugin updates, still looks like a template, and still goes to voicemail when something goes wrong.
+			</p>
 			<div class="overflow-x-auto">
 				<table class="w-full text-left text-[13px]">
 					<thead>
@@ -104,7 +122,6 @@ templ homeContent() {
 						</tr>
 					</thead>
 					<tbody class="text-[#4a4239]">
-						@compRow("Monthly cost", "$150–$250+", "$375")
 						@compRow("Built for your business", "No", "Yes")
 						@compRow("Plugin dependencies", "Many", "None")
 						@compRow("Who maintains it", "Varies — often overseas", "Us. Same people who built it.")
@@ -114,6 +131,9 @@ templ homeContent() {
 					</tbody>
 				</table>
 			</div>
+			<p class="mt-10 max-w-2xl text-[15px] font-light leading-[1.7] text-[#4a4239]">
+				Most businesses that switch don't look back. They just stop dealing with the things that were costing them time.
+			</p>
 		</div>
 	</section>
 
@@ -130,12 +150,6 @@ templ homeContent() {
 					<p>You'll never wonder who's working on your site.</p>
 					<p>We don't disappear after launch — that's the whole point of the monthly model.</p>
 				</div>
-				<p class="mt-6 font-display text-[15px] italic tracking-[0.02em] text-fc-ember">
-					"As durable as the mountains, and just as unlikely to move to San Francisco."
-				</p>
-				<p class="mt-1 text-[11px] font-medium uppercase tracking-[0.18em] text-fc-trail-dust">
-					Helena, MT &middot; Est. 2019
-				</p>
 			</div>
 		</div>
 	</section>
@@ -146,12 +160,12 @@ templ homeContent() {
 			<h2 class="font-display text-[32px] font-normal text-fc-parchment sm:text-[40px]">
 				Let's talk about your project.
 			</h2>
-			<p class="mx-auto mt-4 max-w-md text-[15px] font-light text-fc-trail-dust">
+			<p class="mx-auto mt-4 max-w-md text-[15px] font-light text-fc-ash">
 				Tell us what platform you're on and what's frustrating you — that's enough to start. We'll tell you honestly whether a switch makes sense.
 			</p>
 			<a
 				href="/contact"
-				class="mt-10 inline-block rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
+				class="mt-10 inline-block rounded-[3px] bg-fc-spark px-[22px] py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-obsidian transition hover:bg-fc-ember active:scale-[0.97]"
 			>
 				Start a project
 			</a>
@@ -169,7 +183,7 @@ templ eyebrow(label string) {
 templ eyebrowDark(label string) {
 	<div class="mb-4">
 		<div class="mb-2 h-px w-7 bg-fc-ember"></div>
-		<span class="text-[10px] font-medium uppercase tracking-[0.18em] text-[#8a7d6e]">{ label }</span>
+		<span class="text-[10px] font-medium uppercase tracking-[0.18em] text-fc-ash">{ label }</span>
 	</div>
 }
 
@@ -180,10 +194,17 @@ templ stat(value, label string) {
 	</div>
 }
 
-templ serviceCard(title, description string) {
-	<div class="rounded-[6px] border border-fc-flint bg-fc-flint p-7">
-		<h3 class="mb-3 font-display text-[22px] font-normal text-fc-parchment">{ title }</h3>
-		<p class="text-[13px] font-light leading-[1.6] text-[#8a7d6e]">{ description }</p>
+templ serviceCard(label, headline, description, ctaLabel, ctaHref string) {
+	<div class="flex flex-col rounded-[6px] border border-fc-flint bg-fc-flint p-7">
+		<p class="mb-3 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-spark">{ label }</p>
+		<h3 class="mb-4 font-display text-[22px] font-normal leading-[1.25] text-fc-parchment">{ headline }</h3>
+		<p class="text-[13px] font-light leading-[1.6] text-fc-ash">{ description }</p>
+		<a
+			href={ templ.SafeURL(ctaHref) }
+			class="mt-6 inline-flex text-[12px] font-medium uppercase tracking-[0.06em] text-fc-spark transition hover:brightness-110"
+		>
+			{ ctaLabel } &rarr;
+		</a>
 	</div>
 }
 

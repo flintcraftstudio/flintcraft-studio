@@ -6,7 +6,7 @@
 
 @layer base {
   ::selection {
-    background: rgba(158, 82, 21, 0.25);
-    color: #1a1714;
+    background: rgba(204, 94, 26, 0.25);
+    color: #232226;
   }
 }

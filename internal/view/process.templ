@@ -1,0 +1,124 @@
+package view
+
+templ ProcessPage() {
+	@Base("Process", "Six steps from first call to launch. How FlintCraft Studio builds websites and software.", processContent())
+}
+
+templ processContent() {
+	<!-- Hero -->
+	<section class="bg-fc-birchwood py-20 sm:py-28">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			@eyebrow("How we work")
+			<h1 class="max-w-3xl font-display text-[42px] font-normal leading-[1.1] tracking-[-0.01em] text-fc-obsidian sm:text-[56px]">
+				Six steps. <em class="italic">No surprises.</em> That's the point.
+			</h1>
+			<p class="mt-6 max-w-xl text-[15px] font-light leading-[1.7] text-[#4a4239]">
+				Every project is different. The process isn't. Here's exactly what working with FlintCraft Studio looks like — from the first call to the day your site goes live.
+			</p>
+		</div>
+	</section>
+
+	<!-- Philosophy -->
+	<section class="border-y border-fc-slate-rim bg-fc-parchment py-16 sm:py-20">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			<p class="max-w-2xl font-display text-[22px] italic leading-[1.4] text-fc-ember sm:text-[26px]">
+				"We do the work first, then ask for your reaction."
+			</p>
+			<p class="mt-6 max-w-2xl text-[15px] font-light leading-[1.7] text-[#4a4239]">
+				You're the expert on your business. We're the experts on the build. Our job is to bring you something finished enough to have an opinion about — not to pepper you with questions and put the blank page in your lap.
+			</p>
+		</div>
+	</section>
+
+	<!-- The six steps -->
+	<section class="bg-fc-birchwood py-20 sm:py-24">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			<div class="space-y-14">
+				@processStep("01", "Discover") {
+					<p>The first conversation is a scoping call — no sales pitch, no deck. We talk through what you need, what you've tried, and what success looks like for your business. If we're a good fit, we'll tell you. If we're not, we'll tell you that too. By the end of this call you'll have a clear sense of scope, timeline, and whether we're the right people to build it.</p>
+				}
+				@processStep("02", "Agree") {
+					<p>If the scoping call goes well, we put it in writing. We send over a project proposal that covers scope, deliverables, timeline, and terms — in plain English, not legal boilerplate. No work starts until both sides have signed. This protects you as much as it protects us. You know exactly what you're getting before anything changes hands.</p>
+				}
+				@processStep("03", "Research") {
+					<p>Before we open a design tool, we research your market, identify what successful competitors are doing well, and establish what good looks like in your space. Then we build two or three brand and UI direction examples — different enough to be a real choice, grounded enough to be buildable. You pick a direction and tell us what you like and what you don't. That's the whole ask. No mood boards to assemble, no questionnaires to fill out. We bring the options; you steer.</p>
+				}
+				@processStep("04", "Build") {
+					<p>Once a direction is agreed, we build. <strong class="font-medium text-fc-obsidian">You get a public URL from day one</strong> — you can watch the site take shape without scheduling a call or waiting for a demo. We work through the core pages first: landing page, services, about, contact.</p>
+					<p class="mt-4">When the first full draft is ready, we send you a list of every factual claim the site makes about your business — guarantees, credentials, years of experience, service areas, all of it. You go down the list and tell us what to change. Most owners don't have time to write copy from scratch, and it's faster for everyone if you're correcting something finished than building it from nothing.</p>
+				}
+				@processStep("05", "Refine") {
+					<p>This is where the site gets finished. You've seen the full draft, you've verified the claims, and now you have something real to react to. Most clients find it easier to say what they want to change once they can see what they have. We go through the revision rounds included in your plan — copy, layout, visuals, mobile behavior. If you need more, we'll scope that conversation honestly. When you're satisfied, we move to launch.</p>
+				}
+				@processStep("06", "Launch") {
+					<p>Before we go live we run a full pre-launch checklist — performance, security, mobile, SEO basics, contact forms, analytics. Then we flip the switch.</p>
+					<p class="mt-4">After launch you receive a written summary of everything that was built and delivered: pages, features, integrations, credentials, and anything you'll need to know going forward. You own all of it — the code, the domain, the content. We don't hold anything hostage.</p>
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- When things shift -->
+	<section class="bg-fc-obsidian py-20 sm:py-24">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			<div class="max-w-2xl">
+				@eyebrowDark("When things shift")
+				<h2 class="font-display text-[32px] font-normal leading-[1.15] text-fc-parchment sm:text-[40px]">
+					What happens if something goes wrong?
+				</h2>
+				<p class="mt-6 text-[15px] font-light leading-[1.7] text-fc-ash">
+					Scope changes. Timelines slip. Clients change their minds — it happens on every project and it's not a crisis. If scope grows beyond what the proposal covers, we'll tell you before we build it, not after. If a deadline is at risk, you'll hear from us first. We'd rather have an uncomfortable conversation early than a bad surprise late. We've never abandoned a project. We don't intend to start.
+				</p>
+				<a
+					href="/terms"
+					class="mt-8 inline-block border-b-[1.5px] border-fc-spark py-[4px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-spark transition hover:brightness-110"
+				>
+					Read our full terms &rarr;
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Final CTA -->
+	<section class="bg-fc-parchment py-20 sm:py-24">
+		<div class="mx-auto max-w-content px-6 text-center lg:px-8">
+			<h2 class="font-display text-[32px] font-normal text-fc-obsidian sm:text-[40px]">
+				Ready to start?
+			</h2>
+			<p class="mx-auto mt-4 max-w-md text-[15px] font-light leading-[1.7] text-[#4a4239]">
+				The first conversation costs nothing. Tell us what you're working on and we'll tell you honestly whether we're the right fit.
+			</p>
+			<div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+				<a
+					href="/contact"
+					class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
+				>
+					Start a project
+				</a>
+				<a
+					href="tel:+14068719875"
+					class="border-b-[1.5px] border-fc-ember px-0 py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
+				>
+					{ Phone }
+				</a>
+			</div>
+		</div>
+	</section>
+}
+
+templ processStep(number, title string) {
+	<article class="border-t border-fc-slate-rim pt-10">
+		<div class="flex flex-col gap-6 sm:flex-row sm:gap-12">
+			<div class="sm:w-28 sm:flex-shrink-0">
+				<p class="font-display text-[42px] font-normal leading-none text-fc-ember sm:text-[48px]">{ number }</p>
+				<p class="mt-3 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-trail-dust">Step</p>
+			</div>
+			<div class="max-w-2xl flex-1">
+				<h3 class="font-display text-[28px] font-normal leading-[1.15] text-fc-obsidian sm:text-[32px]">{ title }</h3>
+				<div class="mt-4 text-[15px] font-light leading-[1.7] text-[#4a4239]">
+					{ children... }
+				</div>
+			</div>
+		</div>
+	</article>
+}

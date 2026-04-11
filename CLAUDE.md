@@ -11,9 +11,8 @@ Same content as the original (pricing, portfolio, team, process, contact). Refer
 ## Commands
 
 ```bash
-# Development (two terminals)
-mage Dev               # Terminal 1: Tailwind CSS watch mode
-go run ./cmd/server    # Terminal 2: Run server on :8080
+# Development
+mage Dev               # Generate templ, build CSS, start server on :8080
 
 # One-time setup
 mage InstallTailwind   # Download platform-specific Tailwind CLI binary
@@ -48,14 +47,15 @@ docker compose up
 
 Full spec in `./design-system.md`. Key points:
 
-**Color tokens** (8 total, closed palette — no gradients, shadows, or additional colors):
-- `fc-obsidian` (#1a1714) — dark bg / text on light
-- `fc-flint` (#2e2924) — dark surface (cards, nav)
-- `fc-ember` (#9e5215) — accent on light backgrounds
-- `fc-spark` (#bf6e2a) — accent on dark backgrounds (never use ember on dark)
+**Color tokens** (9 total, closed palette — no gradients, shadows, or additional colors):
+- `fc-obsidian` (#232226) — dark bg / text on light
+- `fc-flint` (#2e3338) — dark surface (cards, nav)
+- `fc-ember` (#cc5e1a) — accent on light backgrounds
+- `fc-spark` (#db7f36) — accent on dark backgrounds (never use ember on dark)
 - `fc-birchwood` (#faf9f7) — light bg
 - `fc-parchment` (#f0ece5) — light surface
-- `fc-trail-dust` (#6b5f52) — muted/secondary text
+- `fc-trail-dust` (#6b5f52) — muted/secondary text on light backgrounds
+- `fc-ash` (#8a7d6e) — muted/secondary text on dark backgrounds (pairs with trail-dust)
 - `fc-slate-rim` (#d4cfc9) — borders/dividers (0.5px weight)
 
 **Typography**: Cormorant Garamond (display/headlines) + DM Sans (body/UI). Three DM Sans weights only: 300, 400, 500. Cormorant italic reserved for tagline, hero, pull quotes.

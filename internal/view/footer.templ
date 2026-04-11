@@ -15,7 +15,7 @@ templ Footer() {
 							<div class="text-[14px] font-medium uppercase tracking-[0.12em] text-fc-parchment">
 								{ SiteName }
 							</div>
-							<div class="font-display text-[11px] italic tracking-[0.04em] text-fc-trail-dust">
+							<div class="font-display text-[11px] italic tracking-[0.04em] text-fc-ash">
 								{ Tagline }
 							</div>
 						</div>
@@ -25,21 +25,20 @@ templ Footer() {
 				<div class="flex gap-8 text-[12px] uppercase tracking-[0.06em]">
 					@footerLink("Work", "/work")
 					@footerLink("Process", "/process")
-					@footerLink("Pricing", "/pricing")
 					@footerLink("About", "/about")
 					@footerLink("Contact", "/contact")
 				</div>
 			</div>
 			<!-- Contact -->
 			<div class="mt-10 border-t border-fc-flint pt-8">
-				<div class="flex flex-col gap-4 text-[13px] text-fc-trail-dust sm:flex-row sm:items-center sm:gap-8">
+				<div class="flex flex-col gap-4 text-[13px] text-fc-ash sm:flex-row sm:items-center sm:gap-8">
 					<span>{ Phone }</span>
 					<span>{ Email }</span>
 					<span>Helena, Montana</span>
 				</div>
 			</div>
 			<!-- Copyright -->
-			<div class="mt-8 flex flex-col gap-2 text-[11px] text-fc-trail-dust sm:flex-row sm:items-center sm:justify-between">
+			<div class="mt-8 flex flex-col gap-2 text-[11px] text-fc-ash sm:flex-row sm:items-center sm:justify-between">
 				<p>&copy; { fmt.Sprint(Year()) } { SiteName }. All rights reserved.</p>
 				<div class="flex gap-4">
 					<a href="/privacy" class="transition hover:text-fc-parchment">Privacy</a>
@@ -53,7 +52,7 @@ templ Footer() {
 templ footerLink(label, href string) {
 	<a
 		href={ templ.SafeURL(href) }
-		class="text-fc-trail-dust transition hover:text-fc-parchment"
+		class="text-fc-ash transition hover:text-fc-parchment"
 	>
 		{ label }
 	</a>

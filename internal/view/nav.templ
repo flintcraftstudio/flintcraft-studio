@@ -10,7 +10,7 @@ templ Nav() {
 					<div class="text-[14px] font-medium uppercase tracking-[0.12em] text-fc-parchment">
 						{ SiteName }
 					</div>
-					<div class="font-display text-[11px] italic tracking-[0.04em] text-fc-trail-dust">
+					<div class="font-display text-[11px] italic tracking-[0.04em] text-fc-ash">
 						{ Tagline }
 					</div>
 				</div>
@@ -19,7 +19,6 @@ templ Nav() {
 			<div class="hidden items-center gap-6 md:flex">
 				@navLink("Work", "/work")
 				@navLink("Process", "/process")
-				@navLink("Pricing", "/pricing")
 				@navLink("About", "/about")
 				<a
 					href="/contact"
@@ -31,7 +30,7 @@ templ Nav() {
 			<!-- Mobile hamburger -->
 			<button
 				@click="open = !open"
-				class="flex h-8 w-8 items-center justify-center text-fc-trail-dust transition hover:text-fc-parchment md:hidden"
+				class="flex h-8 w-8 items-center justify-center text-fc-ash transition hover:text-fc-parchment md:hidden"
 				aria-label="Toggle menu"
 			>
 				<svg x-show="!open" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -54,11 +53,10 @@ templ Nav() {
 			x-transition:leave-end="opacity-0 -translate-y-1"
 			class="border-t border-fc-flint px-6 pb-6 pt-4 md:hidden"
 		>
-			<div class="mb-3 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-trail-dust">Navigation</div>
+			<div class="mb-3 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-ash">Navigation</div>
 			<div class="flex flex-col gap-3">
 				@mobileNavLink("Work", "/work")
 				@mobileNavLink("Process", "/process")
-				@mobileNavLink("Pricing", "/pricing")
 				@mobileNavLink("About", "/about")
 				<a
 					href="/contact"
@@ -67,7 +65,7 @@ templ Nav() {
 					Start a project
 				</a>
 			</div>
-			<div class="mt-6 border-t border-fc-flint pt-4 text-[12px] text-fc-trail-dust">
+			<div class="mt-6 border-t border-fc-flint pt-4 text-[12px] text-fc-ash">
 				<p>{ Phone }</p>
 				<p class="mt-1">{ Email }</p>
 			</div>
@@ -78,7 +76,7 @@ templ Nav() {
 templ navLink(label, href string) {
 	<a
 		href={ templ.SafeURL(href) }
-		class="text-[12px] uppercase tracking-[0.06em] text-fc-trail-dust transition hover:text-fc-parchment"
+		class="text-[12px] uppercase tracking-[0.06em] text-fc-ash transition hover:text-fc-parchment"
 	>
 		{ label }
 	</a>
@@ -87,7 +85,7 @@ templ navLink(label, href string) {
 templ mobileNavLink(label, href string) {
 	<a
 		href={ templ.SafeURL(href) }
-		class="text-[13px] uppercase tracking-[0.06em] text-fc-trail-dust transition hover:text-fc-parchment"
+		class="text-[13px] uppercase tracking-[0.06em] text-fc-ash transition hover:text-fc-parchment"
 	>
 		{ label }
 	</a>

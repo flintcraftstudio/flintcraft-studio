@@ -9,14 +9,15 @@ module.exports = {
     extend: {
       colors: {
         fc: {
-          obsidian:     "#1a1714",
-          flint:        "#2e2924",
-          ember:        "#9e5215",
-          "ember-dark": "#8a4712",
-          spark:        "#bf6e2a",
+          obsidian:     "#232226",
+          flint:        "#2e3338",
+          ember:        "#cc5e1a",
+          "ember-dark": "#a84b12",
+          spark:        "#db7f36",
           birchwood:    "#faf9f7",
           parchment:    "#f0ece5",
           "trail-dust": "#6b5f52",
+          ash:          "#8a7d6e",
           "slate-rim":  "#d4cfc9",
         },
       },
