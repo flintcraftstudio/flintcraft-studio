@@ -40,4 +40,9 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          script: cd /opt/${{ env.PROJECT }} && docker compose pull && docker compose down && docker compose up -d
+          script: |
+            cd /opt/${{ env.PROJECT }}
+            docker compose pull
+            docker compose down --remove-orphans
+            sleep 2
+            docker compose up -d
