@@ -1,0 +1,116 @@
+package view
+
+templ WorkPage() {
+	@Base("Work", "A selection of recent projects. Websites, software, and the problems behind both.", workContent())
+}
+
+templ workContent() {
+	<!-- Hero -->
+	<section class="bg-fc-birchwood py-20 sm:py-28">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			@eyebrow("Selected work")
+			<h1 class="max-w-3xl font-display text-[48px] font-normal leading-[1.1] tracking-[-0.01em] text-fc-obsidian sm:text-[64px]">
+				<em class="italic">Field reports.</em>
+			</h1>
+			<p class="mt-6 max-w-xl text-[15px] font-light leading-[1.7] text-[#4a4239]">
+				A selection of recent projects. Websites, software, and the problems behind both.
+			</p>
+		</div>
+	</section>
+
+	<!-- Project Cards -->
+	<section class="bg-fc-obsidian py-20 sm:py-24">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			@eyebrowDark("Websites")
+			<h2 class="mb-12 font-display text-[32px] font-normal text-fc-parchment sm:text-[40px]">
+				Marketing sites & brand builds
+			</h2>
+			<div class="grid gap-8 sm:grid-cols-2">
+				for _, slug := range ProjectOrder {
+					if p, ok := Projects[slug]; ok {
+						@projectCard(p)
+					}
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<section class="bg-fc-birchwood py-20 sm:py-24">
+		<div class="mx-auto max-w-content px-6 text-center lg:px-8">
+			<h2 class="font-display text-[32px] font-normal text-fc-obsidian sm:text-[40px]">
+				Have a project in mind?
+			</h2>
+			<p class="mx-auto mt-4 max-w-md text-[15px] font-light text-fc-trail-dust">
+				We're selective about the projects we take on. Tell us what you're working on and we'll tell you whether we're the right fit.
+			</p>
+			<div class="mt-10 flex flex-wrap items-center justify-center gap-6">
+				<a
+					href="/contact"
+					class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
+				>
+					Start a project
+				</a>
+				<a
+					href={ templ.SafeURL("tel:" + Phone) }
+					class="border-b-[1.5px] border-fc-ember px-0 py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
+				>
+					{ Phone }
+				</a>
+			</div>
+		</div>
+	</section>
+}
+
+templ projectCard(p Project) {
+	<a
+		href={ templ.SafeURL("/work/" + p.Slug) }
+		class="group flex flex-col overflow-hidden rounded-[6px] border border-fc-flint bg-fc-flint transition hover:border-fc-spark/30"
+	>
+		if p.Screenshot != "" {
+			<div class="overflow-hidden">
+				<img
+					src={ p.Screenshot }
+					alt={ p.Client + " website screenshot" }
+					width="800"
+					height="542"
+					loading="lazy"
+					class="w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+				/>
+			</div>
+		}
+		<div class="flex flex-1 flex-col p-6">
+			<div class="mb-3 flex flex-wrap items-center gap-3">
+				<span class="text-[10px] font-medium uppercase tracking-[0.16em] text-fc-spark">
+					{ p.Client }
+				</span>
+				<span class="text-[10px] text-fc-ash">
+					{ p.Location }
+				</span>
+			</div>
+			<div class="mb-3 flex flex-wrap gap-2">
+				for _, tag := range p.Tags {
+					<span class="rounded-[20px] border border-fc-ash/30 px-[8px] py-[2px] text-[10px] uppercase tracking-[0.08em] text-fc-ash">
+						{ tag }
+					</span>
+				}
+			</div>
+			<h3 class="mb-3 font-display text-[20px] font-normal leading-[1.25] text-fc-parchment">
+				{ p.Title }
+			</h3>
+			if len(p.Results) > 0 {
+				<div class="mt-auto flex gap-6 border-t border-fc-ash/20 pt-4">
+					for _, r := range p.Results {
+						<div>
+							<div class="font-display text-[20px] font-semibold text-fc-parchment">
+								{ r.Value }
+								<span class="text-[12px] font-normal text-fc-spark">{ r.Unit }</span>
+							</div>
+							<div class="text-[10px] text-fc-ash">{ r.Label }</div>
+						</div>
+					}
+				</div>
+			}
+		</div>
+	</a>
+}
