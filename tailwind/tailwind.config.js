@@ -28,6 +28,10 @@ module.exports = {
       maxWidth: {
         content: "1100px",
       },
+      transitionTimingFunction: {
+        "out-expo":  "cubic-bezier(0.16, 1, 0.3, 1)",
+        "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)",
+      },
     },
   },
   plugins: [],

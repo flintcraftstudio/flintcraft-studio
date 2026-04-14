@@ -37,6 +37,15 @@ templ Base(title, description string, body templ.Component) {
 				@body
 			</main>
 			@Footer()
+		<script>
+			(function(){
+				var io=new IntersectionObserver(function(es){
+					es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('reveal-visible');io.unobserve(e.target);}});
+				},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+				function init(){document.querySelectorAll('[data-reveal]').forEach(function(el){io.observe(el);});}
+				document.readyState==='loading'?document.addEventListener('DOMContentLoaded',init):init();
+			})();
+		</script>
 		</body>
 	</html>
 }

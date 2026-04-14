@@ -6,28 +6,66 @@ templ HomePage() {
 
 templ homeContent() {
 	<!-- Hero -->
-	<section class="bg-fc-birchwood py-20 sm:py-28">
-		<div class="mx-auto max-w-content px-6 lg:px-8">
-			@eyebrow("FlintCraft Studio")
-			<h1 class="max-w-3xl font-display text-[48px] font-normal leading-[1.1] tracking-[-0.01em] text-fc-obsidian sm:text-[64px]">
-				<em class="italic">Carved for purpose.</em>
-			</h1>
-			<p class="mt-6 max-w-xl text-[15px] font-light leading-[1.7] text-[#4a4239]">
-				WordPress, Wix, and Squarespace made it easy to get started. They make it expensive to stay. Plugin subscriptions that break on updates. Overseas support teams that don't know your site. Template designs that look like everyone else's. We build custom sites that replace all of it — for one monthly rate, no upfront cost, no runaround.
-			</p>
-			<div class="mt-10 flex flex-wrap gap-4">
-				<a
-					href="/contact"
-					class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
+	<section class="relative min-h-[580px] overflow-hidden bg-fc-obsidian sm:min-h-[660px]">
+		<!-- Full-bleed image with slow zoom-out on load -->
+		<img
+			x-data="{ ready: false }"
+			x-init="$nextTick(() => ready = true)"
+			:class="ready ? 'scale-100' : 'scale-[1.04]'"
+			src="/static/images/hero.png"
+			alt="Montana mountains at sunset with circuit traces carved into stone"
+			loading="eager"
+			fetchpriority="high"
+			class="absolute inset-0 h-full w-full object-cover object-[center_35%] transition-transform duration-[3000ms] ease-out-expo motion-reduce:transition-none motion-reduce:!scale-100"
+		/>
+		<!-- Global light tint across full image -->
+		<div class="absolute inset-0 bg-fc-obsidian/25"></div>
+		<!-- Deeper scrim behind text: full-width on mobile, left portion on desktop -->
+		<div class="absolute inset-y-0 left-0 w-full bg-fc-obsidian/55 lg:w-[58%]"></div>
+		<!-- Staggered entrance -->
+		<div
+			x-data="{ show: false }"
+			x-init="$nextTick(() => show = true)"
+			class="relative mx-auto max-w-content px-6 py-24 sm:py-32 lg:px-8"
+		>
+			<div class="max-w-[560px]">
+				<div
+					:class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'"
+					class="mb-4 motion-reduce:transition-none transition duration-500 ease-out-quart"
 				>
-					Start a project
-				</a>
-				<a
-					href="/work"
-					class="border-b-[1.5px] border-fc-ember px-0 py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
+					<div class="mb-2 h-px w-7 bg-fc-ember"></div>
+					<span class="text-[10px] font-medium uppercase tracking-[0.18em] text-fc-ash">FlintCraft Studio</span>
+				</div>
+				<h1
+					:class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'"
+					class="font-display text-[40px] font-normal leading-[1.05] tracking-[-0.01em] text-fc-parchment motion-reduce:transition-none transition delay-100 duration-700 ease-out-expo sm:text-[56px] lg:text-[68px]"
 				>
-					See our work &rarr;
-				</a>
+					<em class="italic">Carved for purpose.</em>
+				</h1>
+				<p
+					:class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'"
+					class="mt-6 text-[15px] font-light leading-[1.7] text-fc-ash motion-reduce:transition-none transition delay-200 duration-700 ease-out-quart"
+				>
+					WordPress, Wix, and Squarespace made it easy to get started. They make it expensive to stay. Plugin subscriptions that break on updates. Overseas support teams that don't know your site. Template designs that look like everyone else's. We build custom sites that replace all of it — for one monthly rate, no upfront cost, no runaround.
+				</p>
+				<div
+					:class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'"
+					class="mt-10 flex flex-wrap gap-4 motion-reduce:transition-none transition delay-300 duration-500 ease-out-quart"
+				>
+					<a
+						href="/contact"
+						class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-birchwood transition hover:-translate-y-px hover:bg-fc-ember-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fc-ember active:translate-y-0 active:scale-[0.97]"
+					>
+						Start a project
+					</a>
+					<a
+						href="/work"
+						class="group border-b-[1.5px] border-fc-spark px-0 py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-spark transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fc-spark active:scale-[0.98]"
+					>
+						See our work
+						<span class="ml-0.5 inline-block transition-transform duration-200 ease-out-quart group-hover:translate-x-1 motion-reduce:transition-none">&rarr;</span>
+					</a>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -45,7 +83,7 @@ templ homeContent() {
 	<!-- Credentialing -->
 	<section class="bg-fc-birchwood py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
-			<div class="max-w-2xl">
+			<div data-reveal class="max-w-2xl">
 				@eyebrow("Who we are")
 				<h2 class="font-display text-[32px] font-normal tracking-normal text-fc-obsidian sm:text-[40px]">
 					Small by design. Accountable by nature.
@@ -74,9 +112,11 @@ templ homeContent() {
 	<!-- Services -->
 	<section class="bg-fc-obsidian py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
-			@eyebrowDark("What we build")
-			<h2 class="mb-12 font-display text-[32px] font-normal text-fc-parchment sm:text-[40px]">Services</h2>
-			<div class="grid gap-6 sm:grid-cols-3">
+			<div data-reveal>
+				@eyebrowDark("What we build")
+				<h2 class="mb-12 font-display text-[32px] font-normal text-fc-parchment sm:text-[40px]">Services</h2>
+			</div>
+			<div data-reveal style="transition-delay: 120ms" class="grid gap-6 sm:grid-cols-3">
 				@serviceCard(
 					"Websites",
 					"The last website you'll have to think about.",
@@ -104,7 +144,7 @@ templ homeContent() {
 
 	<!-- Comparison -->
 	<section class="bg-fc-parchment py-20 sm:py-24">
-		<div class="mx-auto max-w-content px-6 lg:px-8">
+		<div data-reveal class="mx-auto max-w-content px-6 lg:px-8">
 			@eyebrow("Why switch")
 			<h2 class="font-display text-[32px] font-normal text-fc-obsidian sm:text-[40px]">
 				Tired of WordPress? You're not alone.
@@ -140,7 +180,7 @@ templ homeContent() {
 	<!-- Commitment -->
 	<section class="bg-fc-birchwood py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
-			<div class="max-w-2xl">
+			<div data-reveal class="max-w-2xl">
 				@eyebrow("Our commitment")
 				<h2 class="font-display text-[32px] font-normal text-fc-obsidian sm:text-[40px]">
 					A few things never change.
@@ -156,7 +196,7 @@ templ homeContent() {
 
 	<!-- CTA -->
 	<section class="bg-fc-obsidian py-20 sm:py-24">
-		<div class="mx-auto max-w-content px-6 text-center lg:px-8">
+		<div data-reveal class="mx-auto max-w-content px-6 text-center lg:px-8">
 			<h2 class="font-display text-[32px] font-normal text-fc-parchment sm:text-[40px]">
 				Let's talk about your project.
 			</h2>
