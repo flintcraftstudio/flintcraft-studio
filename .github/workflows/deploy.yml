@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 env:
-  PROJECT: flintcraft-studio
+  PROJECT: flintcraft
   IMAGE: ghcr.io/flintcraftstudio/flintcraft-studio
 
 jobs:
