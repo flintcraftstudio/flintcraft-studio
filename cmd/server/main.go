@@ -60,6 +60,7 @@ func main() {
 
 	// Pages
 	mux.Handle("GET /{$}", handler.Home())
+	mux.Handle("GET /services", handler.Services())
 	mux.Handle("GET /work", handler.Work())
 	mux.Handle("GET /work/{slug}", handler.WorkProject())
 	mux.Handle("GET /process", handler.Process())

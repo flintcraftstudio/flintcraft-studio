@@ -17,6 +17,7 @@ templ Nav() {
 			</a>
 			<!-- Desktop nav -->
 			<div class="hidden items-center gap-6 md:flex">
+				@navLink("Services", "/services")
 				@navLink("Work", "/work")
 				@navLink("Process", "/process")
 				@navLink("About", "/about")
@@ -55,6 +56,7 @@ templ Nav() {
 		>
 			<div class="mb-3 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-ash">Navigation</div>
 			<div class="flex flex-col gap-3">
+				@mobileNavLink("Services", "/services")
 				@mobileNavLink("Work", "/work")
 				@mobileNavLink("Process", "/process")
 				@mobileNavLink("About", "/about")
