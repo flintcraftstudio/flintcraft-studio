@@ -19,6 +19,7 @@ module.exports = {
           "trail-dust": "#6b5f52",
           ash:          "#8a7d6e",
           "slate-rim":  "#d4cfc9",
+          body:         "#4a4239",
         },
       },
       fontFamily: {

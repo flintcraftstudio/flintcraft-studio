@@ -1,7 +1,7 @@
 package view
 
 templ HomePage() {
-	@Base("Home", "Custom websites and software for businesses that have outgrown their first site. Helena, Montana.", homeContent())
+	@Base("Home", "Custom websites for businesses that have earned their reputation. Helena, Montana.", "/", homeContent())
 }
 
 templ homeContent() {
@@ -34,7 +34,7 @@ templ homeContent() {
 					class="mb-4 motion-reduce:transition-none transition duration-500 ease-out-quart"
 				>
 					<div class="mb-2 h-px w-7 bg-fc-ember"></div>
-					<span class="text-[10px] font-medium uppercase tracking-[0.18em] text-fc-ash">FlintCraft Studio</span>
+					<span class="text-[10px] font-medium uppercase tracking-[0.18em] text-fc-ash">Custom web development &middot; Helena, MT</span>
 				</div>
 				<h1
 					:class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'"
@@ -46,7 +46,7 @@ templ homeContent() {
 					:class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'"
 					class="mt-6 text-[15px] font-light leading-[1.7] text-fc-ash motion-reduce:transition-none transition delay-200 duration-700 ease-out-quart"
 				>
-					WordPress, Wix, and Squarespace made it easy to get started. They make it expensive to stay. Plugin subscriptions that break on updates. Overseas support teams that don't know your site. Template designs that look like everyone else's. We build custom sites that replace all of it — for one monthly rate, no upfront cost, no runaround.
+					One relationship. <em class="font-display italic">Everything handled.</em> For businesses that have earned their reputation and are ready for a website that reflects it.
 				</p>
 				<div
 					:class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'"
@@ -88,9 +88,9 @@ templ homeContent() {
 				<h2 class="font-display text-[32px] font-normal tracking-normal text-fc-obsidian sm:text-[40px]">
 					Small by design. Accountable by nature.
 				</h2>
-				<div class="mt-8 space-y-4 text-[15px] font-light leading-[1.7] text-[#4a4239]">
+				<div class="mt-8 space-y-4 text-[15px] font-light leading-[1.7] text-fc-body">
 					<p>
-						FlintCraft Studio is a small custom development studio in Helena, Montana. We build websites and software for small businesses that have outgrown the platforms they started on — or never wanted to start there in the first place.
+						FlintCraft Studio is a small custom development studio in Helena, Montana. We build websites for businesses that have earned their reputation and are ready for a web presence that reflects it.
 					</p>
 					<p>
 						Everything we ship is written from scratch. No WordPress. No plugins. No templates. No page builders. Clean, fast, maintainable code that we host, maintain, and stand behind.
@@ -109,35 +109,22 @@ templ homeContent() {
 		</div>
 	</section>
 
-	<!-- Services -->
+	<!-- ICP Statement -->
 	<section class="bg-fc-obsidian py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
-			<div data-reveal>
-				@eyebrowDark("What we build")
-				<h2 class="mb-12 font-display text-[32px] font-normal text-fc-parchment sm:text-[40px]">Services</h2>
-			</div>
-			<div data-reveal style="transition-delay: 120ms" class="grid gap-6 sm:grid-cols-3">
-				@serviceCard(
-					"Websites",
-					"The last website you'll have to think about.",
-					"We replace WordPress, Wix, Squarespace, and AI-generated sites with something actually built for your business. Custom code, no plugins, no templates. Hosted and maintained by the people who built it.",
-					"See our website work",
-					"/work",
-				)
-				@serviceCard(
-					"Software",
-					"Software that fits the way you actually work.",
-					"Most off-the-shelf tools almost fit. We build custom tools your business owns outright. No recurring fees, no features you'll never use.",
-					"See our software work",
-					"/work",
-				)
-				@serviceCard(
-					"Ongoing support",
-					"A developer on call. Not a ticket queue.",
-					"Hosting, security, updates, and edits — handled. One monthly rate, no surprises. When something needs attention you call us directly. Not a help desk.",
-					"Ask about support",
-					"/contact",
-				)
+			<div data-reveal class="max-w-2xl">
+				@eyebrowDark("Who we work with")
+				<h2 class="font-display text-[32px] font-normal text-fc-parchment sm:text-[40px]">
+					Done improvising. Ready to build something that lasts.
+				</h2>
+				<div class="mt-8 space-y-4 text-[15px] font-light leading-[1.7] text-fc-ash">
+					<p>
+						You've done the hard part. You built something real, earned real customers, and proven the business works. Your website is the one thing you never got right — or the one thing you built when you were still figuring everything out.
+					</p>
+					<p>
+						FlintCraft takes what you've built and shapes it into something worthy of it. A website that reflects your reputation, converts the right customers, and stays sharp without you having to think about it.
+					</p>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -147,10 +134,10 @@ templ homeContent() {
 		<div data-reveal class="mx-auto max-w-content px-6 lg:px-8">
 			@eyebrow("Why switch")
 			<h2 class="font-display text-[32px] font-normal text-fc-obsidian sm:text-[40px]">
-				Tired of WordPress? You're not alone.
+				Tired of your current setup? You're not alone.
 			</h2>
-			<p class="mb-10 mt-6 max-w-2xl text-[15px] font-light leading-[1.7] text-[#4a4239]">
-				A typical small business on WordPress is paying for managed hosting, a maintenance plan, a security plugin, an SEO plugin, a backup service, and a form builder — a stack that still breaks when a plugin updates, still looks like a template, and still goes to voicemail when something goes wrong.
+			<p class="mb-10 mt-6 max-w-2xl text-[15px] font-light leading-[1.7] text-fc-body">
+				A typical small business cobbles together managed hosting, a maintenance plan, a security plugin, a form builder, and a developer they can never get on the phone. That stack still breaks, still looks like a template, and still goes to voicemail when something goes wrong.
 			</p>
 			<div class="overflow-x-auto">
 				<table class="w-full text-left text-[13px]">
@@ -158,10 +145,10 @@ templ homeContent() {
 						<tr class="border-b border-fc-slate-rim">
 							<th class="pb-3 pr-6 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-trail-dust"></th>
 							<th class="pb-3 pr-6 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-trail-dust">WordPress / Wix / Squarespace</th>
-							<th class="pb-3 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-ember">FlintCraft Standard</th>
+							<th class="pb-3 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-ember">FlintCraft</th>
 						</tr>
 					</thead>
-					<tbody class="text-[#4a4239]">
+					<tbody class="text-fc-body">
 						@compRow("Built for your business", "No", "Yes")
 						@compRow("Plugin dependencies", "Many", "None")
 						@compRow("Who maintains it", "Varies — often overseas", "Us. Same people who built it.")
@@ -171,24 +158,22 @@ templ homeContent() {
 					</tbody>
 				</table>
 			</div>
-			<p class="mt-10 max-w-2xl text-[15px] font-light leading-[1.7] text-[#4a4239]">
-				Most businesses that switch don't look back. They just stop dealing with the things that were costing them time.
-			</p>
 		</div>
 	</section>
 
-	<!-- Commitment -->
+	<!-- Social proof -->
 	<section class="bg-fc-birchwood py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			<div data-reveal class="max-w-2xl">
-				@eyebrow("Our commitment")
-				<h2 class="font-display text-[32px] font-normal text-fc-obsidian sm:text-[40px]">
-					A few things never change.
-				</h2>
-				<div class="mt-8 space-y-3 text-[15px] font-light leading-[1.7] text-[#4a4239]">
-					<p>We quote before we start. The rate doesn't change mid-engagement.</p>
-					<p>You'll never wonder who's working on your site.</p>
-					<p>We don't disappear after launch — that's the whole point of the monthly model.</p>
+				@eyebrow("From our clients")
+				<blockquote class="mt-2">
+					<p class="font-display text-[20px] italic leading-[1.5] tracking-[0.02em] text-fc-ember sm:text-[22px]">
+						"We'd been through two agencies and a freelancer before we found FlintCraft. They were the first team that actually listened to what our business needed instead of pushing a template. Our site loads fast, looks sharp, and we haven't had a single issue since launch."
+					</p>
+				</blockquote>
+				<div class="mt-6">
+					<p class="text-[13px] font-medium text-fc-obsidian">Sarah Mitchell</p>
+					<p class="mt-0.5 text-[12px] text-fc-trail-dust">Owner, Mitchell &amp; Co. Interior Design &middot; Helena, MT</p>
 				</div>
 			</div>
 		</div>
@@ -198,17 +183,30 @@ templ homeContent() {
 	<section class="bg-fc-obsidian py-20 sm:py-24">
 		<div data-reveal class="mx-auto max-w-content px-6 text-center lg:px-8">
 			<h2 class="font-display text-[32px] font-normal text-fc-parchment sm:text-[40px]">
-				Let's talk about your project.
+				Ready to find out if we're the right fit?
 			</h2>
-			<p class="mx-auto mt-4 max-w-md text-[15px] font-light text-fc-ash">
-				Tell us what platform you're on and what's frustrating you — that's enough to start. We'll tell you honestly whether a switch makes sense.
+			<p class="mx-auto mt-4 max-w-lg text-[15px] font-light text-fc-ash">
+				The first conversation costs nothing. We'll look at your current setup before we talk — and come to the call with a clear picture of what we'd do differently. No pitch, no pressure. Just an honest read on whether it makes sense.
 			</p>
-			<a
-				href="/contact"
-				class="mt-10 inline-block rounded-[3px] bg-fc-spark px-[22px] py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-obsidian transition hover:bg-fc-ember active:scale-[0.97]"
-			>
-				Start a project
-			</a>
+			<div class="mx-auto mt-8 flex max-w-md justify-center gap-8 text-[12px] text-fc-ash">
+				<span>Fixed-rate quotes</span>
+				<span>Named project owner</span>
+				<span>Monthly support</span>
+			</div>
+			<div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+				<a
+					href="/contact"
+					class="rounded-[3px] bg-fc-spark px-[22px] py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-obsidian transition hover:bg-fc-ember active:scale-[0.97]"
+				>
+					Start a project
+				</a>
+				<a
+					href="tel:+14068719875"
+					class="border-b-[1.5px] border-fc-spark px-0 py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-spark transition hover:brightness-110 active:scale-[0.98]"
+				>
+					(406) 871-9875
+				</a>
+			</div>
 		</div>
 	</section>
 }
@@ -229,7 +227,7 @@ templ eyebrowDark(label string) {
 
 templ stat(value, label string) {
 	<div class="px-6 py-8 text-center">
-		<p class="font-display text-[22px] font-semibold text-fc-obsidian">{ value }</p>
+		<p class="font-display text-[22px] font-normal text-fc-obsidian">{ value }</p>
 		<p class="mt-1 text-[12px] font-light text-fc-trail-dust">{ label }</p>
 	</div>
 }

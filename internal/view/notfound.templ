@@ -1,7 +1,7 @@
 package view
 
 templ NotFoundPage() {
-	@Base("Page Not Found", "The page you're looking for doesn't exist.", notFoundContent())
+	@Base("Page Not Found", "The page you're looking for doesn't exist.", "", notFoundContent())
 }
 
 templ notFoundContent() {
@@ -11,7 +11,7 @@ templ notFoundContent() {
 			<h1 class="mt-4 font-display text-[42px] font-normal leading-[1.1] text-fc-obsidian sm:text-[64px]">
 				Page not found
 			</h1>
-			<p class="mx-auto mt-6 max-w-md text-[15px] font-light leading-[1.7] text-[#4a4239]">
+			<p class="mx-auto mt-6 max-w-md text-[15px] font-light leading-[1.7] text-fc-body">
 				The page you're looking for doesn't exist or has been moved.
 			</p>
 			<a

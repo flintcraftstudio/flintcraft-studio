@@ -1,6 +1,6 @@
 package view
 
-templ Nav() {
+templ Nav(activePath string) {
 	<nav class="bg-fc-obsidian" x-data="{ open: false }">
 		<div class="mx-auto flex max-w-content items-center justify-between px-6 py-3 lg:px-8">
 			<!-- Brand -->
@@ -17,10 +17,10 @@ templ Nav() {
 			</a>
 			<!-- Desktop nav -->
 			<div class="hidden items-center gap-6 md:flex">
-				@navLink("Services", "/services")
-				@navLink("Work", "/work")
-				@navLink("Process", "/process")
-				@navLink("About", "/about")
+				@navLink("Services", "/services", activePath)
+				@navLink("Work", "/work", activePath)
+				@navLink("Process", "/process", activePath)
+				@navLink("About", "/about", activePath)
 				<a
 					href="/contact"
 					class="rounded-[3px] border border-fc-spark px-[14px] py-[5px] text-[11px] font-medium uppercase tracking-[0.08em] text-fc-spark transition hover:bg-fc-spark hover:text-fc-birchwood active:scale-[0.98]"
@@ -56,10 +56,10 @@ templ Nav() {
 		>
 			<div class="mb-3 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-ash">Navigation</div>
 			<div class="flex flex-col gap-3">
-				@mobileNavLink("Services", "/services")
-				@mobileNavLink("Work", "/work")
-				@mobileNavLink("Process", "/process")
-				@mobileNavLink("About", "/about")
+				@mobileNavLink("Services", "/services", activePath)
+				@mobileNavLink("Work", "/work", activePath)
+				@mobileNavLink("Process", "/process", activePath)
+				@mobileNavLink("About", "/about", activePath)
 				<a
 					href="/contact"
 					class="mt-2 rounded-[3px] border border-fc-spark px-[14px] py-[8px] text-center text-[11px] font-medium uppercase tracking-[0.08em] text-fc-spark transition hover:bg-fc-spark hover:text-fc-birchwood"
@@ -75,19 +75,23 @@ templ Nav() {
 	</nav>
 }
 
-templ navLink(label, href string) {
+templ navLink(label, href, activePath string) {
 	<a
 		href={ templ.SafeURL(href) }
-		class="text-[12px] uppercase tracking-[0.06em] text-fc-ash transition hover:text-fc-parchment"
+		class={ "text-[12px] uppercase tracking-[0.06em] transition hover:text-fc-parchment",
+			templ.KV("text-fc-parchment", href == activePath),
+			templ.KV("text-fc-ash", href != activePath) }
 	>
 		{ label }
 	</a>
 }
 
-templ mobileNavLink(label, href string) {
+templ mobileNavLink(label, href, activePath string) {
 	<a
 		href={ templ.SafeURL(href) }
-		class="text-[13px] uppercase tracking-[0.06em] text-fc-ash transition hover:text-fc-parchment"
+		class={ "text-[13px] uppercase tracking-[0.06em] transition hover:text-fc-parchment",
+			templ.KV("text-fc-parchment", href == activePath),
+			templ.KV("text-fc-ash", href != activePath) }
 	>
 		{ label }
 	</a>

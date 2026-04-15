@@ -1,7 +1,7 @@
 package view
 
 templ ServicesPage() {
-	@Base("Services", "Two tiers of custom website builds — Standard and Advanced. No templates, no page builders, no surprise invoices.", servicesContent())
+	@Base("Services", "One relationship. Everything handled. Custom websites for established businesses.", "/services", servicesContent())
 }
 
 templ servicesContent() {
@@ -12,95 +12,92 @@ templ servicesContent() {
 			<h1 class="max-w-2xl font-display text-[42px] font-normal leading-[1.1] tracking-[-0.01em] text-fc-obsidian sm:text-[56px]">
 				One relationship. <em class="italic text-fc-ember">Everything handled.</em>
 			</h1>
-			<p class="mt-6 max-w-xl text-[15px] font-light leading-[1.7] text-[#4a4239]">
-				Your site is designed, built, hosted, and maintained under one agreement. No surprise invoices. No hunting for a developer when something breaks.
+			<p class="mt-6 max-w-xl text-[15px] font-light leading-[1.7] text-fc-body">
+				For businesses that have earned their reputation and are ready for a website that reflects it.
 			</p>
 		</div>
 	</section>
 
-	<!-- Service tiers -->
-	<section class="bg-fc-obsidian py-20 sm:py-24">
+	<!-- ICP Statement -->
+	<section class="border-y border-fc-slate-rim bg-fc-parchment py-16 sm:py-20">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
-			<div data-reveal class="grid gap-8 lg:grid-cols-2">
-				<!-- Standard -->
-				<div class="flex flex-col rounded-[6px] border border-white/5 bg-fc-flint p-8">
-					<div class="mb-6">
-						<p class="mb-2 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-spark">Standard</p>
-						<h2 class="font-display text-[28px] font-normal leading-[1.15] text-fc-parchment sm:text-[32px]">
-							Up to 6 pages
-						</h2>
-						<p class="mt-3 text-[13px] font-light leading-[1.6] text-fc-ash">
-							Custom design and copy structure for a business that needs to show up professionally online and convert visitors into calls.
-						</p>
-						<p class="mt-3 text-[11px] font-medium uppercase tracking-[0.06em] text-fc-spark">Contact for monthly rate</p>
-					</div>
-					<div class="mb-6">
-						<p class="mb-4 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-ash">What's included</p>
-						<ul class="space-y-3">
-							@serviceFeature("Custom design", "no templates, no page builders, no offshore work")
-							@serviceFeature("Up to 6 pages", "home, services, about, contact, plus two more")
-							@serviceFeature("Copy structure", "we draft the framework, you refine the details")
-							@serviceFeature("Hosting + SSL", "on FlintCraft infrastructure")
-							@serviceFeature("Monthly changes", "copy updates, photos, small additions")
-							@serviceFeature("Google Business Profile", "setup and optimization")
-							@serviceFeature("SEO foundation", "meta tags, schema markup, sitemap")
-							@serviceFeature("Prompt response", "next business day on all requests")
-						</ul>
-					</div>
-					<div class="mt-auto pt-6">
-						<a
-							href="/contact"
-							class="inline-block rounded-[3px] border border-fc-spark px-[22px] py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-spark transition hover:bg-fc-spark hover:text-fc-birchwood active:scale-[0.97]"
-						>
-							Start with Standard
-						</a>
-					</div>
-				</div>
-
-				<!-- Advanced -->
-				<div class="flex flex-col rounded-[6px] border border-fc-spark/30 bg-fc-flint p-8">
-					<div class="mb-6">
-						<p class="mb-2 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-spark">Advanced</p>
-						<h2 class="font-display text-[28px] font-normal leading-[1.15] text-fc-parchment sm:text-[32px]">
-							Up to 12 pages
-						</h2>
-						<p class="mt-3 text-[13px] font-light leading-[1.6] text-fc-ash">
-							Full site build with custom functionality, complete copywriting, and deeper content strategy for businesses that need more than a brochure.
-						</p>
-						<p class="mt-3 text-[11px] font-medium uppercase tracking-[0.06em] text-fc-spark">Contact for monthly rate</p>
-					</div>
-					<div class="mb-6">
-						<p class="mb-4 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-ash">Everything in Standard, plus</p>
-						<ul class="space-y-3">
-							@serviceFeature("Up to 12 pages", "full site architecture and navigation")
-							@serviceFeature("Full copywriting", "we write every page, you approve")
-							@serviceFeature("Expanded monthly changes", "ongoing updates and additions")
-							@serviceFeature("Local SEO expansion", "additional pages targeting nearby cities and markets you serve")
-							@serviceFeature("Custom functionality", "forms, calculators, booking, integrations")
-							@serviceFeature("Brand guide", "color, type, logo usage for consistent future work")
-							@serviceFeature("Priority response", "same business day on all requests")
-						</ul>
-					</div>
-					<div class="mt-auto pt-6">
-						<a
-							href="/contact"
-							class="inline-block rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
-						>
-							Start with Advanced
-						</a>
-					</div>
+			<div data-reveal class="max-w-2xl">
+				@eyebrow("Who this is for")
+				<div class="mt-4 space-y-4 text-[15px] font-light leading-[1.7] text-fc-body">
+					<p>
+						You've done the hard part. You built something real, earned real customers, and proven the business works. Your website is the one thing you never got right — or the one thing you built when you were still figuring everything out.
+					</p>
+					<p>
+						FlintCraft takes what you've built and shapes it into something worthy of it. A website that reflects your reputation, converts the right customers, and stays sharp without you having to think about it.
+					</p>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- Policies -->
-	<section class="border-y border-fc-slate-rim bg-fc-parchment py-16 sm:py-20">
+	<!-- Capabilities -->
+	<section class="bg-fc-obsidian py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
-			<div data-reveal class="grid gap-12 sm:grid-cols-3">
-				@policyItem("Ownership and transfer", "You own your content and design from day one. Your site lives on FlintCraft infrastructure as part of your monthly agreement. If you ever move on, we'll hand over a full file transfer and help with DNS migration.")
-				@policyItem("Custom projects", "Need a web app, estimating tool, or something beyond a marketing site? Custom projects are scoped and priced separately. Write and tell us what you're building.")
-				@policyItem("Direct access", "You'll always know who's working on your site. No ticket queues, no offshore handoffs, no account managers relaying messages. You talk to the person building it.")
+			<div data-reveal>
+				@eyebrowDark("What we do")
+			</div>
+			<div data-reveal style="transition-delay: 120ms" class="mt-8 grid gap-10 sm:grid-cols-2">
+				@capabilityCard(
+					"A site that reflects where you actually are.",
+					"Not where you were when you started. Custom designed, custom built, no templates. When someone finds you online it should feel like the same business they hear about from a referral.",
+				)
+				@capabilityCard(
+					"Copy that does the selling.",
+					"We write it. You verify it. Most owners don't have time to stare at a blank page — so we don't ask you to. We bring something finished, you tell us what to change.",
+				)
+				@capabilityCard(
+					"Built to get found.",
+					"Every site we build includes SEO foundations, Google Business Profile setup and optimization, and copy written for the markets you actually serve. We diagnose the right visibility strategy for your business — local or regional — and build accordingly.",
+				)
+				@capabilityCard(
+					"We watch what's working and adjust.",
+					"After launch we track what's converting and tailor your content around it. If one service is pulling leads and another isn't, we shift. Your site stays aligned with where your business actually makes money.",
+				)
+				@capabilityCard(
+					"Hosting, maintenance, and updates — handled.",
+					"Your site lives on our infrastructure. Security, performance, and uptime are our problem. When something needs updating — new service, new photo, new hours — you call us directly. Not a ticket queue.",
+				)
+				@capabilityCard(
+					"One person to call. Always.",
+					"You'll know who built your site and you'll have their number. That doesn't change after launch.",
+				)
+			</div>
+		</div>
+	</section>
+
+	<!-- Paid visibility callout -->
+	<section class="border-y border-fc-slate-rim bg-fc-parchment py-12 sm:py-16">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			<div data-reveal class="max-w-2xl">
+				@eyebrow("Paid visibility")
+				<p class="mt-4 text-[15px] font-light leading-[1.7] text-fc-body">
+					Some clients need more than organic reach. Google Ads and Facebook campaigns are available as a separate engagement — scoped to your market and managed by the same people who built the site.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Pricing -->
+	<section class="bg-fc-birchwood py-20 sm:py-24">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			<div data-reveal class="max-w-2xl">
+				@eyebrow("What it costs")
+				<h2 class="font-display text-[32px] font-normal text-fc-obsidian sm:text-[40px]">
+					Straightforward pricing. No surprises.
+				</h2>
+				<div class="mt-8 space-y-4 text-[15px] font-light leading-[1.7] text-fc-body">
+					<p>
+						Most FlintCraft engagements run between $150 and $350 per month, all in. No setup fees, no surprise invoices, no separate hosting bill. One rate covers design, build, hosting, maintenance, updates, and ongoing visibility work.
+					</p>
+					<p>
+						Where you land in that range depends on a few things — the complexity of your site, how much copy work is involved, your service area, and how active your content needs to be month to month. We scope that honestly in the first conversation.
+					</p>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -108,27 +105,20 @@ templ servicesContent() {
 	<!-- Commitment -->
 	<section class="bg-fc-obsidian py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
-			<div data-reveal class="grid items-center gap-12 lg:grid-cols-[1fr,auto]">
-				<div class="max-w-xl">
-					@eyebrowDark("Our commitment")
-					<h2 class="font-display text-[32px] font-normal leading-[1.1] text-fc-parchment sm:text-[40px]">
-						Six months. <em class="italic text-fc-ash">That's all we ask.</em>
-					</h2>
-					<div class="mt-6 space-y-4 text-[15px] font-light leading-[1.7] text-fc-ash">
-						<p>
-							We don't lock you into 12- or 24-month contracts. Commit to six months — enough time to build your site, launch it, and see it working. After that, you stay because it's worth it, not because a contract says so.
-						</p>
-						<p>
-							If it's not working after six months, give us 30 days notice and walk away. You keep the site, we hand over everything.
-						</p>
-					</div>
-				</div>
-				<div class="rounded-[6px] border-l-[2.5px] border-fc-spark bg-fc-flint px-8 py-8 lg:max-w-[320px]">
-					<p class="font-display text-[18px] italic leading-[1.4] tracking-[0.02em] text-fc-spark">
-						"We'd rather earn it than keep it."
+			<div data-reveal class="max-w-2xl">
+				@eyebrowDark("How the relationship works")
+				<h2 class="font-display text-[32px] font-normal text-fc-parchment sm:text-[40px]">
+					Six months. That's all we ask.
+				</h2>
+				<div class="mt-8 space-y-4 text-[15px] font-light leading-[1.7] text-fc-ash">
+					<p>
+						We don't do month-to-month. Building something right takes time — design, copy, build, launch, and enough runway to see it working. We ask for six months.
 					</p>
-					<p class="mt-4 text-[13px] font-light leading-[1.6] text-fc-ash">
-						No long-term lock-in. No cancellation fees. After six months, 30 days notice is all it takes.
+					<p>
+						After that, you stay because it's worth it. Thirty days notice is all it takes to end the engagement. You keep everything — the site, the code, the content. No hostage situations.
+					</p>
+					<p>
+						We're also selective about who we take on. Not because we're precious about it, but because a site we've built wrong for the wrong client doesn't help anyone. The first conversation is as much about fit as it is about scope.
 					</p>
 				</div>
 			</div>
@@ -139,16 +129,14 @@ templ servicesContent() {
 	<section class="bg-fc-birchwood py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			@eyebrow("Common questions")
-			<h2 class="mb-12 font-display text-[32px] font-normal leading-[1.15] text-fc-obsidian sm:text-[40px]">
-				Things people ask before signing.
-			</h2>
-			<div data-reveal class="grid gap-x-12 gap-y-10 sm:grid-cols-2">
-				@faqItem("Do I own the site?", "You own all content and the design from day one. Your site lives on FlintCraft infrastructure as part of your monthly agreement — hosting, maintenance, and support are all included. If you ever move on, we hand over everything.")
-				@faqItem("What counts as a monthly change?", "Copy updates, new photos, team member changes, updated hours, adding a page section. Major redesigns or new page builds are scoped separately. Most requests take well under an hour.")
-				@faqItem("How long does the build take?", "Standard sites typically launch in 4\u20136 weeks. Advanced sites run 6\u201310 weeks. The timeline depends heavily on how quickly you can provide assets and approvals.")
-				@faqItem("What if I need more than 12 pages?", "That moves into custom project territory and gets scoped individually. Write and tell us what you're building — most of the time it's more manageable than it sounds.")
-				@faqItem("What happens if I want to cancel?", "After the initial six months, give us 30 days notice. You keep the site and we hand over everything — code, content, DNS. No hostage situations.")
-				@faqItem("What's different from a template site?", "Everything. No WordPress themes, no page builders, no shared hosting with thousands of other sites. Your site is hand-coded, loads fast, and doesn't depend on plugins that break on updates.")
+			<div data-reveal class="mt-8 max-w-2xl space-y-8">
+				@servicesFaqItem("What does the first conversation look like?", "No pitch, no deck. We look at your current setup before we talk — site, search presence, how you're showing up for the customers you want. When we get on the call we walk through what we see: what's working, what isn't, and what we'd do differently. If it makes sense to work together, we'll tell you. If it doesn't, we'll tell you that too.")
+				@servicesFaqItem("Do I own the site?", "After 18 months of active engagement, yes — fully. The code, the design, everything transfers to you and we'll help with the migration. Before that threshold, you have full use of the site as part of your monthly agreement. The six-month clause still protects you — if it's not working, you can exit with 30 days notice. We're transparent about this from the start. It's in the proposal before anything is signed.")
+				@servicesFaqItem("How long does the build take?", "Most sites launch in four to six weeks. Timeline depends on how quickly you can review and approve — we don't sit on things. The faster you can react, the faster you're live.")
+				@servicesFaqItem("What counts as a monthly change?", "Copy updates, new photos, team changes, updated hours, added service descriptions, seasonal content. Anything that takes under an hour. Larger additions — new service lines, structural changes, campaign landing pages — get scoped separately and priced honestly before we touch them.")
+				@servicesFaqItem("What about paid ads — is that included?", "No, but it's available. Google Ads and Facebook campaigns are scoped and managed separately for clients where paid visibility makes sense. We'll tell you in the first conversation whether we think it's worth it for your market.")
+				@servicesFaqItem("Do you work with businesses outside Montana?", "Yes. No geographic limit. We're based in Helena and Montana brands are close to our heart, but most of what we do works just as well over a call and a shared screen. If you're in Billings or Birmingham, the process is the same.")
+				@servicesFaqItem("What happens if I want to cancel?", "After the initial six months, thirty days notice. If you've hit the 18-month mark, you keep the site, the code, the content — all of it. We'll handle the transition and make sure nothing gets lost in the handoff. Before 18 months, we return your digital assets and close out the engagement cleanly.")
 			</div>
 		</div>
 	</section>
@@ -157,10 +145,10 @@ templ servicesContent() {
 	<section class="bg-fc-parchment py-20 sm:py-24">
 		<div data-reveal class="mx-auto max-w-content px-6 text-center lg:px-8">
 			<h2 class="font-display text-[32px] font-normal text-fc-obsidian sm:text-[40px]">
-				Not sure which tier fits?
+				Not sure if we're the right fit?
 			</h2>
-			<p class="mx-auto mt-4 max-w-md text-[15px] font-light leading-[1.7] text-[#4a4239]">
-				Write and describe what you're building. We'll tell you straight.
+			<p class="mx-auto mt-4 max-w-md text-[15px] font-light leading-[1.7] text-fc-body">
+				Write and describe what you're working on. We'll tell you straight.
 			</p>
 			<div class="mt-10 flex flex-wrap items-center justify-center gap-4">
 				<a
@@ -173,30 +161,26 @@ templ servicesContent() {
 					href="/work"
 					class="border-b-[1.5px] border-fc-ember px-0 py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
 				>
-					See our work
+					See our work &rarr;
 				</a>
 			</div>
 		</div>
 	</section>
 }
 
-templ serviceFeature(label, detail string) {
-	<li class="flex items-start gap-3 text-[13px] leading-[1.5]">
-		<span class="mt-[7px] block h-[5px] w-[5px] flex-shrink-0 rounded-full bg-fc-spark"></span>
-		<span class="text-fc-ash"><span class="font-medium text-fc-parchment">{ label }</span> — { detail }</span>
-	</li>
-}
-
-templ policyItem(title, description string) {
-	<div>
-		<h3 class="mb-2 text-[11px] font-medium uppercase tracking-[0.18em] text-fc-obsidian">{ title }</h3>
-		<p class="text-[14px] font-light leading-[1.7] text-[#4a4239]">{ description }</p>
+templ capabilityCard(headline, body string) {
+	<div class="rounded-[6px] border border-fc-flint bg-fc-flint p-7">
+		<h3 class="mb-3 font-display text-[18px] font-normal leading-[1.25] text-fc-parchment">{ headline }</h3>
+		<p class="text-[13px] font-light leading-[1.6] text-fc-ash">{ body }</p>
 	</div>
 }
 
-templ faqItem(question, answer string) {
-	<div>
-		<h3 class="mb-2 text-[15px] font-medium text-fc-obsidian">{ question }</h3>
-		<p class="text-[14px] font-normal leading-[1.7] text-[#4a4239]">{ answer }</p>
-	</div>
+templ servicesFaqItem(question, answer string) {
+	<details class="group border-t border-fc-slate-rim pt-6">
+		<summary class="flex cursor-pointer items-center justify-between font-display text-[18px] font-normal text-fc-obsidian">
+			{ question }
+			<span class="ml-4 text-fc-trail-dust transition group-open:rotate-45">+</span>
+		</summary>
+		<p class="mt-4 text-[14px] font-light leading-[1.7] text-fc-body">{ answer }</p>
+	</details>
 }

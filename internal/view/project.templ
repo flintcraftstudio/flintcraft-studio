@@ -1,7 +1,7 @@
 package view
 
 templ ProjectPage(p Project) {
-	@Base(p.Client, p.Subtitle, projectContent(p))
+	@Base(p.Client, p.Subtitle, "/work", projectContent(p))
 }
 
 templ projectContent(p Project) {
@@ -18,7 +18,7 @@ templ projectContent(p Project) {
 			<h1 class="max-w-3xl font-display text-[48px] font-normal leading-[1.1] tracking-[-0.01em] text-fc-obsidian sm:text-[64px]">
 				{ p.Title }
 			</h1>
-			<p class="mt-6 max-w-xl text-[15px] font-light leading-[1.7] text-[#4a4239]">
+			<p class="mt-6 max-w-xl text-[15px] font-light leading-[1.7] text-fc-body">
 				{ p.Subtitle }
 			</p>
 		</div>
@@ -148,7 +148,7 @@ templ projectContent(p Project) {
 					@eyebrow("What we delivered")
 					<ul class="mt-6 space-y-3">
 						for _, d := range p.Deliverables {
-							<li class="flex items-start gap-3 text-[14px] font-light leading-[1.7] text-[#4a4239]">
+							<li class="flex items-start gap-3 text-[14px] font-light leading-[1.7] text-fc-body">
 								<span class="mt-[9px] h-[5px] w-[5px] shrink-0 rounded-full bg-fc-ember"></span>
 								<span>{ d }</span>
 							</li>

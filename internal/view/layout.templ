@@ -1,6 +1,6 @@
 package view
 
-templ Base(title, description string, body templ.Component) {
+templ Base(title, description, activePath string, body templ.Component) {
 	<!DOCTYPE html>
 	<html lang="en" class="bg-fc-birchwood text-fc-obsidian">
 		<head>
@@ -16,6 +16,7 @@ templ Base(title, description string, body templ.Component) {
 			<!-- Fonts -->
 			<link rel="preconnect" href="https://fonts.googleapis.com"/>
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"/>
 			if GtagID != "" {
 				<script async src={ "https://www.googletagmanager.com/gtag/js?id=" + GtagID }></script>
 				@gtagInit()
@@ -32,7 +33,7 @@ templ Base(title, description string, body templ.Component) {
 			<script src="/static/js/alpine.min.js" defer></script>
 		</head>
 		<body class="min-h-screen font-body text-[15px] font-light antialiased leading-[1.7]">
-			@Nav()
+			@Nav(activePath)
 			<main>
 				@body
 			</main>

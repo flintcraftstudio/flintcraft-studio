@@ -11,7 +11,7 @@ const Tagline = "Still shaped by hand."
 // Contact info
 const (
 	Phone = "(406) 871-9875"
-	Email = "logan@fireflysoftware.dev"
+	Email = "hello@flintcraftstudio.com"
 )
 
 // Tracking IDs and Turnstile site key, set once at startup from config.

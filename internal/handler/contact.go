@@ -30,9 +30,12 @@ func ContactSubmit(mailer *mail.Client, turnstileSecret string) http.HandlerFunc
 		}
 
 		values := map[string]string{
-			"name":    strings.TrimSpace(r.FormValue("name")),
-			"email":   strings.TrimSpace(r.FormValue("email")),
-			"message": strings.TrimSpace(r.FormValue("message")),
+			"name":     strings.TrimSpace(r.FormValue("name")),
+			"business": strings.TrimSpace(r.FormValue("business")),
+			"email":    strings.TrimSpace(r.FormValue("email")),
+			"phone":    strings.TrimSpace(r.FormValue("phone")),
+			"website":  strings.TrimSpace(r.FormValue("website")),
+			"message":  strings.TrimSpace(r.FormValue("message")),
 		}
 
 		errors := validate(values)
@@ -57,11 +60,21 @@ func ContactSubmit(mailer *mail.Client, turnstileSecret string) http.HandlerFunc
 		}
 
 		if mailer != nil {
+			body := values["message"]
+			if values["business"] != "" {
+				body = fmt.Sprintf("Business: %s\n\n%s", values["business"], body)
+			}
+			if values["phone"] != "" {
+				body = fmt.Sprintf("%s\n\nPhone: %s", body, values["phone"])
+			}
+			if values["website"] != "" {
+				body = fmt.Sprintf("%s\nWebsite: %s", body, values["website"])
+			}
 			msg := mail.Message{
 				Name:    values["name"],
 				Email:   values["email"],
 				Subject: fmt.Sprintf("Contact form: %s", values["name"]),
-				Body:    values["message"],
+				Body:    body,
 			}
 			if err := mailer.Send(msg); err != nil {
 				slog.Error("postmark send error", "err", err)

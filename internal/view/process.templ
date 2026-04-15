@@ -1,7 +1,7 @@
 package view
 
 templ ProcessPage() {
-	@Base("Process", "Six steps from first call to launch. How FlintCraft Studio builds websites and software.", processContent())
+	@Base("Process", "Six steps from first call to launch. How FlintCraft Studio builds websites.", "/process", processContent())
 }
 
 templ processContent() {
@@ -12,7 +12,7 @@ templ processContent() {
 			<h1 class="max-w-3xl font-display text-[42px] font-normal leading-[1.1] tracking-[-0.01em] text-fc-obsidian sm:text-[56px]">
 				Six steps. <em class="italic">No surprises.</em> That's the point.
 			</h1>
-			<p class="mt-6 max-w-xl text-[15px] font-light leading-[1.7] text-[#4a4239]">
+			<p class="mt-6 max-w-xl text-[15px] font-light leading-[1.7] text-fc-body">
 				Every project is different. The process isn't. Here's exactly what working with FlintCraft Studio looks like — from the first call to the day your site goes live.
 			</p>
 		</div>
@@ -24,7 +24,7 @@ templ processContent() {
 			<p class="max-w-2xl font-display text-[22px] italic leading-[1.4] text-fc-ember sm:text-[26px]">
 				"We do the work first, then ask for your reaction."
 			</p>
-			<p class="mt-6 max-w-2xl text-[15px] font-light leading-[1.7] text-[#4a4239]">
+			<p class="mt-6 max-w-2xl text-[15px] font-light leading-[1.7] text-fc-body">
 				You're the expert on your business. We're the experts on the build. Our job is to bring you something finished enough to have an opinion about — not to pepper you with questions and put the blank page in your lap.
 			</p>
 		</div>
@@ -85,7 +85,7 @@ templ processContent() {
 			<h2 class="font-display text-[32px] font-normal text-fc-obsidian sm:text-[40px]">
 				Ready to start?
 			</h2>
-			<p class="mx-auto mt-4 max-w-md text-[15px] font-light leading-[1.7] text-[#4a4239]">
+			<p class="mx-auto mt-4 max-w-md text-[15px] font-light leading-[1.7] text-fc-body">
 				The first conversation costs nothing. Tell us what you're working on and we'll tell you honestly whether we're the right fit.
 			</p>
 			<div class="mt-10 flex flex-wrap items-center justify-center gap-4">
@@ -115,7 +115,7 @@ templ processStep(number, title string) {
 			</div>
 			<div class="max-w-2xl flex-1">
 				<h3 class="font-display text-[28px] font-normal leading-[1.15] text-fc-obsidian sm:text-[32px]">{ title }</h3>
-				<div class="mt-4 text-[15px] font-light leading-[1.7] text-[#4a4239]">
+				<div class="mt-4 text-[15px] font-light leading-[1.7] text-fc-body">
 					{ children... }
 				</div>
 			</div>
