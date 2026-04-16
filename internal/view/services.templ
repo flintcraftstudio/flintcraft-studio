@@ -9,10 +9,10 @@ templ servicesContent() {
 	<section class="bg-fc-birchwood py-20 sm:py-28">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			@eyebrow("Services")
-			<h1 class="max-w-2xl font-display text-[42px] font-normal leading-[1.1] tracking-[-0.01em] text-fc-obsidian sm:text-[56px]">
+			<h1 class="max-w-2xl font-display text-h1-display font-normal text-fc-obsidian">
 				One relationship. <em class="italic text-fc-ember">Everything handled.</em>
 			</h1>
-			<p class="mt-6 max-w-xl text-[15px] font-light leading-[1.7] text-fc-body">
+			<p class="mt-6 max-w-xl text-body text-fc-body">
 				For businesses that have earned their reputation and are ready for a website that reflects it.
 			</p>
 		</div>
@@ -23,7 +23,7 @@ templ servicesContent() {
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			<div data-reveal class="max-w-2xl">
 				@eyebrow("Who this is for")
-				<div class="mt-4 space-y-4 text-[15px] font-light leading-[1.7] text-fc-body">
+				<div class="mt-4 space-y-4 text-body text-fc-body">
 					<p>
 						You've done the hard part. You built something real, earned real customers, and proven the business works. Your website is the one thing you never got right — or the one thing you built when you were still figuring everything out.
 					</p>
@@ -75,7 +75,7 @@ templ servicesContent() {
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			<div data-reveal class="max-w-2xl">
 				@eyebrow("Paid visibility")
-				<p class="mt-4 text-[15px] font-light leading-[1.7] text-fc-body">
+				<p class="mt-4 text-body text-fc-body">
 					Some clients need more than organic reach. Google Ads and Facebook campaigns are available as a separate engagement — scoped to your market and managed by the same people who built the site.
 				</p>
 			</div>
@@ -87,10 +87,10 @@ templ servicesContent() {
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			<div data-reveal class="max-w-2xl">
 				@eyebrow("What it costs")
-				<h2 class="font-display text-[32px] font-normal text-fc-obsidian sm:text-[40px]">
+				<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
 					Straightforward pricing. No surprises.
 				</h2>
-				<div class="mt-8 space-y-4 text-[15px] font-light leading-[1.7] text-fc-body">
+				<div class="mt-8 space-y-4 text-body text-fc-body">
 					<p>
 						Most FlintCraft engagements run between $150 and $350 per month, all in. No setup fees, no surprise invoices, no separate hosting bill. One rate covers design, build, hosting, maintenance, updates, and ongoing visibility work.
 					</p>
@@ -107,10 +107,10 @@ templ servicesContent() {
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			<div data-reveal class="max-w-2xl">
 				@eyebrowDark("How the relationship works")
-				<h2 class="font-display text-[32px] font-normal text-fc-parchment sm:text-[40px]">
+				<h2 class="font-display text-h2-display font-normal text-fc-parchment">
 					Six months. That's all we ask.
 				</h2>
-				<div class="mt-8 space-y-4 text-[15px] font-light leading-[1.7] text-fc-ash">
+				<div class="mt-8 space-y-4 text-body text-fc-ash">
 					<p>
 						We don't do month-to-month. Building something right takes time — design, copy, build, launch, and enough runway to see it working. We ask for six months.
 					</p>
@@ -144,22 +144,22 @@ templ servicesContent() {
 	<!-- CTA -->
 	<section class="bg-fc-parchment py-20 sm:py-24">
 		<div data-reveal class="mx-auto max-w-content px-6 text-center lg:px-8">
-			<h2 class="font-display text-[32px] font-normal text-fc-obsidian sm:text-[40px]">
+			<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
 				Not sure if we're the right fit?
 			</h2>
-			<p class="mx-auto mt-4 max-w-md text-[15px] font-light leading-[1.7] text-fc-body">
+			<p class="mx-auto mt-4 max-w-md text-body text-fc-body">
 				Write and describe what you're working on. We'll tell you straight.
 			</p>
 			<div class="mt-10 flex flex-wrap items-center justify-center gap-4">
 				<a
 					href="/contact"
-					class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
+					class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-ui font-medium uppercase text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
 				>
 					Start a project
 				</a>
 				<a
 					href="/work"
-					class="border-b-[1.5px] border-fc-ember px-0 py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
+					class="border-b-[1.5px] border-fc-ember px-0 py-[10px] text-ui font-medium uppercase text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
 				>
 					See our work &rarr;
 				</a>
@@ -170,17 +170,17 @@ templ servicesContent() {
 
 templ capabilityCard(headline, body string) {
 	<div class="rounded-[6px] border border-fc-flint bg-fc-flint p-7">
-		<h3 class="mb-3 font-display text-[18px] font-normal leading-[1.25] text-fc-parchment">{ headline }</h3>
-		<p class="text-[13px] font-light leading-[1.6] text-fc-ash">{ body }</p>
+		<h3 class="mb-3 font-display text-h4-display font-normal text-fc-parchment">{ headline }</h3>
+		<p class="text-body-sm text-fc-ash">{ body }</p>
 	</div>
 }
 
 templ servicesFaqItem(question, answer string) {
 	<details class="group border-t border-fc-slate-rim pt-6">
-		<summary class="flex cursor-pointer items-center justify-between font-display text-[18px] font-normal text-fc-obsidian">
+		<summary class="flex cursor-pointer items-center justify-between font-display text-h4-display font-normal text-fc-obsidian">
 			{ question }
 			<span class="ml-4 text-fc-trail-dust transition group-open:rotate-45">+</span>
 		</summary>
-		<p class="mt-4 text-[14px] font-light leading-[1.7] text-fc-body">{ answer }</p>
+		<p class="mt-4 text-body-sm text-fc-body">{ answer }</p>
 	</details>
 }

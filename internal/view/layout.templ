@@ -32,7 +32,7 @@ templ Base(title, description, activePath string, body templ.Component) {
 			<script src="/static/js/htmx.min.js" defer></script>
 			<script src="/static/js/alpine.min.js" defer></script>
 		</head>
-		<body class="min-h-screen font-body text-[15px] font-light antialiased leading-[1.7]">
+		<body class="min-h-screen font-body text-body font-light antialiased">
 			@Nav(activePath)
 			<main>
 				@body

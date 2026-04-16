@@ -11,14 +11,14 @@ templ contactContent(errors map[string]string, values map[string]string, success
 				<!-- Left: intro -->
 				<div>
 					@eyebrow("Start a project")
-					<h1 class="font-display text-[40px] font-normal leading-[1.1] text-fc-obsidian sm:text-[48px]">
+					<h1 class="font-display text-h1-display font-normal text-fc-obsidian">
 						<em class="italic">Let's find out if we're the right fit.</em>
 					</h1>
-					<p class="mt-6 max-w-md text-[15px] font-light leading-[1.7] text-fc-body">
+					<p class="mt-6 max-w-md text-body text-fc-body">
 						No pitch, no deck. Tell us what you're working on — we'll take a look at your current setup and come to the first conversation prepared.
 					</p>
 					<!-- Contact info -->
-					<div class="mt-10 space-y-3 text-[13px] text-fc-trail-dust">
+					<div class="mt-10 space-y-3 text-body-sm text-fc-trail-dust">
 						<p>Prefer to call? <a href="tel:+14068719875" class="text-fc-ember transition hover:brightness-110">{ Phone }</a></p>
 						<p>Or email: <a href={ templ.SafeURL("mailto:" + Email) } class="text-fc-ember transition hover:brightness-110">{ Email }</a></p>
 						<p>We're based in Helena, Montana. We generally respond same business day.</p>
@@ -37,57 +37,57 @@ templ ContactForm(errors map[string]string, values map[string]string, success bo
 	<form hx-post="/contact" hx-swap="outerHTML" class="space-y-5">
 		if success {
 			<div class="rounded-[6px] border-l-[2.5px] border-fc-ember bg-fc-parchment p-6">
-				<p class="text-[15px] font-normal text-fc-obsidian">
+				<p class="text-body font-normal text-fc-obsidian">
 					Got it. You'll hear from Logan. Not a bot. Not a VA. The person who will actually build your project is reading this right now.
 				</p>
 			</div>
 		} else {
 			if errors["form"] != "" {
 				<div class="rounded-[3px] border border-red-300 bg-red-50 p-4">
-					<p class="text-[13px] text-red-700">{ errors["form"] }</p>
+					<p class="text-body-sm text-red-700">{ errors["form"] }</p>
 				</div>
 			}
 			<div>
-				<label for="name" class="mb-1.5 block text-[11px] font-medium uppercase tracking-[0.06em] text-fc-trail-dust">Name</label>
+				<label for="name" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-trail-dust">Name</label>
 				<input
 					type="text"
 					id="name"
 					name="name"
 					value={ values["name"] }
-					class="w-full rounded-[3px] border border-fc-slate-rim bg-fc-birchwood px-[14px] py-[10px] text-[14px] text-fc-obsidian placeholder-[#b4ada6] outline-none transition focus:border-fc-ember focus:shadow-[0_0_0_2px_rgba(158,82,21,0.12)]"
+					class="w-full rounded-[3px] border border-fc-slate-rim bg-fc-birchwood px-[14px] py-[10px] text-[16px] text-fc-obsidian placeholder-[#b4ada6] outline-none transition focus:border-fc-ember focus:shadow-[0_0_0_2px_rgba(158,82,21,0.12)]"
 					placeholder="Your name"
 				/>
 				if errors["name"] != "" {
-					<p class="mt-1 text-[11px] text-red-600">{ errors["name"] }</p>
+					<p class="mt-1 text-eyebrow tracking-normal text-red-600">{ errors["name"] }</p>
 				}
 			</div>
 			<div>
-				<label for="business" class="mb-1.5 block text-[11px] font-medium uppercase tracking-[0.06em] text-fc-trail-dust">Business name</label>
+				<label for="business" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-trail-dust">Business name</label>
 				<input
 					type="text"
 					id="business"
 					name="business"
 					value={ values["business"] }
-					class="w-full rounded-[3px] border border-fc-slate-rim bg-fc-birchwood px-[14px] py-[10px] text-[14px] text-fc-obsidian placeholder-[#b4ada6] outline-none transition focus:border-fc-ember focus:shadow-[0_0_0_2px_rgba(158,82,21,0.12)]"
+					class="w-full rounded-[3px] border border-fc-slate-rim bg-fc-birchwood px-[14px] py-[10px] text-[16px] text-fc-obsidian placeholder-[#b4ada6] outline-none transition focus:border-fc-ember focus:shadow-[0_0_0_2px_rgba(158,82,21,0.12)]"
 					placeholder="Your business"
 				/>
 			</div>
 			<div>
-				<label for="email" class="mb-1.5 block text-[11px] font-medium uppercase tracking-[0.06em] text-fc-trail-dust">Email</label>
+				<label for="email" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-trail-dust">Email</label>
 				<input
 					type="email"
 					id="email"
 					name="email"
 					value={ values["email"] }
-					class="w-full rounded-[3px] border border-fc-slate-rim bg-fc-birchwood px-[14px] py-[10px] text-[14px] text-fc-obsidian placeholder-[#b4ada6] outline-none transition focus:border-fc-ember focus:shadow-[0_0_0_2px_rgba(158,82,21,0.12)]"
+					class="w-full rounded-[3px] border border-fc-slate-rim bg-fc-birchwood px-[14px] py-[10px] text-[16px] text-fc-obsidian placeholder-[#b4ada6] outline-none transition focus:border-fc-ember focus:shadow-[0_0_0_2px_rgba(158,82,21,0.12)]"
 					placeholder="you@example.com"
 				/>
 				if errors["email"] != "" {
-					<p class="mt-1 text-[11px] text-red-600">{ errors["email"] }</p>
+					<p class="mt-1 text-eyebrow tracking-normal text-red-600">{ errors["email"] }</p>
 				}
 			</div>
 			<div>
-				<label for="phone" class="mb-1.5 block text-[11px] font-medium uppercase tracking-[0.06em] text-fc-trail-dust">
+				<label for="phone" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-trail-dust">
 					Phone <span class="normal-case tracking-normal text-[#b4ada6]">(optional)</span>
 				</label>
 				<input
@@ -95,12 +95,12 @@ templ ContactForm(errors map[string]string, values map[string]string, success bo
 					id="phone"
 					name="phone"
 					value={ values["phone"] }
-					class="w-full rounded-[3px] border border-fc-slate-rim bg-fc-birchwood px-[14px] py-[10px] text-[14px] text-fc-obsidian placeholder-[#b4ada6] outline-none transition focus:border-fc-ember focus:shadow-[0_0_0_2px_rgba(158,82,21,0.12)]"
+					class="w-full rounded-[3px] border border-fc-slate-rim bg-fc-birchwood px-[14px] py-[10px] text-[16px] text-fc-obsidian placeholder-[#b4ada6] outline-none transition focus:border-fc-ember focus:shadow-[0_0_0_2px_rgba(158,82,21,0.12)]"
 					placeholder="(555) 555-5555"
 				/>
 			</div>
 			<div>
-				<label for="website" class="mb-1.5 block text-[11px] font-medium uppercase tracking-[0.06em] text-fc-trail-dust">
+				<label for="website" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-trail-dust">
 					Current website URL <span class="normal-case tracking-normal text-[#b4ada6]">(leave blank if you don't have one)</span>
 				</label>
 				<input
@@ -108,21 +108,21 @@ templ ContactForm(errors map[string]string, values map[string]string, success bo
 					id="website"
 					name="website"
 					value={ values["website"] }
-					class="w-full rounded-[3px] border border-fc-slate-rim bg-fc-birchwood px-[14px] py-[10px] text-[14px] text-fc-obsidian placeholder-[#b4ada6] outline-none transition focus:border-fc-ember focus:shadow-[0_0_0_2px_rgba(158,82,21,0.12)]"
+					class="w-full rounded-[3px] border border-fc-slate-rim bg-fc-birchwood px-[14px] py-[10px] text-[16px] text-fc-obsidian placeholder-[#b4ada6] outline-none transition focus:border-fc-ember focus:shadow-[0_0_0_2px_rgba(158,82,21,0.12)]"
 					placeholder="https://example.com"
 				/>
 			</div>
 			<div>
-				<label for="message" class="mb-1.5 block text-[11px] font-medium uppercase tracking-[0.06em] text-fc-trail-dust">What's frustrating you about your current setup?</label>
+				<label for="message" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-trail-dust">What's frustrating you about your current setup?</label>
 				<textarea
 					id="message"
 					name="message"
 					rows="5"
-					class="w-full resize-y rounded-[3px] border border-fc-slate-rim bg-fc-birchwood px-[14px] py-[10px] text-[14px] leading-[1.6] text-fc-obsidian placeholder-[#b4ada6] outline-none transition focus:border-fc-ember focus:shadow-[0_0_0_2px_rgba(158,82,21,0.12)]"
+					class="w-full resize-y rounded-[3px] border border-fc-slate-rim bg-fc-birchwood px-[14px] py-[10px] text-[16px] leading-[1.6] text-fc-obsidian placeholder-[#b4ada6] outline-none transition focus:border-fc-ember focus:shadow-[0_0_0_2px_rgba(158,82,21,0.12)]"
 					placeholder="Tell us what's not working and what you'd like to change."
 				>{ values["message"] }</textarea>
 				if errors["message"] != "" {
-					<p class="mt-1 text-[11px] text-red-600">{ errors["message"] }</p>
+					<p class="mt-1 text-eyebrow tracking-normal text-red-600">{ errors["message"] }</p>
 				}
 			</div>
 			if TurnstileSiteKey != "" {
@@ -130,7 +130,7 @@ templ ContactForm(errors map[string]string, values map[string]string, success bo
 			}
 			<button
 				type="submit"
-				class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
+				class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-ui font-medium uppercase text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
 			>
 				Send it
 			</button>

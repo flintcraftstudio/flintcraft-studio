@@ -9,57 +9,138 @@ templ workContent() {
 	<section class="bg-fc-birchwood py-20 sm:py-28">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			@eyebrow("Selected work")
-			<h1 class="max-w-3xl font-display text-[48px] font-normal leading-[1.1] tracking-[-0.01em] text-fc-obsidian sm:text-[64px]">
+			<h1 class="max-w-3xl font-display text-h1-display font-normal text-fc-obsidian">
 				<em class="italic">Field reports.</em>
 			</h1>
-			<p class="mt-6 max-w-xl text-[15px] font-light leading-[1.7] text-fc-body">
+			<p class="mt-6 max-w-xl text-body text-fc-body">
 				A selection of recent projects. Real businesses, real problems, real outcomes.
 			</p>
 		</div>
 	</section>
 
+	<!-- Featured Project -->
+	if len(ProjectOrder) > 0 {
+		if p, ok := Projects[ProjectOrder[0]]; ok {
+			<section class="bg-fc-obsidian py-20 sm:py-24">
+				<div class="mx-auto max-w-content px-6 lg:px-8">
+					@eyebrowDark("Featured")
+					<h2 class="mb-12 font-display text-h2-display font-normal text-fc-parchment">
+						Latest field report
+					</h2>
+					@featuredCard(p)
+				</div>
+			</section>
+		}
+	}
+
 	<!-- Project Cards -->
-	<section class="bg-fc-obsidian py-20 sm:py-24">
-		<div class="mx-auto max-w-content px-6 lg:px-8">
-			@eyebrowDark("Websites")
-			<h2 class="mb-12 font-display text-[32px] font-normal text-fc-parchment sm:text-[40px]">
-				Marketing sites & brand builds
-			</h2>
-			<div class="grid gap-8 sm:grid-cols-2">
-				for _, slug := range ProjectOrder {
-					if p, ok := Projects[slug]; ok {
-						@projectCard(p)
+	if len(ProjectOrder) > 1 {
+		<section class="bg-fc-flint py-20 sm:py-24">
+			<div class="mx-auto max-w-content px-6 lg:px-8">
+				@eyebrowDark("More work")
+				<h2 class="mb-12 font-display text-h2-display font-normal text-fc-parchment">
+					Marketing sites &amp; brand builds
+				</h2>
+				<div class="grid gap-8 sm:grid-cols-2">
+					for _, slug := range ProjectOrder[1:] {
+						if p, ok := Projects[slug]; ok {
+							@projectCard(p)
+						}
 					}
-				}
+				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+	}
 
 	<!-- CTA -->
 	<section class="bg-fc-birchwood py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 text-center lg:px-8">
-			<h2 class="font-display text-[32px] font-normal text-fc-obsidian sm:text-[40px]">
+			<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
 				Have a project in mind?
 			</h2>
-			<p class="mx-auto mt-4 max-w-md text-[15px] font-light text-fc-trail-dust">
+			<p class="mx-auto mt-4 max-w-md text-body text-fc-trail-dust">
 				We're selective about the projects we take on. Tell us what you're working on and we'll tell you whether we're the right fit.
 			</p>
 			<div class="mt-10 flex flex-wrap items-center justify-center gap-6">
 				<a
 					href="/contact"
-					class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
+					class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-ui font-medium uppercase text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
 				>
 					Start a project
 				</a>
 				<a
 					href={ templ.SafeURL("tel:" + Phone) }
-					class="border-b-[1.5px] border-fc-ember px-0 py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
+					class="border-b-[1.5px] border-fc-ember px-0 py-[10px] text-ui font-medium uppercase text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
 				>
 					{ Phone }
 				</a>
 			</div>
 		</div>
 	</section>
+}
+
+templ featuredCard(p Project) {
+	<a
+		href={ templ.SafeURL("/work/" + p.Slug) }
+		data-reveal
+		class="group block overflow-hidden rounded-[6px] border border-fc-flint bg-fc-flint transition hover:border-fc-spark/30"
+	>
+		<div class="flex flex-col lg:flex-row">
+			if p.Screenshot != "" {
+				<div class="overflow-hidden lg:w-3/5">
+					<img
+						src={ p.Screenshot }
+						alt={ p.Client + " website screenshot" }
+						width="800"
+						height="542"
+						loading="lazy"
+						class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+					/>
+				</div>
+			}
+			<div class="flex flex-1 flex-col justify-between p-8 lg:p-10">
+				<div>
+					<div class="mb-3 flex flex-wrap items-center gap-3">
+						<span class="text-eyebrow font-medium uppercase text-fc-spark">
+							{ p.Client }
+						</span>
+						<span class="text-eyebrow tracking-normal text-fc-ash">
+							{ p.Location }
+						</span>
+					</div>
+					<div class="mb-4 flex flex-wrap gap-2">
+						for _, tag := range p.Tags {
+							<span class="rounded-[20px] border border-fc-ash/30 px-[8px] py-[2px] text-eyebrow uppercase tracking-[0.08em] text-fc-ash">
+								{ tag }
+							</span>
+						}
+					</div>
+					<h3 class="mb-4 font-display text-h3-display font-normal text-fc-parchment">
+						{ p.Title }
+					</h3>
+					if p.Quote != nil {
+						<p class="mb-6 font-display text-body italic text-fc-ash">
+							&ldquo;{ p.Quote.Text }&rdquo;
+							<span class="not-italic text-eyebrow tracking-normal text-fc-ash/70">&mdash; { p.Quote.Attribution }</span>
+						</p>
+					}
+				</div>
+				if len(p.Results) > 0 {
+					<div class="flex flex-wrap gap-6 border-t border-fc-ash/20 pt-5">
+						for _, r := range p.Results {
+							<div>
+								<div class="font-display text-h4-display font-semibold text-fc-parchment">
+									{ r.Value }
+									<span class="text-body-sm font-normal text-fc-spark">{ r.Unit }</span>
+								</div>
+								<div class="text-eyebrow tracking-normal text-fc-ash">{ r.Label }</div>
+							</div>
+						}
+					</div>
+				}
+			</div>
+		</div>
+	</a>
 }
 
 templ projectCard(p Project) {
@@ -78,35 +159,39 @@ templ projectCard(p Project) {
 					class="w-full object-cover transition duration-500 group-hover:scale-[1.02]"
 				/>
 			</div>
+		} else {
+			<div class="flex h-[180px] items-center justify-center bg-fc-obsidian">
+				<img src="/static/images/logo.svg" alt="" class="h-10 w-auto opacity-20"/>
+			</div>
 		}
 		<div class="flex flex-1 flex-col p-6">
 			<div class="mb-3 flex flex-wrap items-center gap-3">
-				<span class="text-[10px] font-medium uppercase tracking-[0.16em] text-fc-spark">
+				<span class="text-eyebrow font-medium uppercase text-fc-spark">
 					{ p.Client }
 				</span>
-				<span class="text-[10px] text-fc-ash">
+				<span class="text-eyebrow tracking-normal text-fc-ash">
 					{ p.Location }
 				</span>
 			</div>
 			<div class="mb-3 flex flex-wrap gap-2">
 				for _, tag := range p.Tags {
-					<span class="rounded-[20px] border border-fc-ash/30 px-[8px] py-[2px] text-[10px] uppercase tracking-[0.08em] text-fc-ash">
+					<span class="rounded-[20px] border border-fc-ash/30 px-[8px] py-[2px] text-eyebrow uppercase tracking-[0.08em] text-fc-ash">
 						{ tag }
 					</span>
 				}
 			</div>
-			<h3 class="mb-3 font-display text-[20px] font-normal leading-[1.25] text-fc-parchment">
+			<h3 class="mb-3 font-display text-h4-display font-normal text-fc-parchment">
 				{ p.Title }
 			</h3>
 			if len(p.Results) > 0 {
-				<div class="mt-auto flex gap-6 border-t border-fc-ash/20 pt-4">
+				<div class="mt-auto flex flex-col gap-3 border-t border-fc-ash/20 pt-4 sm:flex-row sm:gap-6">
 					for _, r := range p.Results {
 						<div>
-							<div class="font-display text-[20px] font-semibold text-fc-parchment">
+							<div class="font-display text-h4-display font-semibold text-fc-parchment">
 								{ r.Value }
-								<span class="text-[12px] font-normal text-fc-spark">{ r.Unit }</span>
+								<span class="text-ui tracking-normal font-normal text-fc-spark">{ r.Unit }</span>
 							</div>
-							<div class="text-[10px] text-fc-ash">{ r.Label }</div>
+							<div class="text-eyebrow tracking-normal text-fc-ash">{ r.Label }</div>
 						</div>
 					}
 				</div>

@@ -4,6 +4,7 @@ package view
 type ProjectQuote struct {
 	Text        string
 	Attribution string
+	Portrait    string
 }
 
 // ProjectResult holds a single metric.
@@ -34,11 +35,11 @@ type Project struct {
 
 // ProjectOrder defines the display order on the work listing page.
 var ProjectOrder = []string{
+	"lo-mo-outfitting",
 	"nautilus-group",
 	"a-team-asphalt",
 	"a-team-gutters",
 	"traver-hardwood-floors",
-	"lo-mo-outfitting",
 }
 
 // Projects is the canonical list of portfolio entries.
@@ -178,18 +179,40 @@ var Projects = map[string]Project{
 		},
 	},
 	"lo-mo-outfitting": {
-		Slug:     "lo-mo-outfitting",
-		Client:   "Lo Mo Outfitting",
-		Title:    "Coming soon.",
-		Subtitle: "Details on this project are on the way.",
-		Location: "Montana",
-		Tags:     []string{"Marketing site"},
-		NextSlug:   "nautilus-group",
-		NextClient: "Nautilus Group",
+		Slug:             "lo-mo-outfitting",
+		Client:           "Lo Mo Outfitting",
+		Title:            "Born on the river. Now the site feels like it.",
+		Subtitle:         "Custom site, brand voice, and booking flow for a Missouri River fly fishing outfitter run by guides who actually live there.",
+		Location:         "Fly fishing outfitter · Craig, Montana",
+		Tags:             []string{"Marketing site", "Brand", "Design"},
+		LiveURL:          "https://lomooutfitting.com",
+		Screenshot:       "/static/images/portfolio/lomo_screenshot.webp",
+		ScreenshotMobile: "/static/images/portfolio/lomo_screenshot_mobile.webp",
+		NextSlug:         "nautilus-group",
+		NextClient:       "Nautilus Group",
 		Story: []string{
-			"Project details coming soon.",
+			"Matt Mohar has been fishing the Missouri for over twenty years. He started guiding after a decade in concrete — not because someone told him fly fishing was a good brand play, but because taking people fishing is what he wanted to do. Lo Mo runs seven licensed guides, all local, all on the water in their off hours. The operation didn't need inventing. It needed a site that matched.",
+			"The previous site wasn't telling that story. We rebuilt it around what makes Lo Mo different: no booking platforms, no middlemen, no pretense. Matt answers the phone. He picks the guide. He picks the stretch of river. The site needed to communicate that directness without losing the weight of twenty years and thirty-five miles of blue-ribbon water.",
+			"The design pulls from the river itself — deep slate greens, muted golds, photography that breathes. The navigation puts trips and guides up front. The copy is direct and honest, the way Matt talks. Pricing is visible, not buried. The heroes program and seasonal rates are surfaced, not hidden behind a contact form.",
 		},
-		Results:      []ProjectResult{},
-		Deliverables: []string{},
+		Quote: &ProjectQuote{
+			Text:        "Booking has never been more simple.",
+			Attribution: "Matt Mohar — Lo Mo Outfitting",
+			Portrait:    "/static/images/portfolio/matt-mohar.webp",
+		},
+		Results: []ProjectResult{
+			{Value: "20", Unit: "yrs", Label: "On the Missouri River"},
+			{Value: "7", Unit: "guides", Label: "All local, all licensed"},
+			{Value: "5K+", Unit: "trout/mi", Label: "Blue-ribbon water"},
+		},
+		Deliverables: []string{
+			"Custom-designed marketing site — dark, river-inspired palette",
+			"Brand voice and full copywriting — every page written from scratch",
+			"Trip booking flow — pricing, seasonal rates, heroes program",
+			"Guide profiles — individual bios and photography",
+			"SEO foundation — meta tags, schema markup, sitemap",
+			"Hosting and SSL on FlintCraft infrastructure",
+			"Ongoing maintenance and content updates",
+		},
 	},
 }

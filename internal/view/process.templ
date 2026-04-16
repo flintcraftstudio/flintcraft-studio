@@ -9,10 +9,10 @@ templ processContent() {
 	<section class="bg-fc-birchwood py-20 sm:py-28">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			@eyebrow("How we work")
-			<h1 class="max-w-3xl font-display text-[42px] font-normal leading-[1.1] tracking-[-0.01em] text-fc-obsidian sm:text-[56px]">
+			<h1 class="max-w-3xl font-display text-h1-display font-normal text-fc-obsidian">
 				Six steps. <em class="italic">No surprises.</em> That's the point.
 			</h1>
-			<p class="mt-6 max-w-xl text-[15px] font-light leading-[1.7] text-fc-body">
+			<p class="mt-6 max-w-xl text-body text-fc-body">
 				Every project is different. The process isn't. Here's exactly what working with FlintCraft Studio looks like — from the first call to the day your site goes live.
 			</p>
 		</div>
@@ -21,10 +21,10 @@ templ processContent() {
 	<!-- Philosophy -->
 	<section class="border-y border-fc-slate-rim bg-fc-parchment py-16 sm:py-20">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
-			<p class="max-w-2xl font-display text-[22px] italic leading-[1.4] text-fc-ember sm:text-[26px]">
+			<p class="max-w-2xl font-display text-h3-display italic text-fc-ember">
 				"We do the work first, then ask for your reaction."
 			</p>
-			<p class="mt-6 max-w-2xl text-[15px] font-light leading-[1.7] text-fc-body">
+			<p class="mt-6 max-w-2xl text-body text-fc-body">
 				You're the expert on your business. We're the experts on the build. Our job is to bring you something finished enough to have an opinion about — not to pepper you with questions and put the blank page in your lap.
 			</p>
 		</div>
@@ -63,15 +63,15 @@ templ processContent() {
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			<div class="max-w-2xl">
 				@eyebrowDark("When things shift")
-				<h2 class="font-display text-[32px] font-normal leading-[1.15] text-fc-parchment sm:text-[40px]">
+				<h2 class="font-display text-h2-display font-normal text-fc-parchment">
 					What happens if something goes wrong?
 				</h2>
-				<p class="mt-6 text-[15px] font-light leading-[1.7] text-fc-ash">
+				<p class="mt-6 text-body text-fc-ash">
 					Scope changes. Timelines slip. Clients change their minds — it happens on every project and it's not a crisis. If scope grows beyond what the proposal covers, we'll tell you before we build it, not after. If a deadline is at risk, you'll hear from us first. We'd rather have an uncomfortable conversation early than a bad surprise late. We've never abandoned a project. We don't intend to start.
 				</p>
 				<a
 					href="/terms"
-					class="mt-8 inline-block border-b-[1.5px] border-fc-spark py-[4px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-spark transition hover:brightness-110"
+					class="mt-8 inline-block border-b-[1.5px] border-fc-spark py-[4px] text-ui font-medium uppercase text-fc-spark transition hover:brightness-110"
 				>
 					Read our full terms &rarr;
 				</a>
@@ -82,22 +82,22 @@ templ processContent() {
 	<!-- Final CTA -->
 	<section class="bg-fc-parchment py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 text-center lg:px-8">
-			<h2 class="font-display text-[32px] font-normal text-fc-obsidian sm:text-[40px]">
+			<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
 				Ready to start?
 			</h2>
-			<p class="mx-auto mt-4 max-w-md text-[15px] font-light leading-[1.7] text-fc-body">
+			<p class="mx-auto mt-4 max-w-md text-body text-fc-body">
 				The first conversation costs nothing. Tell us what you're working on and we'll tell you honestly whether we're the right fit.
 			</p>
 			<div class="mt-10 flex flex-wrap items-center justify-center gap-4">
 				<a
 					href="/contact"
-					class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
+					class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-ui font-medium uppercase text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
 				>
 					Start a project
 				</a>
 				<a
 					href="tel:+14068719875"
-					class="border-b-[1.5px] border-fc-ember px-0 py-[10px] text-[12px] font-medium uppercase tracking-[0.06em] text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
+					class="border-b-[1.5px] border-fc-ember px-0 py-[10px] text-ui font-medium uppercase text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
 				>
 					{ Phone }
 				</a>
@@ -110,12 +110,12 @@ templ processStep(number, title string) {
 	<article class="border-t border-fc-slate-rim pt-10">
 		<div class="flex flex-col gap-6 sm:flex-row sm:gap-12">
 			<div class="sm:w-28 sm:flex-shrink-0">
-				<p class="font-display text-[42px] font-normal leading-none text-fc-ember sm:text-[48px]">{ number }</p>
-				<p class="mt-3 text-[10px] font-medium uppercase tracking-[0.18em] text-fc-trail-dust">Step</p>
+				<p class="font-display text-h1-display font-normal text-fc-ember">{ number }</p>
+				<p class="mt-3 text-eyebrow font-medium uppercase text-fc-trail-dust">Step</p>
 			</div>
 			<div class="max-w-2xl flex-1">
-				<h3 class="font-display text-[28px] font-normal leading-[1.15] text-fc-obsidian sm:text-[32px]">{ title }</h3>
-				<div class="mt-4 text-[15px] font-light leading-[1.7] text-fc-body">
+				<h3 class="font-display text-h3-display font-normal text-fc-obsidian">{ title }</h3>
+				<div class="mt-4 text-body text-fc-body">
 					{ children... }
 				</div>
 			</div>
