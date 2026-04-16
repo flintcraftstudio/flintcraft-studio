@@ -8,6 +8,7 @@ import (
 
 type Config struct {
 	Port           int
+	BaseURL        string
 	PostmarkToken  string
 	PostmarkFrom   string
 	PostmarkTo     string
@@ -24,8 +25,14 @@ func Load() (*Config, error) {
 		return nil, err
 	}
 
+	baseURL := os.Getenv("BASE_URL")
+	if baseURL == "" {
+		baseURL = "https://flintcraftstudio.com"
+	}
+
 	return &Config{
 		Port:          port,
+		BaseURL:       baseURL,
 		PostmarkToken: os.Getenv("POSTMARK_SERVER_TOKEN"),
 		PostmarkFrom:  os.Getenv("POSTMARK_FROM"),
 		PostmarkTo:    os.Getenv("POSTMARK_TO"),

@@ -39,17 +39,39 @@ templ aboutContent() {
 	<section class="bg-fc-birchwood py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			@eyebrow("The team")
-			<div data-reveal class="mt-8 grid gap-10 sm:grid-cols-2">
+			<h2 class="mt-4 font-display text-h3-display font-normal text-fc-obsidian">The people who do the work</h2>
+			<div data-reveal class="mt-10 grid gap-12 sm:grid-cols-2">
+				<!-- Logan Williams -->
 				<div>
-					<h3 class="font-display text-h4-display font-normal text-fc-obsidian">Logan</h3>
+					<div class="mb-6 overflow-hidden rounded-[6px]">
+						<img
+							src="/static/images/about/logan_and_elliot_williams.webp"
+							alt="Logan Williams with his son Elliot"
+							class="aspect-[3/2] w-full object-cover"
+							loading="lazy"
+						/>
+					</div>
+					<h3 class="font-display text-h4-display font-normal text-fc-obsidian">Logan Williams</h3>
+					<p class="mt-1 text-sm font-medium uppercase tracking-wider text-fc-trail-dust">Co-Founder</p>
 					<p class="mt-3 text-body text-fc-body">
-						Developer and studio lead. Builds every site. Available by phone.
+						Grew up overseas — a missionary kid in Papua New Guinea and the Canadian prairies. Spent years as an air traffic controller in the Air Force, then civilian ATC in Afghanistan and the FAA. Earned a BS in Computer Science while working full-time. Founded the studio in 2019.
+					</p>
+					<p class="mt-3 text-body text-fc-body">
+						<strong class="font-medium text-fc-obsidian">The two careers have more in common than you'd think</strong> — both demand precision, clear communication, and building systems that don't fail when it matters.
 					</p>
 				</div>
+				<!-- Jaden Maharg -->
 				<div>
-					<h3 class="font-display text-h4-display font-normal text-fc-obsidian">Jaden</h3>
+					<div class="mb-6 flex aspect-[3/2] items-center justify-center overflow-hidden rounded-[6px] bg-fc-flint">
+						<span class="font-display text-[64px] font-medium tracking-wide text-fc-birchwood">JM</span>
+					</div>
+					<h3 class="font-display text-h4-display font-normal text-fc-obsidian">Jaden Maharg</h3>
+					<p class="mt-1 text-sm font-medium uppercase tracking-wider text-fc-trail-dust">Co-Founder</p>
 					<p class="mt-3 text-body text-fc-body">
-						Client relationships and account management. First point of contact for new projects.
+						Grew up in Montana and built a successful career as a physical therapist before discovering that what he really loved was building things. Brought the same discipline and client focus from healthcare into software development — and it shows in how he works.
+					</p>
+					<p class="mt-3 text-body text-fc-body">
+						<strong class="font-medium text-fc-obsidian">Detail-oriented, calm under pressure, and genuinely invested in the problems he's solving.</strong>
 					</p>
 				</div>
 			</div>
@@ -60,13 +82,55 @@ templ aboutContent() {
 	<section class="bg-fc-obsidian py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			<div data-reveal class="max-w-2xl">
-				@eyebrowDark("Based in Helena")
-				<div class="mt-4 space-y-4 text-body text-fc-ash">
+				@eyebrowDark("Where we're from")
+				<h2 class="mt-4 font-display text-h3-display font-normal text-fc-birchwood">
+					Built in Montana. <em class="italic text-fc-ash">Built for America.</em>
+				</h2>
+				<div class="mt-6 space-y-4 text-body text-fc-ash">
 					<p>
-						Helena is a small city at the foot of the Rockies. It has a disproportionate number of people who do excellent work quietly and don't make a lot of noise about it. That's the culture we come from and the standard we hold ourselves to.
+						Helena is home. We're proud of that — proud to be part of Montana's economy, proud to build things that help American small businesses compete. But the work doesn't stop at the state line. A business in Florida or California deserves the same accountability that our Helena neighbors get. That's the standard we hold ourselves to regardless of the zip code.
 					</p>
-					<p>
-						We work with clients everywhere. Montana brands are closest to our heart.
+				</div>
+				<div class="mt-8 flex flex-wrap items-center gap-6 text-xs font-medium uppercase tracking-[0.12em] text-fc-ash">
+					<span>46.5958°N · 112.0270°W</span>
+					<span class="hidden sm:inline">·</span>
+					<span>Founded 2019 · Registered in Montana 2022</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- What we won't do -->
+	<section class="bg-fc-parchment py-20 sm:py-24">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			<div data-reveal class="grid gap-10 sm:grid-cols-2">
+				<div>
+					@eyebrow("What we won't do")
+					<ul class="mt-6 space-y-4 text-body text-fc-body">
+						<li class="flex items-start gap-3">
+							<span class="mt-2 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-fc-ember"></span>
+							<span>Take on a project we can't deliver</span>
+						</li>
+						<li class="flex items-start gap-3">
+							<span class="mt-2 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-fc-ember"></span>
+							<span>Quote a price and change it mid-build without a conversation</span>
+						</li>
+						<li class="flex items-start gap-3">
+							<span class="mt-2 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-fc-ember"></span>
+							<span>Hand your project to someone you've never met</span>
+						</li>
+						<li class="flex items-start gap-3">
+							<span class="mt-2 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-fc-ember"></span>
+							<span>Disappear after launch and let you figure out the rest</span>
+						</li>
+					</ul>
+				</div>
+				<div class="flex flex-col justify-center">
+					<p class="text-body text-fc-body">
+						We also won't maintain sites we didn't build — if it's on WordPress, Wix, or Squarespace and you want someone to manage it, we're not the right fit.
+					</p>
+					<p class="mt-4 text-body text-fc-body">
+						If you want to <strong class="font-medium text-fc-obsidian">replace it with something better</strong>, that's a different conversation and we're happy to have it.
 					</p>
 				</div>
 			</div>
@@ -74,7 +138,7 @@ templ aboutContent() {
 	</section>
 
 	<!-- CTA -->
-	<section class="bg-fc-parchment py-20 sm:py-24">
+	<section class="bg-fc-birchwood py-20 sm:py-24">
 		<div data-reveal class="mx-auto max-w-content px-6 text-center lg:px-8">
 			<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
 				Want to work with us?

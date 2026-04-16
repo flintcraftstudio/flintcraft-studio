@@ -68,6 +68,10 @@ func main() {
 	mux.Handle("GET /contact", handler.Contact())
 	mux.Handle("POST /contact", handler.ContactSubmit(mailer, cfg.TurnstileSecretKey))
 
+	// Sitemap & health
+	mux.Handle("GET /sitemap.xml", handler.Sitemap(cfg.BaseURL))
+	mux.Handle("GET /healthz", handler.Health())
+
 	// 404 catch-all
 	mux.Handle("GET /", handler.NotFound())
 
