@@ -56,8 +56,8 @@ templ gtagInit() {
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
 		gtag('js', new Date());
-		gtag('config', '{ GtagID }');
 	</script>
+	@templ.JSFuncCall("gtag", "config", GtagID)
 }
 
 templ pixelInit() {
@@ -70,7 +70,7 @@ templ pixelInit() {
 		t.src=v;s=b.getElementsByTagName(e)[0];
 		s.parentNode.insertBefore(t,s)}(window, document,'script',
 		'https://connect.facebook.net/en_US/fbevents.js');
-		fbq('init', '{ PixelID }');
-		fbq('track', 'PageView');
 	</script>
+	@templ.JSFuncCall("fbq", "init", PixelID)
+	@templ.JSFuncCall("fbq", "track", "PageView")
 }
