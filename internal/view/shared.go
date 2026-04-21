@@ -10,8 +10,9 @@ const Tagline = "Still shaped by hand."
 
 // Contact info
 const (
-	Phone = "(406) 871-9875"
-	Email = "hello@flintcraftstudio.com"
+	Phone     = "(406) 871-9875"
+	Email     = "hello@flintcraftstudio.com"
+	ReviewURL = "https://g.page/r/Cc5efB_VXb5vEBM/review"
 )
 
 // Tracking IDs and Turnstile site key, set once at startup from config.
