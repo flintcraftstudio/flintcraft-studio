@@ -47,16 +47,23 @@ docker compose up
 
 Full spec in `./design-system.md`. Key points:
 
-**Color tokens** (9 total, closed palette — no gradients, shadows, or additional colors):
-- `fc-obsidian` (#232226) — dark bg / text on light
-- `fc-flint` (#2e3338) — dark surface (cards, nav)
-- `fc-ember` (#cc5e1a) — accent on light backgrounds
-- `fc-spark` (#db7f36) — accent on dark backgrounds (never use ember on dark)
-- `fc-birchwood` (#faf9f7) — light bg
-- `fc-parchment` (#f0ece5) — light surface
-- `fc-trail-dust` (#6b5f52) — muted/secondary text on light backgrounds
-- `fc-ash` (#8a7d6e) — muted/secondary text on dark backgrounds (pairs with trail-dust)
+**Color tokens** (12 total, closed palette — no gradients, shadows, or additional colors):
+- `fc-obsidian` (#1c1e24) — primary dark bg / primary text on light
+- `fc-flint` (#363b42) — raised dark surface (cards, nav)
+- `fc-charcoal` (#474d55) — highest dark surface (modals, popovers, hover)
+- `fc-ash` (#c4bdb2) — strong muted / body-weight text on dark
+- `fc-smoke` (#96897a) — subtle muted on dark (captions, eyebrows, nav links)
+- `fc-spark` (#e8873b) — accent on dark (never ember on dark)
+- `fc-birchwood` (#faf9f7) — primary light bg
+- `fc-parchment` (#f0ece5) — raised light surface
+- `fc-trail-dust` (#4a4038) — strong muted / body-weight text on light
+- `fc-bracken` (#6b5f52) — subtle muted on light (captions, eyebrows, form labels)
+- `fc-ember` (#a84812) — accent on light (never spark on light)
 - `fc-slate-rim` (#d4cfc9) — borders/dividers (0.5px weight)
+
+Strong-muted vs subtle-muted: use trail-dust/ash for body-weight prose; use bracken/smoke for captions, eyebrows, metadata. Never trail-dust or bracken on dark; never ash or smoke on light.
+
+One derived utility tint (not a palette token): `fc-ember-dark` (#8a3a0e) — primary-button hover only.
 
 **Typography**: Cormorant Garamond (display/headlines) + DM Sans (body/UI). Three DM Sans weights only: 300, 400, 500. Cormorant italic reserved for tagline, hero, pull quotes.
 

@@ -34,7 +34,7 @@ templ homeContent() {
 					class="mb-4 motion-reduce:transition-none transition duration-500 ease-out-quart"
 				>
 					<div class="mb-2 h-px w-7 bg-fc-ember"></div>
-					<span class="text-eyebrow font-medium uppercase text-fc-ash">Custom web development &middot; Helena, MT</span>
+					<span class="text-eyebrow font-medium uppercase text-fc-smoke">Custom web development &middot; Helena, MT</span>
 				</div>
 				<h1
 					:class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'"
@@ -88,7 +88,7 @@ templ homeContent() {
 				<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
 					Small by design. Accountable by nature.
 				</h2>
-				<div class="mt-8 space-y-4 text-body text-fc-body">
+				<div class="mt-8 space-y-4 text-body text-fc-trail-dust">
 					<p>
 						FlintCraft Studio is a small custom development studio in Helena, Montana. We build websites for businesses that have earned their reputation and are ready for a web presence that reflects it.
 					</p>
@@ -102,7 +102,7 @@ templ homeContent() {
 				<p class="mt-8 font-display text-body italic tracking-[0.02em] text-fc-ember">
 					"As durable as the mountains, and just as unlikely to move to San Francisco."
 				</p>
-				<p class="mt-1 text-eyebrow font-medium uppercase text-fc-trail-dust">
+				<p class="mt-1 text-eyebrow font-medium uppercase text-fc-bracken">
 					Helena, MT &middot; Est. 2019
 				</p>
 			</div>
@@ -136,19 +136,19 @@ templ homeContent() {
 			<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
 				Tired of your current setup? You're not alone.
 			</h2>
-			<p class="mb-10 mt-6 max-w-2xl text-body text-fc-body">
+			<p class="mb-10 mt-6 max-w-2xl text-body text-fc-trail-dust">
 				A typical small business cobbles together managed hosting, a maintenance plan, a security plugin, a form builder, and a developer they can never get on the phone. That stack still breaks, still looks like a template, and still goes to voicemail when something goes wrong.
 			</p>
 			<div class="overflow-x-auto">
 				<table class="w-full text-left text-body-sm">
 					<thead>
 						<tr class="border-b border-fc-slate-rim">
-							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-trail-dust"></th>
-							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-trail-dust">WordPress / Wix / Squarespace</th>
+							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-bracken"></th>
+							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-bracken">WordPress / Wix / Squarespace</th>
 							<th class="pb-3 text-eyebrow font-medium uppercase text-fc-ember">FlintCraft</th>
 						</tr>
 					</thead>
-					<tbody class="text-fc-body">
+					<tbody class="text-fc-trail-dust">
 						@compRow("Built for your business", "No", "Yes")
 						@compRow("Plugin dependencies", "Many", "None")
 						@compRow("Who maintains it", "Varies — often overseas", "Us. Same people who built it.")
@@ -164,19 +164,35 @@ templ homeContent() {
 	<!-- Social proof -->
 	<section class="bg-fc-birchwood py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
-			<div data-reveal class="max-w-2xl">
-				@eyebrow("From our clients")
-				<blockquote class="mt-2">
-					<p class="font-display text-h4-display italic tracking-[0.02em] text-fc-ember">
-						"He treated us like family. Patience and understanding with all the changes and chatting back and forth. Someone willing to take the time to listen to your needs."
-					</p>
-				</blockquote>
-				<div class="mt-6 flex items-center gap-4">
-					<img src="/static/images/portfolio/david-nash.webp" alt="David Nash" class="h-12 w-12 rounded-[6px] object-cover" />
-					<a href="/work/nautilus-group" class="group">
-						<p class="text-body-sm font-medium text-fc-obsidian group-hover:text-fc-ember transition-colors">David Nash</p>
-						<p class="mt-0.5 text-ui tracking-normal text-fc-trail-dust">Nautilus Group Cleaning Services &middot; Kennewick, WA</p>
-					</a>
+			@eyebrow("From our clients")
+			<div class="mt-6 grid gap-12 lg:grid-cols-2 lg:gap-16">
+				<div data-reveal>
+					<blockquote>
+						<p class="font-display text-h4-display italic tracking-[0.02em] text-fc-ember">
+							"He treated us like family. Patience and understanding with all the changes and chatting back and forth. Someone willing to take the time to listen to your needs."
+						</p>
+					</blockquote>
+					<div class="mt-6 flex items-center gap-4">
+						<img src="/static/images/portfolio/david-nash.webp" alt="David Nash" class="h-12 w-12 rounded-[6px] object-cover" />
+						<a href="/work/nautilus-group" class="group">
+							<p class="text-body-sm font-medium text-fc-obsidian group-hover:text-fc-ember transition-colors">David Nash</p>
+							<p class="mt-0.5 text-ui tracking-normal text-fc-bracken">Nautilus Group Cleaning Services &middot; Kennewick, WA</p>
+						</a>
+					</div>
+				</div>
+				<div data-reveal>
+					<blockquote>
+						<p class="font-display text-h4-display italic tracking-[0.02em] text-fc-ember">
+							"FlintCraft did an amazing job on our website, our business almost doubled in a month's time. I highly recommend them for all your technical needs."
+						</p>
+					</blockquote>
+					<div class="mt-6 flex items-center gap-4">
+						<img src="/static/images/portfolio/david-nash.webp" alt="David Nash" class="h-12 w-12 rounded-[6px] object-cover" />
+						<a href="/work/nautilus-group" class="group">
+							<p class="text-body-sm font-medium text-fc-obsidian group-hover:text-fc-ember transition-colors">David Nash</p>
+							<p class="mt-0.5 text-ui tracking-normal text-fc-bracken">Nautilus Group Cleaning Services &middot; Kennewick, WA</p>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -191,7 +207,7 @@ templ homeContent() {
 			<p class="mx-auto mt-4 max-w-lg text-body text-fc-ash">
 				The first conversation costs nothing. We'll look at your current setup before we talk — and come to the call with a clear picture of what we'd do differently. No pitch, no pressure. Just an honest read on whether it makes sense.
 			</p>
-			<div class="mx-auto mt-8 flex max-w-md justify-center gap-8 text-ui tracking-normal text-fc-ash">
+			<div class="mx-auto mt-8 flex max-w-md justify-center gap-8 text-ui tracking-normal text-fc-smoke">
 				<span>Fixed-rate quotes</span>
 				<span>Named project owner</span>
 				<span>Monthly support</span>
@@ -217,21 +233,21 @@ templ homeContent() {
 templ eyebrow(label string) {
 	<div class="mb-4">
 		<div class="mb-2 h-px w-7 bg-fc-ember"></div>
-		<span class="text-eyebrow font-medium uppercase text-fc-trail-dust">{ label }</span>
+		<span class="text-eyebrow font-medium uppercase text-fc-bracken">{ label }</span>
 	</div>
 }
 
 templ eyebrowDark(label string) {
 	<div class="mb-4">
 		<div class="mb-2 h-px w-7 bg-fc-ember"></div>
-		<span class="text-eyebrow font-medium uppercase text-fc-ash">{ label }</span>
+		<span class="text-eyebrow font-medium uppercase text-fc-smoke">{ label }</span>
 	</div>
 }
 
 templ stat(value, label string) {
 	<div class="px-6 py-8 text-center">
 		<p class="font-display text-h4-display font-normal text-fc-obsidian">{ value }</p>
-		<p class="mt-1 text-ui tracking-normal font-light text-fc-trail-dust">{ label }</p>
+		<p class="mt-1 text-ui tracking-normal font-light text-fc-bracken">{ label }</p>
 	</div>
 }
 

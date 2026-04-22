@@ -122,17 +122,21 @@ module.exports = {
     extend: {
       colors: {
         fc: {
-          obsidian:     "#232226",
-          flint:        "#2e3338",
-          ember:        "#cc5e1a",
-          "ember-dark": "#a84b12",
-          spark:        "#db7f36",
-          birchwood:    "#faf9f7",
-          parchment:    "#f0ece5",
-          "trail-dust": "#6b5f52",
-          ash:          "#a89b8c",
-          "slate-rim":  "#d4cfc9",
-          body:         "#4a4239",
+          // ── Closed 12-token palette ──────────────────────────────────────
+          obsidian:     "#1c1e24",  // dark bg / text on light
+          flint:        "#363b42",  // raised dark surface
+          charcoal:     "#474d55",  // highest dark surface / hover
+          ash:          "#c4bdb2",  // strong muted on dark
+          smoke:        "#96897a",  // subtle muted on dark
+          spark:        "#e8873b",  // accent on dark
+          birchwood:    "#faf9f7",  // light bg
+          parchment:    "#f0ece5",  // raised light surface
+          "trail-dust": "#4a4038",  // strong muted on light
+          bracken:      "#6b5f52",  // subtle muted on light
+          ember:        "#a84812",  // accent on light
+          "slate-rim":  "#d4cfc9",  // borders / rules
+          // ── Derived (non-token) utility tints ────────────────────────────
+          "ember-dark": "#8a3a0e",  // ember hover state — ~15% darker
         },
       },
       fontFamily: {

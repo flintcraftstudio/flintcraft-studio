@@ -12,7 +12,7 @@ templ workContent() {
 			<h1 class="max-w-3xl font-display text-h1-display font-normal text-fc-obsidian">
 				<em class="italic">Field reports.</em>
 			</h1>
-			<p class="mt-6 max-w-xl text-body text-fc-body">
+			<p class="mt-6 max-w-xl text-body text-fc-trail-dust">
 				A selection of recent projects. Real businesses, real problems, real outcomes.
 			</p>
 		</div>
@@ -104,13 +104,13 @@ templ featuredCard(p Project) {
 						<span class="text-eyebrow font-medium uppercase text-fc-spark">
 							{ p.Client }
 						</span>
-						<span class="text-eyebrow tracking-normal text-fc-ash">
+						<span class="text-eyebrow tracking-normal text-fc-smoke">
 							{ p.Location }
 						</span>
 					</div>
 					<div class="mb-4 flex flex-wrap gap-2">
 						for _, tag := range p.Tags {
-							<span class="rounded-[20px] border border-fc-ash/30 px-[8px] py-[2px] text-eyebrow uppercase tracking-[0.08em] text-fc-ash">
+							<span class="rounded-[20px] border border-fc-smoke/30 px-[8px] py-[2px] text-eyebrow uppercase tracking-[0.08em] text-fc-smoke">
 								{ tag }
 							</span>
 						}
@@ -121,19 +121,19 @@ templ featuredCard(p Project) {
 					if p.Quote != nil {
 						<p class="mb-6 font-display text-body italic text-fc-ash">
 							&ldquo;{ p.Quote.Text }&rdquo;
-							<span class="not-italic text-eyebrow tracking-normal text-fc-ash/70">&mdash; { p.Quote.Attribution }</span>
+							<span class="not-italic text-eyebrow tracking-normal text-fc-smoke/70">&mdash; { p.Quote.Attribution }</span>
 						</p>
 					}
 				</div>
 				if len(p.Results) > 0 {
-					<div class="flex flex-wrap gap-6 border-t border-fc-ash/20 pt-5">
+					<div class="flex flex-wrap gap-6 border-t border-fc-smoke/20 pt-5">
 						for _, r := range p.Results {
 							<div>
 								<div class="font-display text-h4-display font-semibold text-fc-parchment">
 									{ r.Value }
 									<span class="text-body-sm font-normal text-fc-spark">{ r.Unit }</span>
 								</div>
-								<div class="text-eyebrow tracking-normal text-fc-ash">{ r.Label }</div>
+								<div class="text-eyebrow tracking-normal text-fc-smoke">{ r.Label }</div>
 							</div>
 						}
 					</div>
@@ -169,13 +169,13 @@ templ projectCard(p Project) {
 				<span class="text-eyebrow font-medium uppercase text-fc-spark">
 					{ p.Client }
 				</span>
-				<span class="text-eyebrow tracking-normal text-fc-ash">
+				<span class="text-eyebrow tracking-normal text-fc-smoke">
 					{ p.Location }
 				</span>
 			</div>
 			<div class="mb-3 flex flex-wrap gap-2">
 				for _, tag := range p.Tags {
-					<span class="rounded-[20px] border border-fc-ash/30 px-[8px] py-[2px] text-eyebrow uppercase tracking-[0.08em] text-fc-ash">
+					<span class="rounded-[20px] border border-fc-smoke/30 px-[8px] py-[2px] text-eyebrow uppercase tracking-[0.08em] text-fc-smoke">
 						{ tag }
 					</span>
 				}
@@ -184,14 +184,14 @@ templ projectCard(p Project) {
 				{ p.Title }
 			</h3>
 			if len(p.Results) > 0 {
-				<div class="mt-auto flex flex-col gap-3 border-t border-fc-ash/20 pt-4 sm:flex-row sm:gap-6">
+				<div class="mt-auto flex flex-col gap-3 border-t border-fc-smoke/20 pt-4 sm:flex-row sm:gap-6">
 					for _, r := range p.Results {
 						<div>
 							<div class="font-display text-h4-display font-semibold text-fc-parchment">
 								{ r.Value }
 								<span class="text-ui tracking-normal font-normal text-fc-spark">{ r.Unit }</span>
 							</div>
-							<div class="text-eyebrow tracking-normal text-fc-ash">{ r.Label }</div>
+							<div class="text-eyebrow tracking-normal text-fc-smoke">{ r.Label }</div>
 						</div>
 					}
 				</div>
