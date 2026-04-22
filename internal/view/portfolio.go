@@ -31,6 +31,9 @@ type Project struct {
 	Deliverables     []string
 	NextSlug         string
 	NextClient       string
+	// Shipped is the editorial "Shipped" line that appears in the field report
+	// marginalia (e.g. "March 2026"). Optional.
+	Shipped string
 }
 
 // ProjectOrder defines the display order on the work listing page.
@@ -47,6 +50,7 @@ var Projects = map[string]Project{
 	"nautilus-group": {
 		Slug:             "nautilus-group",
 		Client:           "Nautilus Group Cleaning Services",
+		Shipped:          "March 2026",
 		Title:            "No web presence. Now they have a pipeline.",
 		Subtitle:         "Custom site, brand, and SEO for a cleaning company starting from zero.",
 		Location:         "Commercial cleaning \u00b7 Kennewick, WA",
@@ -83,6 +87,7 @@ var Projects = map[string]Project{
 	"a-team-asphalt": {
 		Slug:             "a-team-asphalt",
 		Client:           "A-Team Asphalt",
+		Shipped:          "January 2026",
 		Title:            "Twenty years of reputation. A website that finally matched it.",
 		Subtitle:         "Full custom site with brand identity, copy, and SEO for a Pacific Northwest paving company.",
 		Location:         "Asphalt & paving \u00b7 Sumner, WA",
@@ -119,6 +124,7 @@ var Projects = map[string]Project{
 	"a-team-gutters": {
 		Slug:             "a-team-gutters",
 		Client:           "A-Team Gutters",
+		Shipped:          "October 2025",
 		Title:            "New trade, new brand, built to generate leads from day one.",
 		Subtitle:         "Brand identity and custom site for a new gutter installation company.",
 		Location:         "Gutter installation \u00b7 Bonney Lake, WA",
@@ -148,6 +154,7 @@ var Projects = map[string]Project{
 	"traver-hardwood-floors": {
 		Slug:             "traver-hardwood-floors",
 		Client:           "Traver Hardwood Floors",
+		Shipped:          "July 2025",
 		Title:            "Every board placed with intent. Now the site is too.",
 		Subtitle:         "Chris Traver has been laying hardwood floors in western Montana for 18 years. The redesign started with the floors themselves.",
 		Location:         "Hardwood flooring \u00b7 Western Montana",
@@ -181,6 +188,7 @@ var Projects = map[string]Project{
 	"lo-mo-outfitting": {
 		Slug:             "lo-mo-outfitting",
 		Client:           "Lo Mo Outfitting",
+		Shipped:          "April 2026",
 		Title:            "Born on the river. Now the site feels like it.",
 		Subtitle:         "Custom site, brand voice, and booking flow for a Missouri River fly fishing outfitter run by guides who actually live there.",
 		Location:         "Fly fishing outfitter · Craig, Montana",

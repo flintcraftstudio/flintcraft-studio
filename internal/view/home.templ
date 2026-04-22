@@ -5,70 +5,7 @@ templ HomePage() {
 }
 
 templ homeContent() {
-	<!-- Hero -->
-	<section class="relative min-h-[580px] overflow-hidden bg-fc-obsidian sm:min-h-[660px]">
-		<!-- Full-bleed image with slow zoom-out on load -->
-		<img
-			x-data="{ ready: false }"
-			x-init="$nextTick(() => ready = true)"
-			:class="ready ? 'scale-100' : 'scale-[1.04]'"
-			src="/static/images/hero.webp"
-			alt="Montana mountains at sunset with circuit traces carved into stone"
-			loading="eager"
-			fetchpriority="high"
-			class="absolute inset-0 h-full w-full object-cover object-[center_35%] transition-transform duration-[3000ms] ease-out-expo motion-reduce:transition-none motion-reduce:!scale-100"
-		/>
-		<!-- Global light tint across full image -->
-		<div class="absolute inset-0 bg-fc-obsidian/25"></div>
-		<!-- Deeper scrim behind text: full-width on mobile, left portion on desktop -->
-		<div class="absolute inset-y-0 left-0 w-full bg-fc-obsidian/55 lg:w-[58%]"></div>
-		<!-- Staggered entrance -->
-		<div
-			x-data="{ show: false }"
-			x-init="$nextTick(() => show = true)"
-			class="relative mx-auto max-w-content px-6 py-24 sm:py-32 lg:px-8"
-		>
-			<div class="max-w-[560px]">
-				<div
-					:class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'"
-					class="mb-4 motion-reduce:transition-none transition duration-500 ease-out-quart"
-				>
-					<div class="mb-2 h-px w-7 bg-fc-ember"></div>
-					<span class="text-eyebrow font-medium uppercase text-fc-smoke">Custom web development &middot; Helena, MT</span>
-				</div>
-				<h1
-					:class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'"
-					class="font-display text-display-display font-normal text-fc-parchment motion-reduce:transition-none transition delay-100 duration-700 ease-out-expo"
-				>
-					<em class="italic">Carved for purpose.</em>
-				</h1>
-				<p
-					:class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'"
-					class="mt-6 text-body text-fc-ash motion-reduce:transition-none transition delay-200 duration-700 ease-out-quart"
-				>
-					One relationship. <em class="font-display italic">Everything handled.</em> For businesses that have earned their reputation and are ready for a website that reflects it.
-				</p>
-				<div
-					:class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'"
-					class="mt-10 flex flex-wrap gap-4 motion-reduce:transition-none transition delay-300 duration-500 ease-out-quart"
-				>
-					<a
-						href="/contact"
-						class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-ui font-medium uppercase text-fc-birchwood transition hover:-translate-y-px hover:bg-fc-ember-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fc-ember active:translate-y-0 active:scale-[0.97]"
-					>
-						Start a project
-					</a>
-					<a
-						href="/work"
-						class="group border-b-[1.5px] border-fc-spark px-0 py-[10px] text-ui font-medium uppercase text-fc-spark transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fc-spark active:scale-[0.98]"
-					>
-						See our work
-						<span class="ml-0.5 inline-block transition-transform duration-200 ease-out-quart group-hover:translate-x-1 motion-reduce:transition-none">&rarr;</span>
-					</a>
-				</div>
-			</div>
-		</div>
-	</section>
+	@heroStrike()
 
 	<!-- Stats -->
 	<section class="border-y border-fc-slate-rim bg-fc-parchment">
@@ -102,7 +39,7 @@ templ homeContent() {
 				<p class="mt-8 font-display text-body italic tracking-[0.02em] text-fc-ember">
 					"As durable as the mountains, and just as unlikely to move to San Francisco."
 				</p>
-				<p class="mt-1 text-eyebrow font-medium uppercase text-fc-bracken">
+				<p class="mt-1 text-eyebrow font-medium uppercase tracking-[0.2em] text-fc-bracken">
 					Helena, MT &middot; Est. 2019
 				</p>
 			</div>
@@ -114,7 +51,7 @@ templ homeContent() {
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			<div data-reveal class="max-w-2xl">
 				@eyebrowDark("Who we work with")
-				<h2 class="font-display text-h2-display font-normal text-fc-parchment">
+				<h2 class="font-display text-h2-display font-normal text-fc-birchwood">
 					Done improvising. Ready to build something that lasts.
 				</h2>
 				<div class="mt-8 space-y-4 text-body text-fc-ash">
@@ -143,9 +80,9 @@ templ homeContent() {
 				<table class="w-full text-left text-body-sm">
 					<thead>
 						<tr class="border-b border-fc-slate-rim">
-							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-bracken"></th>
-							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-bracken">WordPress / Wix / Squarespace</th>
-							<th class="pb-3 text-eyebrow font-medium uppercase text-fc-ember">FlintCraft</th>
+							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase tracking-[0.2em] text-fc-bracken"></th>
+							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase tracking-[0.2em] text-fc-bracken">WordPress / Wix / Squarespace</th>
+							<th class="pb-3 text-eyebrow font-medium uppercase tracking-[0.2em] text-fc-ember">FlintCraft</th>
 						</tr>
 					</thead>
 					<tbody class="text-fc-trail-dust">
@@ -161,38 +98,38 @@ templ homeContent() {
 		</div>
 	</section>
 
-	<!-- Social proof -->
+	<!-- Social proof — accent card (no chip; the 2.5px Ember bar carries the message) -->
 	<section class="bg-fc-birchwood py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			@eyebrow("From our clients")
-			<div class="mt-6 grid gap-12 lg:grid-cols-2 lg:gap-16">
+			<div class="mt-6 grid gap-8 lg:grid-cols-2 lg:gap-10">
 				<div data-reveal>
-					<blockquote>
-						<p class="font-display text-h4-display italic tracking-[0.02em] text-fc-ember">
+					<blockquote class="border-l-[2.5px] border-fc-ember bg-fc-parchment py-6 pl-7 pr-6">
+						<p class="font-display text-h4-display italic tracking-[0.02em] text-fc-obsidian">
 							"He treated us like family. Patience and understanding with all the changes and chatting back and forth. Someone willing to take the time to listen to your needs."
 						</p>
+						<footer class="mt-5 flex items-center gap-4">
+							<img src="/static/images/portfolio/david-nash.webp" alt="David Nash" class="h-12 w-12 rounded-[6px] object-cover"/>
+							<a href="/work/nautilus-group" class="group">
+								<p class="text-body-sm font-medium text-fc-obsidian transition-colors group-hover:text-fc-ember">David Nash</p>
+								<p class="mt-0.5 text-ui tracking-normal text-fc-bracken">Nautilus Group Cleaning Services &middot; Kennewick, WA</p>
+							</a>
+						</footer>
 					</blockquote>
-					<div class="mt-6 flex items-center gap-4">
-						<img src="/static/images/portfolio/david-nash.webp" alt="David Nash" class="h-12 w-12 rounded-[6px] object-cover" />
-						<a href="/work/nautilus-group" class="group">
-							<p class="text-body-sm font-medium text-fc-obsidian group-hover:text-fc-ember transition-colors">David Nash</p>
-							<p class="mt-0.5 text-ui tracking-normal text-fc-bracken">Nautilus Group Cleaning Services &middot; Kennewick, WA</p>
-						</a>
-					</div>
 				</div>
 				<div data-reveal>
-					<blockquote>
-						<p class="font-display text-h4-display italic tracking-[0.02em] text-fc-ember">
+					<blockquote class="border-l-[2.5px] border-fc-ember bg-fc-parchment py-6 pl-7 pr-6">
+						<p class="font-display text-h4-display italic tracking-[0.02em] text-fc-obsidian">
 							"Did an absolute phenomenal job developing my new website. 10/10 recommend! Easy to navigate and the detail is amazing!"
 						</p>
+						<footer class="mt-5 flex items-center gap-4">
+							<img src="/static/images/portfolio/matt-mohar.webp" alt="Matt Mohar" class="h-12 w-12 rounded-[6px] object-cover"/>
+							<a href="/work/lo-mo-outfitting" class="group">
+								<p class="text-body-sm font-medium text-fc-obsidian transition-colors group-hover:text-fc-ember">Matt Mohar</p>
+								<p class="mt-0.5 text-ui tracking-normal text-fc-bracken">Lo Mo Outfitting &middot; Craig, MT</p>
+							</a>
+						</footer>
 					</blockquote>
-					<div class="mt-6 flex items-center gap-4">
-						<img src="/static/images/portfolio/matt-mohar.webp" alt="Matt Mohar" class="h-12 w-12 rounded-[6px] object-cover" />
-						<a href="/work/lo-mo-outfitting" class="group">
-							<p class="text-body-sm font-medium text-fc-obsidian group-hover:text-fc-ember transition-colors">Matt Mohar</p>
-							<p class="mt-0.5 text-ui tracking-normal text-fc-bracken">Lo Mo Outfitting &middot; Craig, MT</p>
-						</a>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -201,7 +138,7 @@ templ homeContent() {
 	<!-- CTA -->
 	<section class="bg-fc-obsidian py-20 sm:py-24">
 		<div data-reveal class="mx-auto max-w-content px-6 text-center lg:px-8">
-			<h2 class="font-display text-h2-display font-normal text-fc-parchment">
+			<h2 class="font-display text-h2-display font-normal text-fc-birchwood">
 				Ready to find out if we're the right fit?
 			</h2>
 			<p class="mx-auto mt-4 max-w-lg text-body text-fc-ash">
@@ -212,56 +149,143 @@ templ homeContent() {
 				<span>Named project owner</span>
 				<span>Monthly support</span>
 			</div>
-			<div class="mt-10 flex flex-wrap items-center justify-center gap-4">
-				<a
-					href="/contact"
-					class="rounded-[3px] bg-fc-spark px-[22px] py-[10px] text-ui font-medium uppercase text-fc-obsidian transition hover:bg-fc-ember active:scale-[0.97]"
-				>
-					Start a project
-				</a>
-				<a
-					href="tel:+14068719875"
-					class="border-b-[1.5px] border-fc-spark px-0 py-[10px] text-ui font-medium uppercase text-fc-spark transition hover:brightness-110 active:scale-[0.98]"
-				>
-					(406) 871-9875
-				</a>
+			<div class="mt-10 flex flex-wrap items-center justify-center gap-6">
+				@btnPrimaryDark("Start a project", "/contact")
+				@btnGhostDark(Phone, "tel:+14068719875")
 			</div>
 		</div>
 	</section>
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Hero — "The Strike"
+// Full-bleed Obsidian. Twin-chipped plate (96px tr / 64px bl) with a 2.5px
+// Spark rule drawing along the top-right diagonal on load. Right column carries
+// a museum-style specimen card and a four-row stats ledger.
+// ─────────────────────────────────────────────────────────────────────────────
+
+templ heroStrike() {
+	<section class="fc-scene relative overflow-hidden bg-fc-obsidian">
+		<!-- Newspaper masthead chrome -->
+		<header class="relative z-10 border-b border-fc-flint">
+			<div class="mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-3 px-6 py-5 lg:px-12">
+				<div class="flex items-center gap-3">
+					<img src="/static/images/logo.svg" alt="" class="h-5 w-auto opacity-85"/>
+					<span class="text-eyebrow font-medium uppercase tracking-[0.28em] text-fc-birchwood">FlintCraft Studio</span>
+				</div>
+				<div class="flex flex-wrap gap-7 text-eyebrow font-medium uppercase tracking-[0.28em] text-fc-smoke">
+					<span>Vol. 7</span>
+					<span>Spring <em class="font-display text-[13px] normal-case italic tracking-[0.02em] text-fc-spark">2026</em></span>
+					<span>Helena <em class="font-display text-[13px] normal-case italic tracking-[0.02em] text-fc-spark">MT</em></span>
+					<span>{ Phone }</span>
+				</div>
+			</div>
+		</header>
+
+		<!-- Hero grid -->
+		<div class="relative z-10 mx-auto grid max-w-[1320px] gap-10 px-6 pb-28 pt-16 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-16 lg:px-12 lg:pt-20">
+
+			<!-- The plate -->
+			<div class="relative" style="filter: drop-shadow(0 1px 0 rgba(196,189,178,0.14));">
+				<div class="fc-chip-plate fc-plate-fill relative flex min-h-[580px] flex-col px-8 py-14 sm:px-12 sm:py-16">
+					<div class="fc-strike fc-strike--hero fc-strike--dark fc-strike-anim"></div>
+
+					<!-- Eyebrow -->
+					<div class="fc-fade-in fc-fade-in--eyebrow flex items-center gap-3 text-eyebrow font-medium uppercase tracking-[0.3em] text-fc-spark">
+						<span class="inline-block h-px w-7 bg-fc-spark"></span>
+						<span>A studio shaped by hand</span>
+					</div>
+
+					<!-- Headline — word-by-word reveal -->
+					<h1 class="mt-10 max-w-[11ch] font-display font-normal text-fc-birchwood" style="font-size: clamp(56px, 7.6vw, 116px); line-height: 0.92; letter-spacing: -0.035em;">
+						<span class="fc-word">Carved</span>&nbsp;<span class="fc-word">for</span>&nbsp;<span class="fc-word"><em class="italic text-fc-spark">purpose.</em></span>
+					</h1>
+
+					<!-- Lede -->
+					<p class="fc-fade-in fc-fade-in--lede mt-9 max-w-[540px] text-body-lg text-fc-ash">
+						One relationship. <em class="font-display italic text-fc-spark">Everything handled.</em> Custom websites for businesses that have earned their reputation and are ready for a web presence that reflects it.
+					</p>
+
+					<!-- Aphorism / pull quote -->
+					<blockquote class="fc-fade-in fc-fade-in--quote mt-9 max-w-[520px] border-l-[2.5px] border-fc-spark pl-5 font-display text-[18px] italic leading-[1.5] text-fc-smoke">
+						<span class="mr-0.5 text-[24px] text-fc-spark">&ldquo;</span>As durable as the mountains, and just as unlikely to move to San Francisco.
+					</blockquote>
+
+					<!-- Actions -->
+					<div class="fc-fade-in fc-fade-in--cta mt-auto flex flex-wrap items-center gap-6 pt-12">
+						@btnPrimaryDark("Start a project", "/contact")
+						@btnGhostDark("See recent field reports", "/work")
+					</div>
+
+					<div class="fc-fade-in fc-fade-in--sig mt-8 text-eyebrow uppercase tracking-[0.28em] text-fc-bracken">
+						Est. 2019 &middot; <em class="font-display text-[12px] normal-case italic tracking-[0.02em] text-fc-smoke">Helena, Montana</em>
+					</div>
+				</div>
+			</div>
+
+			<!-- Aside: specimen + stats -->
+			<aside class="flex flex-col gap-8 pt-5">
+				<div class="fc-chip-tr-lg fc-fade-in fc-fade-in--lede relative bg-[#15171c] p-8">
+					<span class="fc-strike fc-strike--lg fc-strike--dark"></span>
+					<div class="font-display text-[12px] italic tracking-[0.04em] text-fc-spark">Plate 01 — the mark</div>
+					<img src="/static/images/logo.png" alt="FlintCraft arrowhead" class="my-5 block h-auto w-full opacity-90"/>
+					<div class="text-eyebrow uppercase tracking-[0.24em] text-fc-smoke">Hand-struck &middot; not rendered</div>
+				</div>
+
+				<dl class="fc-fade-in fc-fade-in--cta border-t border-fc-flint">
+					@statRow("Deadlines met", "100", "%")
+					@statRow("Templates used", "0", "")
+					@statRow("Engineers on file", "2", "")
+					@statRowItalic("Response time", "Same day.")
+				</dl>
+			</aside>
+		</div>
+
+		<!-- Foot — running marginalia -->
+		<footer class="relative z-10 mx-auto flex max-w-[1320px] items-center justify-between border-t border-fc-flint px-6 py-7 text-eyebrow uppercase tracking-[0.28em] text-fc-bracken lg:px-12">
+			<span>№ 01 — <em class="font-display text-[13px] normal-case italic tracking-[0.04em] text-fc-spark">The Mark</em></span>
+			<span>Scroll for the record &rarr;</span>
+		</footer>
+	</section>
+}
+
+templ statRow(label, value, unit string) {
+	<div class="grid grid-cols-[1fr_auto] items-baseline border-b border-fc-flint py-4">
+		<dt class="text-eyebrow uppercase tracking-[0.24em] text-fc-smoke">{ label }</dt>
+		<dd class="font-display text-[28px] tracking-[-0.01em] text-fc-birchwood">
+			{ value }
+			if unit != "" {
+				<em class="italic text-fc-spark">{ unit }</em>
+			}
+		</dd>
+	</div>
+}
+
+templ statRowItalic(label, value string) {
+	<div class="grid grid-cols-[1fr_auto] items-baseline border-b border-fc-flint py-4">
+		<dt class="text-eyebrow uppercase tracking-[0.24em] text-fc-smoke">{ label }</dt>
+		<dd class="font-display text-[28px] italic tracking-[-0.01em] text-fc-spark">{ value }</dd>
+	</div>
+}
+
 templ eyebrow(label string) {
 	<div class="mb-4">
 		<div class="mb-2 h-px w-7 bg-fc-ember"></div>
-		<span class="text-eyebrow font-medium uppercase text-fc-bracken">{ label }</span>
+		<span class="text-eyebrow font-medium uppercase tracking-[0.2em] text-fc-bracken">{ label }</span>
 	</div>
 }
 
 templ eyebrowDark(label string) {
 	<div class="mb-4">
-		<div class="mb-2 h-px w-7 bg-fc-ember"></div>
-		<span class="text-eyebrow font-medium uppercase text-fc-smoke">{ label }</span>
+		<div class="mb-2 h-px w-7 bg-fc-spark"></div>
+		<span class="text-eyebrow font-medium uppercase tracking-[0.2em] text-fc-smoke">{ label }</span>
 	</div>
 }
 
 templ stat(value, label string) {
 	<div class="px-6 py-8 text-center">
 		<p class="font-display text-h4-display font-normal text-fc-obsidian">{ value }</p>
-		<p class="mt-1 text-ui tracking-normal font-light text-fc-bracken">{ label }</p>
-	</div>
-}
-
-templ serviceCard(label, headline, description, ctaLabel, ctaHref string) {
-	<div class="flex flex-col rounded-[6px] border border-fc-flint bg-fc-flint p-7">
-		<p class="mb-3 text-eyebrow font-medium uppercase text-fc-spark">{ label }</p>
-		<h3 class="mb-4 font-display text-h4-display font-normal text-fc-parchment">{ headline }</h3>
-		<p class="text-body-sm text-fc-ash">{ description }</p>
-		<a
-			href={ templ.SafeURL(ctaHref) }
-			class="mt-6 inline-flex text-ui font-medium uppercase text-fc-spark transition hover:brightness-110"
-		>
-			{ ctaLabel } &rarr;
-		</a>
+		<p class="mt-1 text-ui font-light tracking-normal text-fc-bracken">{ label }</p>
 	</div>
 }
 

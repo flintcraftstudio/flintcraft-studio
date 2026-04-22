@@ -121,6 +121,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // FlintCraft v1.1 — 12-token closed palette.
+        // Light text tiers: trail-dust (body) / bracken (subtle muted) / ember (accent)
+        // Dark text tiers:  ash (body) / smoke (subtle muted) / spark (accent)
+        // Surfaces light:   birchwood (page) / parchment (raised)
+        // Surfaces dark:    obsidian (page) / flint (raised) / charcoal (highest)
         fc: {
           // ── Closed 12-token palette ──────────────────────────────────────
           obsidian:     "#1c1e24",  // dark bg / text on light
