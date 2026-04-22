@@ -50,9 +50,6 @@
   z-index: 0;
 }
 
-.hero-spec__chrome {
-  border-bottom: 0.5px solid rgba(196, 189, 178, 0.12);
-}
 .hero-spec__foot {
   border-top: 0.5px solid rgba(196, 189, 178, 0.12);
 }
@@ -64,12 +61,11 @@
   opacity: 0;
   animation: hero-spec-fade-up 900ms cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
 }
-.hero-spec__left .hero-spec__callout + .hero-spec__callout,
-.hero-spec__right .hero-spec__callout + .hero-spec__callout {
-  margin-top: 64px;
+.hero-spec__left .hero-spec__callout + .hero-spec__callout {
+  margin-top: 48px;
 }
 
-/* Leader line — thin Ember rule pointing toward the specimen */
+/* Leader line — thin Ember rule pointing from left callouts toward the specimen */
 .hero-spec__leader {
   position: absolute;
   top: 30px;
@@ -94,45 +90,30 @@
   transform-origin: right center;
 }
 .hero-spec__left .hero-spec__leader::after { right: -3px; }
-.hero-spec__right .hero-spec__leader {
-  left: -20px;
-  width: calc(100% + 20px);
-  transform-origin: left center;
-}
-.hero-spec__right .hero-spec__leader::after { left: -3px; }
 
-/* Stagger */
-.hero-spec__left  .hero-spec__callout:nth-child(1) { animation-delay: 900ms; }
-.hero-spec__left  .hero-spec__callout:nth-child(2) { animation-delay: 1050ms; }
-.hero-spec__left  .hero-spec__callout:nth-child(3) { animation-delay: 1200ms; }
-.hero-spec__right .hero-spec__callout:nth-child(1) { animation-delay: 950ms; }
-.hero-spec__right .hero-spec__callout:nth-child(2) { animation-delay: 1100ms; }
-.hero-spec__right .hero-spec__callout:nth-child(3) { animation-delay: 1250ms; }
-.hero-spec__left  .hero-spec__callout:nth-child(1) .hero-spec__leader { animation-delay: 700ms; }
-.hero-spec__left  .hero-spec__callout:nth-child(2) .hero-spec__leader { animation-delay: 850ms; }
-.hero-spec__left  .hero-spec__callout:nth-child(3) .hero-spec__leader { animation-delay: 1000ms; }
-.hero-spec__right .hero-spec__callout:nth-child(1) .hero-spec__leader { animation-delay: 750ms; }
-.hero-spec__right .hero-spec__callout:nth-child(2) .hero-spec__leader { animation-delay: 900ms; }
-.hero-spec__right .hero-spec__callout:nth-child(3) .hero-spec__leader { animation-delay: 1050ms; }
+/* Headline / lede / CTAs reveal FIRST — the pitch lands before supporting proof */
+.hero-spec__headline { opacity: 0; animation: hero-spec-fade-up 900ms 100ms forwards; }
+.hero-spec__lede     { opacity: 0; animation: hero-spec-fade-up 700ms 300ms forwards; }
+.hero-spec__actions  { opacity: 0; animation: hero-spec-fade-up 700ms 500ms forwards; }
 
-/* Specimen */
+/* Specimen follows the headline */
 .hero-spec__plate-label {
   opacity: 0;
-  animation: hero-spec-fade-up 700ms 200ms forwards;
+  animation: hero-spec-fade-up 700ms 700ms forwards;
 }
 .hero-spec__specimen-img {
   opacity: 0;
   transform: scale(0.98);
-  animation: hero-spec-reveal 1200ms cubic-bezier(0.2, 0.8, 0.25, 1) 400ms forwards;
+  animation: hero-spec-reveal 1200ms cubic-bezier(0.2, 0.8, 0.25, 1) 900ms forwards;
   filter: drop-shadow(0 0 48px rgba(232, 135, 59, 0.12));
 }
 .hero-spec__reg {
   opacity: 0;
-  animation: hero-spec-fade-in 900ms 400ms forwards;
+  animation: hero-spec-fade-in 900ms 900ms forwards;
 }
 .hero-spec__caption {
   opacity: 0;
-  animation: hero-spec-fade-up 700ms 550ms forwards;
+  animation: hero-spec-fade-up 700ms 1150ms forwards;
 }
 .hero-spec__caption::before,
 .hero-spec__caption::after {
@@ -145,13 +126,16 @@
   margin: 0 14px;
 }
 
-/* Headline band */
-.hero-spec__headline { opacity: 0; animation: hero-spec-fade-up 900ms 1400ms forwards; }
-.hero-spec__lede     { opacity: 0; animation: hero-spec-fade-up 700ms 1550ms forwards; }
-.hero-spec__actions  { opacity: 0; animation: hero-spec-fade-up 700ms 1700ms forwards; }
+/* Callouts stagger last — supporting proof after the pitch is delivered */
+.hero-spec__left .hero-spec__callout:nth-child(1) { animation-delay: 1300ms; }
+.hero-spec__left .hero-spec__callout:nth-child(2) { animation-delay: 1450ms; }
+.hero-spec__left .hero-spec__callout:nth-child(3) { animation-delay: 1600ms; }
+.hero-spec__left .hero-spec__callout:nth-child(1) .hero-spec__leader { animation-delay: 1100ms; }
+.hero-spec__left .hero-spec__callout:nth-child(2) .hero-spec__leader { animation-delay: 1250ms; }
+.hero-spec__left .hero-spec__callout:nth-child(3) .hero-spec__leader { animation-delay: 1400ms; }
 
-/* Primary CTA — chipped corner */
-.hero-spec__cta-primary {
+/* Chipped-corner CTA — shared across hero and closing CTA */
+.fc-cta-chipped {
   clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
 }
 
@@ -165,9 +149,8 @@
 
 @media (max-width: 960px) {
   .hero-spec__stage { grid-template-columns: 1fr !important; }
-  .hero-spec__left, .hero-spec__right { text-align: left !important; }
-  .hero-spec__left .hero-spec__callout + .hero-spec__callout,
-  .hero-spec__right .hero-spec__callout + .hero-spec__callout { margin-top: 0 !important; }
+  .hero-spec__left { text-align: left !important; }
+  .hero-spec__left .hero-spec__callout + .hero-spec__callout { margin-top: 28px !important; }
   .hero-spec__leader { display: none; }
   .hero-spec__callout {
     padding-top: 0;

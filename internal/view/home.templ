@@ -7,30 +7,41 @@ templ HomePage() {
 templ homeContent() {
 	<!-- Hero — specimen case -->
 	<section class="hero-spec">
-		<!-- Chrome strip -->
-		<header class="hero-spec__chrome relative z-[3] flex items-baseline justify-between px-6 py-5 text-[10px] uppercase tracking-[0.28em] text-fc-smoke lg:px-12">
-			<div class="flex items-center gap-3">
-				<img src="/static/images/logo.svg" alt="" class="h-[22px] w-auto opacity-85"/>
-				<span class="font-medium tracking-[0.14em] text-fc-birchwood">{ SiteName }</span>
+		<!-- Headline band — pitch lands first -->
+		<div class="relative z-[2] mx-auto max-w-content px-6 pb-8 pt-20 text-center lg:px-12">
+			<h1 class="hero-spec__headline m-0 font-display font-normal text-fc-parchment" style="font-size: clamp(52px, 6.8vw, 108px); line-height: 0.95; letter-spacing: -0.03em;">
+				Carved <em class="italic text-fc-spark">{ "for purpose." }</em>
+			</h1>
+			<p class="hero-spec__lede mx-auto mt-7 max-w-[620px] text-[18px] leading-[1.7] text-fc-ash">
+				One relationship. <em class="font-display italic text-fc-spark">Everything handled.</em> Custom websites for businesses that have earned their reputation and are ready for a web presence that reflects it.
+			</p>
+			<div class="hero-spec__actions mt-10 flex flex-wrap items-center justify-center gap-7">
+				<a
+					href="/contact"
+					class="fc-cta-chipped inline-flex items-center gap-2 bg-fc-spark px-8 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-obsidian transition hover:-translate-y-px hover:brightness-110 active:translate-y-0 active:scale-[0.97]"
+				>
+					Start a project &rarr;
+				</a>
+				<a
+					href="/work"
+					class="group inline-flex items-center gap-2 border-b-[1.5px] border-fc-spark px-0 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-spark transition hover:brightness-110 active:scale-[0.98]"
+				>
+					See our work
+				</a>
 			</div>
-			<div class="hidden gap-8 sm:flex">
-				<span>Specimen 01 &mdash; <em class="font-display text-[13px] italic tracking-[0.02em] text-fc-spark normal-case">the mark</em></span>
-				<span class="hidden md:inline">Helena <em class="font-display text-[13px] italic tracking-[0.02em] text-fc-spark normal-case">Montana</em></span>
-				<span class="hidden lg:inline">Catalogued <em class="font-display text-[13px] italic tracking-[0.02em] text-fc-spark normal-case">2026</em></span>
-			</div>
-		</header>
-		<!-- Stage — 3-column grid (callouts | specimen | callouts) -->
-		<div class="hero-spec__stage relative z-[2] mx-auto grid max-w-[1360px] items-start gap-10 px-6 pb-16 pt-20 lg:grid-cols-[260px_minmax(0,1fr)_260px] lg:px-12">
-			<!-- Left callouts -->
+		</div>
+		<!-- Stage — 2-column grid (callouts | specimen). Three callouts max. -->
+		<div class="hero-spec__stage relative z-[2] mx-auto grid max-w-content items-center gap-12 px-6 pb-16 pt-12 lg:grid-cols-[260px_minmax(0,1fr)] lg:px-12">
+			<!-- Left callouts (3) — leader lines point to specimen -->
 			<div class="hero-spec__left text-right">
 				@specCallout("№ 01", "Hand-shaped.", "Every line written from scratch. No WordPress. No templates. No page builders.")
-				@specCallout("№ 02", "Locally sourced.", "Designed and built in Helena, Montana. Two engineers. You'll know both their names.")
-				@specCallout("№ 03", "Struck for purpose.", "Every site is written for one business. Yours. Not adapted from a theme.")
+				@specCallout("№ 02", "All in.", "Hosting, maintenance, SEO, updates. One invoice. Between $150 and $350 a month.")
+				@specCallout("№ 03", "One to call.", "The person who built your site has their phone on them. It stays that way after launch.")
 			</div>
-			<!-- Center specimen -->
-			<div class="relative pt-8 text-center">
+			<!-- Specimen -->
+			<div class="relative text-center">
 				<div class="hero-spec__plate-label mb-5 text-[10px] uppercase tracking-[0.3em] text-fc-spark">Plate I &middot; the flint mark</div>
-				<div class="relative mx-auto w-full max-w-[360px]" style="aspect-ratio: 755 / 1072;">
+				<div class="relative mx-auto w-full max-w-[440px]" style="aspect-ratio: 755 / 1072;">
 					<!-- Registration marks -->
 					<span class="hero-spec__reg absolute -left-2 -top-2 h-[14px] w-[14px] text-fc-bracken">
 						<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="0.75" class="block h-full w-full"><path d="M0 5 L0 0 L5 0 M0 7 L3 7 M7 0 L7 3"></path></svg>
@@ -48,51 +59,12 @@ templ homeContent() {
 				</div>
 				<div class="hero-spec__caption mt-5 font-display text-[16px] italic tracking-[0.01em] text-fc-ash">hand-struck, not rendered</div>
 			</div>
-			<!-- Right callouts -->
-			<div class="hero-spec__right">
-				@specCallout("№ 04", "One to call.", "The person who built your site has their phone on them. It stays that way after launch.")
-				@specCallout("№ 05", "All in.", "Hosting, maintenance, SEO, updates. One invoice. Between $150 and $350 a month.")
-				@specCallout("№ 06", "Deadlines met.", "100%. We've never missed one. Ask for references and we'll hand you a list.")
-			</div>
-		</div>
-		<!-- Headline band -->
-		<div class="relative z-[2] mx-auto max-w-[1360px] px-6 pb-24 pt-10 text-center lg:px-12">
-			<h1 class="hero-spec__headline m-0 font-display font-normal text-fc-parchment" style="font-size: clamp(52px, 6.8vw, 108px); line-height: 0.95; letter-spacing: -0.03em;">
-				Carved <em class="italic text-fc-spark">{ "for purpose." }</em>
-			</h1>
-			<p class="hero-spec__lede mx-auto mt-7 max-w-[620px] text-[18px] leading-[1.7] text-fc-ash">
-				One relationship. <em class="font-display italic text-fc-spark">Everything handled.</em> Custom websites for businesses that have earned their reputation and are ready for a web presence that reflects it.
-			</p>
-			<div class="hero-spec__actions mt-10 flex flex-wrap items-center justify-center gap-7">
-				<a
-					href="/contact"
-					class="hero-spec__cta-primary inline-flex items-center gap-2 bg-fc-spark px-8 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-obsidian transition hover:-translate-y-px hover:brightness-110 active:translate-y-0 active:scale-[0.97]"
-				>
-					Start a project &rarr;
-				</a>
-				<a
-					href="/work"
-					class="group inline-flex items-center gap-2 border-b-[1.5px] border-fc-spark px-0 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-spark transition hover:brightness-110 active:scale-[0.98]"
-				>
-					See recent field reports
-				</a>
-			</div>
 		</div>
 		<!-- Foot meta -->
-		<footer class="hero-spec__foot relative z-[2] mx-auto flex max-w-[1360px] flex-wrap items-center justify-between gap-3 px-6 pb-8 pt-6 text-[10px] uppercase tracking-[0.28em] text-fc-bracken lg:px-12">
-			<span>{ SiteName } &mdash; Vol. 1 &middot; Spring 2026</span>
+		<footer class="hero-spec__foot relative z-[2] mx-auto flex max-w-content flex-wrap items-center justify-between gap-3 px-6 pb-8 pt-6 text-[10px] uppercase tracking-[0.28em] text-fc-bracken lg:px-12">
+			<span>Est. 2019 &middot; <em class="font-display text-[13px] italic tracking-[0.04em] text-fc-spark normal-case">Helena, MT</em></span>
 			<span>{ Phone } &middot; <em class="font-display text-[13px] italic tracking-[0.04em] text-fc-spark normal-case">{ Email }</em></span>
 		</footer>
-	</section>
-
-	<!-- Stats -->
-	<section class="border-y border-fc-slate-rim bg-fc-parchment">
-		<div class="mx-auto grid max-w-content grid-cols-2 divide-x divide-fc-slate-rim sm:grid-cols-4">
-			@stat("100%", "Deadlines met")
-			@stat("2", "Engineers — you always know who built it")
-			@stat("0", "Templates — every line written for you")
-			@stat("Same day", "Support response")
-		</div>
 	</section>
 
 	<!-- Credentialing -->
@@ -181,13 +153,16 @@ templ homeContent() {
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			<div data-reveal class="max-w-2xl">
 				@eyebrow("From our clients")
-				<blockquote class="mt-2">
+				<p class="mt-2 text-body text-fc-trail-dust">
+					On a recent project, <span class="font-medium text-fc-obsidian">David Nash</span> wrote:
+				</p>
+				<blockquote class="mt-4">
 					<p class="font-display text-h4-display italic tracking-[0.02em] text-fc-ember">
-						"He treated us like family. Patience and understanding with all the changes and chatting back and forth. Someone willing to take the time to listen to your needs."
+						"They treated us like family. Patience and understanding with all the changes and chatting back and forth. They took the time to listen to our needs."
 					</p>
 				</blockquote>
 				<div class="mt-6 flex items-center gap-4">
-					<img src="/static/images/portfolio/david-nash.webp" alt="David Nash" class="h-12 w-12 rounded-[6px] object-cover" />
+					<img src="/static/images/portfolio/david-nash.webp" alt="David Nash" class="h-12 w-12 rounded-[6px] object-cover"/>
 					<a href="/work/nautilus-group" class="group">
 						<p class="text-body-sm font-medium text-fc-obsidian group-hover:text-fc-ember transition-colors">David Nash</p>
 						<p class="mt-0.5 text-ui tracking-normal text-fc-bracken">Nautilus Group Cleaning Services &middot; Kennewick, WA</p>
@@ -211,16 +186,16 @@ templ homeContent() {
 				<span>Named project owner</span>
 				<span>Monthly support</span>
 			</div>
-			<div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+			<div class="mt-10 flex flex-wrap items-center justify-center gap-7">
 				<a
 					href="/contact"
-					class="rounded-[3px] bg-fc-spark px-[22px] py-[10px] text-ui font-medium uppercase text-fc-obsidian transition hover:bg-fc-ember active:scale-[0.97]"
+					class="fc-cta-chipped inline-flex items-center gap-2 bg-fc-spark px-8 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-obsidian transition hover:-translate-y-px hover:brightness-110 active:translate-y-0 active:scale-[0.97]"
 				>
-					Start a project
+					Start a project &rarr;
 				</a>
 				<a
 					href="tel:+14068719875"
-					class="border-b-[1.5px] border-fc-spark px-0 py-[10px] text-ui font-medium uppercase text-fc-spark transition hover:brightness-110 active:scale-[0.98]"
+					class="inline-flex items-center gap-2 border-b-[1.5px] border-fc-spark px-0 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-spark transition hover:brightness-110 active:scale-[0.98]"
 				>
 					(406) 871-9875
 				</a>
@@ -249,13 +224,6 @@ templ eyebrowDark(label string) {
 	<div class="mb-4">
 		<div class="mb-2 h-px w-7 bg-fc-spark"></div>
 		<span class="text-eyebrow font-medium uppercase text-fc-smoke">{ label }</span>
-	</div>
-}
-
-templ stat(value, label string) {
-	<div class="px-6 py-8 text-center">
-		<p class="font-display text-h4-display font-normal text-fc-obsidian">{ value }</p>
-		<p class="mt-1 text-ui tracking-normal font-light text-fc-bracken">{ label }</p>
 	</div>
 }
 
