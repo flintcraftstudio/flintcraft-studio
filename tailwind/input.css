@@ -50,10 +50,6 @@
   z-index: 0;
 }
 
-.hero-spec__foot {
-  border-top: 0.5px solid rgba(196, 189, 178, 0.12);
-}
-
 /* Callouts */
 .hero-spec__callout {
   position: relative;
@@ -97,10 +93,6 @@
 .hero-spec__actions  { opacity: 0; animation: hero-spec-fade-up 700ms 500ms forwards; }
 
 /* Specimen follows the headline */
-.hero-spec__plate-label {
-  opacity: 0;
-  animation: hero-spec-fade-up 700ms 700ms forwards;
-}
 .hero-spec__specimen-img {
   opacity: 0;
   transform: scale(0.98);
@@ -162,7 +154,6 @@
 @media (prefers-reduced-motion: reduce) {
   .hero-spec__callout,
   .hero-spec__leader,
-  .hero-spec__plate-label,
   .hero-spec__specimen-img,
   .hero-spec__reg,
   .hero-spec__caption,
