@@ -121,18 +121,38 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // FlintCraft v1.1 — 12-token closed palette.
+        // Light text tiers: trail-dust (body) / bracken (subtle muted) / ember (accent)
+        // Dark text tiers:  ash (body) / smoke (subtle muted) / spark (accent)
+        // Surfaces light:   birchwood (page) / parchment (raised)
+        // Surfaces dark:    obsidian (page) / flint (raised) / charcoal (highest)
         fc: {
-          obsidian:     "#232226",
-          flint:        "#2e3338",
-          ember:        "#cc5e1a",
-          "ember-dark": "#a84b12",
-          spark:        "#db7f36",
+          // Dark surfaces
+          obsidian:     "#1c1e24",
+          flint:        "#363b42",
+          charcoal:     "#474d55",
+
+          // Light surfaces
           birchwood:    "#faf9f7",
           parchment:    "#f0ece5",
-          "trail-dust": "#6b5f52",
-          ash:          "#a89b8c",
+
+          // Light text
+          "trail-dust": "#4a4038",
+          bracken:      "#6b5f52",
+          ember:        "#a84812",
+          "ember-dark": "#8f3d0f",
+
+          // Dark text
+          ash:          "#c4bdb2",
+          smoke:        "#96897a",
+          spark:        "#e8873b",
+
+          // Structure
           "slate-rim":  "#d4cfc9",
-          body:         "#4a4239",
+
+          // Legacy alias — kept so existing `text-fc-body` keeps working;
+          // resolves to the new trail-dust value.
+          body:         "#4a4038",
         },
       },
       fontFamily: {

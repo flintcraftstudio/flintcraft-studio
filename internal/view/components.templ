@@ -1,0 +1,49 @@
+package view
+
+// Shared FlintCraft components — flint-geometry buttons, eyebrows, chipped cards.
+// Conventions:
+//   - Buttons carry .fc-chip-btn (8px chipped top-right corner).
+//   - Cards carry .fc-chip-tr + a .fc-strike--card child for the struck rule.
+//   - Light/dark context is explicit; we never mix Ember on dark or Spark on light.
+
+// btnPrimaryLight — Ember fill, Birchwood text, chipped corner.
+templ btnPrimaryLight(label, href string) {
+	<a
+		href={ templ.SafeURL(href) }
+		class="fc-chip-btn inline-flex items-center gap-2 bg-fc-ember px-[26px] py-[12px] text-ui font-medium uppercase tracking-[0.08em] text-fc-birchwood transition hover:-translate-y-px hover:bg-fc-ember-dark active:translate-y-0 active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fc-ember"
+	>
+		{ label }
+	</a>
+}
+
+// btnPrimaryDark — Spark fill, Obsidian text, chipped corner.
+templ btnPrimaryDark(label, href string) {
+	<a
+		href={ templ.SafeURL(href) }
+		class="fc-chip-btn inline-flex items-center gap-2 bg-fc-spark px-[26px] py-[12px] text-ui font-medium uppercase tracking-[0.08em] text-fc-obsidian transition hover:-translate-y-px hover:brightness-110 active:translate-y-0 active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fc-spark"
+	>
+		{ label }
+	</a>
+}
+
+// btnGhostLight — Ember underline, no chip, arrow suffix.
+templ btnGhostLight(label, href string) {
+	<a
+		href={ templ.SafeURL(href) }
+		class="group inline-flex items-baseline gap-2 border-b-[1.5px] border-fc-ember px-0 py-[10px] text-ui font-medium uppercase tracking-[0.08em] text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
+	>
+		{ label }
+		<span class="ml-0.5 inline-block transition-transform duration-200 ease-out-quart group-hover:translate-x-1 motion-reduce:transition-none">&rarr;</span>
+	</a>
+}
+
+// btnGhostDark — Spark underline, no chip, arrow suffix.
+templ btnGhostDark(label, href string) {
+	<a
+		href={ templ.SafeURL(href) }
+		class="group inline-flex items-baseline gap-2 border-b-[1.5px] border-fc-spark px-0 py-[10px] text-ui font-medium uppercase tracking-[0.08em] text-fc-spark transition hover:brightness-110 active:scale-[0.98]"
+	>
+		{ label }
+		<span class="ml-0.5 inline-block transition-transform duration-200 ease-out-quart group-hover:translate-x-1 motion-reduce:transition-none">&rarr;</span>
+	</a>
+}

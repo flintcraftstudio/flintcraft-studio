@@ -4,12 +4,14 @@
 
 @layer base {
   ::selection {
-    background: rgba(204, 94, 26, 0.25);
-    color: #232226;
+    background: rgba(168, 72, 18, 0.22);
+    color: #1c1e24;
   }
 }
 
-/* Scroll reveal */
+/* ─────────────────────────────────────────────────────────────────────────────
+   Scroll reveal
+   ───────────────────────────────────────────────────────────────────────────── */
 [data-reveal] {
   opacity: 0;
   transform: translateY(18px);
@@ -25,4 +27,174 @@
     transform: none;
     transition: none;
   }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Flint geometry — knapped / chipped corners using clip-path.
+   The "struck edge" is a 2.5px accent rule running the chipped diagonal.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Single chip, top-right — default for cards. */
+.fc-chip-tr {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 14px) 0,
+    100% 14px,
+    100% 100%,
+    0 100%
+  );
+}
+
+/* Twin chips — top-right + bottom-left. Featured cards / hero plate. */
+.fc-chip-tr-bl {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 18px) 0,
+    100% 18px,
+    100% 100%,
+    18px 100%,
+    0 calc(100% - 18px)
+  );
+}
+
+/* Large chip top-right — hero / statement plates. */
+.fc-chip-tr-lg {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 28px) 0,
+    100% 28px,
+    100% 100%,
+    0 100%
+  );
+}
+
+/* Small chip — buttons, badges. */
+.fc-chip-btn {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 8px) 0,
+    100% 8px,
+    100% 100%,
+    0 100%
+  );
+}
+
+/* Hero plate — twin-chip with an exaggerated arrowhead silhouette. */
+.fc-chip-plate {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 96px) 0,
+    100% 96px,
+    100% 100%,
+    64px 100%,
+    0 calc(100% - 64px)
+  );
+}
+
+/* Image plate inside an editorial column. */
+.fc-chip-plate-sm {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 28px) 0,
+    100% 28px,
+    100% 100%,
+    0 100%
+  );
+}
+
+/* ─── Struck edge rules ───────────────────────────────────────────────────────
+   Render the accent stripe along the chipped diagonal. Position-absolute
+   inside a position-relative parent that already carries a chip clip-path. */
+
+.fc-strike {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2.5px;
+  background: #a84812;        /* ember on light, override on dark */
+  transform-origin: 100% 50%;
+  pointer-events: none;
+  z-index: 2;
+}
+.fc-strike--card    { width: 24px; transform: translate(-10px, 6px)  rotate(-45deg); }
+.fc-strike--feature { width: 44px; transform: translate(-20px, 12px) rotate(-45deg); }
+.fc-strike--lg      { width: 60px; transform: translate(-26px, 16px) rotate(-45deg); }
+.fc-strike--hero    {
+  width: 136px; /* 96 * sqrt(2) */
+  transform: translate(-48px, 48px) rotate(-45deg);
+  box-shadow: 0 0 18px rgba(232, 135, 59, 0.45);
+}
+.fc-strike--dark    { background: #e8873b; }
+
+/* On-load animation for the hero strike (and any element with .fc-strike-anim). */
+.fc-strike-anim {
+  opacity: 0;
+  transform-origin: 100% 50%;
+  animation: fc-strike-in 900ms cubic-bezier(0.2, 0.8, 0.25, 1) 280ms forwards;
+}
+@keyframes fc-strike-in {
+  0%   { opacity: 0; transform: translate(-48px, 48px) rotate(-45deg) scaleX(0); }
+  40%  { opacity: 1; }
+  100% { opacity: 1; transform: translate(-48px, 48px) rotate(-45deg) scaleX(1); }
+}
+
+/* Hero word reveal — staggered translate-up. */
+.fc-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(18px);
+  animation: fc-word-in 820ms cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
+  margin-right: 0.04em;
+}
+.fc-word:nth-child(1) { animation-delay: 220ms; }
+.fc-word:nth-child(2) { animation-delay: 380ms; }
+.fc-word:nth-child(3) { animation-delay: 560ms; }
+@keyframes fc-word-in { to { opacity: 1; transform: translateY(0); } }
+
+.fc-fade-in {
+  opacity: 0;
+  animation: fc-fade-in 700ms cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
+}
+.fc-fade-in--lede   { animation-delay: 760ms; }
+.fc-fade-in--quote  { animation-delay: 880ms; }
+.fc-fade-in--cta    { animation-delay: 1000ms; }
+.fc-fade-in--sig    { animation-delay: 1100ms; }
+.fc-fade-in--eyebrow { animation-delay: 120ms; }
+@keyframes fc-fade-in { to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fc-strike-anim,
+  .fc-word,
+  .fc-fade-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Hero plate scene chrome — hairline grid + radial warmth. */
+.fc-scene { position: relative; isolation: isolate; }
+.fc-scene::before,
+.fc-scene::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.fc-scene::before {
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 20%, rgba(232,135,59,0.04), transparent 60%),
+    radial-gradient(ellipse 90% 70% at 80% 90%, rgba(232,135,59,0.025), transparent 70%);
+}
+.fc-scene::after {
+  background:
+    linear-gradient(to right, rgba(196,189,178,0.04) 0, rgba(196,189,178,0.04) 1px, transparent 1px) 0 0 / 120px 100%,
+    linear-gradient(to bottom, rgba(196,189,178,0.04) 0, rgba(196,189,178,0.04) 1px, transparent 1px) 0 0 / 100% 120px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 80%);
+}
+
+/* Hero plate fill — flint gradient gives the slab a subtle face. */
+.fc-plate-fill {
+  background: linear-gradient(150deg, #323742 0%, #252832 55%, #1b1d24 100%);
 }

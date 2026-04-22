@@ -1,201 +1,282 @@
 package view
 
 templ WorkPage() {
-	@Base("Work", "A selection of recent projects. Real businesses, real problems, real outcomes.", "/work", workContent())
+	@Base("Work", "A running record of recent projects. Real businesses, real problems, real outcomes.", "/work", workContent())
 }
 
 templ workContent() {
-	<!-- Hero -->
-	<section class="bg-fc-birchwood py-20 sm:py-28">
-		<div class="mx-auto max-w-content px-6 lg:px-8">
-			@eyebrow("Selected work")
-			<h1 class="max-w-3xl font-display text-h1-display font-normal text-fc-obsidian">
-				<em class="italic">Field reports.</em>
-			</h1>
-			<p class="mt-6 max-w-xl text-body text-fc-body">
-				A selection of recent projects. Real businesses, real problems, real outcomes.
-			</p>
+	<!-- ─── Masthead ──────────────────────────────────────────────────────── -->
+	<header class="border-b border-fc-slate-rim bg-fc-birchwood px-6 pb-12 pt-20 sm:pt-24 lg:px-8">
+		<div class="mx-auto grid max-w-content gap-10 sm:grid-cols-[200px_1fr] sm:items-end sm:gap-14">
+			<div class="text-eyebrow font-medium uppercase leading-[1.8] tracking-[0.28em] text-fc-bracken">
+				Vol. 7<br/>
+				Spring 2026<br/>
+				<span class="text-fc-ember">Helena, Montana</span>
+			</div>
+			<div>
+				<div class="mb-4 text-eyebrow font-medium uppercase tracking-[0.28em] text-fc-ember">
+					Selected Work — A Journal
+				</div>
+				<h1 class="font-display font-normal text-fc-obsidian" style="font-size: clamp(56px, 8vw, 88px); line-height: 0.95; letter-spacing: -0.03em;">
+					<em class="italic">Field Reports.</em>
+				</h1>
+				<p class="mt-6 max-w-xl text-body text-fc-trail-dust">
+					A running record of recent projects. Real businesses, real problems, real outcomes — written the way we wish case studies were always written.
+				</p>
+			</div>
+		</div>
+	</header>
+
+	<!-- ─── Ledger (table of contents) ────────────────────────────────────── -->
+	<section class="border-b border-fc-slate-rim bg-fc-parchment px-6 py-14 lg:px-8">
+		<div class="mx-auto max-w-content">
+			<div class="mb-5 text-eyebrow font-medium uppercase tracking-[0.28em] text-fc-bracken">
+				In this volume
+			</div>
+			<div class="grid gap-0">
+				for i, slug := range ProjectOrder {
+					if p, ok := Projects[slug]; ok {
+						@ledgerRow(i+1, p)
+					}
+				}
+			</div>
 		</div>
 	</section>
 
-	<!-- Featured Project -->
-	if len(ProjectOrder) > 0 {
-		if p, ok := Projects[ProjectOrder[0]]; ok {
-			<section class="bg-fc-obsidian py-20 sm:py-24">
-				<div class="mx-auto max-w-content px-6 lg:px-8">
-					@eyebrowDark("Featured")
-					<h2 class="mb-12 font-display text-h2-display font-normal text-fc-parchment">
-						Latest field report
-					</h2>
-					@featuredCard(p)
-				</div>
-			</section>
+	<!-- ─── Field reports — alternating Birchwood ↔ Obsidian ─────────────── -->
+	for i, slug := range ProjectOrder {
+		if p, ok := Projects[slug]; ok {
+			@fieldReport(i+1, p, i%2 == 1)
 		}
 	}
 
-	<!-- Project Cards -->
-	if len(ProjectOrder) > 1 {
-		<section class="bg-fc-flint py-20 sm:py-24">
-			<div class="mx-auto max-w-content px-6 lg:px-8">
-				@eyebrowDark("More work")
-				<h2 class="mb-12 font-display text-h2-display font-normal text-fc-parchment">
-					Marketing sites &amp; brand builds
-				</h2>
-				<div class="grid gap-8 sm:grid-cols-2">
-					for _, slug := range ProjectOrder[1:] {
-						if p, ok := Projects[slug]; ok {
-							@projectCard(p)
-						}
-					}
-				</div>
-			</div>
-		</section>
-	}
-
-	<!-- CTA -->
-	<section class="bg-fc-birchwood py-20 sm:py-24">
-		<div class="mx-auto max-w-content px-6 text-center lg:px-8">
-			<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
-				Have a project in mind?
-			</h2>
-			<p class="mx-auto mt-4 max-w-md text-body text-fc-trail-dust">
-				We're selective about the projects we take on. Tell us what you're working on and we'll tell you whether we're the right fit.
+	<!-- ─── Colophon / CTA ─────────────────────────────────────────────────── -->
+	<section class="bg-fc-birchwood px-6 py-24 text-center lg:px-8">
+		<div class="mx-auto max-w-xl">
+			<div class="mb-4 text-eyebrow font-medium uppercase tracking-[0.28em] text-fc-ember">Colophon</div>
+			<p class="font-display text-h3-display italic leading-[1.4] tracking-[-0.005em] text-fc-obsidian">
+				Each report is a faithful account of work done in Montana and points west. If you see your business in one of these, the next one could be yours.
 			</p>
 			<div class="mt-10 flex flex-wrap items-center justify-center gap-6">
-				<a
-					href="/contact"
-					class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-ui font-medium uppercase text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
-				>
-					Start a project
-				</a>
-				<a
-					href={ templ.SafeURL("tel:" + Phone) }
-					class="border-b-[1.5px] border-fc-ember px-0 py-[10px] text-ui font-medium uppercase text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
-				>
-					{ Phone }
-				</a>
+				@btnPrimaryLight("Start a project", "/contact")
+				@btnGhostLight(Phone, "tel:+14068719875")
 			</div>
 		</div>
 	</section>
 }
 
-templ featuredCard(p Project) {
+// ledgerRow — one row of the table-of-contents ledger.
+templ ledgerRow(index int, p Project) {
 	<a
 		href={ templ.SafeURL("/work/" + p.Slug) }
-		data-reveal
-		class="group block overflow-hidden rounded-[6px] border border-fc-flint bg-fc-flint transition hover:border-fc-spark/30"
+		class="group grid grid-cols-[40px_1fr_auto] items-baseline gap-5 border-t border-fc-slate-rim py-3 transition hover:bg-fc-birchwood/40"
 	>
-		<div class="flex flex-col lg:flex-row">
-			if p.Screenshot != "" {
-				<div class="overflow-hidden lg:w-3/5">
-					<img
-						src={ p.Screenshot }
-						alt={ p.Client + " website screenshot" }
-						width="800"
-						height="542"
-						loading="lazy"
-						class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
-					/>
-				</div>
-			}
-			<div class="flex flex-1 flex-col justify-between p-8 lg:p-10">
-				<div>
-					<div class="mb-3 flex flex-wrap items-center gap-3">
-						<span class="text-eyebrow font-medium uppercase text-fc-spark">
-							{ p.Client }
-						</span>
-						<span class="text-eyebrow tracking-normal text-fc-ash">
-							{ p.Location }
-						</span>
-					</div>
-					<div class="mb-4 flex flex-wrap gap-2">
-						for _, tag := range p.Tags {
-							<span class="rounded-[20px] border border-fc-ash/30 px-[8px] py-[2px] text-eyebrow uppercase tracking-[0.08em] text-fc-ash">
-								{ tag }
-							</span>
-						}
-					</div>
-					<h3 class="mb-4 font-display text-h3-display font-normal text-fc-parchment">
-						{ p.Title }
-					</h3>
-					if p.Quote != nil {
-						<p class="mb-6 font-display text-body italic text-fc-ash">
-							&ldquo;{ p.Quote.Text }&rdquo;
-							<span class="not-italic text-eyebrow tracking-normal text-fc-ash/70">&mdash; { p.Quote.Attribution }</span>
-						</p>
-					}
-				</div>
-				if len(p.Results) > 0 {
-					<div class="flex flex-wrap gap-6 border-t border-fc-ash/20 pt-5">
-						for _, r := range p.Results {
-							<div>
-								<div class="font-display text-h4-display font-semibold text-fc-parchment">
-									{ r.Value }
-									<span class="text-body-sm font-normal text-fc-spark">{ r.Unit }</span>
-								</div>
-								<div class="text-eyebrow tracking-normal text-fc-ash">{ r.Label }</div>
-							</div>
-						}
-					</div>
-				}
-			</div>
-		</div>
+		<span class="font-display text-[14px] italic text-fc-ember">{ ledgerNumeral(index) }</span>
+		<span class="font-display text-[18px] leading-snug text-fc-obsidian sm:text-[19px]">
+			<em class="italic text-fc-ember">{ p.Client }</em>
+			&nbsp;—&nbsp;
+			{ trimTrailingPeriod(p.Title) }
+		</span>
+		<span class="text-eyebrow font-medium uppercase tracking-[0.2em] text-fc-bracken">p. { ledgerPage(index) }</span>
 	</a>
 }
 
-templ projectCard(p Project) {
-	<a
-		href={ templ.SafeURL("/work/" + p.Slug) }
-		class="group flex flex-col overflow-hidden rounded-[6px] border border-fc-flint bg-fc-flint transition hover:border-fc-spark/30"
+// fieldReport — single editorial article with marginalia + plate + run-in copy.
+templ fieldReport(index int, p Project, dark bool) {
+	<article
+		class={ "px-6 py-24 sm:py-28 lg:px-8 border-b",
+			templ.KV("bg-fc-birchwood border-fc-slate-rim", !dark),
+			templ.KV("bg-fc-obsidian border-fc-flint", dark) }
 	>
-		if p.Screenshot != "" {
-			<div class="overflow-hidden">
-				<img
-					src={ p.Screenshot }
-					alt={ p.Client + " website screenshot" }
-					width="800"
-					height="542"
-					loading="lazy"
-					class="w-full object-cover transition duration-500 group-hover:scale-[1.02]"
-				/>
-			</div>
-		} else {
-			<div class="flex h-[180px] items-center justify-center bg-fc-obsidian">
-				<img src="/static/images/logo.svg" alt="" class="h-10 w-auto opacity-20"/>
-			</div>
-		}
-		<div class="flex flex-1 flex-col p-6">
-			<div class="mb-3 flex flex-wrap items-center gap-3">
-				<span class="text-eyebrow font-medium uppercase text-fc-spark">
-					{ p.Client }
-				</span>
-				<span class="text-eyebrow tracking-normal text-fc-ash">
-					{ p.Location }
-				</span>
-			</div>
-			<div class="mb-3 flex flex-wrap gap-2">
-				for _, tag := range p.Tags {
-					<span class="rounded-[20px] border border-fc-ash/30 px-[8px] py-[2px] text-eyebrow uppercase tracking-[0.08em] text-fc-ash">
-						{ tag }
-					</span>
-				}
-			</div>
-			<h3 class="mb-3 font-display text-h4-display font-normal text-fc-parchment">
-				{ p.Title }
-			</h3>
-			if len(p.Results) > 0 {
-				<div class="mt-auto flex flex-col gap-3 border-t border-fc-ash/20 pt-4 sm:flex-row sm:gap-6">
-					for _, r := range p.Results {
-						<div>
-							<div class="font-display text-h4-display font-semibold text-fc-parchment">
-								{ r.Value }
-								<span class="text-ui tracking-normal font-normal text-fc-spark">{ r.Unit }</span>
-							</div>
-							<div class="text-eyebrow tracking-normal text-fc-ash">{ r.Label }</div>
-						</div>
-					}
+		<div class="mx-auto grid max-w-content gap-10 sm:grid-cols-[240px_1fr] sm:gap-14">
+
+			<!-- Marginalia -->
+			<aside>
+				<div
+					class={ "font-display italic font-normal leading-none",
+						templ.KV("text-fc-ember", !dark),
+						templ.KV("text-fc-spark", dark) }
+					style="font-size: 48px;"
+				>
+					{ ledgerNumeral(index) }
 				</div>
-			}
+				<dl class="mt-8 space-y-3.5 text-[12px] leading-snug">
+					@marginRow("Client", p.Client, dark, true)
+					@marginRow("Location", p.Location, dark, false)
+					@marginRow("Scope", joinTags(p.Tags), dark, false)
+					if p.Shipped != "" {
+						@marginRow("Shipped", p.Shipped, dark, false)
+					}
+				</dl>
+			</aside>
+
+			<!-- Editorial column -->
+			<div>
+				<div
+					class={ "mb-3 text-eyebrow font-medium uppercase tracking-[0.28em]",
+						templ.KV("text-fc-ember", !dark),
+						templ.KV("text-fc-spark", dark) }
+				>
+					Field Report
+				</div>
+				<h2
+					class={ "font-display font-normal",
+						templ.KV("text-fc-obsidian", !dark),
+						templ.KV("text-fc-birchwood", dark) }
+					style="font-size: clamp(32px, 4.4vw, 44px); line-height: 1.1; letter-spacing: -0.01em;"
+				>
+					{ p.Title }
+				</h2>
+
+				<!-- Image plate -->
+				<figure class="relative mt-10">
+					<div
+						class={ "fc-chip-tr-lg relative flex h-[340px] items-center justify-center overflow-hidden",
+							templ.KV("bg-fc-parchment", !dark),
+							templ.KV("bg-fc-flint", dark) }
+					>
+						if p.Screenshot != "" {
+							<img
+								src={ p.Screenshot }
+								alt={ p.Client + " website screenshot" }
+								loading="lazy"
+								class="h-full w-full object-cover"
+							/>
+						} else {
+							<img src="/static/images/logo.svg" alt="" class={ "h-20 w-auto",
+								templ.KV("opacity-25", !dark),
+								templ.KV("opacity-20", dark) }/>
+						}
+						<span
+							class={ "fc-strike fc-strike--lg",
+								templ.KV("fc-strike--dark", dark) }
+						></span>
+					</div>
+					<figcaption
+						class={ "mt-3 font-display text-[13px] italic tracking-[0.02em]",
+							templ.KV("text-fc-bracken", !dark),
+							templ.KV("text-fc-smoke", dark) }
+					>
+						Plate { ledgerNumeral(index) }.1 — { p.Subtitle }
+					</figcaption>
+				</figure>
+
+				<!-- Body — run-in labels for The brief / What we did / The outcome -->
+				if len(p.Story) > 0 {
+					<div
+						class={ "mt-10 max-w-[620px] text-body leading-[1.75]",
+							templ.KV("text-fc-obsidian", !dark),
+							templ.KV("text-fc-birchwood", dark) }
+					>
+						for j, para := range p.Story {
+							<p class="mt-5 first:mt-0">
+								<span
+									class={ "mr-2 font-display text-[11px] font-medium uppercase tracking-[0.2em]",
+										templ.KV("text-fc-ember", !dark),
+										templ.KV("text-fc-spark", dark) }
+								>
+									{ runInLabel(j) }
+								</span>
+								{ para }
+							</p>
+						}
+					</div>
+				}
+
+				<!-- Pull quote -->
+				if p.Quote != nil {
+					<blockquote
+						class={ "mt-11 max-w-[620px] border-l-[2.5px] pl-6",
+							templ.KV("border-fc-ember", !dark),
+							templ.KV("border-fc-spark", dark) }
+					>
+						<p
+							class={ "font-display text-h3-display italic leading-[1.45] tracking-[-0.005em]",
+								templ.KV("text-fc-obsidian", !dark),
+								templ.KV("text-fc-birchwood", dark) }
+						>
+							"{ p.Quote.Text }"
+						</p>
+						<footer
+							class={ "mt-3 text-eyebrow font-medium uppercase tracking-[0.2em]",
+								templ.KV("text-fc-bracken", !dark),
+								templ.KV("text-fc-smoke", dark) }
+						>
+							— { p.Quote.Attribution }
+						</footer>
+					</blockquote>
+				}
+
+				<!-- Results strip -->
+				if len(p.Results) > 0 {
+					<div
+						class={ "mt-11 flex flex-wrap gap-12 border-t pt-7",
+							templ.KV("border-fc-slate-rim", !dark),
+							templ.KV("border-fc-flint", dark) }
+					>
+						for _, r := range p.Results {
+							<div>
+								<div
+									class={ "font-display font-normal tracking-[-0.02em]",
+										templ.KV("text-fc-obsidian", !dark),
+										templ.KV("text-fc-birchwood", dark) }
+									style="font-size: 36px;"
+								>
+									{ r.Value }
+									if r.Unit != "" {
+										<span
+											class={ "ml-0.5 text-[16px]",
+												templ.KV("text-fc-ember", !dark),
+												templ.KV("text-fc-spark", dark) }
+										>{ r.Unit }</span>
+									}
+								</div>
+								<div
+									class={ "mt-1.5 text-eyebrow font-medium uppercase tracking-[0.2em]",
+										templ.KV("text-fc-bracken", !dark),
+										templ.KV("text-fc-smoke", dark) }
+								>{ r.Label }</div>
+							</div>
+						}
+					</div>
+				}
+
+				<!-- Read full report link -->
+				<div class="mt-10">
+					<a
+						href={ templ.SafeURL("/work/" + p.Slug) }
+						class={ "group inline-flex items-baseline gap-2 border-b-[1.5px] py-1 text-ui font-medium uppercase tracking-[0.08em] transition hover:brightness-110",
+							templ.KV("border-fc-ember text-fc-ember", !dark),
+							templ.KV("border-fc-spark text-fc-spark", dark) }
+					>
+						Read the full report
+						<span class="ml-0.5 inline-block transition-transform duration-200 ease-out-quart group-hover:translate-x-1 motion-reduce:transition-none">&rarr;</span>
+					</a>
+				</div>
+			</div>
 		</div>
-	</a>
+	</article>
+}
+
+templ marginRow(label, value string, dark, italicValue bool) {
+	<div>
+		<dt
+			class={ "text-eyebrow font-medium uppercase tracking-[0.2em]",
+				templ.KV("text-fc-ember", !dark),
+				templ.KV("text-fc-spark", dark) }
+		>{ label }</dt>
+		if italicValue {
+			<dd
+				class={ "mt-0.5 font-display text-[14px] italic leading-snug",
+					templ.KV("text-fc-obsidian", !dark),
+					templ.KV("text-fc-birchwood", dark) }
+			>{ value }</dd>
+		} else {
+			<dd
+				class={ "mt-0.5 text-[12px] leading-snug",
+					templ.KV("text-fc-trail-dust", !dark),
+					templ.KV("text-fc-ash", dark) }
+			>{ value }</dd>
+		}
+	</div>
 }
