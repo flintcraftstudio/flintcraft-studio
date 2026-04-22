@@ -35,7 +35,7 @@ templ homeContent() {
 			<!-- Left callouts (3) — leader lines point to specimen -->
 			<div class="hero-spec__left text-right">
 				@specCallout("№ 01", "Hand-shaped.", "Every line written from scratch. No WordPress. No templates. No page builders.")
-				@specCallout("№ 02", "All in.", "Hosting, maintenance, SEO, updates. One invoice. Between $150 and $350 a month.")
+				@specCallout("№ 02", "All in.", "Hosting, maintenance, SEO, updates. One simple monthly invoice.")
 				@specCallout("№ 03", "One to call.", "The person who built your site has their phone on them. It stays that way after launch.")
 			</div>
 			<!-- Specimen -->
@@ -90,6 +90,16 @@ templ homeContent() {
 		</div>
 	</section>
 
+	<!-- Pull quote — validates the small-by-design pitch -->
+	@pullQuoteFeatured(
+		"FlintCraft did an amazing job on our website. Our business almost doubled in a month's time. I highly recommend them for all your technical needs.",
+		"David Nash",
+		"Nautilus Group Cleaning Services",
+		"Kennewick, WA",
+		"/static/images/portfolio/david-nash.webp",
+		"/work/nautilus-group",
+	)
+
 	<!-- ICP Statement -->
 	<section class="bg-fc-obsidian py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
@@ -109,6 +119,13 @@ templ homeContent() {
 			</div>
 		</div>
 	</section>
+
+	<!-- Pull quote — validates the craft/understanding angle -->
+	@pullQuoteDark(
+		"They understood what we do and built something we're actually proud to hand out.",
+		"Don",
+		"A-Team Asphalt",
+	)
 
 	<!-- Comparison -->
 	<section class="bg-fc-parchment py-20 sm:py-24">
@@ -142,29 +159,15 @@ templ homeContent() {
 		</div>
 	</section>
 
-	<!-- Social proof -->
-	<section class="bg-fc-birchwood py-20 sm:py-24">
-		<div class="mx-auto max-w-content px-6 lg:px-8">
-			<div data-reveal class="max-w-2xl">
-				@eyebrow("From our clients")
-				<p class="mt-2 text-body text-fc-trail-dust">
-					On a recent project, <span class="font-medium text-fc-obsidian">David Nash</span> wrote:
-				</p>
-				<blockquote class="mt-4">
-					<p class="font-display text-h4-display italic tracking-[0.02em] text-fc-ember">
-						"FlintCraft did an amazing job on our website. Our business almost doubled in a month's time. I highly recommend them for all your technical needs."
-					</p>
-				</blockquote>
-				<div class="mt-6 flex items-center gap-4">
-					<img src="/static/images/portfolio/david-nash.webp" alt="David Nash" class="h-12 w-12 rounded-[6px] object-cover"/>
-					<a href="/work/nautilus-group" class="group">
-						<p class="text-body-sm font-medium text-fc-obsidian group-hover:text-fc-ember transition-colors">David Nash</p>
-						<p class="mt-0.5 text-ui tracking-normal text-fc-bracken">Nautilus Group Cleaning Services &middot; Kennewick, WA</p>
-					</a>
-				</div>
-			</div>
-		</div>
-	</section>
+	<!-- Featured testimonial — lands right before the CTA -->
+	@pullQuoteFeatured(
+		"Did an absolute phenomenal job developing my new website. 10/10 recommend! Easy to navigate and the detail is amazing!",
+		"Matt Mohar",
+		"Lo Mo Outfitting",
+		"Craig, Montana",
+		"/static/images/portfolio/matt-mohar.webp",
+		"/work/lo-mo-outfitting",
+	)
 
 	<!-- CTA -->
 	<section class="bg-fc-obsidian py-20 sm:py-24">
@@ -241,4 +244,49 @@ templ compRow(label, them, us string) {
 		<td class="py-3 pr-6">{ them }</td>
 		<td class="py-3 font-medium text-fc-obsidian">{ us }</td>
 	</tr>
+}
+
+templ pullQuote(quote, attribution, location string) {
+	<section class="bg-fc-birchwood py-14 sm:py-16">
+		<div data-reveal class="mx-auto max-w-content px-6 text-center lg:px-8">
+			<p class="mx-auto max-w-2xl font-display text-h3-display italic tracking-[0.02em] text-fc-ember">
+				&ldquo;{ quote }&rdquo;
+			</p>
+			<p class="mt-5 text-eyebrow font-medium uppercase tracking-[0.18em] text-fc-bracken">
+				{ attribution } &middot; { location }
+			</p>
+		</div>
+	</section>
+}
+
+templ pullQuoteDark(quote, attribution, location string) {
+	<section class="bg-fc-obsidian py-14 sm:py-16">
+		<div data-reveal class="mx-auto max-w-content px-6 text-center lg:px-8">
+			<p class="mx-auto max-w-2xl font-display text-h3-display italic tracking-[0.02em] text-fc-spark">
+				&ldquo;{ quote }&rdquo;
+			</p>
+			<p class="mt-5 text-eyebrow font-medium uppercase tracking-[0.18em] text-fc-ash">
+				{ attribution } &middot; { location }
+			</p>
+		</div>
+	</section>
+}
+
+templ pullQuoteFeatured(quote, author, company, location, portrait, href string) {
+	<section class="bg-fc-birchwood py-16 sm:py-20">
+		<div data-reveal class="mx-auto max-w-content px-6 lg:px-8">
+			<blockquote class="mx-auto max-w-2xl text-center">
+				<p class="font-display text-h3-display italic tracking-[0.02em] text-fc-ember">
+					&ldquo;{ quote }&rdquo;
+				</p>
+			</blockquote>
+			<div class="mt-8 flex items-center justify-center gap-4">
+				<img src={ portrait } alt={ author } class="h-12 w-12 rounded-[6px] object-cover"/>
+				<a href={ templ.SafeURL(href) } class="group">
+					<p class="text-body-sm font-medium text-fc-obsidian group-hover:text-fc-ember transition-colors">{ author }</p>
+					<p class="mt-0.5 text-ui tracking-normal text-fc-bracken">{ company } &middot; { location }</p>
+				</a>
+			</div>
+		</div>
+	</section>
 }
