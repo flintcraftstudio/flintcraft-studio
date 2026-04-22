@@ -1,0 +1,183 @@
+/* FlintCraft Studio — flint geometry primitives
+ * Knapped / chipped corners using clip-path. Render a border by stacking
+ * an accent-colored clipped layer BEHIND a slightly-smaller same-clipped fill.
+ */
+
+/* ===================================================================
+ * clip-path definitions — percentages measured from the corner inward.
+ * Each shape walks vertices clockwise starting from top-left.
+ * =================================================================== */
+
+/* Single chip, top-right — the "arrowhead notch". Our default. */
+.fc-chip-tr {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 14px) 0,
+    100% 14px,
+    100% 100%,
+    0 100%
+  );
+}
+
+/* Twin chips — top-right + bottom-left. Use for featured cards. */
+.fc-chip-tr-bl {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 18px) 0,
+    100% 18px,
+    100% 100%,
+    18px 100%,
+    0 calc(100% - 18px)
+  );
+}
+
+/* Large chip top-right — hero / statement cards */
+.fc-chip-tr-lg {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 28px) 0,
+    100% 28px,
+    100% 100%,
+    0 100%
+  );
+}
+
+/* Small chip — buttons, badges */
+.fc-chip-btn {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 8px) 0,
+    100% 8px,
+    100% 100%,
+    0 100%
+  );
+}
+
+/* Faceted top edge (3 vertices) — used for section dividers */
+.fc-chip-facet-top {
+  clip-path: polygon(
+    0 6px,
+    28% 0,
+    62% 4px,
+    100% 0,
+    100% 100%,
+    0 100%
+  );
+}
+
+/* ===================================================================
+ * Flint frame — accent-colored "struck edge" showing through the chip.
+ * Use as a wrapper: outer = accent color (clipped), inner = fill (clipped
+ * a hair smaller). Thickness controlled by --fc-flint-stroke on the outer.
+ * =================================================================== */
+
+.fc-flint-frame {
+  --fc-flint-stroke: 2px;
+  position: relative;
+  display: inline-block;
+  background: var(--fc-ember);              /* overridden to spark on dark */
+  padding: var(--fc-flint-stroke);
+}
+
+.fc-flint-frame > .fc-flint-fill {
+  position: relative;
+  z-index: 1;
+}
+
+/* when the fill itself is clipped, the padding reveals the accent as a border along the chipped edge */
+
+/* ===================================================================
+ * Interactive polish
+ * =================================================================== */
+
+.fc-flint-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--fc-font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 12px 22px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1),
+              filter 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.fc-flint-btn:hover { filter: brightness(1.08); }
+.fc-flint-btn:active { transform: translateY(0.5px); }
+
+.fc-flint-btn--primary-light { background: var(--fc-ember); color: var(--fc-birchwood); }
+.fc-flint-btn--primary-dark  { background: var(--fc-spark); color: var(--fc-obsidian); }
+
+.fc-flint-btn--outline-light {
+  background: var(--fc-birchwood);
+  color: var(--fc-obsidian);
+  box-shadow: inset 0 0 0 1.5px var(--fc-obsidian);
+}
+.fc-flint-btn--outline-dark {
+  background: transparent;
+  color: var(--fc-birchwood);
+  box-shadow: inset 0 0 0 1.5px var(--fc-charcoal);
+}
+
+/* ===================================================================
+ * Flint card — accent edge runs along the chipped top-right.
+ * Achieves the "struck" look: accent layer peeks through at the notch.
+ * =================================================================== */
+
+.fc-flint-card {
+  position: relative;
+  padding: 28px;
+  /* clip-path applied via .fc-chip-* utility class */
+}
+
+.fc-flint-card--light {
+  background: var(--fc-parchment);
+  color: var(--fc-obsidian);
+}
+.fc-flint-card--dark {
+  background: var(--fc-flint);
+  color: var(--fc-birchwood);
+}
+
+/* Struck edge — a 2.5px accent line following the chipped top-right cut.
+ * Implemented as an absolutely-positioned rotated rule along the diagonal.
+ * The diagonal length for a 14px chip = 14 * √2 ≈ 20px. */
+.fc-flint-card__strike {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 2.5px;
+  background: var(--fc-ember);
+  transform-origin: 100% 50%;
+  transform: translate(-10px, 6px) rotate(-45deg);
+  pointer-events: none;
+}
+.fc-flint-card--dark .fc-flint-card__strike { background: var(--fc-spark); }
+
+/* Larger chip variant for featured/hero */
+.fc-flint-card--feature .fc-flint-card__strike {
+  width: 44px;
+  transform: translate(-20px, 12px) rotate(-45deg);
+}
+
+/* ===================================================================
+ * Badge — tiny chipped pill
+ * =================================================================== */
+.fc-flint-badge {
+  display: inline-block;
+  font-family: var(--fc-font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+}
+.fc-flint-badge--light { background: var(--fc-parchment); color: var(--fc-trail-dust); }
+.fc-flint-badge--dark  { background: var(--fc-charcoal);  color: var(--fc-ash); }
+.fc-flint-badge--accent-light { background: var(--fc-ember); color: var(--fc-birchwood); }
+.fc-flint-badge--accent-dark  { background: var(--fc-spark); color: var(--fc-obsidian); }

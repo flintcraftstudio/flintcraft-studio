@@ -14,11 +14,11 @@ templ contactContent(errors map[string]string, values map[string]string, success
 					<h1 class="font-display text-h1-display font-normal text-fc-obsidian">
 						<em class="italic">Let's find out if we're the right fit.</em>
 					</h1>
-					<p class="mt-6 max-w-md text-body text-fc-body">
+					<p class="mt-6 max-w-md text-body text-fc-trail-dust">
 						No pitch, no deck. Tell us what you're working on — we'll take a look at your current setup and come to the first conversation prepared.
 					</p>
 					<!-- Contact info -->
-					<div class="mt-10 space-y-3 text-body-sm text-fc-trail-dust">
+					<div class="mt-10 space-y-3 text-body-sm text-fc-bracken">
 						<p>Prefer to call? <a href="tel:+14068719875" class="text-fc-ember transition hover:brightness-110">{ Phone }</a></p>
 						<p>Or email: <a href={ templ.SafeURL("mailto:" + Email) } class="text-fc-ember transition hover:brightness-110">{ Email }</a></p>
 						<p>We're based in Helena, Montana. We generally respond same business day.</p>
@@ -48,7 +48,7 @@ templ ContactForm(errors map[string]string, values map[string]string, success bo
 				</div>
 			}
 			<div>
-				<label for="name" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-trail-dust">Name</label>
+				<label for="name" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-bracken">Name</label>
 				<input
 					type="text"
 					id="name"
@@ -62,7 +62,7 @@ templ ContactForm(errors map[string]string, values map[string]string, success bo
 				}
 			</div>
 			<div>
-				<label for="business" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-trail-dust">Business name</label>
+				<label for="business" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-bracken">Business name</label>
 				<input
 					type="text"
 					id="business"
@@ -73,7 +73,7 @@ templ ContactForm(errors map[string]string, values map[string]string, success bo
 				/>
 			</div>
 			<div>
-				<label for="email" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-trail-dust">Email</label>
+				<label for="email" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-bracken">Email</label>
 				<input
 					type="email"
 					id="email"
@@ -87,7 +87,7 @@ templ ContactForm(errors map[string]string, values map[string]string, success bo
 				}
 			</div>
 			<div>
-				<label for="phone" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-trail-dust">
+				<label for="phone" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-bracken">
 					Phone <span class="normal-case tracking-normal text-[#b4ada6]">(optional)</span>
 				</label>
 				<input
@@ -100,7 +100,7 @@ templ ContactForm(errors map[string]string, values map[string]string, success bo
 				/>
 			</div>
 			<div>
-				<label for="website" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-trail-dust">
+				<label for="website" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-bracken">
 					Current website URL <span class="normal-case tracking-normal text-[#b4ada6]">(leave blank if you don't have one)</span>
 				</label>
 				<input
@@ -113,7 +113,7 @@ templ ContactForm(errors map[string]string, values map[string]string, success bo
 				/>
 			</div>
 			<div>
-				<label for="message" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-trail-dust">What's frustrating you about your current setup?</label>
+				<label for="message" class="mb-1.5 block text-eyebrow font-medium uppercase tracking-[0.06em] text-fc-bracken">What's frustrating you about your current setup?</label>
 				<textarea
 					id="message"
 					name="message"

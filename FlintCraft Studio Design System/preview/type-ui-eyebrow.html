@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FlintCraft — UI & Eyebrow Type</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: var(--fc-birchwood); padding: 24px; box-sizing: border-box; font-family: var(--fc-font-body); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fc-bracken); margin-bottom: 10px; }
+  .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fc-bracken); }
+  .rule { width: 28px; height: 1px; background: var(--fc-ember); margin-bottom: 8px; }
+  .ui { font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fc-obsidian); }
+  .pq { font-family: var(--fc-font-display); font-style: italic; font-size: 18px; letter-spacing: 0.02em; color: var(--fc-ember); line-height: 1.4; margin-top: 8px; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div>
+      <div class="label">Eyebrow · DM 500 · 11/0.2em</div>
+      <div class="rule"></div>
+      <div class="eyebrow">Our work</div>
+      <div class="rule" style="margin-top:18px"></div>
+      <div class="eyebrow">Who we are</div>
+    </div>
+    <div>
+      <div class="label">UI label · DM 500 · 13/0.08em</div>
+      <div class="ui">Start a project</div>
+      <div class="ui" style="margin-top:10px">See our work →</div>
+      <div class="label" style="margin-top:22px">Pull quote · Cormorant italic</div>
+      <div class="pq">"As durable as the mountains."</div>
+    </div>
+  </div>
+</body>
+</html>

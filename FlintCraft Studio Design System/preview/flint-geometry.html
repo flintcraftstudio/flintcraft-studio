@@ -1,0 +1,45 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../flint.css">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--fc-birchwood); font-family: var(--fc-font-body); }
+  .frame { padding: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  h4 { margin: 0 0 10px; font-family: var(--fc-font-body); font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fc-bracken); }
+  .stroke { width: 100%; aspect-ratio: 5/2; display: flex; align-items: center; justify-content: center; font-family: var(--fc-font-display); font-style: italic; font-size: 20px; position: relative; }
+  .light-bg { background: var(--fc-parchment); color: var(--fc-obsidian); }
+  .dark-bg  { background: var(--fc-flint); color: var(--fc-birchwood); }
+  .note { font-size: 11px; color: var(--fc-bracken); margin-top: 6px; line-height: 1.5; font-family: var(--fc-font-body); font-style: normal; }
+</style></head>
+<body>
+<div class="frame">
+  <div>
+    <h4>Standard chip · 14px</h4>
+    <div class="stroke light-bg fc-chip-tr">
+      carved for purpose
+      <div class="fc-flint-card__strike"></div>
+    </div>
+    <p class="note">Default card. Clip-path notches the top-right; a 2.5px Ember rule strikes along the diagonal.</p>
+  </div>
+  <div>
+    <h4>Large chip · 28px</h4>
+    <div class="stroke dark-bg fc-chip-tr-lg">
+      still shaped by hand
+      <div class="fc-flint-card__strike" style="width:44px;transform:translate(-20px,13px) rotate(-45deg);"></div>
+    </div>
+    <p class="note">Hero / figure plates. The strike grows with the chip for visual weight.</p>
+  </div>
+  <div>
+    <h4>Twin chip · top-right + bottom-left</h4>
+    <div class="stroke light-bg fc-chip-tr-bl">field report №01</div>
+    <p class="note">Featured item. The diagonal pair gives an asymmetric arrowhead silhouette.</p>
+  </div>
+  <div>
+    <h4>Button chip · 8px</h4>
+    <div class="stroke dark-bg" style="aspect-ratio:auto;padding:14px 24px;width:auto;align-self:start;display:inline-flex;">
+      <a class="fc-flint-btn fc-chip-btn fc-flint-btn--primary-dark">Start a project</a>
+    </div>
+    <p class="note">Subtle chip for interactive elements — readable at small sizes without shouting.</p>
+  </div>
+</div>
+</body></html>

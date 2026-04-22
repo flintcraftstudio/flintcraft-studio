@@ -5,69 +5,84 @@ templ HomePage() {
 }
 
 templ homeContent() {
-	<!-- Hero -->
-	<section class="relative min-h-[580px] overflow-hidden bg-fc-obsidian sm:min-h-[660px]">
-		<!-- Full-bleed image with slow zoom-out on load -->
-		<img
-			x-data="{ ready: false }"
-			x-init="$nextTick(() => ready = true)"
-			:class="ready ? 'scale-100' : 'scale-[1.04]'"
-			src="/static/images/hero.webp"
-			alt="Montana mountains at sunset with circuit traces carved into stone"
-			loading="eager"
-			fetchpriority="high"
-			class="absolute inset-0 h-full w-full object-cover object-[center_35%] transition-transform duration-[3000ms] ease-out-expo motion-reduce:transition-none motion-reduce:!scale-100"
-		/>
-		<!-- Global light tint across full image -->
-		<div class="absolute inset-0 bg-fc-obsidian/25"></div>
-		<!-- Deeper scrim behind text: full-width on mobile, left portion on desktop -->
-		<div class="absolute inset-y-0 left-0 w-full bg-fc-obsidian/55 lg:w-[58%]"></div>
-		<!-- Staggered entrance -->
-		<div
-			x-data="{ show: false }"
-			x-init="$nextTick(() => show = true)"
-			class="relative mx-auto max-w-content px-6 py-24 sm:py-32 lg:px-8"
-		>
-			<div class="max-w-[560px]">
-				<div
-					:class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'"
-					class="mb-4 motion-reduce:transition-none transition duration-500 ease-out-quart"
-				>
-					<div class="mb-2 h-px w-7 bg-fc-ember"></div>
-					<span class="text-eyebrow font-medium uppercase text-fc-ash">Custom web development &middot; Helena, MT</span>
+	<!-- Hero — specimen case -->
+	<section class="hero-spec">
+		<!-- Chrome strip -->
+		<header class="hero-spec__chrome relative z-[3] flex items-baseline justify-between px-6 py-5 text-[10px] uppercase tracking-[0.28em] text-fc-smoke lg:px-12">
+			<div class="flex items-center gap-3">
+				<img src="/static/images/logo.svg" alt="" class="h-[22px] w-auto opacity-85"/>
+				<span class="font-medium tracking-[0.14em] text-fc-birchwood">{ SiteName }</span>
+			</div>
+			<div class="hidden gap-8 sm:flex">
+				<span>Specimen 01 &mdash; <em class="font-display text-[13px] italic tracking-[0.02em] text-fc-spark normal-case">the mark</em></span>
+				<span class="hidden md:inline">Helena <em class="font-display text-[13px] italic tracking-[0.02em] text-fc-spark normal-case">Montana</em></span>
+				<span class="hidden lg:inline">Catalogued <em class="font-display text-[13px] italic tracking-[0.02em] text-fc-spark normal-case">2026</em></span>
+			</div>
+		</header>
+		<!-- Stage — 3-column grid (callouts | specimen | callouts) -->
+		<div class="hero-spec__stage relative z-[2] mx-auto grid max-w-[1360px] items-start gap-10 px-6 pb-16 pt-20 lg:grid-cols-[260px_minmax(0,1fr)_260px] lg:px-12">
+			<!-- Left callouts -->
+			<div class="hero-spec__left text-right">
+				@specCallout("№ 01", "Hand-shaped.", "Every line written from scratch. No WordPress. No templates. No page builders.")
+				@specCallout("№ 02", "Locally sourced.", "Designed and built in Helena, Montana. Two engineers. You'll know both their names.")
+				@specCallout("№ 03", "Struck for purpose.", "Every site is written for one business. Yours. Not adapted from a theme.")
+			</div>
+			<!-- Center specimen -->
+			<div class="relative pt-8 text-center">
+				<div class="hero-spec__plate-label mb-5 text-[10px] uppercase tracking-[0.3em] text-fc-spark">Plate I &middot; the flint mark</div>
+				<div class="relative mx-auto w-full max-w-[360px]" style="aspect-ratio: 755 / 1072;">
+					<!-- Registration marks -->
+					<span class="hero-spec__reg absolute -left-2 -top-2 h-[14px] w-[14px] text-fc-bracken">
+						<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="0.75" class="block h-full w-full"><path d="M0 5 L0 0 L5 0 M0 7 L3 7 M7 0 L7 3"></path></svg>
+					</span>
+					<span class="hero-spec__reg absolute -right-2 -top-2 h-[14px] w-[14px] text-fc-bracken">
+						<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="0.75" class="block h-full w-full"><path d="M14 5 L14 0 L9 0 M14 7 L11 7 M7 0 L7 3"></path></svg>
+					</span>
+					<span class="hero-spec__reg absolute -bottom-2 -left-2 h-[14px] w-[14px] text-fc-bracken">
+						<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="0.75" class="block h-full w-full"><path d="M0 9 L0 14 L5 14 M0 7 L3 7 M7 14 L7 11"></path></svg>
+					</span>
+					<span class="hero-spec__reg absolute -bottom-2 -right-2 h-[14px] w-[14px] text-fc-bracken">
+						<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="0.75" class="block h-full w-full"><path d="M14 9 L14 14 L9 14 M14 7 L11 7 M7 14 L7 11"></path></svg>
+					</span>
+					<img class="hero-spec__specimen-img absolute inset-0 block h-full w-full object-contain" src="/static/images/logo.png" alt="FlintCraft arrowhead" loading="eager" fetchpriority="high"/>
 				</div>
-				<h1
-					:class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'"
-					class="font-display text-display-display font-normal text-fc-parchment motion-reduce:transition-none transition delay-100 duration-700 ease-out-expo"
-				>
-					<em class="italic">Carved for purpose.</em>
-				</h1>
-				<p
-					:class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'"
-					class="mt-6 text-body text-fc-ash motion-reduce:transition-none transition delay-200 duration-700 ease-out-quart"
-				>
-					One relationship. <em class="font-display italic">Everything handled.</em> For businesses that have earned their reputation and are ready for a website that reflects it.
-				</p>
-				<div
-					:class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'"
-					class="mt-10 flex flex-wrap gap-4 motion-reduce:transition-none transition delay-300 duration-500 ease-out-quart"
-				>
-					<a
-						href="/contact"
-						class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-ui font-medium uppercase text-fc-birchwood transition hover:-translate-y-px hover:bg-fc-ember-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fc-ember active:translate-y-0 active:scale-[0.97]"
-					>
-						Start a project
-					</a>
-					<a
-						href="/work"
-						class="group border-b-[1.5px] border-fc-spark px-0 py-[10px] text-ui font-medium uppercase text-fc-spark transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fc-spark active:scale-[0.98]"
-					>
-						See our work
-						<span class="ml-0.5 inline-block transition-transform duration-200 ease-out-quart group-hover:translate-x-1 motion-reduce:transition-none">&rarr;</span>
-					</a>
-				</div>
+				<div class="hero-spec__caption mt-5 font-display text-[16px] italic tracking-[0.01em] text-fc-ash">hand-struck, not rendered</div>
+			</div>
+			<!-- Right callouts -->
+			<div class="hero-spec__right">
+				@specCallout("№ 04", "One to call.", "The person who built your site has their phone on them. It stays that way after launch.")
+				@specCallout("№ 05", "All in.", "Hosting, maintenance, SEO, updates. One invoice. Between $150 and $350 a month.")
+				@specCallout("№ 06", "Deadlines met.", "100%. We've never missed one. Ask for references and we'll hand you a list.")
 			</div>
 		</div>
+		<!-- Headline band -->
+		<div class="relative z-[2] mx-auto max-w-[1360px] px-6 pb-24 pt-10 text-center lg:px-12">
+			<h1 class="hero-spec__headline m-0 font-display font-normal text-fc-parchment" style="font-size: clamp(52px, 6.8vw, 108px); line-height: 0.95; letter-spacing: -0.03em;">
+				Carved <em class="italic text-fc-spark">{ "for purpose." }</em>
+			</h1>
+			<p class="hero-spec__lede mx-auto mt-7 max-w-[620px] text-[18px] leading-[1.7] text-fc-ash">
+				One relationship. <em class="font-display italic text-fc-spark">Everything handled.</em> Custom websites for businesses that have earned their reputation and are ready for a web presence that reflects it.
+			</p>
+			<div class="hero-spec__actions mt-10 flex flex-wrap items-center justify-center gap-7">
+				<a
+					href="/contact"
+					class="hero-spec__cta-primary inline-flex items-center gap-2 bg-fc-spark px-8 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-obsidian transition hover:-translate-y-px hover:brightness-110 active:translate-y-0 active:scale-[0.97]"
+				>
+					Start a project &rarr;
+				</a>
+				<a
+					href="/work"
+					class="group inline-flex items-center gap-2 border-b-[1.5px] border-fc-spark px-0 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-spark transition hover:brightness-110 active:scale-[0.98]"
+				>
+					See recent field reports
+				</a>
+			</div>
+		</div>
+		<!-- Foot meta -->
+		<footer class="hero-spec__foot relative z-[2] mx-auto flex max-w-[1360px] flex-wrap items-center justify-between gap-3 px-6 pb-8 pt-6 text-[10px] uppercase tracking-[0.28em] text-fc-bracken lg:px-12">
+			<span>{ SiteName } &mdash; Vol. 1 &middot; Spring 2026</span>
+			<span>{ Phone } &middot; <em class="font-display text-[13px] italic tracking-[0.04em] text-fc-spark normal-case">{ Email }</em></span>
+		</footer>
 	</section>
 
 	<!-- Stats -->
@@ -88,7 +103,7 @@ templ homeContent() {
 				<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
 					Small by design. Accountable by nature.
 				</h2>
-				<div class="mt-8 space-y-4 text-body text-fc-body">
+				<div class="mt-8 space-y-4 text-body text-fc-trail-dust">
 					<p>
 						FlintCraft Studio is a small custom development studio in Helena, Montana. We build websites for businesses that have earned their reputation and are ready for a web presence that reflects it.
 					</p>
@@ -102,7 +117,7 @@ templ homeContent() {
 				<p class="mt-8 font-display text-body italic tracking-[0.02em] text-fc-ember">
 					"As durable as the mountains, and just as unlikely to move to San Francisco."
 				</p>
-				<p class="mt-1 text-eyebrow font-medium uppercase text-fc-trail-dust">
+				<p class="mt-1 text-eyebrow font-medium uppercase text-fc-bracken">
 					Helena, MT &middot; Est. 2019
 				</p>
 			</div>
@@ -136,19 +151,19 @@ templ homeContent() {
 			<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
 				Tired of your current setup? You're not alone.
 			</h2>
-			<p class="mb-10 mt-6 max-w-2xl text-body text-fc-body">
+			<p class="mb-10 mt-6 max-w-2xl text-body text-fc-trail-dust">
 				A typical small business cobbles together managed hosting, a maintenance plan, a security plugin, a form builder, and a developer they can never get on the phone. That stack still breaks, still looks like a template, and still goes to voicemail when something goes wrong.
 			</p>
 			<div class="overflow-x-auto">
 				<table class="w-full text-left text-body-sm">
 					<thead>
 						<tr class="border-b border-fc-slate-rim">
-							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-trail-dust"></th>
-							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-trail-dust">WordPress / Wix / Squarespace</th>
+							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-bracken"></th>
+							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-bracken">WordPress / Wix / Squarespace</th>
 							<th class="pb-3 text-eyebrow font-medium uppercase text-fc-ember">FlintCraft</th>
 						</tr>
 					</thead>
-					<tbody class="text-fc-body">
+					<tbody class="text-fc-trail-dust">
 						@compRow("Built for your business", "No", "Yes")
 						@compRow("Plugin dependencies", "Many", "None")
 						@compRow("Who maintains it", "Varies — often overseas", "Us. Same people who built it.")
@@ -175,7 +190,7 @@ templ homeContent() {
 					<img src="/static/images/portfolio/david-nash.webp" alt="David Nash" class="h-12 w-12 rounded-[6px] object-cover" />
 					<a href="/work/nautilus-group" class="group">
 						<p class="text-body-sm font-medium text-fc-obsidian group-hover:text-fc-ember transition-colors">David Nash</p>
-						<p class="mt-0.5 text-ui tracking-normal text-fc-trail-dust">Nautilus Group Cleaning Services &middot; Kennewick, WA</p>
+						<p class="mt-0.5 text-ui tracking-normal text-fc-bracken">Nautilus Group Cleaning Services &middot; Kennewick, WA</p>
 					</a>
 				</div>
 			</div>
@@ -214,24 +229,33 @@ templ homeContent() {
 	</section>
 }
 
+templ specCallout(number, title, body string) {
+	<div class="hero-spec__callout">
+		<span class="hero-spec__leader"></span>
+		<div class="mb-2 font-display text-[13px] italic tracking-[0.02em] text-fc-spark">{ number }</div>
+		<div class="mb-2.5 font-display text-[22px] font-normal leading-[1.2] tracking-[-0.01em] text-fc-birchwood">{ title }</div>
+		<div class="text-[13px] leading-[1.65] text-fc-smoke">{ body }</div>
+	</div>
+}
+
 templ eyebrow(label string) {
 	<div class="mb-4">
 		<div class="mb-2 h-px w-7 bg-fc-ember"></div>
-		<span class="text-eyebrow font-medium uppercase text-fc-trail-dust">{ label }</span>
+		<span class="text-eyebrow font-medium uppercase text-fc-bracken">{ label }</span>
 	</div>
 }
 
 templ eyebrowDark(label string) {
 	<div class="mb-4">
-		<div class="mb-2 h-px w-7 bg-fc-ember"></div>
-		<span class="text-eyebrow font-medium uppercase text-fc-ash">{ label }</span>
+		<div class="mb-2 h-px w-7 bg-fc-spark"></div>
+		<span class="text-eyebrow font-medium uppercase text-fc-smoke">{ label }</span>
 	</div>
 }
 
 templ stat(value, label string) {
 	<div class="px-6 py-8 text-center">
 		<p class="font-display text-h4-display font-normal text-fc-obsidian">{ value }</p>
-		<p class="mt-1 text-ui tracking-normal font-light text-fc-trail-dust">{ label }</p>
+		<p class="mt-1 text-ui tracking-normal font-light text-fc-bracken">{ label }</p>
 	</div>
 }
 

@@ -122,17 +122,28 @@ module.exports = {
     extend: {
       colors: {
         fc: {
-          obsidian:     "#232226",
-          flint:        "#2e3338",
-          ember:        "#cc5e1a",
-          "ember-dark": "#a84b12",
-          spark:        "#db7f36",
-          birchwood:    "#faf9f7",
-          parchment:    "#f0ece5",
-          "trail-dust": "#6b5f52",
-          ash:          "#a89b8c",
-          "slate-rim":  "#d4cfc9",
-          body:         "#4a4239",
+          // Dark surfaces
+          obsidian:     "#1c1e24",  // page bg
+          flint:        "#363b42",  // raised surface (cards, nav)
+          charcoal:     "#474d55",  // highest surface (modals, popovers, hover)
+
+          // Dark-mode text
+          ash:          "#c4bdb2",  // body / strong muted on dark
+          smoke:        "#96897a",  // subtle muted — captions, eyebrows, metadata
+          spark:        "#e8873b",  // accent on dark
+
+          // Light surfaces
+          birchwood:    "#faf9f7",  // page bg
+          parchment:    "#f0ece5",  // raised surface
+
+          // Light-mode text
+          "trail-dust": "#4a4038",  // body / strong muted on light
+          bracken:      "#6b5f52",  // subtle muted — captions, eyebrows, metadata
+          ember:        "#a84812",  // accent on light
+          "ember-dark": "#8f3d0f",  // ember hover (darken 8%)
+
+          // Structure
+          "slate-rim":  "#d4cfc9",  // borders, dividers
         },
       },
       fontFamily: {

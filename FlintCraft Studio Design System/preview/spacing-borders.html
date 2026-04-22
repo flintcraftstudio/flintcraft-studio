@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Borders</title><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+html,body{margin:0;padding:0}body{background:var(--fc-birchwood);padding:22px;box-sizing:border-box;font-family:var(--fc-font-body)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{padding:18px;background:var(--fc-birchwood);border-radius:var(--fc-radius-md)}
+.lbl{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--fc-bracken);margin-bottom:8px}
+.ti{font-family:var(--fc-font-display);font-size:18px;color:var(--fc-obsidian);line-height:1.25}
+.sp{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:10px;color:var(--fc-bracken);margin-top:8px}
+</style></head><body>
+<div class="grid">
+  <div class="card" style="border:0.5px solid var(--fc-slate-rim)">
+    <div class="lbl">Standard rule</div>
+    <div class="ti">Light card body</div>
+    <div class="sp">0.5px · Slate Rim</div>
+  </div>
+  <div class="card" style="border-left:2.5px solid var(--fc-ember);border-radius:0">
+    <div class="lbl" style="color:var(--fc-ember)">Accent card</div>
+    <div class="ti">"Sharp work. No shortcuts."</div>
+    <div class="sp">2.5px · Ember · radius 0</div>
+  </div>
+  <div class="card" style="border:2px solid var(--fc-ember)">
+    <div class="lbl" style="color:var(--fc-ember)">Featured</div>
+    <div class="ti">Latest field report</div>
+    <div class="sp">2px · Ember · radius 6</div>
+  </div>
+</div>
+</body></html>

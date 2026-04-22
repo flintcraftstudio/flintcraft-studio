@@ -4,8 +4,8 @@
 
 @layer base {
   ::selection {
-    background: rgba(204, 94, 26, 0.25);
-    color: #232226;
+    background: rgba(168, 72, 18, 0.22);
+    color: #1c1e24;
   }
 }
 
@@ -24,5 +24,170 @@
     opacity: 1;
     transform: none;
     transition: none;
+  }
+}
+
+/* ─── Specimen-case hero ───────────────────────────────────────────────── */
+
+.hero-spec {
+  position: relative;
+  background: #1c1e24;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Faint archival graph-paper lines, masked to the center */
+.hero-spec::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(196, 189, 178, 0.035) 0, rgba(196, 189, 178, 0.035) 1px, transparent 1px) 0 0 / 80px 100%,
+    linear-gradient(to bottom, rgba(196, 189, 178, 0.035) 0, rgba(196, 189, 178, 0.035) 1px, transparent 1px) 0 0 / 100% 80px;
+  mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, black 30%, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, black 30%, transparent 90%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-spec__chrome {
+  border-bottom: 0.5px solid rgba(196, 189, 178, 0.12);
+}
+.hero-spec__foot {
+  border-top: 0.5px solid rgba(196, 189, 178, 0.12);
+}
+
+/* Callouts */
+.hero-spec__callout {
+  position: relative;
+  padding-top: 60px;
+  opacity: 0;
+  animation: hero-spec-fade-up 900ms cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
+}
+.hero-spec__left .hero-spec__callout + .hero-spec__callout,
+.hero-spec__right .hero-spec__callout + .hero-spec__callout {
+  margin-top: 64px;
+}
+
+/* Leader line — thin Ember rule pointing toward the specimen */
+.hero-spec__leader {
+  position: absolute;
+  top: 30px;
+  height: 1px;
+  background: #a84812;
+  opacity: 0.7;
+  transform: scaleX(0);
+  animation: hero-spec-leader 700ms cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
+}
+.hero-spec__leader::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e8873b;
+  top: -2.5px;
+}
+.hero-spec__left .hero-spec__leader {
+  right: -20px;
+  width: calc(100% + 20px);
+  transform-origin: right center;
+}
+.hero-spec__left .hero-spec__leader::after { right: -3px; }
+.hero-spec__right .hero-spec__leader {
+  left: -20px;
+  width: calc(100% + 20px);
+  transform-origin: left center;
+}
+.hero-spec__right .hero-spec__leader::after { left: -3px; }
+
+/* Stagger */
+.hero-spec__left  .hero-spec__callout:nth-child(1) { animation-delay: 900ms; }
+.hero-spec__left  .hero-spec__callout:nth-child(2) { animation-delay: 1050ms; }
+.hero-spec__left  .hero-spec__callout:nth-child(3) { animation-delay: 1200ms; }
+.hero-spec__right .hero-spec__callout:nth-child(1) { animation-delay: 950ms; }
+.hero-spec__right .hero-spec__callout:nth-child(2) { animation-delay: 1100ms; }
+.hero-spec__right .hero-spec__callout:nth-child(3) { animation-delay: 1250ms; }
+.hero-spec__left  .hero-spec__callout:nth-child(1) .hero-spec__leader { animation-delay: 700ms; }
+.hero-spec__left  .hero-spec__callout:nth-child(2) .hero-spec__leader { animation-delay: 850ms; }
+.hero-spec__left  .hero-spec__callout:nth-child(3) .hero-spec__leader { animation-delay: 1000ms; }
+.hero-spec__right .hero-spec__callout:nth-child(1) .hero-spec__leader { animation-delay: 750ms; }
+.hero-spec__right .hero-spec__callout:nth-child(2) .hero-spec__leader { animation-delay: 900ms; }
+.hero-spec__right .hero-spec__callout:nth-child(3) .hero-spec__leader { animation-delay: 1050ms; }
+
+/* Specimen */
+.hero-spec__plate-label {
+  opacity: 0;
+  animation: hero-spec-fade-up 700ms 200ms forwards;
+}
+.hero-spec__specimen-img {
+  opacity: 0;
+  transform: scale(0.98);
+  animation: hero-spec-reveal 1200ms cubic-bezier(0.2, 0.8, 0.25, 1) 400ms forwards;
+  filter: drop-shadow(0 0 48px rgba(232, 135, 59, 0.12));
+}
+.hero-spec__reg {
+  opacity: 0;
+  animation: hero-spec-fade-in 900ms 400ms forwards;
+}
+.hero-spec__caption {
+  opacity: 0;
+  animation: hero-spec-fade-up 700ms 550ms forwards;
+}
+.hero-spec__caption::before,
+.hero-spec__caption::after {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 0.5px;
+  background: #6b5f52;
+  vertical-align: middle;
+  margin: 0 14px;
+}
+
+/* Headline band */
+.hero-spec__headline { opacity: 0; animation: hero-spec-fade-up 900ms 1400ms forwards; }
+.hero-spec__lede     { opacity: 0; animation: hero-spec-fade-up 700ms 1550ms forwards; }
+.hero-spec__actions  { opacity: 0; animation: hero-spec-fade-up 700ms 1700ms forwards; }
+
+/* Primary CTA — chipped corner */
+.hero-spec__cta-primary {
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+}
+
+@keyframes hero-spec-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes hero-spec-fade-in { to { opacity: 1; } }
+@keyframes hero-spec-reveal  { to { opacity: 1; transform: scale(1); } }
+@keyframes hero-spec-leader  { to { transform: scaleX(1); } }
+
+@media (max-width: 960px) {
+  .hero-spec__stage { grid-template-columns: 1fr !important; }
+  .hero-spec__left, .hero-spec__right { text-align: left !important; }
+  .hero-spec__left .hero-spec__callout + .hero-spec__callout,
+  .hero-spec__right .hero-spec__callout + .hero-spec__callout { margin-top: 0 !important; }
+  .hero-spec__leader { display: none; }
+  .hero-spec__callout {
+    padding-top: 0;
+    padding-left: 22px;
+    border-left: 1px solid #a84812;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-spec__callout,
+  .hero-spec__leader,
+  .hero-spec__plate-label,
+  .hero-spec__specimen-img,
+  .hero-spec__reg,
+  .hero-spec__caption,
+  .hero-spec__headline,
+  .hero-spec__lede,
+  .hero-spec__actions {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

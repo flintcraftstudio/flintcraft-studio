@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FlintCraft Studio — Hero: Tectonic</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../flint.css">
+<style>
+  html, body { margin: 0; padding: 0; background: #1c1e24; font-family: var(--fc-font-body); color: #f0ece5; min-height: 100vh; overflow-x: hidden; }
+  * { box-sizing: border-box; }
+
+  .scene {
+    position: relative;
+    min-height: 100vh;
+    background: #1c1e24;
+    display: flex; flex-direction: column;
+  }
+
+  /* ======================= CHROME ======================= */
+  .chrome {
+    position: relative; z-index: 5;
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 24px 56px;
+    font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: #96897a;
+  }
+  .chrome .brand { display: flex; align-items: center; gap: 12px; }
+  .chrome .brand img { height: 20px; opacity: 0.85; }
+  .chrome .brand .name { color: #faf9f7; font-weight: 500; letter-spacing: 0.14em; }
+  .chrome .meta { display: flex; gap: 30px; align-items: baseline; }
+  .chrome .meta em { font-family: var(--fc-font-display); font-style: italic; color: #e8873b; text-transform: none; font-size: 13px; letter-spacing: 0.02em; }
+
+  /* ======================= HEADLINE ======================= */
+  .type {
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 40px 56px;
+    max-width: 1600px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #e8873b;
+    margin-bottom: 36px;
+  }
+  .eyebrow::before {
+    content: ''; width: 28px; height: 1px; background: #e8873b;
+    transform-origin: left center;
+    transform: scaleX(0);
+    animation: eyebrow-draw 600ms cubic-bezier(0.2,0.8,0.25,1) 200ms forwards;
+  }
+  .eyebrow span {
+    opacity: 0;
+    animation: fade-up 600ms 400ms forwards;
+  }
+  @keyframes eyebrow-draw { to { transform: scaleX(1); } }
+
+  /* One sentence. Allowed to break where it wants. */
+  .tectonic {
+    margin: 0;
+    font-family: var(--fc-font-display);
+    font-weight: 400;
+    font-size: clamp(64px, 8.6vw, 136px);
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+    color: #f0ece5;
+    white-space: nowrap;
+  }
+
+  /* Each line wraps in .line so we can translate & fade it in */
+  .tectonic .line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.04em;
+  }
+  .tectonic .line > span {
+    display: inline-block;
+    transform: translateY(110%);
+    animation: line-rise 1100ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+  .tectonic .line:nth-of-type(1) > span { animation-delay: 500ms; }
+  .tectonic .line:nth-of-type(2) > span { animation-delay: 720ms; }
+  .tectonic .line:nth-of-type(3) > span { animation-delay: 940ms; }
+
+  @keyframes line-rise { to { transform: translateY(0); } }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .tectonic em { font-style: italic; color: #e8873b; }
+  .tectonic .shift-2 { padding-left: 1.1em; }
+  .tectonic .shift-3 { padding-left: 2.4em; }
+
+  /* subtle hairline after the headline settles */
+  .after-line {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: end;
+    opacity: 0;
+    animation: fade-up 800ms 1300ms forwards;
+  }
+  .after-line::before {
+    content: ''; grid-column: 1 / -1;
+    height: 0.5px; background: rgba(196,189,178,0.18);
+    margin-bottom: 28px;
+  }
+
+  .lede {
+    max-width: 480px;
+    font-size: 17px;
+    line-height: 1.75;
+    color: #96897a;
+    margin: 0;
+  }
+  .lede em { font-family: var(--fc-font-display); font-style: italic; color: #c4bdb2; }
+
+  .cta-cluster {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 14px;
+  }
+  .btn {
+    font-family: var(--fc-font-body);
+    font-size: 13px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px 30px;
+    cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 10px;
+    border: none;
+    transition: transform 200ms, filter 200ms;
+  }
+  .btn--primary {
+    background: #e8873b; color: #1c1e24;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+  }
+  .btn--primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
+  .cta-sub {
+    font-family: var(--fc-font-display); font-style: italic;
+    font-size: 13px; color: #6b5f52; letter-spacing: 0.02em;
+  }
+  .cta-sub em { color: #e8873b; font-style: italic; }
+
+  /* ======================= FOOT ======================= */
+  .foot {
+    position: relative; z-index: 2;
+    padding: 28px 56px 36px;
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px; align-items: baseline;
+    font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: #6b5f52;
+    border-top: 0.5px solid rgba(196,189,178,0.1);
+    max-width: 1600px; margin: 0 auto; width: 100%;
+    opacity: 0;
+    animation: fade-up 800ms 1500ms forwards;
+  }
+  .foot em { font-family: var(--fc-font-display); font-style: italic; text-transform: none; letter-spacing: 0.04em; color: #e8873b; font-size: 13px; }
+  .foot .center { text-align: center; }
+  .foot .right { text-align: right; }
+
+  @media (max-width: 900px) {
+    .type { padding: 40px 24px; }
+    .tectonic { font-size: clamp(44px, 12vw, 80px); white-space: normal; }
+    .tectonic .shift-2, .tectonic .shift-3 { padding-left: 0; }
+    .after-line { grid-template-columns: 1fr; }
+    .cta-cluster { align-items: flex-start; }
+    .chrome, .foot { padding-left: 24px; padding-right: 24px; }
+    .foot { grid-template-columns: 1fr; gap: 10px; }
+    .foot .center, .foot .right { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scene">
+
+  <header class="chrome">
+    <div class="brand">
+      <img src="../assets/logo.svg" alt="">
+      <span class="name">FlintCraft Studio</span>
+    </div>
+    <div class="meta">
+      <span>Helena <em>MT</em></span>
+      <span>Est. <em>2019</em></span>
+      <span>(406) 871·9875</span>
+    </div>
+  </header>
+
+  <section class="type">
+    <div class="eyebrow"><span>A small studio, shaped by hand</span></div>
+
+    <h1 class="tectonic">
+      <span class="line"><span>Websites built</span></span>
+      <span class="line shift-2"><span>for <em>businesses</em></span></span>
+      <span class="line shift-3"><span>that <em>last.</em></span></span>
+    </h1>
+
+    <div class="after-line">
+      <p class="lede">
+        One relationship. <em>Everything handled.</em> Custom websites for businesses that have earned their reputation and are ready for a web presence that reflects it.
+      </p>
+      <div class="cta-cluster">
+        <a class="btn btn--primary">Start a project →</a>
+        <span class="cta-sub">or read our <em>field reports</em></span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>№ 01 — <em>The Mark</em></span>
+    <span class="center">Scroll for the record →</span>
+    <span class="right">Vol. 7 · Spring <em>2026</em></span>
+  </footer>
+
+</div>
+
+</body>
+</html>

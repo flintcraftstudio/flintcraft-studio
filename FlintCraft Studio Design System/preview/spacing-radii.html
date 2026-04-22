@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Radii</title><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+html,body{margin:0;padding:0}body{background:var(--fc-birchwood);padding:22px;box-sizing:border-box;font-family:var(--fc-font-body)}
+.row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.item{text-align:center}
+.box{width:76px;height:76px;background:var(--fc-parchment);border:0.5px solid var(--fc-slate-rim);margin:0 auto 10px}
+.name{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--fc-bracken)}
+.val{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:11px;color:var(--fc-obsidian);margin-top:2px}
+.use{font-size:10px;color:var(--fc-bracken);margin-top:6px}
+</style></head><body>
+<div class="row">
+  <div class="item"><div class="box" style="border-radius:0"></div><div class="name">none</div><div class="val">0px</div><div class="use">Accent cards</div></div>
+  <div class="item"><div class="box" style="border-radius:3px"></div><div class="name">sm</div><div class="val">3px</div><div class="use">Buttons · inputs</div></div>
+  <div class="item"><div class="box" style="border-radius:6px"></div><div class="name">md</div><div class="val">6px</div><div class="use">Cards</div></div>
+  <div class="item"><div class="box" style="border-radius:20px;width:120px"></div><div class="name">pill</div><div class="val">20px</div><div class="use">Status badges only</div></div>
+</div>
+</body></html>

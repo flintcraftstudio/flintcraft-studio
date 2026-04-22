@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Nav</title><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+html,body{margin:0;padding:0}body{background:var(--fc-birchwood);box-sizing:border-box;font-family:var(--fc-font-body)}
+nav{background:var(--fc-obsidian);padding:12px 22px;display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{height:28px;width:auto}
+.name{font-size:13px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--fc-birchwood)}
+.tag{font-family:var(--fc-font-display);font-style:italic;font-size:11px;color:var(--fc-smoke);letter-spacing:0.04em;margin-top:1px}
+.links{display:flex;align-items:center;gap:22px}
+.lnk{font-size:12px;color:var(--fc-smoke);letter-spacing:0.06em;text-transform:uppercase;text-decoration:none}
+.lnk.active{color:var(--fc-birchwood)}
+.cta{font-size:11px;font-weight:500;color:var(--fc-spark);letter-spacing:0.08em;text-transform:uppercase;border:0.5px solid var(--fc-spark);border-radius:3px;padding:5px 14px;text-decoration:none}
+</style></head><body>
+<nav>
+  <div class="brand">
+    <img src="../assets/logo.svg" alt="FlintCraft">
+    <div>
+      <div class="name">FlintCraft Studio</div>
+      <div class="tag">Still shaped by hand.</div>
+    </div>
+  </div>
+  <div class="links">
+    <a class="lnk active">Work</a>
+    <a class="lnk">Services</a>
+    <a class="lnk">Process</a>
+    <a class="lnk">About</a>
+    <a class="cta">Start a project</a>
+  </div>
+</nav>
+</body></html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Form</title><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+html,body{margin:0;padding:0}body{background:var(--fc-birchwood);padding:22px;box-sizing:border-box;font-family:var(--fc-font-body)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.lbl{display:block;font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--fc-bracken);margin-bottom:6px}
+.in{width:100%;padding:10px 14px;background:var(--fc-birchwood);border:0.5px solid var(--fc-slate-rim);border-radius:3px;font-family:var(--fc-font-body);font-size:14px;color:var(--fc-obsidian);outline:none;box-sizing:border-box}
+.in.focus{border-color:var(--fc-ember);box-shadow:0 0 0 2px rgba(168,72,18,0.12)}
+.in.err{border-color:#b44}
+.err-msg{font-size:10px;letter-spacing:0.02em;color:#b44;margin-top:5px}
+</style></head><body>
+<div class="grid">
+  <div>
+    <label class="lbl">Name</label>
+    <input class="in" value="Logan Williams">
+  </div>
+  <div>
+    <label class="lbl">Email (focused)</label>
+    <input class="in focus" value="logan@flintcraftstudio.com">
+  </div>
+  <div>
+    <label class="lbl">Phone</label>
+    <input class="in" placeholder="(406) 555-0199" style="color:#b4ada6">
+  </div>
+  <div>
+    <label class="lbl">Email (error)</label>
+    <input class="in err" value="not-an-email">
+    <div class="err-msg">Something's missing here.</div>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Eyebrow + Divider</title><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+html,body{margin:0;padding:0}body{background:var(--fc-birchwood);padding:26px;box-sizing:border-box;font-family:var(--fc-font-body)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.rule{width:28px;height:1px;background:var(--fc-ember);margin-bottom:8px}
+.eb{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--fc-bracken);margin-bottom:12px}
+.hr{border:none;border-top:0.5px solid var(--fc-slate-rim);margin:8px 0}
+.acc{border:none;border-top:1px solid var(--fc-ember);width:48px;margin:8px 0}
+.lbl{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--fc-bracken);margin-top:10px}
+</style></head><body>
+<div class="grid">
+  <div>
+    <div class="rule"></div>
+    <div class="eb">Our work</div>
+    <div class="rule"></div>
+    <div class="eb">Process</div>
+    <div class="rule"></div>
+    <div class="eb">Who we are</div>
+  </div>
+  <div>
+    <hr class="hr"><div class="lbl">Standard rule · 0.5px Slate Rim</div>
+    <hr class="acc"><div class="lbl">Accent rule · 1px Ember · 48px wide</div>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FlintCraft — Display Type</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: var(--fc-birchwood); padding: 24px; box-sizing: border-box; }
+  .row { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  .spec { display: grid; grid-template-columns: 1fr 100px; gap: 18px; align-items: baseline; }
+  .spec .hx { font-family: var(--fc-font-display); color: var(--fc-obsidian); line-height: 1.05; letter-spacing: -0.015em; }
+  .label { font-family: var(--fc-font-body); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fc-bracken); text-align: right; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="spec">
+      <div class="hx" style="font-size: 52px; font-weight: 400"><em style="font-style: italic">Carved for purpose.</em></div>
+      <div class="label">Display · 400 italic · 52px</div>
+    </div>
+    <div class="spec">
+      <div class="hx" style="font-size: 36px; font-weight: 400">Small by design. Accountable by nature.</div>
+      <div class="label">H2 · 400 · 36px</div>
+    </div>
+    <div class="spec">
+      <div class="hx" style="font-size: 24px; font-weight: 600">A site that reflects where you are.</div>
+      <div class="label">H4 · 600 · 24px</div>
+    </div>
+  </div>
+</body>
+</html>

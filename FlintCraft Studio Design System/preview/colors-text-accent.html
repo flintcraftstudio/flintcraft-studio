@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FlintCraft — Text & Accent Colors</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: var(--fc-birchwood); padding: 24px; box-sizing: border-box; }
+  .row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+  .sw {
+    border: 0.5px solid var(--fc-slate-rim);
+    border-radius: var(--fc-radius-md);
+    overflow: hidden;
+  }
+  .chip { height: 76px; }
+  .meta { padding: 10px 12px 12px; }
+  .name {
+    font-family: var(--fc-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fc-obsidian);
+  }
+  .hex {
+    font-family: 'SF Mono', ui-monospace, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--fc-bracken);
+    margin-top: 3px;
+  }
+  .role {
+    font-family: var(--fc-font-body);
+    font-size: 10px;
+    color: var(--fc-bracken);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sw">
+      <div class="chip" style="background: #4a4038"></div>
+      <div class="meta">
+        <div class="name">Trail Dust</div>
+        <div class="hex">#4a4038</div>
+        <div class="role">Body muted · light bg</div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="chip" style="background: #6b5f52"></div>
+      <div class="meta">
+        <div class="name">Bracken</div>
+        <div class="hex">#6b5f52</div>
+        <div class="role">Subtle · captions · light</div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="chip" style="background: #a84812"></div>
+      <div class="meta">
+        <div class="name">Ember</div>
+        <div class="hex">#a84812</div>
+        <div class="role">Accent on light only</div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="chip" style="background: #c4bdb2"></div>
+      <div class="meta">
+        <div class="name">Ash</div>
+        <div class="hex">#c4bdb2</div>
+        <div class="role">Body muted · dark bg</div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="chip" style="background: #96897a"></div>
+      <div class="meta">
+        <div class="name">Smoke</div>
+        <div class="hex">#96897a</div>
+        <div class="role">Subtle · captions · dark</div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="chip" style="background: #e8873b"></div>
+      <div class="meta">
+        <div class="name">Spark</div>
+        <div class="hex">#e8873b</div>
+        <div class="role">Accent on dark only</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
