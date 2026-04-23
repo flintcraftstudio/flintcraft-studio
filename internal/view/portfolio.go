@@ -150,7 +150,7 @@ var Projects = map[string]Project{
 		Client:           "Traver Hardwood Floors",
 		Title:            "Every board placed with intent. Now the site is too.",
 		Subtitle:         "Chris Traver has been laying hardwood floors in western Montana for 18 years. The redesign started with the floors themselves.",
-		Location:         "Hardwood flooring \u00b7 Western Montana",
+		Location:         "Hardwood flooring \u00b7 Helena, MT",
 		Tags:             []string{"Marketing site", "Brand", "Design"},
 		LiveURL:          "https://traverhardwoodfloors.com",
 		Screenshot:       "/static/images/portfolio/thf_screenshot.webp",
