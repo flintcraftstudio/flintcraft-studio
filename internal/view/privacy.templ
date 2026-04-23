@@ -1,0 +1,154 @@
+package view
+
+templ PrivacyPage() {
+	@Base("Privacy", "How FlintCraft Studio handles your data.", "/privacy", privacyContent())
+}
+
+templ privacyContent() {
+	<!-- Hero -->
+	<section class="bg-fc-birchwood py-20 sm:py-28">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			@eyebrow("Privacy")
+			<h1 class="max-w-3xl font-display text-h1-display font-normal text-fc-obsidian">
+				<em class="italic">What we keep, why, and how to ask us not to.</em>
+			</h1>
+			<p class="mt-6 max-w-xl text-body text-fc-trail-dust">
+				FlintCraft Studio is a two-person studio in Helena, Montana. This page explains what information we collect on this website and what we do with it, in plain language.
+			</p>
+			<p class="mt-4 text-eyebrow font-medium uppercase text-fc-bracken">
+				Last updated &middot; April 22, 2026
+			</p>
+		</div>
+	</section>
+
+	<!-- What we collect -->
+	<section class="bg-fc-parchment py-16 sm:py-20">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			<div data-reveal class="max-w-2xl">
+				@eyebrow("What we collect")
+				<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
+					Information you give us. Information we see.
+				</h2>
+				<div class="mt-8 space-y-4 text-body text-fc-trail-dust">
+					<p>
+						When you submit the contact form, we collect your name, email address, phone number (if provided), your website URL, and the message you send. This information is delivered to our studio by email.
+					</p>
+					<p>
+						When you visit any page on this site, we automatically collect basic technical information: the page you visited, how you got there, your approximate location derived from your IP address, the type of device and browser you used, and how long you spent on the page. We collect this through Google Analytics 4 and Meta (Facebook) Pixel &mdash; see "Third-party services" below for details.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- How we use it -->
+	<section class="bg-fc-birchwood py-16 sm:py-20">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			<div data-reveal class="max-w-2xl">
+				@eyebrow("How we use it")
+				<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
+					To reply, to improve, to measure.
+				</h2>
+				<ul class="mt-8 space-y-3 text-body text-fc-trail-dust">
+					<li class="pl-5 -indent-5">&mdash; To respond to your inquiry and, if we work together, to deliver your project.</li>
+					<li class="pl-5 -indent-5">&mdash; To understand which pages and topics on our site are useful so we can improve them.</li>
+					<li class="pl-5 -indent-5">&mdash; To measure the performance of any advertising we run on platforms like Facebook and Instagram.</li>
+				</ul>
+				<p class="mt-6 text-body text-fc-trail-dust">
+					We do not sell your personal information. We do not share it with anyone except the service providers listed below.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Third-party services -->
+	<section class="bg-fc-parchment py-16 sm:py-20">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			<div data-reveal class="max-w-2xl">
+				@eyebrow("Third-party services")
+				<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
+					The tools that see this site with us.
+				</h2>
+				<div class="mt-8 space-y-6 text-body text-fc-trail-dust">
+					<div>
+						<h3 class="font-display text-h4-display font-normal text-fc-obsidian">Google Analytics 4</h3>
+						<p class="mt-2">
+							We use Google Analytics 4 to understand how visitors use this site. Google places cookies on your device that track page visits, session duration, and general demographic signals. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="border-b border-fc-ember text-fc-ember transition hover:brightness-110">Google's privacy policy</a>. You can opt out by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" class="border-b border-fc-ember text-fc-ember transition hover:brightness-110">Google Analytics Opt-out Browser Add-on</a>.
+						</p>
+					</div>
+					<div>
+						<h3 class="font-display text-h4-display font-normal text-fc-obsidian">Meta (Facebook) Pixel</h3>
+						<p class="mt-2">
+							We use Meta Pixel to measure the effectiveness of advertising we run on Facebook and Instagram. The pixel places a cookie that tracks page visits and may be used by Meta to show you relevant ads. See <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener noreferrer" class="border-b border-fc-ember text-fc-ember transition hover:brightness-110">Meta's privacy policy</a>. You can manage your ad preferences in your <a href="https://www.facebook.com/adpreferences" target="_blank" rel="noopener noreferrer" class="border-b border-fc-ember text-fc-ember transition hover:brightness-110">Facebook ad settings</a>.
+						</p>
+					</div>
+					<div>
+						<h3 class="font-display text-h4-display font-normal text-fc-obsidian">Postmark</h3>
+						<p class="mt-2">
+							When you submit the contact form, your message is delivered to our studio through Postmark, a transactional email service. See <a href="https://postmarkapp.com/privacy-policy" target="_blank" rel="noopener noreferrer" class="border-b border-fc-ember text-fc-ember transition hover:brightness-110">Postmark's privacy policy</a>.
+						</p>
+					</div>
+					<div>
+						<h3 class="font-display text-h4-display font-normal text-fc-obsidian">Cloudflare Turnstile</h3>
+						<p class="mt-2">
+							We use Cloudflare Turnstile to prevent spam submissions on the contact form. Turnstile is a privacy-preserving alternative to traditional CAPTCHAs. See <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" class="border-b border-fc-ember text-fc-ember transition hover:brightness-110">Cloudflare's privacy policy</a>.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Cookies -->
+	<section class="bg-fc-birchwood py-16 sm:py-20">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			<div data-reveal class="max-w-2xl">
+				@eyebrow("Cookies")
+				<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
+					How to turn them off.
+				</h2>
+				<p class="mt-8 text-body text-fc-trail-dust">
+					Cookies are set on this site by Google Analytics and Meta Pixel. We do not set our own cookies. You can block cookies from this site through your browser's settings, use the Google Analytics opt-out extension linked above, or manage Meta's ad preferences from your Facebook account.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Data retention & your rights -->
+	<section class="bg-fc-parchment py-16 sm:py-20">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			<div data-reveal class="max-w-2xl">
+				@eyebrow("Your rights")
+				<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
+					Ask us what we have. Ask us to delete it.
+				</h2>
+				<div class="mt-8 space-y-4 text-body text-fc-trail-dust">
+					<p>
+						If you have contacted us or we have worked together, you can ask for a copy of the personal information we hold about you, or ask us to delete it.
+					</p>
+					<p>
+						Email <a href="mailto:hello@flintcraftstudio.com" class="border-b border-fc-ember text-fc-ember transition hover:brightness-110">hello@flintcraftstudio.com</a> and we will respond within a reasonable timeframe.
+					</p>
+					<p>
+						We retain contact form submissions and email correspondence for as long as they remain useful for our working relationship or, where that relationship has ended, for a reasonable period in case of follow-up.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Contact -->
+	<section class="bg-fc-obsidian py-16 sm:py-20">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			<div data-reveal class="max-w-2xl">
+				@eyebrowDark("Questions")
+				<h2 class="font-display text-h2-display font-normal text-fc-parchment">
+					Still unsure?
+				</h2>
+				<p class="mt-8 text-body text-fc-ash">
+					Email <a href="mailto:hello@flintcraftstudio.com" class="border-b border-fc-spark text-fc-spark transition hover:brightness-110">hello@flintcraftstudio.com</a> or call { Phone }.
+				</p>
+			</div>
+		</div>
+	</section>
+}

@@ -49,7 +49,7 @@ var Projects = map[string]Project{
 		Client:           "Nautilus Group Cleaning Services",
 		Title:            "No web presence. Now they have a pipeline.",
 		Subtitle:         "Custom site, brand, and SEO for a cleaning company starting from zero.",
-		Location:         "Commercial cleaning \u00b7 Kennewick, WA",
+		Location:         "Commercial cleaning \u00b7 Helena, MT",
 		Tags:             []string{"Marketing site", "Brand", "SEO"},
 		LiveURL:          "https://nautiluscleaning.com",
 		Screenshot:       "/static/images/portfolio/nautilus_screenshot.webp",

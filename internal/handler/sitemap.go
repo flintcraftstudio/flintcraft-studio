@@ -30,6 +30,8 @@ func Sitemap(baseURL string) http.HandlerFunc {
 			{Loc: baseURL + "/process", ChangeFreq: "monthly", Priority: "0.7"},
 			{Loc: baseURL + "/about", ChangeFreq: "monthly", Priority: "0.7"},
 			{Loc: baseURL + "/contact", ChangeFreq: "yearly", Priority: "0.6"},
+			{Loc: baseURL + "/privacy", ChangeFreq: "yearly", Priority: "0.3"},
+			{Loc: baseURL + "/terms", ChangeFreq: "yearly", Priority: "0.3"},
 		}
 
 		for _, slug := range view.ProjectOrder {

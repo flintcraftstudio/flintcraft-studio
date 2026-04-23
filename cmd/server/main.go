@@ -67,6 +67,8 @@ func main() {
 	mux.Handle("GET /about", handler.About())
 	mux.Handle("GET /contact", handler.Contact())
 	mux.Handle("POST /contact", handler.ContactSubmit(mailer, cfg.TurnstileSecretKey))
+	mux.Handle("GET /privacy", handler.Privacy())
+	mux.Handle("GET /terms", handler.Terms())
 
 	// Sitemap & health
 	mux.Handle("GET /sitemap.xml", handler.Sitemap(cfg.BaseURL))
