@@ -30,7 +30,7 @@ go.work.sum
 
 # Build artifacts
 bin/
-server
+/server
 web/static/css/site.css
 
 # Generated templ output
