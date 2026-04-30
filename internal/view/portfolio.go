@@ -25,6 +25,8 @@ type Project struct {
 	LiveURL          string
 	Screenshot       string
 	ScreenshotMobile string
+	HeroVideo        string // optional mp4; takes precedence over Screenshot in the desktop frame
+	HeroVideoWebm    string // optional webm; preferred source if browser supports it
 	Story            []string
 	Quote            *ProjectQuote
 	Results          []ProjectResult
@@ -36,6 +38,7 @@ type Project struct {
 // ProjectOrder defines the display order on the work listing page.
 var ProjectOrder = []string{
 	"lo-mo-outfitting",
+	"rockabilly-roasting",
 	"nautilus-group",
 	"a-team-asphalt",
 	"a-team-gutters",
@@ -188,8 +191,8 @@ var Projects = map[string]Project{
 		LiveURL:          "https://lomooutfitting.com",
 		Screenshot:       "/static/images/portfolio/lomo_screenshot.webp",
 		ScreenshotMobile: "/static/images/portfolio/lomo_screenshot_mobile.webp",
-		NextSlug:         "nautilus-group",
-		NextClient:       "Nautilus Group",
+		NextSlug:         "rockabilly-roasting",
+		NextClient:       "Rockabilly Roasting",
 		Story: []string{
 			"Matt Mohar has been fishing the Missouri for over twenty years. He started guiding after a decade in concrete — not because someone told him fly fishing was a good brand play, but because taking people fishing is what he wanted to do. Lo Mo runs seven licensed guides, all local, all on the water in their off hours. The operation didn't need inventing. It needed a site that matched.",
 			"The previous site wasn't telling that story. We rebuilt it around what makes Lo Mo different: no booking platforms, no middlemen, no pretense. Matt answers the phone. He picks the guide. He picks the stretch of river. The site needed to communicate that directness without losing the weight of twenty years and thirty-five miles of blue-ribbon water.",
@@ -210,6 +213,36 @@ var Projects = map[string]Project{
 			"Brand voice and full copywriting — every page written from scratch",
 			"Trip booking flow — pricing, seasonal rates, heroes program",
 			"Guide profiles — individual bios and photography",
+			"SEO foundation — meta tags, schema markup, sitemap",
+			"Hosting and SSL on FlintCraft infrastructure",
+			"Ongoing maintenance and content updates",
+		},
+	},
+	"rockabilly-roasting": {
+		Slug:             "rockabilly-roasting",
+		Client:           "Rockabilly Roasting",
+		Title:            "Inherited a plugin store. Replaced it with one worthy of the roast.",
+		Subtitle:         "Custom e-commerce, subscription management, and brand identity for a small-batch coffee roaster in eastern Washington.",
+		Location:         "Coffee roaster · Kennewick, WA",
+		Tags:             []string{"E-commerce", "Marketing site", "Brand"},
+		LiveURL:          "https://rockabillyroasting.com",
+		Screenshot:       "/static/images/portfolio/rockabilly_screenshot.webp",
+		ScreenshotMobile: "/static/images/portfolio/rockabilly_screenshot_mobile.webp",
+		HeroVideo:        "/static/videos/rockabilly-hero.mp4",
+		HeroVideoWebm:    "/static/videos/rockabilly-hero.webm",
+		NextSlug:         "nautilus-group",
+		NextClient:       "Nautilus Group",
+		Story: []string{
+			"The previous storefront was inherited — a stock WooCommerce build that made every part of the customer journey harder than it needed to be. Sign-up friction. Subscription management buried behind plugin defaults. A checkout flow that didn’t feel like the brand it was selling. For a roaster pulling genuinely great coffee, the storefront was the weakest link in the operation.",
+			"We rebuilt it from the ground up — storefront, checkout, and subscription handling, all custom. No WooCommerce. No plugin sprawl. Designed around how a small-batch roaster actually sells coffee: one-time bags, recurring shipments, gift subscriptions, account management that takes one click instead of three.",
+			"And the brand itself got the treatment it deserved. Identity, typography, photography — all rebuilt to match the quality in the bag. A storefront finally worthy of the coffee.",
+		},
+		Deliverables: []string{
+			"Custom-designed e-commerce storefront — no WooCommerce, no plugins",
+			"Custom subscription management — sign-up, pause, modify, cancel",
+			"Custom checkout flow — one-time, recurring, and gift purchases",
+			"Brand identity — logo, color palette, typography",
+			"Product photography integration",
 			"SEO foundation — meta tags, schema markup, sitemap",
 			"Hosting and SSL on FlintCraft infrastructure",
 			"Ongoing maintenance and content updates",

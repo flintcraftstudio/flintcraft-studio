@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FlintCraft Studio — Project Highlight: Rockabilly Roasting Co.</title>
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <link rel="stylesheet" href="flint.css">
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; background: #f0eee9; }
+    body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+    #root { height: 100vh; }
+    /* Make the artboard internals scroll within their fixed frame so the canvas can present
+       full case studies as discrete "pages". */
+    .case-frame { overflow-y: auto; overflow-x: hidden; height: 100%; }
+    .case-frame::-webkit-scrollbar { width: 0; }
+  </style>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" src="design-canvas.jsx"></script>
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="case-content.jsx"></script>
+  <script type="text/babel" src="editorial-case.jsx"></script>
+  <script type="text/babel" src="image-led-case.jsx"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "flintGeometry": false,
+      "showQuote": true,
+      "viewMode": "image-led"
+    }/*EDITMODE-END*/;
+
+    function App() {
+      const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
+      const { flintGeometry, viewMode } = tweaks;
+
+      // viewMode: "canvas" (both side-by-side) | "editorial" | "image-led"
+      if (viewMode === 'editorial') {
+        return (
+          <div className="case-frame" data-screen-label="Editorial Cut">
+            <EditorialCase flintGeometry={flintGeometry} />
+            <FlintTweaks tweaks={tweaks} setTweak={setTweak} />
+          </div>
+        );
+      }
+      if (viewMode === 'image-led') {
+        return (
+          <div className="case-frame" data-screen-label="Image-led Cut">
+            <ImageLedCase flintGeometry={flintGeometry} />
+            <FlintTweaks tweaks={tweaks} setTweak={setTweak} />
+          </div>
+        );
+      }
+      return (
+        <>
+          <DesignCanvas>
+            <DCSection
+              id="rockabilly"
+              title="Rockabilly Roasting Co. — Project Highlight"
+              subtitle="Two cuts of the same case study. FlintCraft Studio · v1.1 system.">
+              <DCArtboard id="editorial" label="A · Editorial cut — quiet, type-forward" width={1280} height={2400}>
+                <div className="case-frame" data-screen-label="Editorial Cut">
+                  <EditorialCase flintGeometry={flintGeometry} />
+                </div>
+              </DCArtboard>
+              <DCArtboard id="image-led" label="B · Image-led cut — warmer, mockup-forward" width={1280} height={2600}>
+                <div className="case-frame" data-screen-label="Image-led Cut">
+                  <ImageLedCase flintGeometry={flintGeometry} />
+                </div>
+              </DCArtboard>
+            </DCSection>
+          </DesignCanvas>
+          <FlintTweaks tweaks={tweaks} setTweak={setTweak} />
+        </>
+      );
+    }
+
+    function FlintTweaks({ tweaks, setTweak }) {
+      return (
+        <TweaksPanel title="Tweaks">
+          <TweakSection title="View">
+            <TweakRadio
+              label="Layout"
+              value={tweaks.viewMode}
+              onChange={v => setTweak('viewMode', v)}
+              options={[
+                { value: 'canvas', label: 'Canvas' },
+                { value: 'editorial', label: 'A · Editorial' },
+                { value: 'image-led', label: 'B · Image-led' },
+              ]}
+            />
+            <p style={{ margin: '6px 2px 0', fontSize: 11, color: '#888', lineHeight: 1.5 }}>
+              Canvas shows both cuts side-by-side. Pick A or B to view fullscreen.
+            </p>
+          </TweakSection>
+
+          <TweakSection title="System">
+            <TweakToggle
+              label="Flint geometry"
+              hint="Chipped corners on featured cards & buttons"
+              value={tweaks.flintGeometry}
+              onChange={v => setTweak('flintGeometry', v)}
+            />
+          </TweakSection>
+        </TweaksPanel>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

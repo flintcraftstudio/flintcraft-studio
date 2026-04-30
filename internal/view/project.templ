@@ -50,13 +50,36 @@ templ projectContent(p Project) {
 								<span class="h-[7px] w-[7px] rounded-full bg-fc-slate-rim"></span>
 								<span class="h-[7px] w-[7px] rounded-full bg-fc-slate-rim"></span>
 							</div>
-							<img
-								src={ p.Screenshot }
-								alt={ p.Client + " website — desktop view" }
-								width="800"
-								height="542"
-								class="w-full"
-							/>
+							if p.HeroVideo != "" {
+								<video
+									autoplay
+									muted
+									loop
+									playsinline
+									preload="metadata"
+									poster={ p.Screenshot }
+									class="block w-full"
+									aria-label={ p.Client + " website — hero video" }
+								>
+									if p.HeroVideoWebm != "" {
+										<source src={ p.HeroVideoWebm } type="video/webm"/>
+									}
+									<source src={ p.HeroVideo } type="video/mp4"/>
+									<img
+										src={ p.Screenshot }
+										alt={ p.Client + " website — desktop view" }
+										class="w-full"
+									/>
+								</video>
+							} else {
+								<img
+									src={ p.Screenshot }
+									alt={ p.Client + " website — desktop view" }
+									width="800"
+									height="542"
+									class="w-full"
+								/>
+							}
 						</div>
 					</div>
 					<!-- Mobile -->

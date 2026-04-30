@@ -1,0 +1,226 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   FlintCraft Studio — Colors & Type
+   Closed palette. Two typefaces. No substitutions.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Webfonts — Cormorant Garamond (display) + DM Sans (body) */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+
+:root {
+  /* ─── Color Tokens (12) ───────────────────────────────────────────────── */
+
+  /* Dark surfaces */
+  --fc-obsidian:   #1c1e24;  /* page bg · text on light */
+  --fc-flint:      #363b42;  /* raised surface (cards, nav) */
+  --fc-charcoal:   #474d55;  /* highest surface (modals, popovers, hovered nav) */
+
+  /* Dark-mode text */
+  --fc-ash:        #c4bdb2;  /* body / strong muted on dark */
+  --fc-smoke:      #96897a;  /* subtle muted — captions, eyebrows, metadata */
+  --fc-spark:      #e8873b;  /* accent on dark (body text on Obsidian; 18px+/bold on Flint) */
+
+  /* Light surfaces */
+  --fc-birchwood:  #faf9f7;  /* page bg */
+  --fc-parchment:  #f0ece5;  /* raised surface (cards, section backgrounds) */
+
+  /* Light-mode text */
+  --fc-trail-dust: #4a4038;  /* body / strong muted on light */
+  --fc-bracken:    #6b5f52;  /* subtle muted — captions, eyebrows, metadata */
+  --fc-ember:      #a84812;  /* accent on light */
+
+  /* Structure */
+  --fc-slate-rim:  #d4cfc9;  /* borders, dividers, rules */
+
+  /* ─── Semantic tokens — light context ─────────────────────────────────── */
+  --bg-page:          var(--fc-birchwood);
+  --bg-raised:        var(--fc-parchment);
+  --fg-primary:       var(--fc-obsidian);
+  --fg-body:          var(--fc-trail-dust);
+  --fg-muted:         var(--fc-bracken);
+  --fg-accent:        var(--fc-ember);
+  --border-rule:      var(--fc-slate-rim);
+
+  /* ─── Semantic tokens — dark context ──────────────────────────────────── */
+  --bg-page-dark:     var(--fc-obsidian);
+  --bg-raised-dark:   var(--fc-flint);
+  --bg-highest-dark:  var(--fc-charcoal);
+  --fg-primary-dark:  var(--fc-birchwood);
+  --fg-body-dark:     var(--fc-ash);
+  --fg-muted-dark:    var(--fc-smoke);
+  --fg-accent-dark:   var(--fc-spark);
+
+  /* ─── Spacing ─────────────────────────────────────────────────────────── */
+  --fc-space-xs:  4px;
+  --fc-space-sm:  8px;
+  --fc-space-md:  16px;
+  --fc-space-lg:  32px;
+  --fc-space-xl:  64px;
+
+  /* ─── Radii ───────────────────────────────────────────────────────────── */
+  --fc-radius-none: 0px;
+  --fc-radius-sm:   3px;    /* buttons, inputs, badges */
+  --fc-radius-md:   6px;    /* cards */
+  --fc-radius-pill: 20px;   /* status indicators only */
+
+  /* ─── Borders ─────────────────────────────────────────────────────────── */
+  --fc-border:          0.5px solid var(--fc-slate-rim);
+  --fc-border-accent:   2.5px solid var(--fc-ember);      /* accent cards — light */
+  --fc-border-accent-d: 2.5px solid var(--fc-spark);      /* accent cards — dark */
+  --fc-border-feature:  2px solid var(--fc-ember);        /* featured — light */
+  --fc-border-feature-d:2px solid var(--fc-spark);        /* featured — dark */
+
+  /* ─── Typefaces ───────────────────────────────────────────────────────── */
+  --fc-font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --fc-font-body:    'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* ─── Type scale (static, px values; tailwind plugin uses fluid) ──────── */
+  --fc-text-display:  64px;   /* hero headlines (cormorant) */
+  --fc-text-h1:       46px;
+  --fc-text-h2:       36px;
+  --fc-text-h3:       28px;
+  --fc-text-h4:       22px;
+  --fc-text-body-lg:  19px;
+  --fc-text-body:     17px;
+  --fc-text-body-sm:  15px;
+  --fc-text-ui:       13px;
+  --fc-text-eyebrow:  11px;
+
+  /* ─── Motion ──────────────────────────────────────────────────────────── */
+  --fc-ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+  --fc-ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Base semantic styles
+   ───────────────────────────────────────────────────────────────────────────── */
+
+body {
+  font-family: var(--fc-font-body);
+  font-size: var(--fc-text-body);
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--fc-trail-dust);
+  background: var(--fc-birchwood);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(168, 72, 18, 0.22);
+  color: var(--fc-obsidian);
+}
+
+/* Headings — Cormorant Garamond by default */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--fc-font-display);
+  color: var(--fc-obsidian);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: var(--fc-text-h1); line-height: 1.1;  letter-spacing: -0.015em; }
+h2 { font-size: var(--fc-text-h2); line-height: 1.2; }
+h3 { font-size: var(--fc-text-h3); line-height: 1.3; }
+h4 { font-size: var(--fc-text-h4); line-height: 1.4; font-weight: 600; letter-spacing: 0; }
+
+/* Paragraphs + inline */
+p {
+  font-family: var(--fc-font-body);
+  color: var(--fc-trail-dust);
+  line-height: 1.7;
+}
+
+em, i {
+  font-style: italic;
+}
+
+strong, b {
+  font-weight: 500;
+  color: var(--fc-obsidian);
+}
+
+/* Eyebrow label — uppercase, tracked, DM Sans */
+.eyebrow {
+  font-family: var(--fc-font-body);
+  font-size: var(--fc-text-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fc-bracken);
+}
+
+.eyebrow-dark {
+  color: var(--fc-smoke);
+}
+
+/* Pull-quote / accent display italic */
+.pull-quote {
+  font-family: var(--fc-font-display);
+  font-style: italic;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  color: var(--fc-ember);
+  line-height: 1.4;
+}
+
+.pull-quote-dark {
+  color: var(--fc-spark);
+}
+
+/* Code / mono — fallback; not a brand typeface */
+code, pre, kbd {
+  font-family: 'SF Mono', ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.92em;
+  color: var(--fc-obsidian);
+  background: var(--fc-parchment);
+  padding: 1px 5px;
+  border-radius: var(--fc-radius-sm);
+  border: var(--fc-border);
+}
+
+/* Caption / footnote */
+.caption {
+  font-family: var(--fc-font-body);
+  font-size: var(--fc-text-eyebrow);
+  color: var(--fc-bracken);
+  line-height: 1.4;
+}
+
+/* UI label — buttons, tabs, chips */
+.ui-label {
+  font-family: var(--fc-font-body);
+  font-size: var(--fc-text-ui);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Links */
+a {
+  color: var(--fc-ember);
+  text-decoration: none;
+  transition: filter 0.2s var(--fc-ease-out-quart);
+}
+a:hover { filter: brightness(1.1); }
+
+/* Horizontal rule */
+hr {
+  border: none;
+  border-top: 0.5px solid var(--fc-slate-rim);
+  margin: 2.5rem 0;
+}
+
+/* Dark-context scope — apply by wrapping in `.fc-dark` or setting bg directly */
+.fc-dark {
+  background: var(--fc-obsidian);
+  color: var(--fc-ash);
+}
+.fc-dark h1, .fc-dark h2, .fc-dark h3, .fc-dark h4, .fc-dark h5, .fc-dark h6 {
+  color: var(--fc-birchwood);
+}
+.fc-dark p { color: var(--fc-ash); }
+.fc-dark strong { color: var(--fc-birchwood); }
+.fc-dark a { color: var(--fc-spark); }
+.fc-dark .eyebrow { color: var(--fc-smoke); }
+.fc-dark .pull-quote { color: var(--fc-spark); }
+.fc-dark hr { border-top-color: var(--fc-flint); }
