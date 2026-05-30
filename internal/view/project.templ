@@ -116,6 +116,42 @@ templ projectContent(p Project) {
 		</section>
 	}
 
+	<!-- The work -->
+	if len(p.Gallery) > 0 {
+		<section class="bg-fc-parchment py-20 sm:py-24">
+			<div class="mx-auto max-w-content px-6 lg:px-8">
+				<div class="mb-10 flex flex-wrap items-end justify-between gap-4">
+					<div>
+						@eyebrow("The work")
+						<h2 class="mt-3 max-w-xl font-display text-h3-display font-normal text-fc-obsidian">
+							A few pieces from the shop.
+						</h2>
+					</div>
+					if p.LiveURL != "" {
+						<a
+							href={ templ.SafeURL(p.LiveURL + "/gallery") }
+							target="_blank"
+							rel="noopener"
+							class="border-b-[1.5px] border-fc-ember pb-[2px] text-ui font-medium uppercase text-fc-ember transition hover:brightness-110"
+						>
+							See the full gallery &nearr;
+						</a>
+					}
+				</div>
+				<div class="gap-3 [column-count:2] md:[column-count:3]">
+					for _, img := range p.Gallery {
+						<img
+							src={ img.Src }
+							alt={ img.Alt }
+							loading="lazy"
+							class="mb-3 w-full break-inside-avoid rounded-[6px] border border-fc-slate-rim object-cover transition duration-500 hover:brightness-105"
+						/>
+					}
+				</div>
+			</div>
+		</section>
+	}
+
 	<!-- Story + Results -->
 	<section class="bg-fc-obsidian py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 lg:px-8">

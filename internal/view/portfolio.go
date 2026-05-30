@@ -14,6 +14,12 @@ type ProjectResult struct {
 	Label string
 }
 
+// ProjectImage is a single work photo shown in the project gallery.
+type ProjectImage struct {
+	Src string
+	Alt string
+}
+
 // Project holds all data for a portfolio page.
 type Project struct {
 	Slug             string
@@ -30,6 +36,7 @@ type Project struct {
 	Story            []string
 	Quote            *ProjectQuote
 	Results          []ProjectResult
+	Gallery          []ProjectImage // optional work photos; rendered as a "The work" section
 	Deliverables     []string
 	NextSlug         string
 	NextClient       string
@@ -64,6 +71,16 @@ var Projects = map[string]Project{
 			"Colton Schluter has been fabricating custom metalwork in Helena since 2012 — railings, gates, structural steel, decorative pieces, all of it one-off. Online, he had a Facebook page and not much else. He’d had a website once, but he lost it, and access to every photo of his old work went with it — years of finished projects, gone from his control.",
 			"We built him a new one from the ground up — brand, copy, and a custom site — and made sure the photos couldn’t disappear again. It runs on cloud storage Colton owns permanently, with a backend built so he can upload, organize, and manage the gallery himself. No agency in the loop, no platform holding his work hostage.",
 			"It fits the shop. Nothing Colton makes comes off a shelf, and neither does the site. “Shaped, welded & coated in Helena” — the work is custom-only, and now the thing that shows it off is too.",
+		},
+		Gallery: []ProjectImage{
+			{Src: "/static/images/portfolio/schluters-fabrication-1.webp", Alt: "Custom steel fabrication by Schluter's Metal Art"},
+			{Src: "/static/images/portfolio/schluters-fabrication-2.webp", Alt: "Custom steel fabrication by Schluter's Metal Art"},
+			{Src: "/static/images/portfolio/schluters-staircase-1.webp", Alt: "Custom metal staircase by Schluter's Metal Art"},
+			{Src: "/static/images/portfolio/schluters-staircase-2.webp", Alt: "Custom metal staircase by Schluter's Metal Art"},
+			{Src: "/static/images/portfolio/schluters-furniture-1.webp", Alt: "Custom metal furniture by Schluter's Metal Art"},
+			{Src: "/static/images/portfolio/schluters-furniture-2.webp", Alt: "Custom metal furniture by Schluter's Metal Art"},
+			{Src: "/static/images/portfolio/schluters-offroad-1.webp", Alt: "Off-road metal fabrication by Schluter's Metal Art"},
+			{Src: "/static/images/portfolio/schluters-powdercoat-1.webp", Alt: "Powder-coated metalwork by Schluter's Metal Art"},
 		},
 		Deliverables: []string{
 			"Custom-designed marketing site — no templates, no page builders",
