@@ -37,6 +37,7 @@ type Project struct {
 
 // ProjectOrder defines the display order on the work listing page.
 var ProjectOrder = []string{
+	"schluters-metal-art",
 	"rockabilly-roasting",
 	"lo-mo-outfitting",
 	"nautilus-group",
@@ -47,6 +48,34 @@ var ProjectOrder = []string{
 
 // Projects is the canonical list of portfolio entries.
 var Projects = map[string]Project{
+	"schluters-metal-art": {
+		Slug:             "schluters-metal-art",
+		Client:           "Schluter’s Metal Art",
+		Title:            "Custom-only metalwork. A site that’s custom too.",
+		Subtitle:         "Custom site, brand, and a self-serve photo gallery for a one-man fabrication shop in Helena.",
+		Location:         "Custom metal fabrication · Helena, MT",
+		Tags:             []string{"Marketing site", "Brand", "SEO"},
+		LiveURL:          "https://schlutersmetalart.com",
+		Screenshot:       "/static/images/portfolio/schluters-metal-art_screenshot.webp",
+		ScreenshotMobile: "/static/images/portfolio/schluters-metal-art_screenshot_mobile.webp",
+		NextSlug:         "rockabilly-roasting",
+		NextClient:       "Rockabilly Roasting",
+		Story: []string{
+			"Colton Schluter has been fabricating custom metalwork in Helena since 2012 — railings, gates, structural steel, decorative pieces, all of it one-off. Online, he had a Facebook page and not much else. He’d had a website once, but he lost it, and access to every photo of his old work went with it — years of finished projects, gone from his control.",
+			"We built him a new one from the ground up — brand, copy, and a custom site — and made sure the photos couldn’t disappear again. It runs on cloud storage Colton owns permanently, with a backend built so he can upload, organize, and manage the gallery himself. No agency in the loop, no platform holding his work hostage.",
+			"It fits the shop. Nothing Colton makes comes off a shelf, and neither does the site. “Shaped, welded & coated in Helena” — the work is custom-only, and now the thing that shows it off is too.",
+		},
+		Deliverables: []string{
+			"Custom-designed marketing site — no templates, no page builders",
+			"Brand identity — logo, color palette, typography",
+			"Custom photo-management backend — upload, organize, and update the gallery directly",
+			"Permanent cloud storage — every project photo owned and controlled by the shop",
+			"Filterable project gallery — railings, gates, structural, decorative",
+			"Full copywriting — every page written from scratch",
+			"SEO foundation — meta tags, schema markup, sitemap",
+			"Hosting and SSL on FlintCraft infrastructure",
+		},
+	},
 	"nautilus-group": {
 		Slug:             "nautilus-group",
 		Client:           "Nautilus Group Cleaning Services",
@@ -158,8 +187,8 @@ var Projects = map[string]Project{
 		LiveURL:          "https://traverhardwoodfloors.com",
 		Screenshot:       "/static/images/portfolio/thf_screenshot.webp",
 		ScreenshotMobile: "/static/images/portfolio/thf_screenshot_mobile.webp",
-		NextSlug:         "rockabilly-roasting",
-		NextClient:       "Rockabilly Roasting",
+		NextSlug:         "schluters-metal-art",
+		NextClient:       "Schluter’s Metal Art",
 		Story: []string{
 			"Chris Traver has been laying hardwood floors in western Montana for 18 years. His site didn\u2019t show it. The previous design was functional. But it read like a flooring store, not a craftsman. On a site where the portfolio is the only argument that matters, there were two projects in it.",
 			"The redesign started with the floors themselves \u2014 warm espresso darks, amber light, a palette pulled from aged fir and walnut endgrain. The typography got weight. The layout got wide enough to let photography breathe. Dark sections alternate with light ones so the page has pace, not just content.",
