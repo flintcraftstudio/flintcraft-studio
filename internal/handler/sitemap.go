@@ -27,6 +27,7 @@ func Sitemap(baseURL string) http.HandlerFunc {
 			{Loc: baseURL + "/", ChangeFreq: "monthly", Priority: "1.0"},
 			{Loc: baseURL + "/services", ChangeFreq: "monthly", Priority: "0.8"},
 			{Loc: baseURL + "/work", ChangeFreq: "monthly", Priority: "0.8"},
+			{Loc: baseURL + "/industries", ChangeFreq: "monthly", Priority: "0.7"},
 			{Loc: baseURL + "/process", ChangeFreq: "monthly", Priority: "0.7"},
 			{Loc: baseURL + "/about", ChangeFreq: "monthly", Priority: "0.7"},
 			{Loc: baseURL + "/contact", ChangeFreq: "yearly", Priority: "0.6"},
@@ -39,6 +40,16 @@ func Sitemap(baseURL string) http.HandlerFunc {
 				Loc:        baseURL + "/work/" + slug,
 				ChangeFreq: "monthly",
 				Priority:   "0.7",
+			})
+		}
+
+		// Industry landing pages (the keyword URLs we want ranked). Demo sites
+		// are intentionally excluded — they carry their own noindex.
+		for _, slug := range view.IndustryOrder {
+			urls = append(urls, sitemapURL{
+				Loc:        baseURL + "/" + slug,
+				ChangeFreq: "monthly",
+				Priority:   "0.8",
 			})
 		}
 

@@ -91,6 +91,47 @@ type LocalBusiness struct {
 	Review          []Review         `json:"review,omitempty"`
 }
 
+// Provider is the organization offering a Service.
+type Provider struct {
+	Type      string `json:"@type"` // "Organization" / "LocalBusiness"
+	Name      string `json:"name"`
+	URL       string `json:"url,omitempty"`
+	Telephone string `json:"telephone,omitempty"`
+}
+
+// Service is a schema.org Service node — used by the industry landing pages to
+// describe an offering (e.g. "Chiropractor Website Design") and its area served.
+type Service struct {
+	Context     string    `json:"@context"` // "https://schema.org"
+	Type        string    `json:"@type"`    // "Service"
+	ServiceType string    `json:"serviceType"`
+	Name        string    `json:"name,omitempty"`
+	Description string    `json:"description,omitempty"`
+	URL         string    `json:"url,omitempty"`
+	AreaServed  string    `json:"areaServed,omitempty"`
+	Provider    *Provider `json:"provider,omitempty"`
+}
+
+// Answer is the accepted answer to a FAQ Question.
+type Answer struct {
+	Type string `json:"@type"` // "Answer"
+	Text string `json:"text"`
+}
+
+// Question is one FAQ entry.
+type Question struct {
+	Type           string `json:"@type"` // "Question"
+	Name           string `json:"name"`
+	AcceptedAnswer Answer `json:"acceptedAnswer"`
+}
+
+// FAQPage is a schema.org FAQPage node built from a page's Q&A list.
+type FAQPage struct {
+	Context    string     `json:"@context"` // "https://schema.org"
+	Type       string     `json:"@type"`    // "FAQPage"
+	MainEntity []Question `json:"mainEntity"`
+}
+
 // Script returns a templ.Component that renders v as a
 // <script type="application/ld+json"> tag in the page head.
 //

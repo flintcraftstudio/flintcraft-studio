@@ -1,0 +1,80 @@
+package view
+
+// IndustriesHubPage lists the verticals FlintCraft builds for. Live verticals
+// link to their landing page; upcoming ones show as "coming soon" — which still
+// signals the strategy and gives future pages an internal link home.
+templ IndustriesHubPage() {
+	@Base("Industries", "Custom websites built for Montana's professional practices — chiropractors, dentists, and law firms. See live examples and start a project.", "/industries", industriesHubContent())
+}
+
+templ industriesHubContent() {
+	<!-- Hero -->
+	<section class="bg-fc-birchwood py-20 sm:py-28">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			@eyebrow("Industries")
+			<h1 class="max-w-3xl font-display text-h1-display font-normal text-fc-obsidian">
+				Built for your <em class="italic text-fc-ember">profession.</em>
+			</h1>
+			<p class="mt-6 max-w-xl text-body text-fc-trail-dust">
+				We build custom websites for Montana's established practices. Pick your field to see a live example of what we'd build — and what it would do for you.
+			</p>
+		</div>
+	</section>
+
+	<!-- Vertical cards -->
+	<section class="bg-fc-obsidian py-20 sm:py-24">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+				@industryCard("Chiropractors", "Chiropractor website design", "New-patient intake, online booking, and reviews that show up in search.", "/chiropractor-website-design", true)
+				@industryCard("Dentists", "Dentist website design", "Appointment requests, services, and a calm first impression for new patients.", "", false)
+				@industryCard("Law firms", "Law firm website design", "Practice areas, attorney bios, and consultation requests that build trust fast.", "", false)
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<section class="bg-fc-birchwood py-20 sm:py-24">
+		<div class="mx-auto max-w-content px-6 text-center lg:px-8">
+			<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
+				Don't see your field?
+			</h2>
+			<p class="mx-auto mt-4 max-w-md text-body text-fc-trail-dust">
+				We build for established practices of all kinds. If you've earned your reputation and your website doesn't reflect it, let's talk.
+			</p>
+			<div class="mt-10 flex justify-center">
+				<a
+					href="/contact"
+					class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-ui font-medium uppercase text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
+				>
+					Start a project
+				</a>
+			</div>
+		</div>
+	</section>
+}
+
+templ industryCard(name, keyword, body, href string, live bool) {
+	if live {
+		<a
+			href={ templ.SafeURL(href) }
+			data-reveal
+			class="group flex flex-col rounded-[6px] border border-fc-flint bg-fc-flint p-7 transition hover:border-fc-spark/40"
+		>
+			<div class="mb-3 flex items-center justify-between">
+				<span class="text-eyebrow font-medium uppercase text-fc-spark">{ keyword }</span>
+				<span class="text-eyebrow font-medium uppercase tracking-[0.08em] text-fc-spark">Live demo &rarr;</span>
+			</div>
+			<h3 class="mb-3 font-display text-h3-display font-normal text-fc-parchment group-hover:text-fc-spark transition-colors">{ name }</h3>
+			<p class="text-body-sm text-fc-ash">{ body }</p>
+		</a>
+	} else {
+		<div data-reveal class="flex flex-col rounded-[6px] border border-fc-flint/60 bg-fc-flint/40 p-7">
+			<div class="mb-3 flex items-center justify-between">
+				<span class="text-eyebrow font-medium uppercase text-fc-smoke">{ keyword }</span>
+				<span class="text-eyebrow font-medium uppercase tracking-[0.08em] text-fc-smoke">Coming soon</span>
+			</div>
+			<h3 class="mb-3 font-display text-h3-display font-normal text-fc-ash">{ name }</h3>
+			<p class="text-body-sm text-fc-smoke">{ body }</p>
+		</div>
+	}
+}

@@ -1,0 +1,208 @@
+package view
+
+import (
+	"strings"
+
+	"github.com/firefly-software-mt/standard-template/internal/structdata"
+)
+
+// IndustryLandingPage renders a keyword-targeted industry landing page. It uses
+// the "Industries" nav-active state but canonicalizes to its own keyword URL.
+templ IndustryLandingPage(d IndustryLanding) {
+	@BaseCanonical(d.MetaTitle, d.MetaDescription, "/industries", "/"+d.Slug, industryContent(d))
+}
+
+templ industryContent(d IndustryLanding) {
+	@structdata.Script(d.serviceLD())
+	if len(d.FAQ) > 0 {
+		@structdata.Script(d.faqLD())
+	}
+
+	<!-- Hero -->
+	<section class="bg-fc-birchwood py-20 sm:py-28">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			@eyebrow(d.Profession + " websites")
+			<h1 class="max-w-3xl font-display text-h1-display font-normal text-fc-obsidian">
+				{ d.H1 }
+			</h1>
+			<p class="mt-6 max-w-xl text-body text-fc-trail-dust">{ d.Lede }</p>
+			<div class="mt-10 flex flex-wrap items-center gap-6">
+				<a
+					href="/contact"
+					class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-ui font-medium uppercase text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
+				>
+					Start a project
+				</a>
+				<a
+					href={ templ.SafeURL(d.DemoURL) }
+					target="_blank"
+					rel="noopener"
+					class="group inline-flex items-center gap-2 border-b-[1.5px] border-fc-ember px-0 py-[10px] text-ui font-medium uppercase text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
+				>
+					See the live demo &rarr;
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Proof: the live demo -->
+	<section class="bg-fc-obsidian py-20 sm:py-24">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			<div data-reveal class="max-w-2xl">
+				@eyebrowDark("See it for yourself")
+				<h2 class="font-display text-h2-display font-normal text-fc-parchment">
+					A real { d.Profession } site, not a mockup
+				</h2>
+				<p class="mt-4 text-body text-fc-ash">{ d.DemoCaption }</p>
+			</div>
+			<a
+				href={ templ.SafeURL(d.DemoURL) }
+				target="_blank"
+				rel="noopener"
+				data-reveal
+				class="group mt-10 block overflow-hidden rounded-[8px] border border-fc-flint bg-fc-flint transition hover:border-fc-spark/40"
+			>
+				<!-- Browser chrome -->
+				<div class="flex items-center gap-2 border-b border-fc-obsidian/60 bg-fc-obsidian px-4 py-3">
+					<span class="h-3 w-3 rounded-full bg-fc-flint"></span>
+					<span class="h-3 w-3 rounded-full bg-fc-flint"></span>
+					<span class="h-3 w-3 rounded-full bg-fc-flint"></span>
+					<span class="ml-3 truncate rounded-[4px] bg-fc-flint px-3 py-1 text-eyebrow tracking-normal text-fc-ash">
+						{ d.DemoLabel }
+					</span>
+				</div>
+				<img
+					src={ d.PreviewImage }
+					alt={ d.PreviewAlt }
+					width="1120"
+					height="640"
+					loading="lazy"
+					class="aspect-[1120/640] w-full object-cover object-top transition duration-500 group-hover:scale-[1.01]"
+				/>
+			</a>
+			<div class="mt-8 flex justify-center">
+				<a
+					href={ templ.SafeURL(d.DemoURL) }
+					target="_blank"
+					rel="noopener"
+					class="fc-cta-chipped inline-flex items-center gap-2 bg-fc-spark px-8 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-obsidian transition hover:-translate-y-px hover:brightness-110 active:translate-y-0 active:scale-[0.97]"
+				>
+					Open the live demo &rarr;
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Intro + what your site gets -->
+	<section class="bg-fc-birchwood py-20 sm:py-24">
+		<div class="mx-auto max-w-content px-6 lg:px-8">
+			<div data-reveal class="max-w-2xl">
+				@eyebrow("Why it works")
+				<div class="space-y-4 text-body text-fc-trail-dust">
+					for _, p := range d.Intro {
+						<p>{ p }</p>
+					}
+				</div>
+			</div>
+			<div data-reveal class="mt-12 grid gap-8 sm:grid-cols-2">
+				for _, kp := range d.KeyPoints {
+					<div class="rounded-[6px] border border-fc-slate-rim bg-fc-parchment p-7">
+						<h3 class="mb-3 font-display text-h4-display font-normal text-fc-obsidian">{ kp.Title }</h3>
+						<p class="text-body-sm text-fc-trail-dust">{ kp.Body }</p>
+					</div>
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- WordPress comparison (shared pattern) -->
+	<section class="bg-fc-parchment py-20 sm:py-24">
+		<div data-reveal class="mx-auto max-w-content px-6 lg:px-8">
+			@eyebrow("Why not WordPress")
+			<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
+				A custom site, not a rented template
+			</h2>
+			<p class="mb-10 mt-6 max-w-2xl text-body text-fc-trail-dust">
+				The typical { d.Profession } site stacks managed hosting, a maintenance plan, a security plugin, a booking add-on, and a developer who's hard to reach. It still breaks, still looks like a template, and still goes to voicemail.
+			</p>
+			<div class="overflow-x-auto">
+				<table class="w-full text-left text-body-sm">
+					<thead>
+						<tr class="border-b border-fc-slate-rim">
+							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-bracken"></th>
+							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-bracken">WordPress / Wix / Squarespace</th>
+							<th class="pb-3 text-eyebrow font-medium uppercase text-fc-ember">FlintCraft</th>
+						</tr>
+					</thead>
+					<tbody class="text-fc-trail-dust">
+						@compRow("Built for your practice", "No", "Yes")
+						@compRow("Plugin dependencies", "Many", "None")
+						@compRow("Online reviews in search", "Plugin you rent", "Your own structured data")
+						@compRow("Speed", "Sluggish, plugin-bloated", "Sub-second, near-perfect Lighthouse")
+						@compRow("When it breaks", "Support ticket", "Phone call")
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+	<!-- Local SEO line -->
+	<section class="bg-fc-obsidian py-16">
+		<div data-reveal class="mx-auto max-w-content px-6 text-center lg:px-8">
+			<p class="mx-auto max-w-2xl text-body text-fc-ash">
+				Serving { d.Profession } practices across Montana — { strings.Join(d.Cities, ", ") }, and everywhere in between.
+			</p>
+		</div>
+	</section>
+
+	<!-- FAQ -->
+	if len(d.FAQ) > 0 {
+		<section class="bg-fc-birchwood py-20 sm:py-24">
+			<div class="mx-auto max-w-content px-6 lg:px-8">
+				<div data-reveal class="max-w-2xl">
+					@eyebrow("Questions")
+					<h2 class="mb-10 font-display text-h2-display font-normal text-fc-obsidian">
+						Common questions
+					</h2>
+				</div>
+				<div class="mx-auto max-w-3xl divide-y divide-fc-slate-rim border-y border-fc-slate-rim">
+					for _, f := range d.FAQ {
+						<details class="group py-5">
+							<summary class="flex cursor-pointer items-center justify-between gap-4 font-display text-h4-display font-normal text-fc-obsidian marker:content-['']">
+								{ f.Q }
+								<span class="text-fc-ember transition group-open:rotate-45">+</span>
+							</summary>
+							<p class="mt-3 text-body-sm text-fc-trail-dust">{ f.A }</p>
+						</details>
+					}
+				</div>
+			</div>
+		</section>
+	}
+
+	<!-- CTA -->
+	<section class="bg-fc-obsidian py-20 sm:py-24">
+		<div data-reveal class="mx-auto max-w-content px-6 text-center lg:px-8">
+			<h2 class="font-display text-h2-display font-normal text-fc-parchment">
+				Ready for a { d.Profession } site that pulls its weight?
+			</h2>
+			<p class="mx-auto mt-4 max-w-lg text-body text-fc-ash">
+				The first conversation costs nothing. We'll look at your current site before we talk and come with a clear picture of what we'd do differently. No pitch, no pressure.
+			</p>
+			<div class="mt-10 flex flex-wrap items-center justify-center gap-7">
+				<a
+					href="/contact"
+					class="fc-cta-chipped inline-flex items-center gap-2 bg-fc-spark px-8 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-obsidian transition hover:-translate-y-px hover:brightness-110 active:translate-y-0 active:scale-[0.97]"
+				>
+					Start a project &rarr;
+				</a>
+				<a
+					href={ templ.SafeURL("tel:" + Phone) }
+					class="inline-flex items-center gap-2 border-b-[1.5px] border-fc-spark px-0 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-spark transition hover:brightness-110 active:scale-[0.98]"
+				>
+					{ Phone }
+				</a>
+			</div>
+		</div>
+	</section>
+}

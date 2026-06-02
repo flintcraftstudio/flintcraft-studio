@@ -31,6 +31,8 @@ templ Page(c Content, st pageState) {
 		<head>
 			<meta charset="utf-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<!-- Demo: keep the fictional site out of search so the /chiropractor-website-design landing page is the canonical ranking target. -->
+			<meta name="robots" content="noindex, follow"/>
 			<title>{ c.Business.LegalName } · Helena, MT</title>
 			<meta name="description" content={ c.HeroSub + " Now accepting new patients in Helena, Montana." }/>
 			<link rel="icon" href="/static/favicon/favicon.svg" type="image/svg+xml"/>
@@ -51,6 +53,7 @@ templ Page(c Content, st pageState) {
 		</head>
 		<body>
 			@ui.SkipLink("top", "Skip to content")
+			@ui.DemoBar("/contact")
 			@Announce(c)
 			@Nav(c)
 			<main id="top">

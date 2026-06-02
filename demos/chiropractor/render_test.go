@@ -54,6 +54,9 @@ func TestPageRenders(t *testing.T) {
 		`loading="eager"`,                         // hero is eager (LCP)
 		`rel="preload" as="image"`,                // hero preloaded for LCP
 		`fetchpriority="high"`,                    // hero prioritized
+		`name="robots" content="noindex`,          // demo kept out of search
+		`class="demo-bar"`,                        // FlintCraft framing bar
+		`href="/contact"`,                         // bar links back to marketing
 	}
 	for _, s := range must {
 		if !strings.Contains(html, s) {

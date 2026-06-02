@@ -19,6 +19,9 @@ var (
 	PixelID          string
 	GtagID           string
 	TurnstileSiteKey string
+	// BaseURL is the site's public origin (e.g. "https://flintcraftstudio.com"),
+	// set once at startup. Used to build absolute canonical / Open Graph URLs.
+	BaseURL string
 )
 
 // Year returns the current year for copyright notices.

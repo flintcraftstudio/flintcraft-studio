@@ -1,6 +1,15 @@
 package view
 
+// Base renders a page. activePath drives nav highlighting and, for most pages,
+// also the canonical URL.
 templ Base(title, description, activePath string, body templ.Component) {
+	@BaseCanonical(title, description, activePath, activePath, body)
+}
+
+// BaseCanonical is Base with an explicit canonical path, for pages whose URL
+// differs from their nav-active path (e.g. an industry landing page highlights
+// the "Industries" nav item but canonicalizes to its own keyword URL).
+templ BaseCanonical(title, description, activePath, canonicalPath string, body templ.Component) {
 	<!DOCTYPE html>
 	<html lang="en" class="bg-fc-birchwood text-fc-obsidian">
 		<head>
@@ -8,6 +17,19 @@ templ Base(title, description, activePath string, body templ.Component) {
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<meta name="description" content={ description }/>
 			<title>{ title } | { SiteName }</title>
+			if BaseURL != "" {
+				<link rel="canonical" href={ BaseURL + canonicalPath }/>
+				<meta property="og:type" content="website"/>
+				<meta property="og:site_name" content={ SiteName }/>
+				<meta property="og:title" content={ title }/>
+				<meta property="og:description" content={ description }/>
+				<meta property="og:url" content={ BaseURL + canonicalPath }/>
+				<meta property="og:image" content={ BaseURL + "/static/images/logo_wordmark.png" }/>
+				<meta name="twitter:card" content="summary_large_image"/>
+				<meta name="twitter:title" content={ title }/>
+				<meta name="twitter:description" content={ description }/>
+				<meta name="twitter:image" content={ BaseURL + "/static/images/logo_wordmark.png" }/>
+			}
 			<!-- Favicons -->
 			<link rel="icon" href="/static/favicon/favicon.ico" sizes="32x32"/>
 			<link rel="icon" href="/static/favicon/favicon.svg" type="image/svg+xml"/>

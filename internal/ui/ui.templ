@@ -19,6 +19,22 @@ templ IconPhone() {
 	</svg>
 }
 
+// DemoBar is the thin strip rendered at the very top of every demo site,
+// identifying it as a FlintCraft example and funnelling cold/direct visitors
+// back to the marketing site. contactURL is the FlintCraft contact path
+// (e.g. "/contact"). It's dismissible with JS but stays visible without it
+// (no x-cloak), so the framing survives a JS-off load. Styling lives in each
+// demo's stylesheet (.demo-bar).
+templ DemoBar(contactURL string) {
+	<div class="demo-bar" x-data="{ show: true }" x-show="show">
+		<div class="demo-bar__inner">
+			<span class="demo-bar__txt">An <strong>example site</strong> by FlintCraft Studio — not a real practice.</span>
+			<a class="demo-bar__cta" href={ templ.SafeURL(contactURL) }>Get one like this&nbsp;&rarr;</a>
+			<button class="demo-bar__x" type="button" x-on:click="show = false" aria-label="Dismiss this notice">&times;</button>
+		</div>
+	</div>
+}
+
 // IconArrowhead is the alpine-arrowhead mark used as the brand glyph and in the
 // hero eyebrow / map pin. Doubles as the spine/mountain motif.
 templ IconArrowhead() {

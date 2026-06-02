@@ -29,6 +29,9 @@ func main() {
 		os.Exit(1)
 	}
 
+	// Public origin for canonical / Open Graph URLs
+	view.BaseURL = cfg.BaseURL
+
 	// Tracking pixels
 	view.GtagID = cfg.GtagID
 	view.PixelID = cfg.PixelID
@@ -71,11 +74,20 @@ func main() {
 	mux.Handle("GET /privacy", handler.Privacy())
 	mux.Handle("GET /terms", handler.Terms())
 
+	// Industry SEO landing pages (keyword URLs) + hub
+	mux.Handle("GET /industries", handler.Industries())
+	for _, slug := range view.IndustryOrder {
+		if d, ok := view.IndustryLandings[slug]; ok {
+			mux.Handle("GET /"+d.Slug, handler.IndustryLanding(d))
+		}
+	}
+
 	// Demo / example sites (first of a series; see demos/).
 	chiropractor.Register(mux, "/demos/chiropractor", cfg.BaseURL)
 
-	// Sitemap & health
+	// Sitemap, robots & health
 	mux.Handle("GET /sitemap.xml", handler.Sitemap(cfg.BaseURL))
+	mux.Handle("GET /robots.txt", handler.Robots(cfg.BaseURL))
 	mux.Handle("GET /healthz", handler.Health())
 
 	// 404 catch-all
