@@ -29,7 +29,7 @@ templ industryContent(d IndustryLanding) {
 			<p class="mt-6 max-w-xl text-body text-fc-trail-dust">{ d.Lede }</p>
 			<div class="mt-10 flex flex-wrap items-center gap-6">
 				<a
-					href="/contact"
+					href={ d.ContactHref() }
 					class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-ui font-medium uppercase text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
 				>
 					Start a project
@@ -198,7 +198,7 @@ templ industryContent(d IndustryLanding) {
 			</p>
 			<div class="mt-10 flex flex-wrap items-center justify-center gap-7">
 				<a
-					href="/contact"
+					href={ d.ContactHref() }
 					class="fc-cta-chipped inline-flex items-center gap-2 bg-fc-spark px-8 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-obsidian transition hover:-translate-y-px hover:brightness-110 active:translate-y-0 active:scale-[0.97]"
 				>
 					Start a project &rarr;

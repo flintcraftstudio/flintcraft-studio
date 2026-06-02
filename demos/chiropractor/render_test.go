@@ -56,7 +56,7 @@ func TestPageRenders(t *testing.T) {
 		`fetchpriority="high"`,                    // hero prioritized
 		`name="robots" content="noindex`,          // demo kept out of search
 		`class="demo-bar"`,                        // FlintCraft framing bar
-		`href="/contact"`,                         // bar links back to marketing
+		`href="/contact?ref=chiropractor-demo"`,   // bar links back to marketing with referral tag
 		`class="spec-row"`,                        // specialties are whole-row links now
 		`class="link-arrow doc-card__toggle"`,     // doctor bio is an accessible disclosure
 		"founded Alpine Spine in 2014",            // expanded doctor bio present

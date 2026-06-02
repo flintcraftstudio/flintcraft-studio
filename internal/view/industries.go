@@ -1,6 +1,10 @@
 package view
 
-import "github.com/firefly-software-mt/standard-template/internal/structdata"
+import (
+	"github.com/a-h/templ"
+
+	"github.com/firefly-software-mt/standard-template/internal/structdata"
+)
 
 // IndustryLanding is the content for one keyword-targeted industry landing page
 // (e.g. "Chiropractor Website Design in Montana"). These pages are the SEO entry
@@ -23,6 +27,16 @@ type IndustryLanding struct {
 	DemoCaption     string // one line under the preview
 	PreviewImage    string // framed preview visual
 	PreviewAlt      string
+	ContactRef      string // referral tag appended to /contact links, e.g. "chiropractor-landing"
+}
+
+// ContactHref is the booking/contact link for this landing page, tagged with
+// the referral source so leads are attributed to the vertical.
+func (d IndustryLanding) ContactHref() templ.SafeURL {
+	if d.ContactRef == "" {
+		return templ.SafeURL("/contact")
+	}
+	return templ.SafeURL("/contact?ref=" + d.ContactRef)
 }
 
 // IndustryPoint is one "what your site gets" item.
@@ -109,5 +123,6 @@ var IndustryLandings = map[string]IndustryLanding{
 		DemoCaption:  "A complete sample site we built for a (fictional) Helena chiropractor. Click through the whole thing — the booking form works.",
 		PreviewImage: "/demos/chiropractor/static/img/hero-1120.webp",
 		PreviewAlt:   "Preview of the Alpine Spine chiropractor demo website",
+		ContactRef:   "chiropractor-landing",
 	},
 }

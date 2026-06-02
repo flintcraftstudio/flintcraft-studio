@@ -53,7 +53,7 @@ templ Page(c Content, st pageState) {
 		</head>
 		<body>
 			@ui.SkipLink("top", "Skip to content")
-			@ui.DemoBar("/contact")
+			@ui.DemoBar("/contact?ref=chiropractor-demo")
 			@Announce(c)
 			@Nav(c)
 			<main id="top">
@@ -85,7 +85,7 @@ templ celebrateToast() {
 			<strong>That's how easy booking feels on a FlintCraft site.</strong>
 			<span>Want one like this for your practice? Let's talk about your new site.</span>
 		</div>
-		<a class="fc-toast__cta" href="/contact">Talk to FlintCraft &rarr;</a>
+		<a class="fc-toast__cta" href="/contact?ref=chiropractor-demo">Talk to FlintCraft &rarr;</a>
 		<button class="fc-toast__x" type="button" aria-label="Dismiss" data-fc-toast-close>&times;</button>
 	</div>
 }

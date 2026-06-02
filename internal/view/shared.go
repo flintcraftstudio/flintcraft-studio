@@ -28,3 +28,22 @@ var (
 func Year() int {
 	return time.Now().Year()
 }
+
+// ReferralLabel turns a sanitized ?ref= tag into a friendly phrase for the
+// contact form ("You're coming from …"). Returns "" for no/unknown referral so
+// the banner stays hidden — but the raw tag is still carried in the hidden
+// field and the email either way. Add a case per vertical/surface as demos ship.
+func ReferralLabel(ref string) string {
+	switch ref {
+	case "":
+		return ""
+	case "chiropractor-demo":
+		return "the Alpine Spine chiropractor demo"
+	case "chiropractor-landing":
+		return "our chiropractor website page"
+	case "industries-hub":
+		return "our industries page"
+	default:
+		return "one of our industry examples"
+	}
+}

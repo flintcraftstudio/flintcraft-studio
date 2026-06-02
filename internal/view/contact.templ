@@ -42,6 +42,17 @@ templ ContactForm(errors map[string]string, values map[string]string, success bo
 				</p>
 			</div>
 		} else {
+			<!-- Referral source: carried through to the email so we know a lead came via an industry demo -->
+			if values["ref"] != "" {
+				<input type="hidden" name="ref" value={ values["ref"] }/>
+			}
+			if ReferralLabel(values["ref"]) != "" {
+				<div class="rounded-[6px] border-l-[2.5px] border-fc-ember bg-fc-parchment px-5 py-3">
+					<p class="text-body-sm text-fc-trail-dust">
+						You're coming from { ReferralLabel(values["ref"]) }. Tell us about your practice and we'll show you what we'd build.
+					</p>
+				</div>
+			}
 			if errors["form"] != "" {
 				<div class="rounded-[3px] border border-red-300 bg-red-50 p-4">
 					<p class="text-body-sm text-red-700">{ errors["form"] }</p>

@@ -6,16 +6,38 @@ import (
 	"log/slog"
 	"net/http"
 	"net/url"
+	"regexp"
 	"strings"
 
 	"github.com/firefly-software-mt/standard-template/internal/mail"
 	"github.com/firefly-software-mt/standard-template/internal/view"
 )
 
-// Contact handles GET /contact and renders the contact form.
+// refSanitize strips a referral tag down to a safe slug so an arbitrary ?ref=
+// query value can't inject anything into the page or the outgoing email.
+var refSanitize = regexp.MustCompile(`[^a-z0-9-]`)
+
+// sanitizeRef normalizes a referral source to lowercase [a-z0-9-], capped at 40
+// chars. Empty if nothing usable. Demo/landing CTAs pass values like
+// "chiropractor-demo" or "chiropractor-landing".
+func sanitizeRef(s string) string {
+	s = refSanitize.ReplaceAllString(strings.ToLower(strings.TrimSpace(s)), "")
+	if len(s) > 40 {
+		s = s[:40]
+	}
+	return s
+}
+
+// Contact handles GET /contact and renders the contact form. A ?ref= query
+// (set by industry demo/landing CTAs) is captured so we know the lead came in
+// through a demo — it rides through the form in a hidden field.
 func Contact() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		if err := view.ContactPage(nil, nil, false).Render(r.Context(), w); err != nil {
+		var values map[string]string
+		if ref := sanitizeRef(r.URL.Query().Get("ref")); ref != "" {
+			values = map[string]string{"ref": ref}
+		}
+		if err := view.ContactPage(nil, values, false).Render(r.Context(), w); err != nil {
 			slog.Error("render error", "err", err)
 		}
 	}
@@ -36,6 +58,7 @@ func ContactSubmit(mailer *mail.Client, turnstileSecret string) http.HandlerFunc
 			"phone":    strings.TrimSpace(r.FormValue("phone")),
 			"website":  strings.TrimSpace(r.FormValue("website")),
 			"message":  strings.TrimSpace(r.FormValue("message")),
+			"ref":      sanitizeRef(r.FormValue("ref")),
 		}
 
 		errors := validate(values)
@@ -59,6 +82,10 @@ func ContactSubmit(mailer *mail.Client, turnstileSecret string) http.HandlerFunc
 			}
 		}
 
+		// Log every submission (incl. referral source) so demo-driven leads are
+		// recorded even when no mailer is configured.
+		slog.Info("contact submission", "name", values["name"], "email", values["email"], "ref", values["ref"])
+
 		if mailer != nil {
 			body := values["message"]
 			if values["business"] != "" {
@@ -70,10 +97,15 @@ func ContactSubmit(mailer *mail.Client, turnstileSecret string) http.HandlerFunc
 			if values["website"] != "" {
 				body = fmt.Sprintf("%s\nWebsite: %s", body, values["website"])
 			}
+			subject := fmt.Sprintf("Contact form: %s", values["name"])
+			if values["ref"] != "" {
+				body = fmt.Sprintf("⟶ Referred via: %s\n\n%s", values["ref"], body)
+				subject = fmt.Sprintf("Contact form: %s [via %s]", values["name"], values["ref"])
+			}
 			msg := mail.Message{
 				Name:    values["name"],
 				Email:   values["email"],
-				Subject: fmt.Sprintf("Contact form: %s", values["name"]),
+				Subject: subject,
 				Body:    body,
 			}
 			if err := mailer.Send(msg); err != nil {
