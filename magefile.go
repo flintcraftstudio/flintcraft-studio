@@ -40,6 +40,21 @@ func BuildCSS() error {
 	)
 }
 
+// BuildChiroCSS compiles the Alpine Spine chiropractor demo's stylesheet.
+// Each demo vertical carries its own palette/type via a per-demo Tailwind
+// config + input, compiled through the same standalone CLI as the marketing
+// site. To add a vertical, copy this target and the tailwind/demos/<name>.*
+// files, then swap the palette tokens.
+func BuildChiroCSS() error {
+	return sh.Run(
+		tailwindBinaryPath(),
+		"-c", "./tailwind/demos/chiropractor.config.js",
+		"-i", "./tailwind/demos/chiropractor.css",
+		"-o", "./demos/chiropractor/static/css/site.css",
+		"--minify",
+	)
+}
+
 // GenerateTempl runs templ generate
 func GenerateTempl() error {
 	return sh.Run("templ", "generate")
@@ -58,6 +73,9 @@ func Build() error {
 	if err := BuildCSS(); err != nil {
 		return err
 	}
+	if err := BuildChiroCSS(); err != nil {
+		return err
+	}
 	return BuildGo()
 }
 
@@ -67,6 +85,9 @@ func Dev() error {
 		return err
 	}
 	if err := BuildCSS(); err != nil {
+		return err
+	}
+	if err := BuildChiroCSS(); err != nil {
 		return err
 	}
 	return sh.RunV("go", "run", "./cmd/server")

@@ -1,0 +1,28 @@
+// Package ui holds small, brand-agnostic layout/a11y primitives and the few
+// icons reused across demo verticals. Anything vertical-specific (the bulk of
+// the inline SVGs) stays in that vertical's own templates.
+package ui
+
+// SkipLink renders a keyboard skip-to-content link. It is visually hidden
+// until focused (see the .skip-link rule in each demo's stylesheet). Place it
+// as the first focusable element in <body>.
+templ SkipLink(targetID, label string) {
+	<a class="skip-link" href={ templ.SafeURL("#" + targetID) }>{ label }</a>
+}
+
+// IconPhone is the feather-style phone glyph reused in the announcement bar,
+// nav, hero, intake, and location blocks. currentColor lets each context tint
+// it via CSS.
+templ IconPhone() {
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+		<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path>
+	</svg>
+}
+
+// IconArrowhead is the alpine-arrowhead mark used as the brand glyph and in the
+// hero eyebrow / map pin. Doubles as the spine/mountain motif.
+templ IconArrowhead() {
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+		<path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
+	</svg>
+}

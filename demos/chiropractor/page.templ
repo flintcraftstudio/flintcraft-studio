@@ -1,0 +1,187 @@
+package chiropractor
+
+import (
+	"github.com/firefly-software-mt/standard-template/internal/structdata"
+	"github.com/firefly-software-mt/standard-template/internal/theme"
+	"github.com/firefly-software-mt/standard-template/internal/ui"
+)
+
+// pageState carries per-request rendering context (route prefix, public origin,
+// theme, and any intake form state for the no-JS fallback) through the page.
+type pageState struct {
+	prefix  string
+	baseURL string
+	theme   theme.Theme
+	intake  *intakeState
+}
+
+// intakeState reflects a submitted intake form for the full-page (no-JS) path.
+type intakeState struct {
+	sub     submission
+	errs    intakeErrors
+	success bool
+}
+
+// Page is the demo's full single-scroll homepage. It owns its own <head>
+// (Newsreader/DM Sans, JSON-LD, demo stylesheet) rather than reusing the
+// marketing layout, because this is a distinct brand.
+templ Page(c Content, st pageState) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<title>{ c.Business.LegalName } · Helena, MT</title>
+			<meta name="description" content={ c.HeroSub + " Now accepting new patients in Helena, Montana." }/>
+			<link rel="icon" href="/static/favicon/favicon.svg" type="image/svg+xml"/>
+			@theme.Head(st.theme)
+			if c.HeroImage != "" {
+				<link
+					rel="preload"
+					as="image"
+					href={ st.prefix + "/static/img/" + c.HeroImage + "-1120.webp" }
+					imagesrcset={ st.prefix + "/static/img/" + c.HeroImage + "-600.webp 600w, " + st.prefix + "/static/img/" + c.HeroImage + "-1120.webp 1120w" }
+					imagesizes={ heroSizes }
+					fetchpriority="high"
+				/>
+			}
+			@structdata.Script(c.jsonLD(st.baseURL))
+			<script src="/static/js/htmx.min.js" defer></script>
+			<script src="/static/js/alpine.min.js" defer></script>
+		</head>
+		<body>
+			@ui.SkipLink("top", "Skip to content")
+			@Announce(c)
+			@Nav(c)
+			<main id="top">
+				@Hero(c, st.prefix)
+				@TrustBand(c)
+				@Reassure(c, st.prefix)
+				@Expect(c)
+				@Specialties(c)
+				@Team(c, st.prefix)
+				@Treatments(c)
+				@Reviews(c)
+				<div class="ph-band grain" style="height:220px" aria-hidden="true"></div>
+				@Book(c, st)
+				@Location(c)
+			</main>
+			@Footer(c)
+		</body>
+	</html>
+}
+
+// Announce is the thin top strip.
+templ Announce(c Content) {
+	<div class="announce">
+		<div class="announce__inner">
+			<span><span class="dot" aria-hidden="true">●</span>&nbsp; Now accepting new patients</span>
+			<span class="sep" aria-hidden="true">·</span>
+			<span>Most insurance accepted</span>
+			<span class="sep" aria-hidden="true">·</span>
+			<a href={ telURL(c) }>@ui.IconPhone()<span>{ c.Business.PhoneLabel }</span></a>
+		</div>
+	</div>
+}
+
+// Nav is the sticky primary nav. Alpine handles the mobile drawer and the
+// scroll shadow — the only client-side state on the page besides htmx.
+templ Nav(c Content) {
+	<header
+		class="nav"
+		x-data="{ open: false, scrolled: false }"
+		x-bind:class="{ 'is-scrolled': scrolled }"
+		x-on:scroll.window="scrolled = window.scrollY > 8"
+	>
+		<div class="container nav__inner">
+			<a class="nav__brand" href="#top" style="color:var(--primary)">
+				<span style="width:34px;height:34px;display:grid;place-items:center">@ui.IconArrowhead()</span>
+				<span class="wm">{ c.Business.Name }</span>
+			</a>
+			<nav class="nav__links" aria-label="Primary">
+				<a href="#treatments">Treatments</a>
+				<a href="#team">Our Team</a>
+				<a href="#reviews">Reviews</a>
+				<a href="#new-patients">New Patients</a>
+				<a href="#contact">Contact</a>
+			</nav>
+			<div class="nav__right">
+				<a class="nav__phone" href={ telURL(c) }>@ui.IconPhone()<span>{ c.Business.PhoneLabel }</span></a>
+				<a class="btn btn--primary" href="#book">Book Appointment</a>
+				<button
+					class="nav__menu-btn"
+					type="button"
+					aria-label="Open menu"
+					x-bind:aria-expanded="open ? 'true' : 'false'"
+					x-on:click="open = !open"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+				</button>
+			</div>
+		</div>
+		<div class="nav__mobile" x-bind:class="{ 'open': open }" x-on:click="open = false">
+			<div class="container">
+				<a href="#treatments">Treatments</a>
+				<a href="#team">Our Team</a>
+				<a href="#reviews">Reviews</a>
+				<a href="#new-patients">New Patients</a>
+				<a href="#contact">Contact</a>
+				<a class="nav__phone" href={ telURL(c) } style="border-bottom:none">@ui.IconPhone()<span>{ c.Business.PhoneLabel }</span></a>
+				<div class="mob-cta">
+					<a class="btn btn--primary" href="#book">Book Appointment</a>
+				</div>
+			</div>
+		</div>
+	</header>
+}
+
+// Footer is the dark, comprehensive footer.
+templ Footer(c Content) {
+	<footer class="footer">
+		<div class="container">
+			<div class="footer__top">
+				<div class="footer__brand">
+					<a class="nav__brand" href="#top" style="color:var(--teal-300);margin-bottom:16px">
+						<span style="width:40px;height:40px;display:grid;place-items:center">@ui.IconArrowhead()</span>
+						<span class="wm" style="color:var(--ink-on-dark);font-size:24px">{ c.Business.Name }</span>
+					</a>
+					<p>Helena's home for feeling better.</p>
+					<p class="blurb">Gentle, individualized chiropractic care in the heart of the Helena valley.</p>
+				</div>
+				<div>
+					<h4>Care</h4>
+					<ul>
+						<li><a href="#specialties">Sports &amp; Performance</a></li>
+						<li><a href="#specialties">Family &amp; Pediatric</a></li>
+						<li><a href="#specialties">Auto &amp; Work Injury</a></li>
+						<li><a href="#treatments">All Treatments</a></li>
+					</ul>
+				</div>
+				<div>
+					<h4>Practice</h4>
+					<ul>
+						<li><a href="#team">Our Team</a></li>
+						<li><a href="#new-patients">New Patients</a></li>
+						<li><a href="#reviews">Reviews</a></li>
+						<li><a href="#book">Book Online</a></li>
+					</ul>
+				</div>
+				<div>
+					<h4>Visit</h4>
+					<p class="footer__addr">
+						<b>{ c.Business.Name }</b><br/>
+						{ c.Business.Street }<br/>
+						{ c.Business.Locality }, { c.Business.Region } { c.Business.PostalCode }<br/><br/>
+						<a href={ telURL(c) }>{ c.Business.PhoneLabel }</a><br/>
+						{ c.HoursSummary }
+					</p>
+				</div>
+			</div>
+			<div class="footer__hr"></div>
+			<div class="footer__legal">
+				<span>© 2026 { c.Business.LegalName }. All rights reserved.</span>
+				<span>Privacy · Terms · Accessibility · Patient Rights</span>
+			</div>
+		</div>
+	</footer>
+}

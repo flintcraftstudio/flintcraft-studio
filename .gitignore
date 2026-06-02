@@ -32,6 +32,10 @@ go.work.sum
 bin/
 /server
 web/static/css/site.css
+demos/*/static/css/site.css
+
+# Demo intake submissions (local-only, no real email sent)
+demos/*/intake-submissions.log
 
 # Generated templ output
 *_templ.go

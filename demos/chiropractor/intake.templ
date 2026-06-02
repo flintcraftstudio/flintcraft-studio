@@ -1,0 +1,134 @@
+package chiropractor
+
+import "github.com/firefly-software-mt/standard-template/internal/ui"
+
+// Book is the intake-form showcase section. It renders the success partial,
+// the form-with-errors, or a fresh form depending on the page state — the same
+// three states the shared intake handler swaps in via htmx.
+templ Book(c Content, st pageState) {
+	<section class="section book" id="book">
+		<div class="container book__grid">
+			<div class="book__copy">
+				<span class="eyebrow">Request an appointment</span>
+				<h2>Request an appointment — we'll do the rest.</h2>
+				<p>Tell us where you're at and we'll take it from there. It takes about two minutes, and there's no commitment.</p>
+				<div class="book__phone">
+					<span class="ic" aria-hidden="true">@ui.IconPhone()</span>
+					<span>
+						<span class="lbl" style="display:block">Prefer to talk?</span>
+						<a href={ telURL(c) }>{ c.Business.PhoneLabel }</a>
+					</span>
+				</div>
+				<div class="book__assure">
+					<span class="badge badge--success">Most insurance accepted</span>
+					<span class="badge badge--sage">Open Saturdays</span>
+					<span class="badge badge--neutral">Walk-ins welcome</span>
+				</div>
+			</div>
+			if st.intake != nil && st.intake.success {
+				@IntakeSuccess(st.intake.sub.FirstName())
+			} else if st.intake != nil {
+				@IntakeCard(c, st.prefix, st.intake.sub, st.intake.errs)
+			} else {
+				@IntakeCard(c, st.prefix, submission{}, nil)
+			}
+		</div>
+	</section>
+}
+
+// IntakeCard is the swap target. htmx replaces this whole element (outerHTML)
+// with either a re-rendered card (errors) or the success partial.
+templ IntakeCard(c Content, prefix string, sub submission, errs intakeErrors) {
+	<div class="card intake" id="intakeCard">
+		<form
+			id="intakeForm"
+			method="post"
+			action={ templ.SafeURL(prefix + "/intake") }
+			hx-post={ prefix + "/intake" }
+			hx-target="#intakeCard"
+			hx-swap="outerHTML"
+			novalidate
+		>
+			<h3>Tell us where you're at</h3>
+			<p class="intake__sub">No surprises. We'll call to confirm — your chart will be ready when you arrive.</p>
+			if _, ok := errs["form"]; ok {
+				<div class="intake__alert" role="alert">{ errs["form"] }</div>
+			}
+			<!-- Honeypot: hidden from humans; bots that fill it are silently dropped. -->
+			<div class="hp-field" aria-hidden="true">
+				<label>Company<input type="text" name="company" tabindex="-1" autocomplete="off"/></label>
+			</div>
+			<div class="intake__row">
+				<div class={ fieldClass(errs, "name") } id="f-name">
+					<label class="field__label" for="i-name">Name <span class="req">*</span></label>
+					<input class="field__input" id="i-name" name="name" value={ sub.Name } placeholder="Jordan Hill" autocomplete="name" required/>
+					<span class="field__help">{ fieldHelp(errs, "name", "So we can prep your chart.") }</span>
+				</div>
+				<div class={ fieldClass(errs, "phone") } id="f-phone">
+					<label class="field__label" for="i-phone">Phone <span class="req">*</span></label>
+					<input class="field__input" id="i-phone" name="phone" type="tel" value={ sub.Phone } placeholder="(406) 555-0142" autocomplete="tel" required/>
+					<span class="field__help">{ fieldHelp(errs, "phone", "We'll call to confirm.") }</span>
+				</div>
+			</div>
+			<div class="intake__row intake__row--1">
+				<div class={ fieldClass(errs, "email") } id="f-email">
+					<label class="field__label" for="i-email">Email <span class="req">*</span></label>
+					<input class="field__input" id="i-email" name="email" type="email" value={ sub.Email } placeholder="you@email.com" autocomplete="email" required/>
+					<span class="field__help">{ fieldHelp(errs, "email", "Where we'll send your confirmation.") }</span>
+				</div>
+			</div>
+			<div class="intake__row">
+				<div class={ fieldClass(errs, "reason") } id="f-reason">
+					<label class="field__label" for="i-reason">Reason for visit <span class="req">*</span></label>
+					<select class="field__input" id="i-reason" name="reason" required>
+						<option value="" selected?={ sub.Reason == "" }>Choose one…</option>
+						for _, opt := range c.Reasons {
+							<option value={ string(opt) } selected?={ sub.Reason == string(opt) }>{ string(opt) }</option>
+						}
+					</select>
+					<span class="field__help">{ fieldHelp(errs, "reason", "A starting point — we'll dig in together.") }</span>
+				</div>
+				<div class="field">
+					<span class="field__label">I'm a…</span>
+					<div class="radio-row" role="radiogroup" aria-label="Patient type">
+						<label class="radio-opt">
+							<input type="radio" name="ptype" value="new" checked?={ sub.PatientType != "existing" }/>
+							<span class="dot" aria-hidden="true"></span>New patient
+						</label>
+						<label class="radio-opt">
+							<input type="radio" name="ptype" value="existing" checked?={ sub.PatientType == "existing" }/>
+							<span class="dot" aria-hidden="true"></span>Existing patient
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="intake__row intake__row--1">
+				<div class="field">
+					<label class="field__label" for="i-msg">Anything else? <span class="muted" style="font-weight:400">(optional)</span></label>
+					<textarea class="field__input" id="i-msg" name="message" rows="3" style="resize:vertical" placeholder="A few words is plenty — when it started, what makes it worse, what you want to get back to…">{ sub.Message }</textarea>
+				</div>
+			</div>
+			<button class="btn btn--primary btn--block btn--lg" type="submit" style="margin-top:6px">Request my appointment</button>
+			<p class="field__help" style="text-align:center;margin-top:14px">By submitting, you agree to be contacted about your appointment. No spam, ever.</p>
+		</form>
+	</div>
+}
+
+// IntakeSuccess is the warm confirmation that replaces the form on submit.
+templ IntakeSuccess(firstName string) {
+	<div class="card intake" id="intakeCard">
+		<div class="intake__success">
+			<div class="ico" aria-hidden="true">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+			</div>
+			<h3>
+				if firstName != "" {
+					Thanks, { firstName } —
+				} else {
+					Thanks —
+				}
+			</h3>
+			<p>We'll call you within one business day to confirm your appointment. Nervous about your first visit? Don't be — we'll walk you through everything.</p>
+		</div>
+	</div>
+}

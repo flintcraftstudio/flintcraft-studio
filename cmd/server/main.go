@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/firefly-software-mt/standard-template/demos/chiropractor"
 	"github.com/firefly-software-mt/standard-template/internal/config"
 	"github.com/firefly-software-mt/standard-template/internal/handler"
 	"github.com/firefly-software-mt/standard-template/internal/mail"
@@ -69,6 +70,9 @@ func main() {
 	mux.Handle("POST /contact", handler.ContactSubmit(mailer, cfg.TurnstileSecretKey))
 	mux.Handle("GET /privacy", handler.Privacy())
 	mux.Handle("GET /terms", handler.Terms())
+
+	// Demo / example sites (first of a series; see demos/).
+	chiropractor.Register(mux, "/demos/chiropractor", cfg.BaseURL)
 
 	// Sitemap & health
 	mux.Handle("GET /sitemap.xml", handler.Sitemap(cfg.BaseURL))

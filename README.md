@@ -43,19 +43,62 @@ internal/
   handler/                      # HTTP handlers (home, contact)
   middleware/                   # request logging
   mail/postmark.go              # Postmark API client
-  view/                         # templ templates
+  view/                         # templ templates (marketing site)
     layout.templ                # base HTML wrapper
     home.templ                  # homepage
     contact.templ               # contact form
     nav.templ, footer.templ     # shared partials
     shared.go                   # constants (SiteName, tracking IDs)
+  intake/                       # SHARED: demo intake form parse/validate/handle
+  structdata/                   # SHARED: schema.org JSON-LD helpers
+  theme/                        # SHARED: per-demo <head> theming plumbing
+  ui/                           # SHARED: skip link + reused icons
+demos/                          # example/demo sites (see "Demo Sites" below)
+  chiropractor/                 # Alpine Spine — first vertical (the template)
 tailwind/
   tailwind.config.js            # color palette, fonts, content paths
   input.css                     # font imports, Tailwind directives
+  demos/chiropractor.{css,config.js} # per-demo Tailwind input + config
 web/static/
   css/site.css                  # compiled Tailwind output
   js/                           # HTMX, Alpine.js, custom scripts
 ```
+
+## Demo Sites
+
+`demos/` holds a series of polished example sites for lucrative Montana
+professions (chiropractor, then law, dentist, …). They are sales pieces: each
+shows a prospect what they can have in place of a dated WordPress template —
+sub-second loads, near-perfect Lighthouse, clean structured data, full
+accessibility, all served from this one Go binary.
+
+The first vertical, **`demos/chiropractor/`** (Alpine Spine), is the template
+the others copy. The series only pays off if shared code stays shared and
+per-site code stays isolated:
+
+- **Shared** (in `internal/`): the intake handler + validation (`intake`),
+  JSON-LD helpers (`structdata`), per-demo head theming (`theme`), and a11y /
+  icon primitives (`ui`).
+- **Per-demo** (in `demos/<vertical>/`): all content as typed structs
+  (`content.go`), the section templates, the palette/type (compiled stylesheet),
+  and the route registration (`routes.go`).
+
+Each demo exposes a single `Register(mux, prefix, baseURL)` wired from
+`cmd/server/main.go`, so adding a vertical is a one-line change. It serves under
+a path prefix (e.g. `/demos/chiropractor/`); switching to a per-demo subdomain
+later only changes the prefix passed to `Register`.
+
+**To add the next vertical** (e.g. law):
+
+1. `cp -r demos/chiropractor demos/law` and rewrite `content.go` + the section
+   copy/structure for that profession (share the plumbing, not the page shape).
+2. Copy `tailwind/demos/chiropractor.{css,config.js}` to `…/law.{css,config.js}`
+   and swap the palette tokens; add a `BuildLawCSS` mage target mirroring
+   `BuildChiroCSS`.
+3. Add `law.Register(mux, "/demos/law", cfg.BaseURL)` in `cmd/server/main.go`.
+
+See `demos/chiropractor/README.md` for that demo's specifics and
+`docs/why-not-wordpress.md` for the prospect-facing pitch.
 
 ## Environment Variables
 

@@ -1,0 +1,29 @@
+// Package theme is the per-demo theming plumbing shared by all verticals.
+//
+// Each demo declares a Theme (its stylesheet + the woff2 files worth
+// preloading) and the shared Head component emits the matching <head> tags.
+// This keeps the token→CSS wiring uniform across verticals while letting each
+// one ship its own palette and typography. The actual design tokens live in
+// the demo's compiled stylesheet (see tailwind/demos/<vertical>.css).
+package theme
+
+// FontPreload is one woff2 worth preloading (the above-the-fold display + body
+// faces). Keep the list short — preloading every weight hurts more than helps.
+type FontPreload struct {
+	Href string
+}
+
+// Theme describes a demo vertical's visual shell.
+type Theme struct {
+	StylesheetHref string        // compiled, fingerprint-ready CSS for this demo
+	FontPreloads   []FontPreload // critical fonts to preload
+}
+
+// Head emits the stylesheet link and font preloads for a demo theme. Call it
+// inside the demo layout's <head>.
+templ Head(t Theme) {
+	for _, f := range t.FontPreloads {
+		<link rel="preload" href={ f.Href } as="font" type="font/woff2" crossorigin/>
+	}
+	<link rel="stylesheet" href={ t.StylesheetHref }/>
+}

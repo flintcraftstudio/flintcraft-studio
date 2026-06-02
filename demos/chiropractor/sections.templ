@@ -1,0 +1,369 @@
+package chiropractor
+
+import "github.com/firefly-software-mt/standard-template/internal/ui"
+
+// heroSizes describes the hero image's rendered width across breakpoints, so
+// the browser picks the right srcset candidate. The hero column is ~560px on
+// desktop and roughly full-width (minus gutters) on small screens.
+const heroSizes = "(min-width: 1040px) 560px, (min-width: 600px) 520px, 88vw"
+
+// Hero is the dual-path hero — the most important block. New-patient and
+// existing-patient paths, the warm hero photograph (eager, responsive), and the
+// rating badge.
+templ Hero(c Content, prefix string) {
+	<section class="hero">
+		<div class="container hero__grid">
+			<div class="hero__copy">
+				<span class="eyebrow">@ui.IconArrowhead()<span>{ c.Business.Locality }, Montana · Chiropractic &amp; Wellness</span></span>
+				<h1 class="hero__title">
+					for i, line := range c.HeroTitle {
+						if i == len(c.HeroTitle)-1 {
+							<span class="it">{ line }</span>
+						} else {
+							{ line }<br/>
+						}
+					}
+				</h1>
+				<p class="hero__sub">{ c.HeroSub }</p>
+				<div class="paths">
+					for _, p := range c.Paths {
+						@pathCard(c, p)
+					}
+				</div>
+			</div>
+			<div class="hero__media">
+				if c.HeroImage != "" {
+					<div class="hero__img">
+						<img
+							src={ prefix + "/static/img/" + c.HeroImage + "-1120.webp" }
+							srcset={ prefix + "/static/img/" + c.HeroImage + "-600.webp 600w, " + prefix + "/static/img/" + c.HeroImage + "-1120.webp 1120w" }
+							sizes={ heroSizes }
+							alt={ c.HeroImageAlt }
+							width="1120"
+							height="1204"
+							loading="eager"
+							fetchpriority="high"
+							decoding="async"
+						/>
+					</div>
+				} else {
+					<div class="hero__img ph-hero grain" role="img" aria-label="Golden morning light over the Helena valley">
+						<div class="sun"></div>
+						<div class="ridge"></div>
+					</div>
+				}
+				<div class="hero__badge">
+					@stars(5)
+					<span class="t"><b>4.9</b> { c.HeroBadge }</span>
+				</div>
+			</div>
+		</div>
+	</section>
+}
+
+templ pathCard(c Content, p Path) {
+	<div class={ "path path--" + p.Variant }>
+		<p class="path__eyebrow">{ p.Eyebrow }</p>
+		<h2 class="path__title" style="font-size:23px">{ p.Title }</h2>
+		<p class="path__desc">{ p.Desc }</p>
+		<div class="path__acts">
+			<a class="btn btn--primary" href={ templ.SafeURL(p.Primary.Href) }>{ p.Primary.Label }</a>
+			if p.GhostTel {
+				<a class="btn btn--ghost" href={ telURL(c) }>@ui.IconPhone()<span>{ p.Ghost.Label }</span></a>
+			} else {
+				<a class="btn btn--ghost" href={ templ.SafeURL(p.Ghost.Href) }>{ p.Ghost.Label }</a>
+			}
+		</div>
+	</div>
+}
+
+// TrustBand is the four-stat band on teal.
+templ TrustBand(c Content) {
+	<section class="section section--teal" style="padding-block:var(--space-8)" aria-label="By the numbers">
+		<div class="container">
+			<div class="stats">
+				for _, s := range c.Stats {
+					<div class="stat">
+						<div class="stat__n">{ s.Number }<span class="u">{ s.Unit }</span></div>
+						<div class="stat__l">{ s.Label }</div>
+					</div>
+				}
+			</div>
+		</div>
+	</section>
+}
+
+// reassureSizes describes the reassurance image's rendered width by breakpoint.
+const reassureSizes = "(min-width: 1040px) 520px, 92vw"
+
+// Reassure speaks to nervous first-timers.
+templ Reassure(c Content, prefix string) {
+	<section class="section reassure" id="new-patients">
+		<div class="container reassure__grid">
+			if c.CalmImage != "" {
+				<div class="reassure__img">
+					<img
+						src={ prefix + "/static/img/" + c.CalmImage + "-1000.webp" }
+						srcset={ prefix + "/static/img/" + c.CalmImage + "-600.webp 600w, " + prefix + "/static/img/" + c.CalmImage + "-1000.webp 1000w" }
+						sizes={ reassureSizes }
+						alt={ c.CalmImageAlt }
+						width="1000"
+						height="875"
+						loading="lazy"
+						decoding="async"
+					/>
+				</div>
+			} else {
+				<div class="reassure__img ph-calm grain" role="img" aria-label="Warm, calm clinic interior in morning light"><div class="glow"></div></div>
+			}
+			<div>
+				<span class="eyebrow">First time?</span>
+				<h2>Never been to a chiropractor?<br/>You're in good hands.</h2>
+				<p>We explain everything before we do it. We never rush. And we'll never pressure you into a plan you didn't ask for. Many of our patients walked in nervous — and walked out wishing they'd come sooner.</p>
+				<div class="acts">
+					<a class="btn btn--primary btn--lg" href="#expect">See what your first visit looks like</a>
+					<a class="link-arrow" href="#book">Or just book — we'll take it from there <span class="arr" aria-hidden="true">→</span></a>
+				</div>
+			</div>
+		</div>
+	</section>
+}
+
+// Expect is the numbered first-visit walkthrough.
+templ Expect(c Content) {
+	<section class="section section--cream" id="expect">
+		<div class="container">
+			<div class="section__head center">
+				<span class="eyebrow">What to expect</span>
+				<h2>Your first visit, start to finish</h2>
+				<p>No surprises, no being "cracked" before you're ready. Here's exactly how it goes.</p>
+			</div>
+			<div class="expect__grid">
+				for i, step := range c.ExpectSteps {
+					<div class="expect-step">
+						<div class="expect-step__n" aria-hidden="true">{ itoa(i + 1) }</div>
+						<h3>{ step.Title }</h3>
+						<p>{ step.Body }</p>
+					</div>
+				}
+			</div>
+			<div class="expect__cta">
+				<a class="btn btn--primary btn--lg" href="#book">Book your first visit</a>
+			</div>
+		</div>
+	</section>
+}
+
+// Specialties is the four-card grid of care areas.
+templ Specialties(c Content) {
+	<section class="section" id="specialties">
+		<div class="container">
+			<div class="section__head center">
+				<span class="eyebrow">How we help</span>
+				<h2>Care built around your life</h2>
+				<p>Whatever brought you in, we likely treat it — and we start by listening, every time.</p>
+			</div>
+			<div class="spec-grid">
+				for _, s := range c.Specialties {
+					<div class="card card--hover spec-card">
+						<div class="spec-card__ic">@specIcon(s.Icon)</div>
+						<h3>{ s.Title }</h3>
+						<p>{ s.Desc }</p>
+						<a class="link-arrow" href="#book">{ s.LinkText } <span class="arr" aria-hidden="true">→</span></a>
+					</div>
+				}
+			</div>
+		</div>
+	</section>
+}
+
+// Team is the three-doctor card grid. Each card shows a lazy-loaded headshot,
+// falling back to a monogram on a warm gradient when no photo is set.
+templ Team(c Content, prefix string) {
+	<section class="section section--cream" id="team">
+		<div class="container">
+			<div class="section__head center">
+				<span class="eyebrow">Your care team</span>
+				<h2>People you'll actually get to know</h2>
+				<p>Real names, real faces, and real time spent with you — no conveyor belt.</p>
+			</div>
+			<div class="doc-grid">
+				for _, d := range c.Doctors {
+					<div class="card card--hover doc-card">
+						if d.Photo != "" {
+							<div class="doc-card__ph">
+								<img
+									src={ prefix + "/static/img/" + d.Photo }
+									alt={ d.PhotoAlt }
+									width="640"
+									height="576"
+									loading="lazy"
+									decoding="async"
+								/>
+							</div>
+						} else {
+							<div class={ "doc-card__ph ph-doc ph-doc--" + d.Variant + " grain" } role="img" aria-label={ "Portrait of " + d.Name }>
+								<span class="mono" aria-hidden="true">{ d.Initials }</span>
+							</div>
+						}
+						<div class="doc-card__b">
+							<h3>{ d.Name }</h3>
+							<div class="doc-card__cr">{ d.Credentials }</div>
+							<p>{ d.Bio }</p>
+							<a class="link-arrow" href="#book">Read more <span class="arr" aria-hidden="true">→</span></a>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</section>
+}
+
+// Treatments is the quiet three-column modality list.
+templ Treatments(c Content) {
+	<section class="section tx" id="treatments">
+		<div class="container">
+			<div class="section__head center">
+				<span class="eyebrow">Treatments</span>
+				<h2>More tools than the practice down the street</h2>
+				<p class="tx__intro">Whatever's going on, we likely have a tool for it.</p>
+			</div>
+			<div class="tx-cols">
+				for _, col := range c.TreatmentCol {
+					<div class="tx-col">
+						for _, item := range col {
+							<span class="tx-item">@iconCheck()<span>{ item }</span></span>
+						}
+					</div>
+				}
+			</div>
+		</div>
+	</section>
+}
+
+// Reviews renders testimonial cards. The same data also feeds the JSON-LD.
+templ Reviews(c Content) {
+	<section class="section" id="reviews">
+		<div class="container">
+			<div class="section__head center">
+				<span class="eyebrow">In their words</span>
+				<h2>Neighbors who feel better</h2>
+			</div>
+			<div class="tst-grid">
+				for _, r := range c.Reviews {
+					<div class="card tst">
+						@stars(r.Rating)
+						<p class="tst__q">{ r.Quote }</p>
+						<div class="tst__who">
+							<div class="tst__av" aria-hidden="true">{ r.Initials }</div>
+							<div>
+								<div class="tst__nm">{ r.Name }</div>
+								<div class="tst__meta">{ r.Location }</div>
+							</div>
+						</div>
+					</div>
+				}
+			</div>
+			<div class="reviews__cta">
+				<a class="btn btn--primary btn--lg" href="#book">Book your appointment</a>
+			</div>
+		</div>
+	</section>
+}
+
+// Location is the address / hours / CSS-map block.
+templ Location(c Content) {
+	<section class="section section--cream" id="contact">
+		<div class="container">
+			<div class="section__head">
+				<span class="eyebrow">Visit us</span>
+				<h2>Easy to find, easy to park</h2>
+			</div>
+			<div class="loc__grid">
+				<div class="loc__info">
+					<div class="loc-list">
+						<div class="loc-line">
+							<span class="ic" aria-hidden="true">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+							</span>
+							<div><div class="k">Address</div><div class="v">{ c.Business.Street }<br/>{ c.Business.Locality }, { c.Business.Region } { c.Business.PostalCode }</div></div>
+						</div>
+						<div class="loc-line">
+							<span class="ic" aria-hidden="true">@ui.IconPhone()</span>
+							<div><div class="k">Phone</div><div class="v"><a href={ telURL(c) }>{ c.Business.PhoneLabel }</a></div></div>
+						</div>
+						<div class="loc-line">
+							<span class="ic" aria-hidden="true">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+							</span>
+							<div style="flex:1">
+								<div class="k">Hours</div>
+								<table class="loc-hours">
+									<tbody>
+										for _, h := range c.HoursRows {
+											<tr>
+												<td>{ h.Days }</td>
+												if h.Closed {
+													<td class="closed">{ h.Time }</td>
+												} else {
+													<td>{ h.Time }</td>
+												}
+											</tr>
+										}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="loc-chips">
+						<span class="badge badge--sage">Free parking</span>
+						<span class="badge badge--neutral">Wheelchair accessible</span>
+					</div>
+				</div>
+				<div class="loc__map" role="img" aria-label={ c.Business.MapAltText }>
+					<div class="map-field" aria-hidden="true">
+						<div class="park"></div>
+						<div class="roads"></div>
+						<div class="roads2"></div>
+						<div class="hwy"></div>
+						<div class="river"></div>
+					</div>
+					<div class="map-pin" aria-hidden="true">
+						<span class="pin">@ui.IconArrowhead()</span>
+						<span class="tag">{ c.Business.Name }</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+}
+
+// ── small shared bits ─────────────────────────────────────────────────────────
+
+// stars renders an accessible n-of-5 star rating.
+templ stars(n int) {
+	<span class="stars" role="img" aria-label={ ratingLabel(n) }>
+		for i := 0; i < n; i++ {
+			★
+		}
+	</span>
+}
+
+// iconCheck is the small checkmark beside each treatment.
+templ iconCheck() {
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+}
+
+// specIcon selects the inline SVG for a specialty card.
+templ specIcon(k SpecialtyIcon) {
+	switch k {
+		case IconSports:
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+		case IconFamily:
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12h.01"></path><path d="M15 12h.01"></path><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"></path><path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"></path></svg>
+		case IconAuto:
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path><circle cx="7" cy="17" r="2"></circle><path d="M9 17h6"></path><circle cx="17" cy="17" r="2"></circle></svg>
+		default:
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"></path></svg>
+	}
+}
