@@ -30,7 +30,8 @@ func TestChiropractorLandingRenders(t *testing.T) {
 	html := b.String()
 
 	must := []string{
-		"Chiropractor Website Design in Montana",                  // H1
+		"books patients while you adjust them",                    // humanized H1
+		"chiropractor website design",                             // keyword retained in body (lede)
 		"Montana Chiropractor Website Design | FlintCraft Studio", // <title> (Base appends suffix)
 		`rel="canonical" href="https://flintcraftstudio.com/chiropractor-website-design"`,
 		`property="og:title"`,
@@ -39,6 +40,7 @@ func TestChiropractorLandingRenders(t *testing.T) {
 		`"@type":"FAQPage"`,           // FAQ JSON-LD
 		`href="/demos/chiropractor/"`, // links to live demo
 		`target="_blank"`,             // opens in new tab
+		`href="#see-it"`,              // hero secondary CTA scrolls to proof, not a 3rd demo link
 		"WordPress",                   // comparison
 		"Helena",                      // local SEO cities
 	}

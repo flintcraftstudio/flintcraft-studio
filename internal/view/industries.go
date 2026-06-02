@@ -83,13 +83,13 @@ var IndustryLandings = map[string]IndustryLanding{
 		Slug:            "chiropractor-website-design",
 		Profession:      "chiropractic",
 		Keyword:         "chiropractor website design",
-		H1:              "Chiropractor Website Design in Montana",
-		Lede:            "Custom, fast, easy-to-find websites for Montana chiropractors — built to bring in new patients, not just sit there. No WordPress, no templates, no plugin upkeep.",
+		H1:              "A chiropractic site that books patients while you adjust them.",
+		Lede:            "Custom chiropractor website design for Montana practices — fast, easy to find, and built to bring in new patients, not just sit there. No WordPress, no templates, no plugin upkeep.",
 		MetaTitle:       "Montana Chiropractor Website Design",
 		MetaDescription: "Custom chiropractor website design for Montana practices. Online new-patient intake, real review structured data, near-instant load. See a live demo, then start a project.",
 		Intro: []string{
 			"Most chiropractic websites are a tired WordPress theme with a booking plugin bolted on — slow, hard to update, and a little broken on mobile. Patients notice. So does Google.",
-			"FlintCraft builds chiropractor websites from scratch: a site that loads in well under a second, turns first-time visitors into booked new patients, and stays sharp without you touching a plugin. Below is a real, working example of what that looks like.",
+			"We build chiropractor websites from scratch: a site that loads in well under a second, turns first-time visitors into booked new patients, and stays sharp without you ever touching a plugin.",
 		},
 		KeyPoints: []IndustryPoint{
 			{"New-patient intake that actually converts", "A calm, dual-path layout for new and returning patients, with an intake form that validates instantly and reassures nervous first-timers — the moment most practice sites lose the booking."},
