@@ -57,6 +57,15 @@ func TestPageRenders(t *testing.T) {
 		`name="robots" content="noindex`,          // demo kept out of search
 		`class="demo-bar"`,                        // FlintCraft framing bar
 		`href="/contact"`,                         // bar links back to marketing
+		`class="spec-row"`,                        // specialties are whole-row links now
+		`class="link-arrow doc-card__toggle"`,     // doctor bio is an accessible disclosure
+		"founded Alpine Spine in 2014",            // expanded doctor bio present
+		`class="btn-sending"`,                     // intake submit pending state
+		`class="expect__grid" data-reveal`,        // steps marked for staggered reveal
+		"reveal-armed",                            // reveal script present (JS-armed)
+		`id="fcToast"`,                            // celebration toast present
+		"Talk to FlintCraft",                      // toast CTA back to marketing
+		"window.fcCelebrate",                      // celebration script wired
 	}
 	for _, s := range must {
 		if !strings.Contains(html, s) {

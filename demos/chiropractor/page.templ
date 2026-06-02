@@ -65,13 +65,114 @@ templ Page(c Content, st pageState) {
 				@Team(c, st.prefix)
 				@Treatments(c)
 				@Reviews(c)
-				<div class="ph-band grain" style="height:220px" aria-hidden="true"></div>
 				@Book(c, st)
 				@Location(c)
 			</main>
 			@Footer(c)
+			@celebrateToast()
+			@revealScript()
+			@celebrateScript()
 		</body>
 	</html>
+}
+
+// celebrateToast is the FlintCraft nudge shown after a successful booking — it
+// turns the demo's peak moment into a soft pitch. Hidden until fcCelebrate()
+// reveals it. (This is demo chrome, like the demo bar — it links to FlintCraft.)
+templ celebrateToast() {
+	<div id="fcToast" class="fc-toast" role="status" aria-live="polite" hidden>
+		<div class="fc-toast__body">
+			<strong>That's how easy booking feels on a FlintCraft site.</strong>
+			<span>Want one like this for your practice? Let's talk about your new site.</span>
+		</div>
+		<a class="fc-toast__cta" href="/contact">Talk to FlintCraft &rarr;</a>
+		<button class="fc-toast__x" type="button" aria-label="Dismiss" data-fc-toast-close>&times;</button>
+	</div>
+}
+
+// celebrateScript fires a confetti burst + reveals the toast when the intake
+// success state appears — covering both the htmx swap (htmx:afterSettle) and
+// the no-JS full-page fallback (DOMContentLoaded). Confetti is skipped under
+// prefers-reduced-motion; the toast still shows.
+templ celebrateScript() {
+	<script>
+		(function () {
+			var done = false;
+			window.fcCelebrate = function () {
+				if (done) return;
+				done = true;
+				var toast = document.getElementById('fcToast');
+				if (toast) {
+					toast.hidden = false;
+					requestAnimationFrame(function () { toast.classList.add('is-in'); });
+					setTimeout(function () {
+						toast.classList.remove('is-in');
+						setTimeout(function () { toast.hidden = true; }, 450);
+					}, 11000);
+				}
+				var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+				if (reduce) return;
+				var colors = ['#1C4347', '#2F666B', '#6E8A5C', '#A9BE98', '#C7902E', '#EFEAD9'];
+				var wrap = document.createElement('div');
+				wrap.className = 'fc-confetti';
+				wrap.setAttribute('aria-hidden', 'true');
+				for (var i = 0; i < 90; i++) {
+					var p = document.createElement('span');
+					p.className = 'fc-confetti__bit';
+					var sz = 6 + Math.random() * 7;
+					p.style.left = (Math.random() * 100) + 'vw';
+					p.style.width = sz + 'px';
+					p.style.height = (sz * 0.5) + 'px';
+					p.style.background = colors[i % colors.length];
+					p.style.setProperty('--dx', ((Math.random() * 2 - 1) * 28) + 'vw');
+					p.style.setProperty('--rot', (Math.random() * 900 - 450) + 'deg');
+					p.style.animationDelay = (Math.random() * 0.35) + 's';
+					p.style.animationDuration = (2.6 + Math.random() * 1.8) + 's';
+					wrap.appendChild(p);
+				}
+				document.body.appendChild(wrap);
+				setTimeout(function () { wrap.remove(); }, 5200);
+			};
+			function check() { if (document.querySelector('.intake__success')) window.fcCelebrate(); }
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', check);
+			} else {
+				check();
+			}
+			document.body.addEventListener('htmx:afterSettle', check);
+			document.addEventListener('click', function (e) {
+				if (e.target.closest && e.target.closest('[data-fc-toast-close]')) {
+					var el = document.getElementById('fcToast');
+					if (!el) return;
+					el.classList.remove('is-in');
+					setTimeout(function () { el.hidden = true; }, 450);
+				}
+			});
+		})();
+	</script>
+}
+
+// revealScript arms staggered scroll reveals for [data-reveal] containers. It's
+// JS-armed: with no JS the content is fully visible (never hidden), and the
+// reduced-motion override in the stylesheet shows steps instantly.
+templ revealScript() {
+	<script>
+		(function () {
+			var els = document.querySelectorAll('[data-reveal]');
+			if (!els.length) return;
+			els.forEach(function (el) { el.classList.add('reveal-armed'); });
+			if (!('IntersectionObserver' in window)) {
+				els.forEach(function (el) { el.classList.add('reveal-in'); });
+				return;
+			}
+			var io = new IntersectionObserver(function (entries) {
+				entries.forEach(function (e) {
+					if (e.isIntersecting) { e.target.classList.add('reveal-in'); io.unobserve(e.target); }
+				});
+			}, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+			els.forEach(function (el) { io.observe(el); });
+		})();
+	</script>
 }
 
 // Announce is the thin top strip.

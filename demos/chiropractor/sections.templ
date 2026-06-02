@@ -138,7 +138,7 @@ templ Expect(c Content) {
 				<h2>Your first visit, start to finish</h2>
 				<p>No surprises, no being "cracked" before you're ready. Here's exactly how it goes.</p>
 			</div>
-			<div class="expect__grid">
+			<div class="expect__grid" data-reveal>
 				for i, step := range c.ExpectSteps {
 					<div class="expect-step">
 						<div class="expect-step__n" aria-hidden="true">{ itoa(i + 1) }</div>
@@ -154,23 +154,27 @@ templ Expect(c Content) {
 	</section>
 }
 
-// Specialties is the four-card grid of care areas.
+// Specialties is the care-areas section — an editorial list of full-width
+// clickable rows (the page's signature moment). Each whole row links to the
+// booking form, so the affordance matches the cursor.
 templ Specialties(c Content) {
 	<section class="section" id="specialties">
 		<div class="container">
-			<div class="section__head center">
+			<div class="section__head">
 				<span class="eyebrow">How we help</span>
 				<h2>Care built around your life</h2>
 				<p>Whatever brought you in, we likely treat it — and we start by listening, every time.</p>
 			</div>
-			<div class="spec-grid">
+			<div class="spec-list">
 				for _, s := range c.Specialties {
-					<div class="card card--hover spec-card">
-						<div class="spec-card__ic">@specIcon(s.Icon)</div>
-						<h3>{ s.Title }</h3>
-						<p>{ s.Desc }</p>
-						<a class="link-arrow" href="#book">{ s.LinkText } <span class="arr" aria-hidden="true">→</span></a>
-					</div>
+					<a class="spec-row" href="#book">
+						<span class="spec-row__ic">@specIcon(s.Icon)</span>
+						<span class="spec-row__body">
+							<span class="spec-row__title">{ s.Title }</span>
+							<span class="spec-row__desc">{ s.Desc }</span>
+						</span>
+						<span class="spec-row__cta">{ s.LinkText } <span class="arr" aria-hidden="true">→</span></span>
+					</a>
 				}
 			</div>
 		</div>
@@ -187,9 +191,9 @@ templ Team(c Content, prefix string) {
 				<h2>People you'll actually get to know</h2>
 				<p>Real names, real faces, and real time spent with you — no conveyor belt.</p>
 			</div>
-			<div class="doc-grid">
-				for _, d := range c.Doctors {
-					<div class="card card--hover doc-card">
+			<div class="doc-grid" data-reveal>
+				for i, d := range c.Doctors {
+					<div class="card doc-card" x-data="{ open: false }" x-bind:class="open ? 'is-open' : ''">
 						if d.Photo != "" {
 							<div class="doc-card__ph">
 								<img
@@ -210,7 +214,24 @@ templ Team(c Content, prefix string) {
 							<h3>{ d.Name }</h3>
 							<div class="doc-card__cr">{ d.Credentials }</div>
 							<p>{ d.Bio }</p>
-							<a class="link-arrow" href="#book">Read more <span class="arr" aria-hidden="true">→</span></a>
+							if d.LongBio != "" {
+								<div class="doc-card__reveal" id={ "bio-" + itoa(i) } x-bind:class="open ? '' : 'is-collapsed'">
+									<div class="doc-card__reveal-inner">
+										<p class="doc-card__longbio">{ d.LongBio }</p>
+										<a class="link-arrow doc-card__book" href="#book">{ bookWith(d.Name) } <span class="arr" aria-hidden="true">→</span></a>
+									</div>
+								</div>
+								<button
+									type="button"
+									class="link-arrow doc-card__toggle"
+									x-on:click="open = !open"
+									x-bind:aria-expanded="open ? 'true' : 'false'"
+									aria-controls={ "bio-" + itoa(i) }
+								>
+									<span x-text="open ? 'Show less' : 'Read bio'">Read bio</span>
+									<span class="arr" aria-hidden="true" x-bind:class="open ? 'is-open' : ''">→</span>
+								</button>
+							}
 						</div>
 					</div>
 				}

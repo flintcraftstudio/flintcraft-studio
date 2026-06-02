@@ -85,13 +85,15 @@ type Specialty struct {
 
 // Doctor is one provider card. Photo (a webp under static/img/) is the headshot;
 // when empty, the Initials monogram on the Variant (a/b/c) gradient is shown
-// instead. PhotoAlt is the image alt text.
+// instead. Bio is the always-visible blurb; LongBio expands inline via the
+// card's "Read bio" disclosure.
 type Doctor struct {
 	Name        string
 	Initials    string
 	Variant     string // "a" | "b" | "c" — gradient when no Photo
 	Credentials string
 	Bio         string
+	LongBio     string // expanded bio revealed by the card's disclosure toggle
 	Photo       string // filename under static/img/, e.g. "doctor-whitlock.webp"
 	PhotoAlt    string
 }
@@ -198,18 +200,21 @@ func site() Content {
 			{
 				Name: "Dr. Sarah Whitlock", Initials: "SW", Variant: "a", Credentials: "DC, CCSP · Founder",
 				Bio:      "Sports-focused and 14 years in practice — a former collegiate runner who's warm, thorough, and always explains the \"why.\"",
+				LongBio:  "Sarah founded Alpine Spine in 2014 after a decade treating endurance athletes. A Certified Chiropractic Sports Physician and former collegiate runner, she's as comfortable with a marathoner's IT band as she is with a desk-worker's stiff neck. Patients leave knowing exactly what's going on and why — she won't touch you until you understand the plan.",
 				Photo:    "doctor-whitlock.webp",
 				PhotoAlt: "Dr. Sarah Whitlock, founder of Alpine Spine, smiling",
 			},
 			{
 				Name: "Dr. Marcus Reyes", Initials: "MR", Variant: "b", Credentials: "DC · Family & Pediatric",
 				Bio:      "Gentle, low-force techniques for the whole family. A dad of three who coaches Little League on the weekends.",
+				LongBio:  "Marcus focuses on family and pediatric care, with gentle, low-force techniques suited to newborns, kids, and grandparents alike. A dad of three who coaches Little League, he's unhurried with nervous first-timers and especially good with the wiggly ones. Prenatal and postpartum care is a particular focus.",
 				Photo:    "doctor-reyes.webp",
 				PhotoAlt: "Dr. Marcus Reyes, family and pediatric chiropractor",
 			},
 			{
 				Name: "Dr. Hannah Briggs", Initials: "HB", Variant: "c", Credentials: "DC, ART · Soft-tissue & Auto",
 				Bio:      "Soft-tissue and auto-injury specialist. Calm, detail-oriented, and known for never rushing an exam.",
+				LongBio:  "Hannah is our soft-tissue and auto-injury specialist, certified in Active Release Technique. Calm and meticulous, she's known for thorough documentation that holds up with insurers and attorneys after a crash or on-the-job injury — and for never rushing an exam, no matter how full the schedule.",
 				Photo:    "doctor-briggs.webp",
 				PhotoAlt: "Dr. Hannah Briggs, soft-tissue and auto-injury specialist",
 			},
