@@ -73,6 +73,11 @@ func TestPageRenders(t *testing.T) {
 		`href="/contact?ref=law-demo"`,                 // toast carries the demo referral tag
 		"window.fcCelebrate",                           // celebration script wired
 		".form-success",                                // celebration keyed to the success partial
+		`class="mcall"`,                                // mobile persistent call bar
+		`class="btn-sending"`,                          // intake submit pending state
+		`role="dialog"`,                                // mobile drawer is a labelled dialog
+		`aria-modal="true"`,                            // …that traps to the modal
+		`x-on:keydown.escape.window="closeMenu()"`,     // Esc closes the drawer
 	}
 	for _, s := range must {
 		if !strings.Contains(html, s) {
@@ -100,6 +105,21 @@ func TestIntakeCardShowsErrors(t *testing.T) {
 	for _, s := range []string{`class="field err"`, "Please tell us your name", "Tell us what happened", `value="406"`} {
 		if !strings.Contains(html, s) {
 			t.Errorf("intake card missing %q", s)
+		}
+	}
+}
+
+func TestIntakeSuccessIsAnnouncedRegion(t *testing.T) {
+	var b strings.Builder
+	if err := IntakeSuccess(site(), "Jordan").Render(context.Background(), &b); err != nil {
+		t.Fatalf("render success: %v", err)
+	}
+	html := b.String()
+	// The confirmation must be a focusable, announced region (celebrateScript
+	// focuses it after the htmx swap so screen readers hear it).
+	for _, s := range []string{`role="status"`, `tabindex="-1"`} {
+		if !strings.Contains(html, s) {
+			t.Errorf("success partial missing %q", s)
 		}
 	}
 }

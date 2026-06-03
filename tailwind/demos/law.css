@@ -760,3 +760,37 @@ img{display:block;max-width:100%}
 .fc-toast__x:hover{color:#fff}
 @media(max-width:560px){.fc-toast{flex-wrap:wrap}.fc-toast__cta{width:100%;text-align:center}}
 @media(prefers-reduced-motion:reduce){.fc-toast{transition:opacity .25s linear}}
+
+/* ---------- intake submit: pending feedback (htmx adds .htmx-request to the
+   form during submit; hx-disabled-elt also disables the button) ---------- */
+.btn-sending{display:none}
+form.htmx-request .btn-label{display:none}
+form.htmx-request .btn-sending{display:inline-flex;align-items:center;gap:8px}
+form.htmx-request button[type="submit"]{opacity:.85;cursor:progress}
+
+/* ---------- mobile persistent call bar (thumb-zone CTA) ----------
+   Only on phones, where the nav phone + CTA are hidden and the utility strip
+   scrolls away. Slides out while the intake form is on screen (mobileCTAScript). */
+.mcall{display:none}
+@media(max-width:620px){
+  .mcall{position:fixed;left:0;right:0;bottom:0;z-index:45;display:flex;gap:8px;
+    padding:9px 12px;padding-bottom:calc(9px + env(safe-area-inset-bottom,0px));
+    background:rgba(246,243,236,.97);backdrop-filter:blur(8px);border-top:1px solid var(--stone-200);
+    transition:transform .25s ease}
+  .mcall.is-hidden{transform:translateY(120%)}
+  .mcall__btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;
+    padding:12px 10px;border-radius:var(--r-md);font-family:var(--font-body);font-weight:600;font-size:15px;
+    text-decoration:none;line-height:1}
+  .mcall__btn svg{width:18px;height:18px}
+  .mcall__call{background:var(--paper);color:var(--ink);border:1.5px solid var(--stone-300)}
+  .mcall__call:active{background:var(--stone-100)}
+  .mcall__cta{background:var(--brass-600);color:#fff}
+  .mcall__cta:active{background:var(--brass-700)}
+  /* keep the footer + last content clear of the fixed bar */
+  body{padding-bottom:calc(70px + env(safe-area-inset-bottom,0px))}
+  /* lift the success toast above the call bar */
+  .fc-toast{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+}
+@media(max-width:620px) and (prefers-reduced-motion:reduce){
+  .mcall{transition:none}
+}

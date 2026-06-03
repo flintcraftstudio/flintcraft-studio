@@ -68,9 +68,11 @@ templ Page(c Content, st pageState) {
 				@Location(c)
 			</main>
 			@Footer(c, st.prefix)
+			@MobileCallBar(c)
 			@celebrateToast()
 			@revealScript()
 			@celebrateScript()
+			@mobileCTAScript()
 		</body>
 	</html>
 }
@@ -140,7 +142,14 @@ templ celebrateScript() {
 			} else {
 				check();
 			}
-			document.body.addEventListener('htmx:afterSettle', check);
+			// After an htmx swap brings in the confirmation, celebrate and move
+			// focus to it so screen readers announce the success (the swap target
+			// is replaced, so a static live region alone wouldn't fire reliably).
+			document.body.addEventListener('htmx:afterSettle', function () {
+				check();
+				var ok = document.querySelector('.form-success');
+				if (ok && typeof ok.focus === 'function') { ok.focus(); }
+			});
 			document.addEventListener('click', function (e) {
 				if (e.target.closest && e.target.closest('[data-fc-toast-close]')) {
 					var el = document.getElementById('fcToast');
@@ -171,6 +180,35 @@ templ photoPanel(iconName, label, class string) {
 	</div>
 }
 
+// MobileCallBar is the persistent thumb-zone action bar shown only on phones
+// (CSS-gated ≤620px, where the nav's phone + CTA are hidden and the utility
+// strip scrolls away). It keeps a one-tap "Call now" and "Free Case Review"
+// always reachable — the moment a hurt visitor most needs them. mobileCTAScript
+// slides it out of the way while the intake form itself is on screen.
+templ MobileCallBar(c Content) {
+	<nav class="mcall" aria-label="Quick contact">
+		<a class="mcall__btn mcall__call" href={ telURL(c) }>@icon("phone")<span>Call now</span></a>
+		<a class="mcall__btn mcall__cta" href="#review">@icon("shield-check")<span>Free Case Review</span></a>
+	</nav>
+}
+
+// mobileCTAScript hides the mobile call bar while the intake form (#review) is in
+// view, so it never covers the form's own submit and isn't redundant there. With
+// no JS the bar simply stays visible (still correct, just not auto-hiding).
+templ mobileCTAScript() {
+	<script>
+		(function () {
+			var bar = document.querySelector('.mcall');
+			var review = document.getElementById('review');
+			if (!bar || !review || !('IntersectionObserver' in window)) return;
+			var io = new IntersectionObserver(function (entries) {
+				entries.forEach(function (e) { bar.classList.toggle('is-hidden', e.isIntersecting); });
+			}, { rootMargin: '0px 0px -45% 0px' });
+			io.observe(review);
+		})();
+	</script>
+}
+
 // UtilityStrip is the firm's thin evergreen top bar: availability + locale +
 // the tappable 24/7 phone number.
 templ UtilityStrip(c Content) {
@@ -192,7 +230,10 @@ templ UtilityStrip(c Content) {
 // Nav is the sticky primary nav plus the mobile drawer. Alpine drives only the
 // drawer open/close — the single piece of client state on the page besides htmx.
 templ Nav(c Content, prefix string) {
-	<div x-data="{ open: false }">
+	<div
+		x-data="{ open:false, openMenu(){ this.open=true; this.$nextTick(()=>{ this.$refs.close && this.$refs.close.focus() }) }, closeMenu(){ this.open=false; this.$nextTick(()=>{ this.$refs.burger && this.$refs.burger.focus() }) }, trap(e){ if(!this.open || e.key!=='Tab') return; var f=this.$refs.panel.querySelectorAll('a[href],button:not([disabled])'); if(!f.length) return; var first=f[0], last=f[f.length-1]; if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus() } else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus() } } }"
+		x-on:keydown.escape.window="closeMenu()"
+	>
 		<nav class="nav">
 			<div class="wrap">
 				<a class="brand" href="#top">
@@ -216,25 +257,25 @@ templ Nav(c Content, prefix string) {
 					</a>
 					<a class="btn btn-primary" href="#review">@icon("shield-check")
 					Free Case Review</a>
-					<button class="nav-burger" type="button" aria-label="Open menu" x-on:click="open = true" x-bind:aria-expanded="open ? 'true' : 'false'">
+					<button class="nav-burger" type="button" aria-label="Open menu" aria-haspopup="dialog" aria-controls="mmenu-panel" x-ref="burger" x-on:click="openMenu()" x-bind:aria-expanded="open ? 'true' : 'false'">
 						<span style="width:26px;height:26px;display:grid;place-items:center">@icon("menu")</span>
 					</button>
 				</div>
 			</div>
 		</nav>
-		<div class="mmenu" x-bind:class="{ 'open': open }" x-on:click="open = false">
-			<div class="panel" x-on:click.stop>
-				<button class="closex" type="button" aria-label="Close menu" x-on:click="open = false">
+		<div class="mmenu" x-bind:class="{ 'open': open }" x-on:click="closeMenu()">
+			<div class="panel" id="mmenu-panel" role="dialog" aria-modal="true" aria-label="Site menu" x-ref="panel" x-on:click.stop x-on:keydown.tab="trap($event)">
+				<button class="closex" type="button" aria-label="Close menu" x-ref="close" x-on:click="closeMenu()">
 					<span style="width:26px;height:26px;display:grid;place-items:center">@icon("x")</span>
 				</button>
-				<a href="#practice" x-on:click="open = false">Practice Areas</a>
-				<a href="#attorneys" x-on:click="open = false">Our Attorneys</a>
-				<a href="#results" x-on:click="open = false">Results</a>
-				<a href="#reviews" x-on:click="open = false">Reviews</a>
-				<a href="#contact" x-on:click="open = false">Contact</a>
-				<a href={ telURL(c) } style="color:var(--brass-700);font-weight:600" x-on:click="open = false">Call { c.Firm.PhoneLabel } · 24/7</a>
+				<a href="#practice" x-on:click="closeMenu()">Practice Areas</a>
+				<a href="#attorneys" x-on:click="closeMenu()">Our Attorneys</a>
+				<a href="#results" x-on:click="closeMenu()">Results</a>
+				<a href="#reviews" x-on:click="closeMenu()">Reviews</a>
+				<a href="#contact" x-on:click="closeMenu()">Contact</a>
+				<a href={ telURL(c) } style="color:var(--brass-700);font-weight:600" x-on:click="closeMenu()">Call { c.Firm.PhoneLabel } · 24/7</a>
 				<div style="margin-top:16px">
-					<a class="btn btn-primary" href="#review" style="width:100%;justify-content:center" x-on:click="open = false">@icon("shield-check")
+					<a class="btn btn-primary" href="#review" style="width:100%;justify-content:center" x-on:click="closeMenu()">@icon("shield-check")
 					Free Case Review</a>
 				</div>
 			</div>

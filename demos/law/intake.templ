@@ -68,8 +68,13 @@ templ IntakeCard(c Content, prefix string, sub submission, errs intakeErrors) {
 			</div>
 			@textareaField("message", "Briefly, what happened?", "A short description of your injury or accident — where it happened and how you're doing.", sub.Message)
 			@selectFieldPlain("contact", "Best way to reach you", c.ContactMethods, sub.Contact)
-			<button class="btn btn-primary btn-lg" type="submit" style="width:100%;justify-content:center;margin-top:4px">@icon("shield-check")
-			Request my free review</button>
+			<button class="btn btn-primary btn-lg" type="submit" style="width:100%;justify-content:center;margin-top:4px">
+				<span class="btn-label">
+					@icon("shield-check")
+					Request my free review
+				</span>
+				<span class="btn-sending">Sending…</span>
+			</button>
 			<p class="form-disc" style="text-align:center;font-weight:600;color:var(--fg-2);font-size:12.5px">Free, confidential, no obligation.</p>
 			<p class="form-disc">Submitting this form does not create an attorney-client relationship. This website is attorney advertising.</p>
 		</form>
@@ -81,7 +86,9 @@ templ IntakeCard(c Content, prefix string, sub submission, errs intakeErrors) {
 // for anything urgent.
 templ IntakeSuccess(c Content, first string) {
 	<div class="form-card" id="intakeCard">
-		<div class="form-success">
+		<!-- role=status + tabindex makes the confirmation an announced, focusable
+		     region; celebrateScript moves focus here after the htmx swap. -->
+		<div class="form-success" role="status" tabindex="-1">
 			<div class="ok">@icon("check")</div>
 			if first != "" {
 				<h3>Thanks, { first } — we've got it.</h3>
