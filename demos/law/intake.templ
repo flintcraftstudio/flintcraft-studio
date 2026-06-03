@@ -1,0 +1,147 @@
+package law
+
+// Book is the free-case-review section — the htmx showcase and primary
+// conversion endpoint. The left column is the reassurance copy; the right
+// column (#intakeCard) is the swap target the shared intake handler replaces
+// with errors or the success partial.
+templ Book(c Content, st pageState) {
+	<section class="intake" id="review">
+		<div class="wrap section">
+			<div class="grid">
+				<div>
+					<p class="eyebrow" style="color:var(--brass-400)">Free case review</p>
+					<h2>Get your free case review.</h2>
+					<p class="lead">
+						Tell us what happened and an attorney will call you back — usually within one business day. There's no cost and no obligation. Prefer to talk now? Call us anytime at <a href={ telURL(c) } style="color:var(--brass-400);font-weight:600;white-space:nowrap">{ c.Firm.PhoneLabel }</a>.
+					</p>
+					<div class="assure">
+						<div>@icon("shield-check")
+						Free, confidential — protected by attorney-client privilege</div>
+						<div>@icon("clock")
+						We answer 24/7, including nights and weekends</div>
+						<div>@icon("badge-dollar-sign")
+						No fee unless we recover money for you</div>
+					</div>
+				</div>
+				if st.intake != nil && st.intake.success {
+					@IntakeSuccess(c, firstName(st.intake.sub.Name))
+				} else if st.intake != nil {
+					@IntakeCard(c, st.prefix, st.intake.sub, st.intake.errs)
+				} else {
+					@IntakeCard(c, st.prefix, submission{}, nil)
+				}
+			</div>
+		</div>
+	</section>
+}
+
+// IntakeCard is the swap target. htmx replaces this whole element (outerHTML)
+// with either a re-rendered card (errors, values preserved) or the success
+// partial. As a plain POST (no JS) it re-renders the full page in this state.
+templ IntakeCard(c Content, prefix string, sub submission, errs intakeErrors) {
+	<div class="form-card" id="intakeCard">
+		<form
+			method="post"
+			action={ templ.SafeURL(prefix + "/intake") }
+			hx-post={ prefix + "/intake" }
+			hx-target="#intakeCard"
+			hx-swap="outerHTML"
+			hx-disabled-elt="find button[type='submit']"
+			novalidate
+		>
+			if _, ok := errs["form"]; ok {
+				<div class="field err" role="alert"><span class="help">@icon("circle-alert")
+				{ errs["form"] }</span></div>
+			}
+			<!-- Honeypot: hidden from humans; bots that fill it are silently dropped. -->
+			<div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+				<label>Company<input type="text" name="company" tabindex="-1" autocomplete="off"/></label>
+			</div>
+			@field("name", "Full name", "text", "Jordan Avery", sub.Name, errs, "", true)
+			<div class="form-row">
+				@field("phone", "Phone number", "tel", "(406) 555-0188", sub.Phone, errs, "We never share your number.", true)
+				@field("email", "Email", "email", "you@email.com", sub.Email, errs, "", true)
+			</div>
+			<div class="form-row">
+				@selectField("reason", "What happened?", c.Incidents, sub.Reason, errs)
+				@field("when", "When did it happen?", "text", "e.g. last week, March 2026", sub.When, errs, "", false)
+			</div>
+			@textareaField("message", "Briefly, what happened?", "A short description of your injury or accident — where it happened and how you're doing.", sub.Message)
+			@selectFieldPlain("contact", "Best way to reach you", c.ContactMethods, sub.Contact)
+			<button class="btn btn-primary btn-lg" type="submit" style="width:100%;justify-content:center;margin-top:4px">@icon("shield-check")
+			Request my free review</button>
+			<p class="form-disc" style="text-align:center;font-weight:600;color:var(--fg-2);font-size:12.5px">Free, confidential, no obligation.</p>
+			<p class="form-disc">Submitting this form does not create an attorney-client relationship. This website is attorney advertising.</p>
+		</form>
+	</div>
+}
+
+// IntakeSuccess is the warm confirmation that replaces the form on submit. It
+// sets expectations (a callback within one business day) and offers the phone
+// for anything urgent.
+templ IntakeSuccess(c Content, first string) {
+	<div class="form-card" id="intakeCard">
+		<div class="form-success">
+			<div class="ok">@icon("check")</div>
+			if first != "" {
+				<h3>Thanks, { first } — we've got it.</h3>
+			} else {
+				<h3>Thanks — we've got it.</h3>
+			}
+			<p>An attorney will call you within one business day. If it's urgent, call us now at <a href={ telURL(c) } style="color:var(--brass-700);font-weight:600;white-space:nowrap">{ c.Firm.PhoneLabel }</a>.</p>
+		</div>
+	</div>
+}
+
+// field is one labelled text/tel/email input. It shows the validation error (an
+// alert-circle + message) when the field failed, else its help text. required
+// adds the attribute for assistive tech; the server is the source of truth.
+templ field(name, label, typ, placeholder, value string, errs intakeErrors, help string, required bool) {
+	<div class={ fieldClass(errs, name) }>
+		<label for={ "i-" + name }>{ label }</label>
+		<input id={ "i-" + name } name={ name } type={ typ } placeholder={ placeholder } value={ value } required?={ required }/>
+		if e := fieldErr(errs, name); e != "" {
+			<span class="help">@icon("circle-alert")
+			{ e }</span>
+		} else if help != "" {
+			<span class="help">{ help }</span>
+		}
+	</div>
+}
+
+// selectField is the "what happened" select — required, with a disabled
+// placeholder option, and error display wired to the shared validation.
+templ selectField(name, label string, opts []Option, value string, errs intakeErrors) {
+	<div class={ fieldClass(errs, name) }>
+		<label for={ "i-" + name }>{ label }</label>
+		<select id={ "i-" + name } name={ name } required>
+			for _, o := range opts {
+				<option value={ o.Value } selected?={ value == o.Value } disabled?={ o.Value == "" }>{ o.Label }</option>
+			}
+		</select>
+		if e := fieldErr(errs, name); e != "" {
+			<span class="help">@icon("circle-alert")
+			{ e }</span>
+		}
+	</div>
+}
+
+// selectFieldPlain is a non-validated select (preferred contact method).
+templ selectFieldPlain(name, label string, opts []Option, value string) {
+	<div class="field">
+		<label for={ "i-" + name }>{ label }</label>
+		<select id={ "i-" + name } name={ name }>
+			for _, o := range opts {
+				<option value={ o.Value } selected?={ value == o.Value }>{ o.Label }</option>
+			}
+		</select>
+	</div>
+}
+
+// textareaField is the optional free-text description.
+templ textareaField(name, label, placeholder, value string) {
+	<div class="field">
+		<label for={ "i-" + name }>{ label }</label>
+		<textarea id={ "i-" + name } name={ name } placeholder={ placeholder }>{ value }</textarea>
+	</div>
+}

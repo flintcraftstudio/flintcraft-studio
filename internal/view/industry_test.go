@@ -58,12 +58,51 @@ func TestChiropractorLandingRenders(t *testing.T) {
 	}
 }
 
+func TestLawFirmLandingRenders(t *testing.T) {
+	old := BaseURL
+	BaseURL = "https://flintcraftstudio.com"
+	defer func() { BaseURL = old }()
+
+	d := IndustryLandings["law-firm-website-design"]
+	var b strings.Builder
+	if err := IndustryLandingPage(d).Render(context.Background(), &b); err != nil {
+		t.Fatalf("render: %v", err)
+	}
+	html := b.String()
+
+	must := []string{
+		"earns the call when someone needs you most",          // humanized H1
+		"law firm website design",                             // keyword retained in body
+		"Montana Law Firm Website Design | FlintCraft Studio", // <title>
+		`rel="canonical" href="https://flintcraftstudio.com/law-firm-website-design"`,
+		`"@type":"Service"`,
+		`"serviceType":"law firm website design"`,
+		`"@type":"FAQPage"`,
+		`href="/demos/law/"`,         // links to the live law demo
+		`target="_blank"`,            // opens in new tab
+		"Granite Peak Trial Lawyers", // demo label
+		"Helena",                     // local SEO cities
+	}
+	for _, s := range must {
+		if !strings.Contains(html, s) {
+			t.Errorf("law landing missing %q", s)
+		}
+	}
+	if strings.Contains(html, "noindex") {
+		t.Error("landing page should not be noindex")
+	}
+	if n := strings.Count(html, "<h1"); n != 1 {
+		t.Errorf("expected exactly one <h1>, got %d", n)
+	}
+}
+
 func TestIndustriesHubRenders(t *testing.T) {
 	html := renderView(t, IndustriesHubPage())
 	for _, s := range []string{
 		"Built for your",
 		`href="/chiropractor-website-design"`, // live vertical links out
-		"Coming soon",                         // dentist / law placeholders
+		`href="/law-firm-website-design"`,     // law vertical now live
+		"Coming soon",                         // dentist placeholder remains
 		"Dentists",
 		"Law firms",
 	} {

@@ -55,6 +55,19 @@ func BuildChiroCSS() error {
 	)
 }
 
+// BuildLawCSS compiles the Granite Peak Trial Lawyers demo's stylesheet.
+// Second demo vertical; same per-demo pipeline as BuildChiroCSS — its own
+// Tailwind config + input carry the Granite Peak palette/type.
+func BuildLawCSS() error {
+	return sh.Run(
+		tailwindBinaryPath(),
+		"-c", "./tailwind/demos/law.config.js",
+		"-i", "./tailwind/demos/law.css",
+		"-o", "./demos/law/static/css/site.css",
+		"--minify",
+	)
+}
+
 // GenerateTempl runs templ generate
 func GenerateTempl() error {
 	return sh.Run("templ", "generate")
@@ -76,6 +89,9 @@ func Build() error {
 	if err := BuildChiroCSS(); err != nil {
 		return err
 	}
+	if err := BuildLawCSS(); err != nil {
+		return err
+	}
 	return BuildGo()
 }
 
@@ -88,6 +104,9 @@ func Dev() error {
 		return err
 	}
 	if err := BuildChiroCSS(); err != nil {
+		return err
+	}
+	if err := BuildLawCSS(); err != nil {
 		return err
 	}
 	return sh.RunV("go", "run", "./cmd/server")

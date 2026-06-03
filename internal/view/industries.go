@@ -89,6 +89,7 @@ func (d IndustryLanding) faqLD() structdata.FAQPage {
 // IndustryOrder is the display/registration order for industry landing pages.
 var IndustryOrder = []string{
 	"chiropractor-website-design",
+	"law-firm-website-design",
 }
 
 // IndustryLandings is the canonical set of industry landing pages, keyed by slug.
@@ -124,5 +125,37 @@ var IndustryLandings = map[string]IndustryLanding{
 		PreviewImage: "/demos/chiropractor/static/img/hero-1120.webp",
 		PreviewAlt:   "Preview of the Alpine Spine chiropractor demo website",
 		ContactRef:   "chiropractor-landing",
+	},
+	"law-firm-website-design": {
+		Slug:            "law-firm-website-design",
+		Profession:      "personal-injury",
+		Keyword:         "law firm website design",
+		H1:              "A law firm site that earns the call when someone needs you most.",
+		Lede:            "Custom website design for Montana personal-injury and trial firms — fast on a cracked phone, credible in seconds, and built to turn a free-case-review form into signed cases. No WordPress, no templates, no plugin upkeep.",
+		MetaTitle:       "Montana Law Firm Website Design",
+		MetaDescription: "Custom law firm website design for Montana personal-injury and trial firms. Free-case-review intake, review structured data, compliant disclaimers, near-instant load. See a live demo, then start a project.",
+		Intro: []string{
+			"Most law firm websites are a dated template with a stock gavel and a contact form that goes nowhere — slow, generic, and indistinguishable from the settlement mill down the street. The hurt person scrolling on their phone can't tell you apart, so they call whoever loads first.",
+			"We build personal-injury sites from scratch: a site that loads in well under a second, reads as a serious trial firm in the first screen, and turns a free-case-review form into a real intake — with the attorney-advertising disclaimers built into the page, not bolted on.",
+		},
+		KeyPoints: []IndustryPoint{
+			{"Free-case-review intake that actually converts", "A calm, reassuring intake form that validates instantly and sets expectations — \"an attorney will call you within one business day.\" The moment most firm sites lose the lead, yours captures it."},
+			{"Your reviews and results, in your own site's data", "Client reviews and your aggregate rating are written into the site's own structured data so Google can show them in search — not rented from a plugin. Results stay modest and sit under the disclaimers your bar requires."},
+			{"Compliance built into the page", "The attorney-advertising notice, \"prior results do not guarantee a similar outcome,\" and the no-attorney-client-relationship language live in the structured content — easy for your counsel to review, not buried in a plugin's settings."},
+			{"Fast on a phone, in a crisis", "The person who needs you is hurt, stressed, and on one bar of signal. Sub-second loads, tap-to-call in the first screen, near-perfect Lighthouse, and full accessibility — built in, not patched on."},
+		},
+		Cities: []string{"Helena", "Bozeman", "Missoula", "Billings", "Great Falls", "Kalispell"},
+		FAQ: []IndustryFAQ{
+			{"How much does a law firm website cost?", "Every project is custom, so pricing depends on scope — but it's a simple, predictable monthly relationship that includes hosting, maintenance, SEO, and updates, not a surprise invoice every time something changes. The first conversation is free; we'll give you an honest read before you commit to anything."},
+			{"Do you only work with firms in Helena?", "No — we're based in Helena, Montana and work with personal-injury and trial firms across the state, including Bozeman, Missoula, Billings, Great Falls, and Kalispell. The work is remote-friendly and the relationship is hands-on either way."},
+			{"Can clients request a case review online?", "Yes. The demo includes a free-case-review intake form with instant validation and a warm confirmation that sets a callback expectation. It can notify your intake team or connect to your case-management tool — your call."},
+			{"Will the site meet attorney-advertising rules?", "We build the required notices — attorney advertising, \"prior results do not guarantee a similar outcome,\" and the no-attorney-client-relationship language — directly into the page as clearly-marked text your own counsel reviews and approves before launch. The structure keeps compliance easy to maintain, but the final review is always your firm's."},
+		},
+		DemoURL:      "/demos/law/",
+		DemoLabel:    "Granite Peak Trial Lawyers",
+		DemoCaption:  "A complete sample site we built for a (fictional) Helena personal-injury firm. Click through the whole thing — the free-case-review form works.",
+		PreviewImage: "/demos/law/static/img/demo-preview.webp",
+		PreviewAlt:   "Preview of the Granite Peak Trial Lawyers demo website",
+		ContactRef:   "law-landing",
 	},
 }

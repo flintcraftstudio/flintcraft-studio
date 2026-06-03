@@ -1,0 +1,281 @@
+package law
+
+// heroImgSizes tells the browser the hero image's rendered width by breakpoint:
+// it's the right column (~half the 1200px max) on desktop, full-width on mobile
+// where the media stacks above the text.
+const heroImgSizes = "(min-width: 900px) 600px, 100vw"
+
+// sectionHead is the editorial section masthead: a brass eyebrow + serif title
+// on the left, the supporting intro hung on the right (it stacks on mobile).
+templ sectionHead(eyebrow, title, intro string) {
+	<div class="sec-head-row">
+		<div>
+			<p class="eyebrow">{ eyebrow }</p>
+			<h2 class="sec-head">{ title }</h2>
+		</div>
+		<div style="max-width:56ch">
+			<p class="sec-intro">{ intro }</p>
+		</div>
+	</div>
+}
+
+// Hero is the full-bleed asymmetric masthead: the worried-person headline, the
+// trial-firm + no-fee promise, dual CTA (free review / call now), and the
+// editorial stats strip across the bottom.
+templ Hero(c Content, prefix string) {
+	<header class="hero2">
+		<div class="hero2-grid">
+			<div class="hero2-text">
+				<p class="eyebrow tick">{ c.HeroEyebrow }</p>
+				<h1>{ c.HeroTitle }</h1>
+				<div class="rule"></div>
+				<p class="sub">{ c.HeroSub }</p>
+				<div class="cta">
+					<a class="btn btn-primary btn-lg" href="#review">@icon("shield-check")
+					Free Case Review</a>
+					<div class="call-wrap">
+						<a class="btn btn-secondary btn-lg" href={ telURL(c) }>@icon("phone")
+						Call now · { c.Firm.PhoneLabel }</a>
+						<span class="call-note">@icon("clock")
+						Available 24/7 — nights &amp; weekends</span>
+					</div>
+				</div>
+				<div class="reassure">
+					<span>@icon("circle-check-big")
+					No fee unless we win</span>
+					<span>@icon("circle-check-big")
+					Free, confidential review</span>
+					<span>@icon("circle-check-big")
+					No obligation</span>
+				</div>
+			</div>
+			<div class="hero2-media">
+				if c.HeroImage != "" {
+					<img
+						class="hero2-img"
+						src={ prefix + "/static/img/" + c.HeroImage + "-1120.webp" }
+						srcset={ prefix + "/static/img/" + c.HeroImage + "-600.webp 600w, " + prefix + "/static/img/" + c.HeroImage + "-1120.webp 1120w" }
+						sizes={ heroImgSizes }
+						alt={ c.HeroImageAlt }
+						width="1120"
+						height="747"
+						loading="eager"
+						fetchpriority="high"
+						decoding="async"
+					/>
+				} else {
+					@photoPanel("mountain", c.HeroImageAlt, "")
+				}
+			</div>
+		</div>
+		<div class="hero2-stats">
+			<div class="wrap">
+				for _, s := range c.Stats {
+					<div class="hstat">
+						<div class="n">{ s.Number }</div>
+						<div class="l">{ s.Label }</div>
+					</div>
+				}
+			</div>
+		</div>
+	</header>
+}
+
+// MoneyFear is the contingency-fee reassurance block — the highest-leverage
+// trust moment, set as a bold typographic statement on the dark anchor.
+templ MoneyFear(c Content) {
+	<section class="money2 section" id="cost">
+		<div class="wrap">
+			<p class="eyebrow">No risk to you</p>
+			<h2>{ c.MoneyTitle[0] } <em>{ c.MoneyTitle[1] }</em></h2>
+			<p class="body">{ c.MoneyBody }</p>
+			<div class="m2-assure">
+				for _, p := range c.MoneyPoints {
+					<div>@icon(p.Icon)
+					{ p.Text }</div>
+				}
+			</div>
+			<a class="btn btn-primary btn-lg" href="#review">@icon("arrow-right")
+			Start your free case review</a>
+		</div>
+	</section>
+}
+
+// PracticeAreas is the editorial index of case types — full-width clickable
+// rows, each leading to the free-review form.
+templ PracticeAreas(c Content) {
+	<section class="section" id="practice">
+		<div class="wrap">
+			@sectionHead("What we handle", "The cases we take to court", "If someone else's carelessness left you hurt, you're in the right place. We focus on these cases — and we prepare every one as if it's going to trial.")
+			<div class="pindex">
+				for _, p := range c.PracticeAreas {
+					<a class="prow" href="#review">
+						<span class="pic">@icon(p.Icon)</span>
+						<span class="mid">
+							<span class="ttl">{ p.Title }</span>
+							<span class="desc">{ p.Desc }</span>
+						</span>
+						<span class="go">@icon("arrow-right")</span>
+					</a>
+				}
+			</div>
+		</div>
+	</section>
+}
+
+// HowItWorks is the connected timeline that reduces overwhelm after a crash.
+templ HowItWorks(c Content) {
+	<section class="section" id="how" style="background:var(--stone-100)">
+		<div class="wrap">
+			@sectionHead("How it works after a crash", "We carry the burden, so you don't have to", "You're already dealing with enough. From the first call, the weight of the insurance company and the paperwork shifts to us.")
+			<div class="timeline" data-reveal>
+				for i, s := range c.Steps {
+					<div class="tstep">
+						<div class="mark">{ itoa(i + 1) }</div>
+						<h4>{ s.Title }</h4>
+						<p>{ s.Body }</p>
+					</div>
+				}
+			</div>
+			<div class="sec-cta">
+				<a class="btn btn-primary btn-lg" href="#review">@icon("phone")
+				Talk to an attorney free</a>
+			</div>
+		</div>
+	</section>
+}
+
+// Attorneys is the three-lawyer grid — the "real trial lawyers, not a mill"
+// proof. Each card shows a headshot (or a labelled placeholder until shot).
+templ Attorneys(c Content, prefix string) {
+	<section class="section" id="attorneys">
+		<div class="wrap">
+			@sectionHead("The people you'll work with", "Real trial lawyers, not a settlement mill", "You won't be handed off to a call center. You'll work with the attorney building your case — someone you can reach and trust.")
+			<div class="grid-3" data-reveal>
+				for _, a := range c.Attorneys {
+					<article class="card at">
+						if a.Photo != "" {
+							<div class="at-ph">
+								<img src={ prefix + "/static/img/" + a.Photo } alt={ a.PhotoAlt } width="640" height="576" loading="lazy" decoding="async"/>
+							</div>
+						} else {
+							@photoPanel("user-round", a.PhotoAlt, "")
+						}
+						<div class="body">
+							<h3>{ a.Name }</h3>
+							<div class="role">{ a.Role }</div>
+							<div class="cred">@icon("award")
+							{ a.Credentials }</div>
+							<p>{ a.Bio }</p>
+							<a class="lk" href="#review">Read more @icon("arrow-right")</a>
+						</div>
+					</article>
+				}
+			</div>
+		</div>
+	</section>
+}
+
+// Results is the modest, credible outcomes section. The story leads; the figure
+// stays quiet. The whole display sits under a clear, visible disclaimer.
+templ Results(c Content) {
+	<section class="section" id="results">
+		<div class="wrap">
+			@sectionHead("Recent outcomes", "We win hard cases", "A few representative matters, told plainly. The story is the fight — not the figure.")
+			<div class="grid-3 res-grid">
+				for _, r := range c.Results {
+					<article class="card res">
+						<div class="type">@icon("file-text")
+						{ r.Type }</div>
+						<p class="story">{ r.Story }</p>
+						<div class="fig">
+							<span class="lab">{ r.FigLabel }</span>
+							<span class="amt">{ r.FigValue }</span>
+						</div>
+					</article>
+				}
+			</div>
+			<p class="results-disc">@icon("info")
+			{ c.ResultsDisc }</p>
+		</div>
+	</section>
+}
+
+// Testimonials renders client reviews in the PI arc. The same data feeds the
+// JSON-LD Review nodes in the page head.
+templ Testimonials(c Content) {
+	<section class="section" id="reviews" style="background:var(--stone-100)">
+		<div class="wrap">
+			@sectionHead("In their words", "People we've stood beside", "Real clients, real outcomes. The arc shows up again and again — overwhelmed at first, then taken care of.")
+			<div class="grid-3">
+				for _, r := range c.Reviews {
+					<article class="card tst">
+						<div class="stars" role="img" aria-label={ ratingLabel(r.Rating) }>
+							for i := 0; i < r.Rating; i++ {
+								@icon("star")
+							}
+						</div>
+						<blockquote>&#34;{ r.Quote }&#34;</blockquote>
+						<div class="who">
+							<div class="av">{ r.Initials }</div>
+							<div>
+								<div class="nm">{ r.Name }</div>
+								<div class="mt">{ r.Location }</div>
+							</div>
+						</div>
+					</article>
+				}
+			</div>
+			<div class="sec-cta">
+				<a class="btn btn-primary btn-lg" href="#review">@icon("shield-check")
+				Get your free case review</a>
+			</div>
+		</div>
+	</section>
+}
+
+// Location is the visit/availability block: office, hours, 24/7 phone, getting
+// here, and a map placeholder.
+templ Location(c Content) {
+	<section class="section loc" id="contact">
+		<div class="wrap">
+			@sectionHead("Visit or call", "We're right here in Helena", "Stop by the office or call any time — there's no wrong way to reach us.")
+			<div class="grid">
+				<div class="details">
+					for _, row := range c.LocRows {
+						<div class="det-row">
+							<div class="det-ic">@icon(row.Icon)</div>
+							<div>
+								<h4>{ row.Heading }</h4>
+								<p>
+									if row.LinkTel {
+										<a href={ telURL(c) }>{ row.LinkText }</a> { " " + row.Body }
+									} else {
+										{ row.Body }
+										if row.LinkText != "" {
+											<br/>
+											<a href={ templ.SafeURL(row.LinkHref) }>{ row.LinkText }</a>
+										}
+									}
+								</p>
+							</div>
+						</div>
+					}
+				</div>
+				<div class="loc-map" role="img" aria-label={ c.Firm.MapAltText }>
+					<div class="map-field" aria-hidden="true">
+						<div class="park"></div>
+						<div class="roads"></div>
+						<div class="roads2"></div>
+						<div class="hwy"></div>
+						<div class="river"></div>
+					</div>
+					<div class="map-pin" aria-hidden="true">
+						<span class="pin">@icon("mountain")</span>
+						<span class="tag">{ c.Firm.Name }</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+}

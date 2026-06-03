@@ -54,6 +54,31 @@ buried in a page builder's tangle. Every change is tracked, reversible, and easy
 to reason about. If you want to update an hour or a phone number, it's a small,
 safe edit, not a gamble.
 
+### For a personal-injury firm specifically
+
+A few of these matter even more for a PI practice:
+
+- **Someone finds you in a crisis, on a phone.** The person who needs you most is
+  often hurt, stressed, and on a cracked phone screen with one bar of signal. A
+  site that loads in milliseconds and has a tap-to-call number in the first
+  screen is the difference between a call and a bounce.
+- **Your reviews and rating are yours.** The star rating and client reviews that
+  show in Google come from structured data written into your own pages — not a
+  review plugin you rent. You can change firms, hosts, or designers and take it
+  with you.
+- **Compliance is baked into the content, not bolted on.** Attorney advertising
+  is regulated: the "prior results do not guarantee a similar outcome" language
+  sits right with the results, and the attorney-advertising / no-attorney-client
+  notice lives in the footer — part of the structured page, easy for your own
+  counsel to review and update, not buried in a plugin's settings.
+- **No plugin sprawl to break before a big intake week.** One compiled program,
+  nothing to patch on Tuesday night, no white-screen surprise the morning a
+  referral sends you traffic.
+
+> This is a fictional demo. The results, reviews, and disclaimers are
+> placeholders; your real outcomes and your counsel's required notices go in
+> their place before launch.
+
 ---
 
 **The honest version:** a WordPress template gets you online. This gets you a

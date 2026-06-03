@@ -20,13 +20,18 @@ import (
 	"github.com/a-h/templ"
 )
 
-// Submission is one parsed intake form post.
+// Submission is one parsed intake form post. Name/Email/Phone/Reason/Message
+// are shared across every vertical; PatientType, When and Contact are optional
+// extras some verticals collect (the law demo asks "when did it happen" and
+// "best way to reach you"). Unused fields stay empty and validation ignores them.
 type Submission struct {
 	Name        string `json:"name"`
 	Email       string `json:"email"`
 	Phone       string `json:"phone"`
 	Reason      string `json:"reason"`
-	PatientType string `json:"patientType"` // "new" | "existing"
+	PatientType string `json:"patientType,omitempty"` // chiropractor: "new" | "existing"
+	When        string `json:"when,omitempty"`        // law: when the incident happened
+	Contact     string `json:"contact,omitempty"`     // law: preferred contact method
 	Message     string `json:"message"`
 }
 
@@ -49,6 +54,8 @@ func Parse(r *http.Request) Submission {
 		Phone:       strings.TrimSpace(r.FormValue("phone")),
 		Reason:      strings.TrimSpace(r.FormValue("reason")),
 		PatientType: strings.TrimSpace(r.FormValue("ptype")),
+		When:        strings.TrimSpace(r.FormValue("when")),
+		Contact:     strings.TrimSpace(r.FormValue("contact")),
 		Message:     strings.TrimSpace(r.FormValue("message")),
 	}
 }

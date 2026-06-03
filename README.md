@@ -55,10 +55,12 @@ internal/
   ui/                           # SHARED: skip link + reused icons
 demos/                          # example/demo sites (see "Demo Sites" below)
   chiropractor/                 # Alpine Spine — first vertical (the template)
+  law/                          # Granite Peak Trial Lawyers — second vertical
 tailwind/
   tailwind.config.js            # color palette, fonts, content paths
   input.css                     # font imports, Tailwind directives
   demos/chiropractor.{css,config.js} # per-demo Tailwind input + config
+  demos/law.{css,config.js}     # per-demo Tailwind input + config (law)
 web/static/
   css/site.css                  # compiled Tailwind output
   js/                           # HTMX, Alpine.js, custom scripts
@@ -73,8 +75,9 @@ sub-second loads, near-perfect Lighthouse, clean structured data, full
 accessibility, all served from this one Go binary.
 
 The first vertical, **`demos/chiropractor/`** (Alpine Spine), is the template
-the others copy. The series only pays off if shared code stays shared and
-per-site code stays isolated:
+the others copy; **`demos/law/`** (Granite Peak Trial Lawyers) is the second,
+built as a copy-reskin-recontent of it. The series only pays off if shared code
+stays shared and per-site code stays isolated:
 
 - **Shared** (in `internal/`): the intake handler + validation (`intake`),
   JSON-LD helpers (`structdata`), per-demo head theming (`theme`), and a11y /
@@ -88,17 +91,21 @@ Each demo exposes a single `Register(mux, prefix, baseURL)` wired from
 a path prefix (e.g. `/demos/chiropractor/`); switching to a per-demo subdomain
 later only changes the prefix passed to `Register`.
 
-**To add the next vertical** (e.g. law):
+**To add the next vertical** (e.g. dentist) — `demos/law/` is a worked example
+of these steps:
 
-1. `cp -r demos/chiropractor demos/law` and rewrite `content.go` + the section
-   copy/structure for that profession (share the plumbing, not the page shape).
-2. Copy `tailwind/demos/chiropractor.{css,config.js}` to `…/law.{css,config.js}`
-   and swap the palette tokens; add a `BuildLawCSS` mage target mirroring
-   `BuildChiroCSS`.
-3. Add `law.Register(mux, "/demos/law", cfg.BaseURL)` in `cmd/server/main.go`.
+1. `cp -r demos/chiropractor demos/dentist` and rewrite `content.go` + the
+   section copy/structure for that profession (share the plumbing, not the page
+   shape). PI-specific structures the law demo added — results cards with
+   disclaimers, contingency-fee messaging, an attorney-advertising footer — live
+   in `demos/law/` only; don't force them into the shared packages.
+2. Copy `tailwind/demos/chiropractor.{css,config.js}` to `…/dentist.{css,config.js}`
+   and swap the palette tokens; add a `BuildDentistCSS` mage target mirroring
+   `BuildChiroCSS` / `BuildLawCSS` (and wire it into `Build` + `Dev`).
+3. Add `dentist.Register(mux, "/demos/dentist", cfg.BaseURL)` in `cmd/server/main.go`.
 
-See `demos/chiropractor/README.md` for that demo's specifics and
-`docs/why-not-wordpress.md` for the prospect-facing pitch.
+See `demos/chiropractor/README.md` and `demos/law/README.md` for each demo's
+specifics, and `docs/why-not-wordpress.md` for the prospect-facing pitch.
 
 ## Environment Variables
 

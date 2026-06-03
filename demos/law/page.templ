@@ -1,0 +1,323 @@
+package law
+
+import (
+	"github.com/firefly-software-mt/standard-template/internal/structdata"
+	"github.com/firefly-software-mt/standard-template/internal/theme"
+	"github.com/firefly-software-mt/standard-template/internal/ui"
+)
+
+// pageState carries per-request rendering context (route prefix, public origin,
+// theme, and any intake form state for the no-JS fallback) through the page.
+type pageState struct {
+	prefix  string
+	baseURL string
+	theme   theme.Theme
+	intake  *intakeState
+}
+
+// intakeState reflects a submitted intake form for the full-page (no-JS) path.
+type intakeState struct {
+	sub     submission
+	errs    intakeErrors
+	success bool
+}
+
+// Page is the demo's full single-scroll homepage. It owns its own <head>
+// (Spectral/Libre Franklin, JSON-LD, demo stylesheet) rather than reusing the
+// marketing layout, because this is a distinct brand.
+templ Page(c Content, st pageState) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<!-- Demo: keep the fictional firm out of search so the marketing landing pages stay the canonical ranking target. -->
+			<meta name="robots" content="noindex, follow"/>
+			<title>{ c.Firm.LegalName } · Helena, MT</title>
+			<meta name="description" content={ "Hurt in a crash in Helena? " + c.HeroSub }/>
+			<link rel="icon" href="/static/favicon/favicon.svg" type="image/svg+xml"/>
+			@theme.Head(st.theme)
+			if c.HeroImage != "" {
+				<link
+					rel="preload"
+					as="image"
+					href={ st.prefix + "/static/img/" + c.HeroImage + "-1120.webp" }
+					imagesrcset={ st.prefix + "/static/img/" + c.HeroImage + "-600.webp 600w, " + st.prefix + "/static/img/" + c.HeroImage + "-1120.webp 1120w" }
+					imagesizes={ heroImgSizes }
+					fetchpriority="high"
+				/>
+			}
+			@structdata.Script(c.jsonLD(st.baseURL))
+			<script src="/static/js/htmx.min.js" defer></script>
+			<script src="/static/js/alpine.min.js" defer></script>
+		</head>
+		<body>
+			@ui.SkipLink("top", "Skip to content")
+			@ui.DemoBar("/contact?ref=law-demo")
+			@UtilityStrip(c)
+			@Nav(c, st.prefix)
+			<main id="top">
+				@Hero(c, st.prefix)
+				@MoneyFear(c)
+				@PracticeAreas(c)
+				@HowItWorks(c)
+				@Attorneys(c, st.prefix)
+				@Results(c)
+				@Testimonials(c)
+				@Book(c, st)
+				@Location(c)
+			</main>
+			@Footer(c, st.prefix)
+			@celebrateToast()
+			@revealScript()
+			@celebrateScript()
+		</body>
+	</html>
+}
+
+// celebrateToast is the FlintCraft nudge shown after a successful case-review
+// submission — it turns the demo's peak moment into a soft pitch. Hidden until
+// fcCelebrate() reveals it. (Demo chrome, like the demo bar; links to FlintCraft
+// with the law-demo referral tag so the lead is attributed.)
+templ celebrateToast() {
+	<div id="fcToast" class="fc-toast" role="status" aria-live="polite" hidden>
+		<div class="fc-toast__body">
+			<strong>That's how easy a case review feels on a FlintCraft site.</strong>
+			<span>Want one like this for your firm? Let's talk about your new site.</span>
+		</div>
+		<a class="fc-toast__cta" href="/contact?ref=law-demo">Talk to FlintCraft &rarr;</a>
+		<button class="fc-toast__x" type="button" aria-label="Dismiss" data-fc-toast-close>&times;</button>
+	</div>
+}
+
+// celebrateScript fires a confetti burst + reveals the toast when the intake
+// success state appears — covering both the htmx swap (htmx:afterSettle) and the
+// no-JS full-page fallback (DOMContentLoaded). Confetti is skipped under
+// prefers-reduced-motion; the toast still shows. Mirrors the chiropractor demo,
+// keyed to this demo's success class (.form-success) and brass/evergreen palette.
+templ celebrateScript() {
+	<script>
+		(function () {
+			var done = false;
+			window.fcCelebrate = function () {
+				if (done) return;
+				done = true;
+				var toast = document.getElementById('fcToast');
+				if (toast) {
+					toast.hidden = false;
+					requestAnimationFrame(function () { toast.classList.add('is-in'); });
+					setTimeout(function () {
+						toast.classList.remove('is-in');
+						setTimeout(function () { toast.hidden = true; }, 450);
+					}, 11000);
+				}
+				var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+				if (reduce) return;
+				var colors = ['#8f6429', '#a57633', '#c9a86a', '#373f3c', '#2c3431', '#f1e7d3'];
+				var wrap = document.createElement('div');
+				wrap.className = 'fc-confetti';
+				wrap.setAttribute('aria-hidden', 'true');
+				for (var i = 0; i < 90; i++) {
+					var p = document.createElement('span');
+					p.className = 'fc-confetti__bit';
+					var sz = 6 + Math.random() * 7;
+					p.style.left = (Math.random() * 100) + 'vw';
+					p.style.width = sz + 'px';
+					p.style.height = (sz * 0.5) + 'px';
+					p.style.background = colors[i % colors.length];
+					p.style.setProperty('--dx', ((Math.random() * 2 - 1) * 28) + 'vw');
+					p.style.setProperty('--rot', (Math.random() * 900 - 450) + 'deg');
+					p.style.animationDelay = (Math.random() * 0.35) + 's';
+					p.style.animationDuration = (2.6 + Math.random() * 1.8) + 's';
+					wrap.appendChild(p);
+				}
+				document.body.appendChild(wrap);
+				setTimeout(function () { wrap.remove(); }, 5200);
+			};
+			function check() { if (document.querySelector('.form-success')) window.fcCelebrate(); }
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', check);
+			} else {
+				check();
+			}
+			document.body.addEventListener('htmx:afterSettle', check);
+			document.addEventListener('click', function (e) {
+				if (e.target.closest && e.target.closest('[data-fc-toast-close]')) {
+					var el = document.getElementById('fcToast');
+					if (!el) return;
+					el.classList.remove('is-in');
+					setTimeout(function () { el.hidden = true; }, 450);
+				}
+			});
+		})();
+	</script>
+}
+
+// icon renders a Lucide glyph as an inline SVG. Size and color come from CSS in
+// each context (e.g. `.btn svg{width:18px}`), so one 24×24 stroke wrapper fits
+// every use; the filled stars get their fill from `.tst .stars svg` in CSS.
+templ icon(name string) {
+	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+		@templ.Raw(iconInner(name))
+	</svg>
+}
+
+// photoPanel is a labelled placeholder for photography that should be shot real
+// before launch. It is an accessible image region (role=img + aria-label), not
+// a designer note — the README lists each slot and its intended subject.
+templ photoPanel(iconName, label, class string) {
+	<div class={ "ph " + class } role="img" aria-label={ label }>
+		@icon(iconName)
+	</div>
+}
+
+// UtilityStrip is the firm's thin evergreen top bar: availability + locale +
+// the tappable 24/7 phone number.
+templ UtilityStrip(c Content) {
+	<div class="utility">
+		<div class="wrap">
+			<div class="u-left">
+				<b>Available 24/7</b><span>·</span><span>No fee unless we win</span>
+			</div>
+			<div class="u-right">
+				<a href="#contact">@icon("map-pin")
+				{ c.Firm.Locality }, Montana</a>
+				<a class="u-phone" href={ telURL(c) }>@icon("phone")
+				{ c.Firm.PhoneLabel }</a>
+			</div>
+		</div>
+	</div>
+}
+
+// Nav is the sticky primary nav plus the mobile drawer. Alpine drives only the
+// drawer open/close — the single piece of client state on the page besides htmx.
+templ Nav(c Content, prefix string) {
+	<div x-data="{ open: false }">
+		<nav class="nav">
+			<div class="wrap">
+				<a class="brand" href="#top">
+					<img src={ prefix + "/static/img/logo-mark.png" } alt="Granite Peak mark" width="38" height="38"/>
+					<span>
+						<span class="n">{ c.Firm.Name }</span>
+						<span class="t" style="display:block">{ c.Firm.Suffix }</span>
+					</span>
+				</a>
+				<div class="nav-links">
+					<a href="#practice">Practice Areas</a>
+					<a href="#attorneys">Our Attorneys</a>
+					<a href="#results">Results</a>
+					<a href="#reviews">Reviews</a>
+					<a href="#contact">Contact</a>
+				</div>
+				<div class="nav-right">
+					<a class="nav-phone" href={ telURL(c) }>
+						<span class="lab">Call us 24/7</span>
+						<span class="num">{ c.Firm.PhoneLabel }</span>
+					</a>
+					<a class="btn btn-primary" href="#review">@icon("shield-check")
+					Free Case Review</a>
+					<button class="nav-burger" type="button" aria-label="Open menu" x-on:click="open = true" x-bind:aria-expanded="open ? 'true' : 'false'">
+						<span style="width:26px;height:26px;display:grid;place-items:center">@icon("menu")</span>
+					</button>
+				</div>
+			</div>
+		</nav>
+		<div class="mmenu" x-bind:class="{ 'open': open }" x-on:click="open = false">
+			<div class="panel" x-on:click.stop>
+				<button class="closex" type="button" aria-label="Close menu" x-on:click="open = false">
+					<span style="width:26px;height:26px;display:grid;place-items:center">@icon("x")</span>
+				</button>
+				<a href="#practice" x-on:click="open = false">Practice Areas</a>
+				<a href="#attorneys" x-on:click="open = false">Our Attorneys</a>
+				<a href="#results" x-on:click="open = false">Results</a>
+				<a href="#reviews" x-on:click="open = false">Reviews</a>
+				<a href="#contact" x-on:click="open = false">Contact</a>
+				<a href={ telURL(c) } style="color:var(--brass-700);font-weight:600" x-on:click="open = false">Call { c.Firm.PhoneLabel } · 24/7</a>
+				<div style="margin-top:16px">
+					<a class="btn btn-primary" href="#review" style="width:100%;justify-content:center" x-on:click="open = false">@icon("shield-check")
+					Free Case Review</a>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+// Footer is the dark, substantial footer: firm details, nav, closing line, and
+// the required attorney-advertising / disclaimer notices.
+templ Footer(c Content, prefix string) {
+	<footer class="footer">
+		<div class="wrap">
+			<div class="top">
+				<div class="brand">
+					<img src={ prefix + "/static/img/logo-mark-ondark.png" } alt="Granite Peak mark" width="40" height="40"/>
+					<div class="n">{ c.Firm.Name }</div>
+					<div class="t">{ c.Firm.Suffix }</div>
+					<address>
+						{ c.Firm.Street }<br/>
+						{ c.Firm.Locality }, { c.Firm.Region } { c.Firm.PostalCode }<br/>
+						<a href={ telURL(c) }>{ c.Firm.PhoneLabel }</a> · answered 24/7<br/>
+						<a href={ templ.SafeURL("mailto:" + c.Firm.Email) }>{ c.Firm.Email }</a>
+					</address>
+					<p class="closing">{ c.Firm.Closing }</p>
+				</div>
+				<div>
+					<h5>Practice Areas</h5>
+					<ul>
+						<li><a href="#practice">Auto Accidents</a></li>
+						<li><a href="#practice">Truck &amp; Commercial Vehicle</a></li>
+						<li><a href="#practice">Workplace Injury</a></li>
+						<li><a href="#practice">Wrongful Death</a></li>
+					</ul>
+				</div>
+				<div>
+					<h5>Firm</h5>
+					<ul>
+						<li><a href="#attorneys">Our Attorneys</a></li>
+						<li><a href="#results">Results</a></li>
+						<li><a href="#reviews">Reviews</a></li>
+						<li><a href="#how">How It Works</a></li>
+					</ul>
+				</div>
+				<div>
+					<h5>Get Help Now</h5>
+					<ul>
+						<li><a href={ telURL(c) }>Call { c.Firm.PhoneLabel }</a></li>
+						<li><a href="#review">Free Case Review</a></li>
+						<li><a href="#contact">Directions to our office</a></li>
+						<li><a href="#contact">Hours &amp; parking</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="legal">
+				<p>{ c.LegalNotice }</p>
+				<div class="row2">
+					<span>© 2026 { c.Firm.LegalName } · { c.Firm.Locality }, Montana</span>
+					<span>Privacy Policy · Terms · Disclaimer · Site Map</span>
+				</div>
+			</div>
+		</div>
+	</footer>
+}
+
+// revealScript arms staggered scroll reveals for [data-reveal] containers. It's
+// JS-armed: with no JS the content is fully visible (never hidden), and the
+// reduced-motion override in the stylesheet shows everything instantly.
+templ revealScript() {
+	<script>
+		(function () {
+			var els = document.querySelectorAll('[data-reveal]');
+			if (!els.length) return;
+			els.forEach(function (el) { el.classList.add('reveal-armed'); });
+			if (!('IntersectionObserver' in window)) {
+				els.forEach(function (el) { el.classList.add('reveal-in'); });
+				return;
+			}
+			var io = new IntersectionObserver(function (entries) {
+				entries.forEach(function (e) {
+					if (e.isIntersecting) { e.target.classList.add('reveal-in'); io.unobserve(e.target); }
+				});
+			}, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+			els.forEach(function (el) { io.observe(el); });
+		})();
+	</script>
+}

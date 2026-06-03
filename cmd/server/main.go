@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/firefly-software-mt/standard-template/demos/chiropractor"
+	"github.com/firefly-software-mt/standard-template/demos/law"
 	"github.com/firefly-software-mt/standard-template/internal/config"
 	"github.com/firefly-software-mt/standard-template/internal/handler"
 	"github.com/firefly-software-mt/standard-template/internal/mail"
@@ -82,8 +83,10 @@ func main() {
 		}
 	}
 
-	// Demo / example sites (first of a series; see demos/).
+	// Demo / example sites (a growing series; see demos/). Each vertical is one
+	// Register call — copy-reskin-recontent of the one above it.
 	chiropractor.Register(mux, "/demos/chiropractor", cfg.BaseURL)
+	law.Register(mux, "/demos/law", cfg.BaseURL)
 
 	// Sitemap, robots & health
 	mux.Handle("GET /sitemap.xml", handler.Sitemap(cfg.BaseURL))

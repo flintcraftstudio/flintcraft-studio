@@ -41,6 +41,10 @@ func ReferralLabel(ref string) string {
 		return "the Alpine Spine chiropractor demo"
 	case "chiropractor-landing":
 		return "our chiropractor website page"
+	case "law-demo":
+		return "the Granite Peak Trial Lawyers demo"
+	case "law-landing":
+		return "our law firm website page"
 	case "industries-hub":
 		return "our industries page"
 	default:
