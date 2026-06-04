@@ -10,7 +10,8 @@ COPY . .
 RUN curl -sL https://github.com/tailwindlabs/tailwindcss/releases/download/v3.4.17/tailwindcss-linux-x64 -o /usr/local/bin/tailwindcss && \
     chmod +x /usr/local/bin/tailwindcss && \
     tailwindcss -c tailwind/tailwind.config.js -i tailwind/input.css -o web/static/css/site.css --minify && \
-    tailwindcss -c tailwind/demos/chiropractor.config.js -i tailwind/demos/chiropractor.css -o demos/chiropractor/static/css/site.css --minify
+    tailwindcss -c tailwind/demos/chiropractor.config.js -i tailwind/demos/chiropractor.css -o demos/chiropractor/static/css/site.css --minify && \
+    tailwindcss -c tailwind/demos/law.config.js -i tailwind/demos/law.css -o demos/law/static/css/site.css --minify
 
 # Generate templ and build Go binary
 RUN go install github.com/a-h/templ/cmd/templ@latest && \

@@ -794,3 +794,25 @@ form.htmx-request button[type="submit"]{opacity:.85;cursor:progress}
 @media(max-width:620px) and (prefers-reduced-motion:reduce){
   .mcall{transition:none}
 }
+
+/* ---------- narrow-screen overflow guards ----------
+   On phones the utility strip's nowrap content (locale + "no fee unless we win")
+   was forcing the page wider than the viewport. Keep only "Available 24/7" + the
+   tappable phone there; the locale lives in the hero/footer anyway. Long
+   unbreakable strings (the intake email) must wrap, and the mobile call-bar
+   buttons may shrink below their content width so they never overflow. */
+@media(max-width:620px){
+  .utility .u-left span{display:none}
+  .utility .u-right a:not(.u-phone){display:none}
+  .utility .u-right{gap:0}
+}
+.footer address,
+.footer address a{overflow-wrap:anywhere}
+.mcall__btn{min-width:0}
+
+/* The footer's brand column reuses class="brand", which the nav defines as a
+   flex row (.brand{display:flex}); that laid the logo, name, address, and
+   closing line side-by-side — cramming them and forcing the page wider than a
+   narrow phone. The footer brand is a vertical block. */
+.footer .brand{display:block}
+.footer .top > *{min-width:0}

@@ -759,6 +759,9 @@ button[type="submit"]:disabled { opacity: 0.75; cursor: progress; }
 }
 @media (max-width: 1024px) {
   .nav__links, .nav__phone { display: none; }
+  /* The "Book Appointment" CTA lives in the mobile drawer (.mob-cta) once the
+     hamburger appears — keeping it in the bar too overflows the row on phones. */
+  .nav__right .btn { display: none; }
   .nav__menu-btn { display: inline-flex; }
 }
 @media (max-width: 920px) {
