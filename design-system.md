@@ -20,41 +20,44 @@
 
 ## Color Tokens
 
-All color decisions flow from five named tokens. Do not introduce colors outside this set.
+All color decisions flow from these eight tokens (Tailwind `fc-*`, defined in `tailwind/tailwind.config.js`), plus plain white for raised light surfaces. Do not introduce colors outside this set.
 
 | Token | Hex | Role |
 |---|---|---|
-| `--fc-obsidian` | `#232226` | Primary dark background · primary text on light |
-| `--fc-flint` | `#2e3338` | Dark surface (cards, nav bar) |
-| `--fc-ember` | `#cc5e1a` | Primary accent — use on light backgrounds |
-| `--fc-spark` | `#db7f36` | Accent on dark backgrounds (Obsidian/Flint) |
-| `--fc-birchwood` | `#faf9f7` | Primary light background |
-| `--fc-parchment` | `#f0ece5` | Light surface (cards, section backgrounds) |
-| `--fc-trail-dust` | `#6b5f52` | Secondary / muted text on light backgrounds |
-| `--fc-ash` | `#8a7d6e` | Secondary / muted text on dark backgrounds |
-| `--fc-slate-rim` | `#d4cfc9` | Borders, dividers, rules |
+| `--fc-obsidian` | `#17181A` | Primary dark background · primary text on light |
+| `--fc-flint` | `#3B3E43` | Dark surface (cards, nav) · body text on light |
+| `--fc-slate` | `#666B72` | Muted text on light (captions, eyebrows, metadata, placeholders) |
+| `--fc-slate-light` | `#A7ADB5` | Muted text on dark (Obsidian and Flint) |
+| `--fc-ash` | `#D5D7DA` | Body text on dark · borders, dividers, rules on light |
+| `--fc-chalk` | `#F5F5F3` | Primary light background · primary text on dark |
+| `--fc-ember-tint` | `#FCEEDF` | Soft accent background on light (highlights, callouts) |
+| `--fc-ember` | `#EE9440` | Accent on dark backgrounds (Obsidian/Flint) |
+| `--fc-ember-deep` | `#A85A14` | Accent on light backgrounds |
+| white | `#FFFFFF` | Raised light surface (cards, sections) on a Chalk page |
 
 ### Usage Rules
 
-- **Ember (`#cc5e1a`)** is the only accent on white/birchwood/parchment backgrounds — buttons, links, ghost underlines, pull quote text, eyebrow rules.
-- **Spark (`#db7f36`)** replaces Ember wherever it appears on Obsidian or Flint backgrounds. Never use Ember on dark — it loses contrast.
-- **Trail Dust (`#6b5f52`)** is muted/secondary text on light backgrounds only. On Obsidian or Flint it fails AA contrast — use **Ash (`#8a7d6e`)** instead. Trail Dust and Ash always pair this way: Trail Dust on light, Ash on dark.
-- **Slate Rim (`#d4cfc9`)** is the only border color. Use at `0.5px` weight universally. Exceptions: left-border accent cards use `2.5px` Ember; featured items use `2px` Ember.
+- **Ember Deep (`#A85A14`)** is the only accent on Chalk, white, or Ember Tint: buttons, links, ghost underlines, pull quote text, eyebrow rules. Buttons are Ember Deep with Chalk text (4.65:1).
+- **Ember (`#EE9440`)** replaces Ember Deep wherever it appears on Obsidian or Flint. Never use Ember on light backgrounds (2.2:1 on Chalk). Filled Ember buttons take **Obsidian** text, never Chalk (2.4:1).
+- **Slate (`#666B72`)** is muted text on light backgrounds only; on dark use **Slate Light (`#A7ADB5`)**. They always pair this way.
+- **Ash (`#D5D7DA`)** is the only border color on light. Use at `0.5px` weight universally. Exceptions: left-border accent cards use `2.5px` Ember Deep; featured items use `2px` Ember Deep.
+- Hover on filled buttons: `brightness-90` on Ember Deep, `brightness-110` on Ember. Both keep the text above 4.5:1.
 - Do not introduce gradients, shadows, or new colors. The palette is intentionally closed.
+- Every text pairing above passes WCAG AA (4.5:1). When adding a combination not listed here, check it.
 
 ### CSS Custom Properties
 
 ```css
 :root {
-  --fc-obsidian:   #232226;
-  --fc-flint:      #2e3338;
-  --fc-ember:      #cc5e1a;
-  --fc-spark:      #db7f36;
-  --fc-birchwood:  #faf9f7;
-  --fc-parchment:  #f0ece5;
-  --fc-trail-dust: #6b5f52;
-  --fc-ash:        #8a7d6e;
-  --fc-slate-rim:  #d4cfc9;
+  --fc-obsidian:    #17181A;
+  --fc-flint:       #3B3E43;
+  --fc-slate:       #666B72;
+  --fc-slate-light: #A7ADB5;
+  --fc-ash:         #D5D7DA;
+  --fc-chalk:       #F5F5F3;
+  --fc-ember-tint:  #FCEEDF;
+  --fc-ember:       #EE9440;
+  --fc-ember-deep:  #A85A14;
 }
 ```
 
@@ -82,16 +85,16 @@ Two typefaces only. No substitutions.
 | Section header | Cormorant Garamond | 32–40px | 400 | Normal | `--fc-obsidian` | `0` |
 | Card title | Cormorant Garamond | 20–24px | 600 | Normal | `--fc-obsidian` | `0` |
 | Pull quote / accent | Cormorant Garamond | 15–18px | 400 | Italic | `--fc-ember` | `0.02em` |
-| Eyebrow label | DM Sans | 10–12px | 300 | Normal | `--fc-trail-dust` | `0.18–0.22em` |
+| Eyebrow label | DM Sans | 10–12px | 300 | Normal | `--fc-slate` | `0.18–0.22em` |
 | Body copy | DM Sans | 15–16px | 400 | Normal | `#4a4239` | `0` |
 | UI label / button | DM Sans | 11–13px | 500 | Normal | Contextual | `0.04–0.08em` |
-| Caption / footnote | DM Sans | 11–12px | 400 | Normal | `--fc-trail-dust` | `0` |
+| Caption / footnote | DM Sans | 11–12px | 400 | Normal | `--fc-slate` | `0` |
 
 ### Typography Rules
 
 - **Eyebrows** are always DM Sans, uppercase, tracked (`letter-spacing: 0.18–0.22em`). Never uppercase without tracking.
 - **Cormorant italic** is a high-value register — use it for the tagline, hero headline, and pull quotes. Avoid using it for general emphasis in body copy.
-- **Ember (`#cc5e1a`)** is the only color used for Cormorant italic text (pull quotes, accent lines). On dark backgrounds use Spark (`#db7f36`).
+- **Ember Deep (`#A85A14`)** is the only color used for Cormorant italic text (pull quotes, accent lines). On dark backgrounds use Ember (`#EE9440`).
 - **Three DM Sans weights only:** 300 (body), 400 (default/caption), 500 (labels/buttons). Never 600 or 700.
 - Line height: `1.7` for body copy, `1.1–1.2` for display/headlines.
 
@@ -125,20 +128,20 @@ Prefer tight radii. The brand is precise and crafted, not soft and friendly. `r-
 Dark bar. Brand name + italic tagline left. Nav links + CTA right.
 
 ```html
-<nav style="background: #232226; padding: 0.75rem 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+<nav style="background: #17181A; padding: 0.75rem 1.5rem; display: flex; justify-content: space-between; align-items: center;">
   <div>
-    <div style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #f0ece5;">
+    <div style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #F5F5F3;">
       FlintCraft Studio
     </div>
-    <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 11px; font-style: italic; color: #6b5f52; letter-spacing: 0.04em;">
+    <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 11px; font-style: italic; color: #A7ADB5; letter-spacing: 0.04em;">
       Still shaped by hand.
     </div>
   </div>
   <div style="display: flex; gap: 1.5rem; align-items: center;">
-    <a style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #6b5f52; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;">Work</a>
-    <a style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #6b5f52; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;">Process</a>
-    <a style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #6b5f52; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;">About</a>
-    <a style="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; color: #db7f36; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: 0.5px solid #db7f36; border-radius: 3px; padding: 5px 14px;">
+    <a style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #666B72; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;">Work</a>
+    <a style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #666B72; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;">Process</a>
+    <a style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #666B72; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;">About</a>
+    <a style="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; color: #EE9440; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: 0.5px solid #EE9440; border-radius: 3px; padding: 5px 14px;">
       Start a project
     </a>
   </div>
@@ -146,9 +149,9 @@ Dark bar. Brand name + italic tagline left. Nav links + CTA right.
 ```
 
 **Nav rules:**
-- Background is always Obsidian (`#232226`). Never light.
-- Nav links are Trail Dust (`#6b5f52`) at rest. On hover: Parchment (`#f0ece5`).
-- CTA uses Spark (`#db7f36`) — border + text. On hover: fill with Spark, text Birchwood.
+- Background is always Obsidian (`#17181A`). Never light.
+- Nav links are Ash (`#D5D7DA`) at rest. On hover: Chalk (`#F5F5F3`).
+- CTA uses Ember (`#EE9440`) — border + text. On hover: fill with Ember, text Chalk.
 - Tagline is Cormorant italic. Never DM Sans.
 
 ---
@@ -162,8 +165,8 @@ Three variants. Light context and dark context shown separately.
 ```css
 /* Primary */
 .btn-primary {
-  background: #cc5e1a;
-  color: #faf9f7;
+  background: #A85A14;
+  color: #F5F5F3;
   border-radius: 3px;
   padding: 10px 22px;
   font-family: 'DM Sans', sans-serif;
@@ -177,8 +180,8 @@ Three variants. Light context and dark context shown separately.
 /* Outline */
 .btn-outline {
   background: transparent;
-  color: #232226;
-  border: 1.5px solid #232226;
+  color: #17181A;
+  border: 1.5px solid #17181A;
   border-radius: 3px;
   padding: 10px 22px;
   font-family: 'DM Sans', sans-serif;
@@ -191,9 +194,9 @@ Three variants. Light context and dark context shown separately.
 /* Ghost */
 .btn-ghost {
   background: transparent;
-  color: #cc5e1a;
+  color: #A85A14;
   border: none;
-  border-bottom: 1.5px solid #cc5e1a;
+  border-bottom: 1.5px solid #A85A14;
   border-radius: 0;
   padding: 10px 0;
   font-family: 'DM Sans', sans-serif;
@@ -208,12 +211,12 @@ Three variants. Light context and dark context shown separately.
 
 ```css
 /* Primary — same as light */
-.btn-primary { background: #cc5e1a; color: #faf9f7; /* unchanged */ }
+.btn-primary { background: #A85A14; color: #F5F5F3; /* unchanged */ }
 
 /* Outline — border becomes muted, text becomes light */
 .btn-outline-dark {
   background: transparent;
-  color: #f0ece5;
+  color: #F5F5F3;
   border: 1.5px solid #5a4f43;
   border-radius: 3px;
   padding: 10px 22px;
@@ -224,10 +227,10 @@ Three variants. Light context and dark context shown separately.
   text-transform: uppercase;
 }
 
-/* Ghost — Spark replaces Ember */
+/* Ghost — Ember replaces Ember Deep */
 .btn-ghost-dark {
-  color: #db7f36;
-  border-bottom: 1.5px solid #db7f36;
+  color: #EE9440;
+  border-bottom: 1.5px solid #EE9440;
   /* all other properties same as .btn-ghost */
 }
 ```
@@ -242,8 +245,8 @@ Three card types.
 
 ```css
 .card-light {
-  background: #faf9f7;
-  border: 0.5px solid #d4cfc9;
+  background: #F5F5F3;
+  border: 0.5px solid #D5D7DA;
   border-radius: 6px;
   padding: 1.25rem;
 }
@@ -253,8 +256,8 @@ Three card types.
 
 ```css
 .card-dark {
-  background: #232226;
-  border: 0.5px solid #2e3338;
+  background: #17181A;
+  border: 0.5px solid #3B3E43;
   border-radius: 6px;
   padding: 1.25rem;
 }
@@ -264,8 +267,8 @@ Three card types.
 
 ```css
 .card-ruled {
-  background: #faf9f7;
-  border-left: 2.5px solid #cc5e1a;
+  background: #F5F5F3;
+  border-left: 2.5px solid #A85A14;
   border-radius: 0;
   padding: 1rem 1.25rem;
 }
@@ -273,9 +276,9 @@ Three card types.
 
 **Card anatomy:**
 - **Eyebrow:** DM Sans, 10px, uppercase, tracked, `#8a8278` (light card) or `#5a4f43` (dark card)
-- **Title:** Cormorant Garamond, 20–24px, weight 600 (light) or 400 (dark), color Obsidian (light) or Parchment (dark)
-- **Body:** DM Sans, 13px, weight 400, line-height 1.6, Trail Dust (`#6b5f52`) light / `#8a7d6e` dark
-- **CTA link:** DM Sans, 11px, uppercase, tracked, Ember (light) or Spark (dark), no underline, arrow suffix ` →`
+- **Title:** Cormorant Garamond, 20–24px, weight 600 (light) or 400 (dark), color Obsidian (light) or Chalk (dark)
+- **Body:** DM Sans, 13px, weight 400, line-height 1.6, Slate (`#666B72`) light / `#A7ADB5` dark
+- **CTA link:** DM Sans, 11px, uppercase, tracked, Ember Deep (light) or Ember (dark), no underline, arrow suffix ` →`
 
 ---
 
@@ -288,7 +291,7 @@ Three card types.
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #6b5f52;
+  color: #666B72;
   display: block;
   margin-bottom: 6px;
 }
@@ -296,12 +299,12 @@ Three card types.
 .form-input {
   width: 100%;
   padding: 10px 14px;
-  background: #faf9f7;
-  border: 0.5px solid #d4cfc9;
+  background: #F5F5F3;
+  border: 0.5px solid #D5D7DA;
   border-radius: 3px;
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
-  color: #232226;
+  color: #17181A;
   outline: none;
 }
 
@@ -310,7 +313,7 @@ Three card types.
 }
 
 .form-input:focus {
-  border-color: #cc5e1a;
+  border-color: #A85A14;
   box-shadow: 0 0 0 2px rgba(158, 82, 21, 0.12);
 }
 
@@ -340,8 +343,8 @@ textarea.form-input {
 
 /* On dark surface — neutral */
 .badge-flint {
-  background: #2e3338;
-  color: #d4cfc9;
+  background: #3B3E43;
+  color: #D5D7DA;
   /* same padding/radius/font as above */
 }
 
@@ -355,8 +358,8 @@ textarea.form-input {
 /* On light surface — outlined */
 .badge-outline {
   background: transparent;
-  color: #cc5e1a;
-  border: 0.5px solid #cc5e1a;
+  color: #A85A14;
+  border: 0.5px solid #A85A14;
   /* same padding/radius/font as above */
 }
 ```
@@ -369,14 +372,14 @@ Every major section opens with a short rule + uppercase label before the headlin
 
 ```html
 <div style="margin-bottom: 1rem;">
-  <div style="width: 28px; height: 1px; background: #cc5e1a; margin-bottom: 8px;"></div>
-  <div style="font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b5f52;">
+  <div style="width: 28px; height: 1px; background: #A85A14; margin-bottom: 8px;"></div>
+  <div style="font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #666B72;">
     Our work
   </div>
 </div>
 ```
 
-On dark backgrounds, the rule stays Ember (`#cc5e1a`) but the label shifts to `#8a7d6e`.
+On dark backgrounds, the rule shifts to Ember (`#EE9440`) and the label to Slate Light (`#A7ADB5`).
 
 ---
 
@@ -386,14 +389,14 @@ On dark backgrounds, the rule stays Ember (`#cc5e1a`) but the label shifts to `#
 /* Standard rule */
 .divider {
   border: none;
-  border-top: 0.5px solid #d4cfc9;
+  border-top: 0.5px solid #D5D7DA;
   margin: 2.5rem 0;
 }
 
 /* Accent rule — use sparingly, once per section max */
 .divider-accent {
   border: none;
-  border-top: 1px solid #cc5e1a;
+  border-top: 1px solid #A85A14;
   width: 48px;
   margin: 2rem 0;
 }
@@ -403,7 +406,7 @@ On dark backgrounds, the rule stays Ember (`#cc5e1a`) but the label shifts to `#
 
 ## Layout Principles
 
-- **Section alternation:** Light sections (`#faf9f7`) alternate with dark sections (`#232226`). Never two dark sections in a row without a transition.
+- **Section alternation:** Light sections (`#F5F5F3`) alternate with dark sections (`#17181A`). Never two dark sections in a row without a transition.
 - **Max content width:** `1100px`, centered.
 - **Section padding:** `5rem` top/bottom on desktop, `3rem` on mobile.
 - **Grid:** 12-column. Most content uses 8 of 12 centered, or a 5/7 split for text/image pairs.
@@ -415,12 +418,12 @@ On dark backgrounds, the rule stays Ember (`#cc5e1a`) but the label shifts to `#
 
 | Element | Default | Hover | Active/Focus |
 |---|---|---|---|
-| Nav links | `#6b5f52` | `#f0ece5` | `#f0ece5` |
-| Nav CTA | Spark border + text | Spark fill, Birchwood text | Scale `0.98` |
-| Primary button | Ember fill | Darken 8% | Scale `0.97` |
-| Outline button | Dark border | Dark fill, Birchwood text | Scale `0.97` |
-| Ghost button | Ember underline | Ember text brightens | Scale `0.98` |
-| Text input | Slate Rim border | Slate Rim border | Ember border + soft glow ring |
+| Nav links | `#D5D7DA` | `#F5F5F3` | `#F5F5F3` |
+| Nav CTA | Ember border + text | Ember fill, Obsidian text | Scale `0.98` |
+| Primary button | Ember Deep fill | `brightness-90` | Scale `0.97` |
+| Outline button | Dark border | Dark fill, Chalk text | Scale `0.97` |
+| Ghost button | Ember Deep underline | Ember Deep text brightens | Scale `0.98` |
+| Text input | Ash border | Ash border | Ember Deep border + soft glow ring |
 | Card (linked) | No shadow | Lift: `translateY(-2px)` | `translateY(0)` |
 
 ---
@@ -431,10 +434,10 @@ On dark backgrounds, the rule stays Ember (`#cc5e1a`) but the label shifts to `#
 - `Asset_3.png` — No tang, clean silhouette. **Use for nav/small contexts.**
 - `Asset_7.png` — Full arrowhead with tang. **Use for hero and large contexts.**
 
-Both feature the illustrated hand-drawn style with crosshatching. Do not recolor or modify the logo files. The amber/orange facet in the logo is the source of the Ember/Spark palette — do not replace it with a flat color version.
+Both feature the illustrated hand-drawn style with crosshatching. Do not recolor or modify the logo files. The amber/orange facet in the logo is the source of the Ember Deep/Ember palette — do not replace it with a flat color version.
 
 **Logo on dark (Obsidian) backgrounds:** Use as-is — the black outline reads on dark.
-**Logo on light backgrounds:** Use as-is — the dark flint reads on Birchwood/Parchment.
+**Logo on light backgrounds:** Use as-is — the dark flint reads on Chalk and white.
 
 ---
 
@@ -450,7 +453,7 @@ Both feature the illustrated hand-drawn style with crosshatching. Do not recolor
 ## What This System Is Not
 
 - No gradients or shadows (except functional focus rings)
-- No warm amber/golden tones — Ember and Spark are burnt, not bright
+- No warm tones beyond the Ember family (Ember Tint, Ember, Ember Deep); neutrals stay cool grey, never beige or brown
 - No full-bleed photography treatments or overlaid text on images
 - No rounded corners beyond `r-6`
 - No system fonts — always load Cormorant Garamond + DM Sans

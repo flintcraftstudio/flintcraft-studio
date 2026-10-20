@@ -12,7 +12,7 @@ templ Footer() {
 					<a href="/" class="flex items-center gap-3">
 						<img src="/static/images/logo.png" alt={ SiteName } class="h-8 w-auto"/>
 						<div>
-							<div class="text-body-sm font-medium uppercase tracking-[0.12em] text-fc-parchment">
+							<div class="text-body-sm font-medium uppercase tracking-[0.12em] text-fc-chalk">
 								{ SiteName }
 							</div>
 							<div class="font-display text-eyebrow italic tracking-[0.04em] text-fc-ash">
@@ -44,7 +44,7 @@ templ Footer() {
 						href="https://g.page/r/Cc5efB_VXb5vEBM/review"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="inline-flex items-center gap-2 border-b-[1.5px] border-fc-spark px-0 py-1 text-ui font-medium uppercase tracking-[0.08em] text-fc-spark transition hover:brightness-110 active:scale-[0.98]"
+						class="inline-flex items-center gap-2 border-b-[1.5px] border-fc-ember px-0 py-1 text-ui font-medium uppercase tracking-[0.08em] text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
 					>
 						Leave a review &rarr;
 					</a>
@@ -54,8 +54,8 @@ templ Footer() {
 			<div class="mt-8 flex flex-col gap-2 text-eyebrow tracking-normal text-fc-ash sm:flex-row sm:items-center sm:justify-between">
 				<p>&copy; { fmt.Sprint(Year()) } { SiteName }. All rights reserved.</p>
 				<div class="flex gap-4">
-					<a href="/privacy" class="transition hover:text-fc-parchment">Privacy</a>
-					<a href="/terms" class="transition hover:text-fc-parchment">Terms</a>
+					<a href="/privacy" class="transition hover:text-fc-chalk">Privacy</a>
+					<a href="/terms" class="transition hover:text-fc-chalk">Terms</a>
 				</div>
 			</div>
 		</div>
@@ -65,7 +65,7 @@ templ Footer() {
 templ footerLink(label, href string) {
 	<a
 		href={ templ.SafeURL(href) }
-		class="text-fc-ash transition hover:text-fc-parchment"
+		class="text-fc-ash transition hover:text-fc-chalk"
 	>
 		{ label }
 	</a>

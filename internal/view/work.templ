@@ -6,13 +6,13 @@ templ WorkPage() {
 
 templ workContent() {
 	<!-- Hero -->
-	<section class="bg-fc-birchwood py-20 sm:py-28">
+	<section class="bg-fc-chalk py-20 sm:py-28">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			@eyebrow("Selected work")
 			<h1 class="max-w-3xl font-display text-h1-display font-normal text-fc-obsidian">
 				<em class="italic">Field reports.</em>
 			</h1>
-			<p class="mt-6 max-w-xl text-body text-fc-trail-dust">
+			<p class="mt-6 max-w-xl text-body text-fc-flint">
 				A selection of recent projects. Real businesses, real problems, real outcomes.
 			</p>
 		</div>
@@ -24,7 +24,7 @@ templ workContent() {
 			<section class="bg-fc-obsidian py-20 sm:py-24">
 				<div class="mx-auto max-w-content px-6 lg:px-8">
 					@eyebrowDark("Featured")
-					<h2 class="mb-12 font-display text-h2-display font-normal text-fc-parchment">
+					<h2 class="mb-12 font-display text-h2-display font-normal text-fc-chalk">
 						Latest field report
 					</h2>
 					@featuredCard(p)
@@ -38,7 +38,7 @@ templ workContent() {
 		<section class="bg-fc-flint py-20 sm:py-24">
 			<div class="mx-auto max-w-content px-6 lg:px-8">
 				@eyebrowDark("More work")
-				<h2 class="mb-12 font-display text-h2-display font-normal text-fc-parchment">
+				<h2 class="mb-12 font-display text-h2-display font-normal text-fc-chalk">
 					Marketing sites &amp; brand builds
 				</h2>
 				<div class="grid gap-8 sm:grid-cols-2">
@@ -53,24 +53,24 @@ templ workContent() {
 	}
 
 	<!-- CTA -->
-	<section class="bg-fc-birchwood py-20 sm:py-24">
+	<section class="bg-fc-chalk py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 text-center lg:px-8">
 			<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
 				Have a project in mind?
 			</h2>
-			<p class="mx-auto mt-4 max-w-md text-body text-fc-trail-dust">
+			<p class="mx-auto mt-4 max-w-md text-body text-fc-flint">
 				We're selective about the projects we take on. Tell us what you're working on and we'll tell you whether we're the right fit.
 			</p>
 			<div class="mt-10 flex flex-wrap items-center justify-center gap-6">
 				<a
 					href="/contact"
-					class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-ui font-medium uppercase text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
+					class="rounded-[3px] bg-fc-ember-deep px-[22px] py-[10px] text-ui font-medium uppercase text-fc-chalk transition hover:brightness-90 active:scale-[0.97]"
 				>
 					Start a project
 				</a>
 				<a
 					href={ templ.SafeURL("tel:" + Phone) }
-					class="border-b-[1.5px] border-fc-ember px-0 py-[10px] text-ui font-medium uppercase text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
+					class="border-b-[1.5px] border-fc-ember-deep px-0 py-[10px] text-ui font-medium uppercase text-fc-ember-deep transition hover:brightness-110 active:scale-[0.98]"
 				>
 					{ Phone }
 				</a>
@@ -83,7 +83,7 @@ templ featuredCard(p Project) {
 	<a
 		href={ templ.SafeURL("/work/" + p.Slug) }
 		data-reveal
-		class="group block overflow-hidden rounded-[6px] border border-fc-flint bg-fc-flint transition hover:border-fc-spark/30"
+		class="group block overflow-hidden rounded-[6px] border border-fc-flint bg-fc-flint transition hover:border-fc-ember/30"
 	>
 		<div class="flex flex-col lg:flex-row">
 			if p.Screenshot != "" {
@@ -101,7 +101,7 @@ templ featuredCard(p Project) {
 			<div class="flex flex-1 flex-col justify-between p-8 lg:p-10">
 				<div>
 					<div class="mb-3 flex flex-wrap items-center gap-3">
-						<span class="text-eyebrow font-medium uppercase text-fc-spark">
+						<span class="text-eyebrow font-medium uppercase text-fc-ember">
 							{ p.Client }
 						</span>
 						<span class="text-eyebrow tracking-normal text-fc-ash">
@@ -115,7 +115,7 @@ templ featuredCard(p Project) {
 							</span>
 						}
 					</div>
-					<h3 class="mb-4 font-display text-h3-display font-normal text-fc-parchment">
+					<h3 class="mb-4 font-display text-h3-display font-normal text-fc-chalk">
 						{ p.Title }
 					</h3>
 					if p.Quote != nil {
@@ -129,9 +129,9 @@ templ featuredCard(p Project) {
 					<div class="flex flex-wrap gap-6 border-t border-fc-ash/20 pt-5">
 						for _, r := range p.Results {
 							<div>
-								<div class="font-display text-h4-display font-semibold text-fc-parchment">
+								<div class="font-display text-h4-display font-semibold text-fc-chalk">
 									{ r.Value }
-									<span class="text-body-sm font-normal text-fc-spark">{ r.Unit }</span>
+									<span class="text-body-sm font-normal text-fc-ember">{ r.Unit }</span>
 								</div>
 								<div class="text-eyebrow tracking-normal text-fc-ash">{ r.Label }</div>
 							</div>
@@ -146,7 +146,7 @@ templ featuredCard(p Project) {
 templ projectCard(p Project) {
 	<a
 		href={ templ.SafeURL("/work/" + p.Slug) }
-		class="group flex flex-col overflow-hidden rounded-[6px] border border-fc-flint bg-fc-flint transition hover:border-fc-spark/30"
+		class="group flex flex-col overflow-hidden rounded-[6px] border border-fc-flint bg-fc-flint transition hover:border-fc-ember/30"
 	>
 		if p.Screenshot != "" {
 			<div class="overflow-hidden">
@@ -166,7 +166,7 @@ templ projectCard(p Project) {
 		}
 		<div class="flex flex-1 flex-col p-6">
 			<div class="mb-3 flex flex-wrap items-center gap-3">
-				<span class="text-eyebrow font-medium uppercase text-fc-spark">
+				<span class="text-eyebrow font-medium uppercase text-fc-ember">
 					{ p.Client }
 				</span>
 				<span class="text-eyebrow tracking-normal text-fc-ash">
@@ -180,16 +180,16 @@ templ projectCard(p Project) {
 					</span>
 				}
 			</div>
-			<h3 class="mb-3 font-display text-h4-display font-normal text-fc-parchment">
+			<h3 class="mb-3 font-display text-h4-display font-normal text-fc-chalk">
 				{ p.Title }
 			</h3>
 			if len(p.Results) > 0 {
 				<div class="mt-auto flex flex-col gap-3 border-t border-fc-ash/20 pt-4 sm:flex-row sm:gap-6">
 					for _, r := range p.Results {
 						<div>
-							<div class="font-display text-h4-display font-semibold text-fc-parchment">
+							<div class="font-display text-h4-display font-semibold text-fc-chalk">
 								{ r.Value }
-								<span class="text-ui tracking-normal font-normal text-fc-spark">{ r.Unit }</span>
+								<span class="text-ui tracking-normal font-normal text-fc-ember">{ r.Unit }</span>
 							</div>
 							<div class="text-eyebrow tracking-normal text-fc-ash">{ r.Label }</div>
 						</div>

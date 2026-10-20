@@ -9,13 +9,13 @@ templ IndustriesHubPage() {
 
 templ industriesHubContent() {
 	<!-- Hero -->
-	<section class="bg-fc-birchwood py-20 sm:py-28">
+	<section class="bg-fc-chalk py-20 sm:py-28">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			@eyebrow("Industries")
 			<h1 class="max-w-3xl font-display text-h1-display font-normal text-fc-obsidian">
-				Built for your <em class="italic text-fc-ember">profession.</em>
+				Built for your <em class="italic text-fc-ember-deep">profession.</em>
 			</h1>
-			<p class="mt-6 max-w-xl text-body text-fc-trail-dust">
+			<p class="mt-6 max-w-xl text-body text-fc-flint">
 				We build custom websites for Montana's established practices. Pick your field to see a live example of what we'd build — and what it would do for you.
 			</p>
 		</div>
@@ -33,18 +33,18 @@ templ industriesHubContent() {
 	</section>
 
 	<!-- CTA -->
-	<section class="bg-fc-birchwood py-20 sm:py-24">
+	<section class="bg-fc-chalk py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 text-center lg:px-8">
 			<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
 				Don't see your field?
 			</h2>
-			<p class="mx-auto mt-4 max-w-md text-body text-fc-trail-dust">
+			<p class="mx-auto mt-4 max-w-md text-body text-fc-flint">
 				We build for established practices of all kinds. If you've earned your reputation and your website doesn't reflect it, let's talk.
 			</p>
 			<div class="mt-10 flex justify-center">
 				<a
 					href="/contact?ref=industries-hub"
-					class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-ui font-medium uppercase text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
+					class="rounded-[3px] bg-fc-ember-deep px-[22px] py-[10px] text-ui font-medium uppercase text-fc-chalk transition hover:brightness-90 active:scale-[0.97]"
 				>
 					Start a project
 				</a>
@@ -58,23 +58,23 @@ templ industryCard(name, keyword, body, href string, live bool) {
 		<a
 			href={ templ.SafeURL(href) }
 			data-reveal
-			class="group flex flex-col rounded-[6px] border border-fc-flint bg-fc-flint p-7 transition hover:border-fc-spark/40"
+			class="group flex flex-col rounded-[6px] border border-fc-flint bg-fc-flint p-7 transition hover:border-fc-ember/40"
 		>
 			<div class="mb-3 flex items-center justify-between">
-				<span class="text-eyebrow font-medium uppercase text-fc-spark">{ keyword }</span>
-				<span class="text-eyebrow font-medium uppercase tracking-[0.08em] text-fc-spark">Live demo &rarr;</span>
+				<span class="text-eyebrow font-medium uppercase text-fc-ember">{ keyword }</span>
+				<span class="text-eyebrow font-medium uppercase tracking-[0.08em] text-fc-ember">Live demo &rarr;</span>
 			</div>
-			<h3 class="mb-3 font-display text-h3-display font-normal text-fc-parchment group-hover:text-fc-spark transition-colors">{ name }</h3>
+			<h3 class="mb-3 font-display text-h3-display font-normal text-fc-chalk group-hover:text-fc-ember transition-colors">{ name }</h3>
 			<p class="text-body-sm text-fc-ash">{ body }</p>
 		</a>
 	} else {
 		<div data-reveal class="flex flex-col rounded-[6px] border border-fc-flint/60 bg-fc-flint/40 p-7">
 			<div class="mb-3 flex items-center justify-between">
-				<span class="text-eyebrow font-medium uppercase text-fc-smoke">{ keyword }</span>
-				<span class="text-eyebrow font-medium uppercase tracking-[0.08em] text-fc-smoke">Coming soon</span>
+				<span class="text-eyebrow font-medium uppercase text-fc-slate-light">{ keyword }</span>
+				<span class="text-eyebrow font-medium uppercase tracking-[0.08em] text-fc-slate-light">Coming soon</span>
 			</div>
 			<h3 class="mb-3 font-display text-h3-display font-normal text-fc-ash">{ name }</h3>
-			<p class="text-body-sm text-fc-smoke">{ body }</p>
+			<p class="text-body-sm text-fc-slate-light">{ body }</p>
 		</div>
 	}
 }

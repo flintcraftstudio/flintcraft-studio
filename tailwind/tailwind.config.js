@@ -122,28 +122,19 @@ module.exports = {
     extend: {
       colors: {
         fc: {
-          // Dark surfaces
-          obsidian:     "#1c1e24",  // page bg
-          flint:        "#363b42",  // raised surface (cards, nav)
-          charcoal:     "#474d55",  // highest surface (modals, popovers, hover)
+          // Neutrals, darkest to lightest
+          obsidian:      "#17181A",  // dark page bg · primary text on light
+          flint:         "#3B3E43",  // dark surface (cards, nav) · body text on light
+          slate:         "#666B72",  // muted text on light (captions, eyebrows, metadata)
+          "slate-light": "#A7ADB5",  // muted text on dark (obsidian and flint)
+          ash:           "#D5D7DA",  // body text on dark · borders and dividers on light
+          chalk:         "#F5F5F3",  // light page bg · primary text on dark
+          // Light raised surfaces (cards, sections) use plain white on chalk.
 
-          // Dark-mode text
-          ash:          "#c4bdb2",  // body / strong muted on dark
-          smoke:        "#96897a",  // subtle muted — captions, eyebrows, metadata
-          spark:        "#e8873b",  // accent on dark
-
-          // Light surfaces
-          birchwood:    "#faf9f7",  // page bg
-          parchment:    "#f0ece5",  // raised surface
-
-          // Light-mode text
-          "trail-dust": "#4a4038",  // body / strong muted on light
-          bracken:      "#6b5f52",  // subtle muted — captions, eyebrows, metadata
-          ember:        "#a84812",  // accent on light
-          "ember-dark": "#8f3d0f",  // ember hover (darken 8%)
-
-          // Structure
-          "slate-rim":  "#d4cfc9",  // borders, dividers
+          // Accent
+          "ember-tint":  "#FCEEDF",  // soft highlight background on light
+          ember:         "#EE9440",  // accent on dark; obsidian text on ember fills
+          "ember-deep":  "#A85A14",  // accent on light; chalk/white text on ember-deep fills
         },
       },
       fontFamily: {

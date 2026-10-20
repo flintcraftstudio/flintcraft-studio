@@ -20,23 +20,23 @@ templ industryContent(d IndustryLanding) {
 	}
 
 	<!-- Hero -->
-	<section class="bg-fc-birchwood py-20 sm:py-28">
+	<section class="bg-fc-chalk py-20 sm:py-28">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			@eyebrow(d.Profession + " websites")
 			<h1 class="max-w-3xl font-display text-h1-display font-normal text-fc-obsidian">
 				{ d.H1 }
 			</h1>
-			<p class="mt-6 max-w-xl text-body text-fc-trail-dust">{ d.Lede }</p>
+			<p class="mt-6 max-w-xl text-body text-fc-flint">{ d.Lede }</p>
 			<div class="mt-10 flex flex-wrap items-center gap-6">
 				<a
 					href={ d.ContactHref() }
-					class="rounded-[3px] bg-fc-ember px-[22px] py-[10px] text-ui font-medium uppercase text-fc-birchwood transition hover:bg-fc-ember-dark active:scale-[0.97]"
+					class="rounded-[3px] bg-fc-ember-deep px-[22px] py-[10px] text-ui font-medium uppercase text-fc-chalk transition hover:brightness-90 active:scale-[0.97]"
 				>
 					Start a project
 				</a>
 				<a
 					href="#see-it"
-					class="group inline-flex items-center gap-2 border-b-[1.5px] border-fc-ember px-0 py-[10px] text-ui font-medium uppercase text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
+					class="group inline-flex items-center gap-2 border-b-[1.5px] border-fc-ember-deep px-0 py-[10px] text-ui font-medium uppercase text-fc-ember-deep transition hover:brightness-110 active:scale-[0.98]"
 				>
 					See the live demo &darr;
 				</a>
@@ -49,7 +49,7 @@ templ industryContent(d IndustryLanding) {
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			<div data-reveal class="max-w-2xl">
 				@eyebrowDark("See it for yourself")
-				<h2 class="font-display text-h2-display font-normal text-fc-parchment">
+				<h2 class="font-display text-h2-display font-normal text-fc-chalk">
 					A real { d.Profession } site, not a mockup
 				</h2>
 				<p class="mt-4 text-body text-fc-ash">{ d.DemoCaption }</p>
@@ -59,7 +59,7 @@ templ industryContent(d IndustryLanding) {
 				target="_blank"
 				rel="noopener"
 				data-reveal
-				class="group mt-10 block overflow-hidden rounded-[6px] border border-fc-flint bg-fc-flint transition hover:border-fc-spark/40"
+				class="group mt-10 block overflow-hidden rounded-[6px] border border-fc-flint bg-fc-flint transition hover:border-fc-ember/40"
 			>
 				<!-- Browser chrome -->
 				<div class="flex items-center gap-2 border-b border-fc-obsidian/60 bg-fc-obsidian px-4 py-3">
@@ -80,7 +80,7 @@ templ industryContent(d IndustryLanding) {
 						class="aspect-[1120/640] w-full object-cover object-top transition duration-500 ease-out group-hover:scale-[1.02]"
 					/>
 					<div class="pointer-events-none absolute inset-0 flex items-center justify-center bg-fc-obsidian/20 opacity-0 transition duration-300 group-hover:opacity-100">
-						<span class="rounded-[3px] bg-fc-spark px-5 py-[10px] text-ui font-medium uppercase tracking-[0.08em] text-fc-obsidian">Open the live site &rarr;</span>
+						<span class="rounded-[3px] bg-fc-ember px-5 py-[10px] text-ui font-medium uppercase tracking-[0.08em] text-fc-obsidian">Open the live site &rarr;</span>
 					</div>
 				</div>
 			</a>
@@ -89,7 +89,7 @@ templ industryContent(d IndustryLanding) {
 					href={ templ.SafeURL(d.DemoURL) }
 					target="_blank"
 					rel="noopener"
-					class="fc-cta-chipped inline-flex items-center gap-2 bg-fc-spark px-8 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-obsidian transition hover:-translate-y-px hover:brightness-110 active:translate-y-0 active:scale-[0.97]"
+					class="fc-cta-chipped inline-flex items-center gap-2 bg-fc-ember px-8 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-obsidian transition hover:-translate-y-px hover:brightness-110 active:translate-y-0 active:scale-[0.97]"
 				>
 					Open the live demo &rarr;
 				</a>
@@ -98,23 +98,23 @@ templ industryContent(d IndustryLanding) {
 	</section>
 
 	<!-- Intro + what your site gets -->
-	<section class="bg-fc-birchwood py-20 sm:py-24">
+	<section class="bg-fc-chalk py-20 sm:py-24">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			<div data-reveal class="max-w-2xl">
 				@eyebrow("Why it works")
-				<div class="space-y-4 text-body text-fc-trail-dust">
+				<div class="space-y-4 text-body text-fc-flint">
 					for _, p := range d.Intro {
 						<p>{ p }</p>
 					}
 				</div>
 			</div>
-			<div data-reveal class="mt-12 border-t border-fc-slate-rim">
+			<div data-reveal class="mt-12 border-t border-fc-ash">
 				for i, kp := range d.KeyPoints {
-					<div class="grid gap-x-8 gap-y-2 border-b border-fc-slate-rim py-7 sm:grid-cols-[5rem_1fr]">
-						<div class="font-display text-[15px] italic tracking-[0.02em] text-fc-ember">{ fmt.Sprintf("№ %02d", i+1) }</div>
+					<div class="grid gap-x-8 gap-y-2 border-b border-fc-ash py-7 sm:grid-cols-[5rem_1fr]">
+						<div class="font-display text-[15px] italic tracking-[0.02em] text-fc-ember-deep">{ fmt.Sprintf("№ %02d", i+1) }</div>
 						<div>
 							<h3 class="mb-2 font-display text-h3-display font-normal text-fc-obsidian">{ kp.Title }</h3>
-							<p class="max-w-2xl text-body text-fc-trail-dust">{ kp.Body }</p>
+							<p class="max-w-2xl text-body text-fc-flint">{ kp.Body }</p>
 						</div>
 					</div>
 				}
@@ -123,25 +123,25 @@ templ industryContent(d IndustryLanding) {
 	</section>
 
 	<!-- WordPress comparison (shared pattern) -->
-	<section class="bg-fc-parchment py-20 sm:py-24">
+	<section class="bg-white py-20 sm:py-24">
 		<div data-reveal class="mx-auto max-w-content px-6 lg:px-8">
 			@eyebrow("Why not WordPress")
 			<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
 				A custom site, not a rented template
 			</h2>
-			<p class="mb-10 mt-6 max-w-2xl text-body text-fc-trail-dust">
+			<p class="mb-10 mt-6 max-w-2xl text-body text-fc-flint">
 				The typical { d.Profession } site stacks managed hosting, a maintenance plan, a security plugin, a booking add-on, and a developer who's hard to reach. It still breaks, still looks like a template, and still goes to voicemail.
 			</p>
 			<div class="overflow-x-auto">
 				<table class="w-full text-left text-body-sm">
 					<thead>
-						<tr class="border-b border-fc-slate-rim">
-							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-bracken"></th>
-							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-bracken">WordPress / Wix / Squarespace</th>
-							<th class="pb-3 text-eyebrow font-medium uppercase text-fc-ember">FlintCraft</th>
+						<tr class="border-b border-fc-ash">
+							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-slate"></th>
+							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-slate">WordPress / Wix / Squarespace</th>
+							<th class="pb-3 text-eyebrow font-medium uppercase text-fc-ember-deep">FlintCraft</th>
 						</tr>
 					</thead>
-					<tbody class="text-fc-trail-dust">
+					<tbody class="text-fc-flint">
 						@compRow("Built for your practice", "No", "Yes")
 						@compRow("Plugin dependencies", "Many", "None")
 						@compRow("Online reviews in search", "Plugin you rent", "Your own structured data")
@@ -164,7 +164,7 @@ templ industryContent(d IndustryLanding) {
 
 	<!-- FAQ -->
 	if len(d.FAQ) > 0 {
-		<section class="bg-fc-birchwood py-20 sm:py-24">
+		<section class="bg-fc-chalk py-20 sm:py-24">
 			<div class="mx-auto max-w-content px-6 lg:px-8">
 				<div data-reveal class="max-w-2xl">
 					@eyebrow("Questions")
@@ -172,14 +172,14 @@ templ industryContent(d IndustryLanding) {
 						Common questions
 					</h2>
 				</div>
-				<div class="mx-auto max-w-3xl divide-y divide-fc-slate-rim border-y border-fc-slate-rim">
+				<div class="mx-auto max-w-3xl divide-y divide-fc-ash border-y border-fc-ash">
 					for _, f := range d.FAQ {
 						<details class="group py-5">
 							<summary class="flex cursor-pointer items-center justify-between gap-4 font-display text-h4-display font-normal text-fc-obsidian marker:content-['']">
 								{ f.Q }
-								<span class="text-fc-ember transition group-open:rotate-45">+</span>
+								<span class="text-fc-ember-deep transition group-open:rotate-45">+</span>
 							</summary>
-							<p class="mt-3 text-body-sm text-fc-trail-dust">{ f.A }</p>
+							<p class="mt-3 text-body-sm text-fc-flint">{ f.A }</p>
 						</details>
 					}
 				</div>
@@ -190,7 +190,7 @@ templ industryContent(d IndustryLanding) {
 	<!-- CTA -->
 	<section class="bg-fc-obsidian py-20 sm:py-24">
 		<div data-reveal class="mx-auto max-w-content px-6 text-center lg:px-8">
-			<h2 class="font-display text-h2-display font-normal text-fc-parchment">
+			<h2 class="font-display text-h2-display font-normal text-fc-chalk">
 				Ready for a { d.Profession } site that pulls its weight?
 			</h2>
 			<p class="mx-auto mt-4 max-w-lg text-body text-fc-ash">
@@ -199,13 +199,13 @@ templ industryContent(d IndustryLanding) {
 			<div class="mt-10 flex flex-wrap items-center justify-center gap-7">
 				<a
 					href={ d.ContactHref() }
-					class="fc-cta-chipped inline-flex items-center gap-2 bg-fc-spark px-8 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-obsidian transition hover:-translate-y-px hover:brightness-110 active:translate-y-0 active:scale-[0.97]"
+					class="fc-cta-chipped inline-flex items-center gap-2 bg-fc-ember px-8 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-obsidian transition hover:-translate-y-px hover:brightness-110 active:translate-y-0 active:scale-[0.97]"
 				>
 					Start a project &rarr;
 				</a>
 				<a
 					href={ templ.SafeURL("tel:" + Phone) }
-					class="inline-flex items-center gap-2 border-b-[1.5px] border-fc-spark px-0 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-spark transition hover:brightness-110 active:scale-[0.98]"
+					class="inline-flex items-center gap-2 border-b-[1.5px] border-fc-ember px-0 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-fc-ember transition hover:brightness-110 active:scale-[0.98]"
 				>
 					{ Phone }
 				</a>

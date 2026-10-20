@@ -47,16 +47,17 @@ docker compose up
 
 Full spec in `./design-system.md`. Key points:
 
-**Color tokens** (9 total, closed palette — no gradients, shadows, or additional colors):
-- `fc-obsidian` (#232226) — dark bg / text on light
-- `fc-flint` (#2e3338) — dark surface (cards, nav)
-- `fc-ember` (#cc5e1a) — accent on light backgrounds
-- `fc-spark` (#db7f36) — accent on dark backgrounds (never use ember on dark)
-- `fc-birchwood` (#faf9f7) — light bg
-- `fc-parchment` (#f0ece5) — light surface
-- `fc-trail-dust` (#6b5f52) — muted/secondary text on light backgrounds
-- `fc-ash` (#8a7d6e) — muted/secondary text on dark backgrounds (pairs with trail-dust)
-- `fc-slate-rim` (#d4cfc9) — borders/dividers (0.5px weight)
+**Color tokens** (8 total plus white, closed palette — no gradients, shadows, or additional colors; every text pairing passes WCAG AA):
+- `fc-obsidian` (#17181A) — dark bg / primary text on light
+- `fc-flint` (#3B3E43) — dark surface (cards, nav) / body text on light
+- `fc-slate` (#666B72) — muted text on light
+- `fc-slate-light` (#A7ADB5) — muted text on dark (pairs with slate)
+- `fc-ash` (#D5D7DA) — body text on dark / borders and dividers on light (0.5px weight)
+- `fc-chalk` (#F5F5F3) — light page bg / primary text on dark
+- `white` — raised light surfaces (cards, sections) on chalk
+- `fc-ember-tint` (#FCEEDF) — soft accent background on light
+- `fc-ember` (#EE9440) — accent on dark backgrounds; filled ember takes obsidian text
+- `fc-ember-deep` (#A85A14) — accent on light backgrounds; filled ember-deep takes chalk text (never use ember on light)
 
 **Typography**: Cormorant Garamond (display/headlines) + DM Sans (body/UI). Three DM Sans weights only: 300, 400, 500. Cormorant italic reserved for tagline, hero, pull quotes.
 

@@ -5,7 +5,7 @@ templ Nav(activePath string) {
 		<div class="mx-auto flex max-w-content items-center justify-between px-6 py-3 lg:px-8">
 			<!-- Brand -->
 			<a href="/" class="flex flex-col">
-				<span class="text-body-sm font-medium uppercase tracking-[0.12em] text-fc-parchment">
+				<span class="text-body-sm font-medium uppercase tracking-[0.12em] text-fc-chalk">
 					{ SiteName }
 				</span>
 				<span class="font-display text-eyebrow italic tracking-[0.04em] text-fc-ash">
@@ -21,7 +21,7 @@ templ Nav(activePath string) {
 				@navLink("About", "/about", activePath)
 				<a
 					href="/contact"
-					class="rounded-[3px] border border-fc-spark px-[14px] py-[5px] text-eyebrow font-medium uppercase tracking-[0.08em] text-fc-spark transition hover:bg-fc-spark hover:text-fc-birchwood active:scale-[0.98]"
+					class="rounded-[3px] border border-fc-ember px-[14px] py-[5px] text-eyebrow font-medium uppercase tracking-[0.08em] text-fc-ember transition hover:bg-fc-ember hover:text-fc-obsidian active:scale-[0.98]"
 				>
 					Start a project
 				</a>
@@ -29,7 +29,7 @@ templ Nav(activePath string) {
 			<!-- Mobile hamburger -->
 			<button
 				@click="open = !open"
-				class="flex h-8 w-8 items-center justify-center text-fc-ash transition hover:text-fc-parchment md:hidden"
+				class="flex h-8 w-8 items-center justify-center text-fc-ash transition hover:text-fc-chalk md:hidden"
 				aria-label="Toggle menu"
 			>
 				<svg x-show="!open" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -61,7 +61,7 @@ templ Nav(activePath string) {
 				@mobileNavLink("About", "/about", activePath)
 				<a
 					href="/contact"
-					class="mt-2 rounded-[3px] border border-fc-spark px-[14px] py-[8px] text-center text-eyebrow font-medium uppercase tracking-[0.08em] text-fc-spark transition hover:bg-fc-spark hover:text-fc-birchwood"
+					class="mt-2 rounded-[3px] border border-fc-ember px-[14px] py-[8px] text-center text-eyebrow font-medium uppercase tracking-[0.08em] text-fc-ember transition hover:bg-fc-ember hover:text-fc-obsidian"
 				>
 					Start a project
 				</a>
@@ -77,8 +77,8 @@ templ Nav(activePath string) {
 templ navLink(label, href, activePath string) {
 	<a
 		href={ templ.SafeURL(href) }
-		class={ "text-ui uppercase transition hover:text-fc-parchment",
-			templ.KV("text-fc-parchment", href == activePath),
+		class={ "text-ui uppercase transition hover:text-fc-chalk",
+			templ.KV("text-fc-chalk", href == activePath),
 			templ.KV("text-fc-ash", href != activePath) }
 	>
 		{ label }
@@ -88,8 +88,8 @@ templ navLink(label, href, activePath string) {
 templ mobileNavLink(label, href, activePath string) {
 	<a
 		href={ templ.SafeURL(href) }
-		class={ "text-ui uppercase transition hover:text-fc-parchment",
-			templ.KV("text-fc-parchment", href == activePath),
+		class={ "text-ui uppercase transition hover:text-fc-chalk",
+			templ.KV("text-fc-chalk", href == activePath),
 			templ.KV("text-fc-ash", href != activePath) }
 	>
 		{ label }
