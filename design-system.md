@@ -30,14 +30,15 @@ All color decisions flow from these eight tokens (Tailwind `fc-*`, defined in `t
 | `--fc-slate-light` | `#A7ADB5` | Muted text on dark (Obsidian and Flint) |
 | `--fc-ash` | `#D5D7DA` | Body text on dark · borders, dividers, rules on light |
 | `--fc-chalk` | `#F5F5F3` | Primary light background · primary text on dark |
-| `--fc-ember-tint` | `#FCEEDF` | Soft accent background on light (highlights, callouts) |
+| `--fc-ember-tint` | `#FCEEDF` | Soft accent background on light (highlights, callouts); Obsidian or Flint text |
 | `--fc-ember` | `#EE9440` | Accent on dark backgrounds (Obsidian/Flint) |
 | `--fc-ember-deep` | `#A85A14` | Accent on light backgrounds |
 | white | `#FFFFFF` | Raised light surface (cards, sections) on a Chalk page |
 
 ### Usage Rules
 
-- **Ember Deep (`#A85A14`)** is the only accent on Chalk, white, or Ember Tint: buttons, links, ghost underlines, pull quote text, eyebrow rules. Buttons are Ember Deep with Chalk text (4.65:1).
+- **Ember Deep (`#A85A14`)** is the only accent on Chalk or white: buttons, links, ghost underlines, pull quote text, eyebrow rules. Buttons are Ember Deep with Chalk text (4.65:1).
+- **Ember Tint (`#FCEEDF`)** takes Obsidian or Flint text. Ember Deep on Ember Tint is 4.46:1, so use it there only for large text (24px+) or rules.
 - **Ember (`#EE9440`)** replaces Ember Deep wherever it appears on Obsidian or Flint. Never use Ember on light backgrounds (2.2:1 on Chalk). Filled Ember buttons take **Obsidian** text, never Chalk (2.4:1).
 - **Slate (`#666B72`)** is muted text on light backgrounds only; on dark use **Slate Light (`#A7ADB5`)**. They always pair this way.
 - **Ash (`#D5D7DA`)** is the only border color on light. Use at `0.5px` weight universally. Exceptions: left-border accent cards use `2.5px` Ember Deep; featured items use `2px` Ember Deep.

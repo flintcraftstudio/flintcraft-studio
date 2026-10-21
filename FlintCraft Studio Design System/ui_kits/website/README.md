@@ -1,6 +1,6 @@
 # FlintCraft Studio — Website UI Kit
 
-High-fidelity recreation of the FlintCraft Studio marketing site (Helena, MT). Rebuilds the home, services, work, and contact surfaces as static React/JSX components using the v1.1 twelve-token palette.
+High-fidelity recreation of the FlintCraft Studio marketing site (Helena, MT). Rebuilds the home, services, work, and contact surfaces as static React/JSX components using palette v2 (eight tokens plus white).
 
 ## Screens covered
 

@@ -4,19 +4,19 @@ const { useState } = React;
 function Eyebrow({ children, dark = false }) {
   return (
     <div style={{ marginBottom: '1rem' }}>
-      <div style={{ width: 28, height: 1, background: '#a84812', marginBottom: 8 }} />
+      <div style={{ width: 28, height: 1, background: '#A85A14', marginBottom: 8 }} />
       <span style={{
         fontFamily: 'var(--fc-font-body)',
         fontSize: 11, fontWeight: 500, letterSpacing: '0.2em',
         textTransform: 'uppercase',
-        color: dark ? '#96897a' : '#6b5f52',
+        color: dark ? '#A7ADB5' : '#666B72',
       }}>{children}</span>
     </div>
   );
 }
 
 function RuleAccent() {
-  return <hr style={{ border: 'none', borderTop: '1px solid #a84812', width: 48, margin: '1.5rem 0' }} />;
+  return <hr style={{ border: 'none', borderTop: '1px solid #A85A14', width: 48, margin: '1.5rem 0' }} />;
 }
 
 function PullQuote({ children, dark = false }) {
@@ -26,7 +26,7 @@ function PullQuote({ children, dark = false }) {
       fontStyle: 'italic',
       fontSize: 18,
       letterSpacing: '0.02em',
-      color: dark ? '#e8873b' : '#a84812',
+      color: dark ? '#EE9440' : '#A85A14',
       lineHeight: 1.4,
       margin: 0,
     }}>{children}</p>
@@ -59,8 +59,8 @@ function Button({ variant = 'primary', dark = false, children, onClick, size = '
     <a onClick={onClick} style={{
       fontFamily: 'var(--fc-font-body)', fontSize: 13, fontWeight: 500,
       letterSpacing: '0.08em', textTransform: 'uppercase',
-      color: dark ? '#e8873b' : '#a84812',
-      borderBottom: `1.5px solid ${dark ? '#e8873b' : '#a84812'}`,
+      color: dark ? '#EE9440' : '#A85A14',
+      borderBottom: `1.5px solid ${dark ? '#EE9440' : '#A85A14'}`,
       padding: '10px 0', textDecoration: 'none', cursor: 'pointer',
       transition: 'opacity 0.2s',
     }}>{children}</a>

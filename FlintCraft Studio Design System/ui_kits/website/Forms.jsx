@@ -5,7 +5,7 @@ function TextInput({ label, value, onChange, placeholder, type = 'text', error, 
   const [focused, setFocused] = useStateForm(false);
   return (
     <div>
-      <label style={{ display: 'block', fontFamily: 'var(--fc-font-body)', fontSize: 11, fontWeight: 500, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#6b5f52', marginBottom: 6 }}>
+      <label style={{ display: 'block', fontFamily: 'var(--fc-font-body)', fontSize: 11, fontWeight: 500, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#666B72', marginBottom: 6 }}>
         {label} {optional && <span style={{ textTransform: 'none', letterSpacing: 0, color: '#b4ada6' }}>(optional)</span>}
       </label>
       <input
@@ -18,14 +18,14 @@ function TextInput({ label, value, onChange, placeholder, type = 'text', error, 
         style={{
           width: '100%',
           padding: '10px 14px',
-          background: '#faf9f7',
-          border: error ? '0.5px solid #b44' : `0.5px solid ${focused ? '#a84812' : '#d4cfc9'}`,
+          background: '#F5F5F3',
+          border: error ? '0.5px solid #b44' : `0.5px solid ${focused ? '#A85A14' : '#D5D7DA'}`,
           borderRadius: 3,
           fontFamily: 'var(--fc-font-body)',
           fontSize: 16,
-          color: '#1c1e24',
+          color: '#17181A',
           outline: 'none',
-          boxShadow: focused ? '0 0 0 2px rgba(168, 72, 18, 0.12)' : 'none',
+          boxShadow: focused ? '0 0 0 2px rgba(168,90,20, 0.12)' : 'none',
           boxSizing: 'border-box',
           transition: 'all 0.15s',
         }}
@@ -39,7 +39,7 @@ function TextArea({ label, value, onChange, placeholder, error }) {
   const [focused, setFocused] = useStateForm(false);
   return (
     <div>
-      <label style={{ display: 'block', fontFamily: 'var(--fc-font-body)', fontSize: 11, fontWeight: 500, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#6b5f52', marginBottom: 6 }}>{label}</label>
+      <label style={{ display: 'block', fontFamily: 'var(--fc-font-body)', fontSize: 11, fontWeight: 500, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#666B72', marginBottom: 6 }}>{label}</label>
       <textarea
         value={value || ''}
         placeholder={placeholder}
@@ -50,16 +50,16 @@ function TextArea({ label, value, onChange, placeholder, error }) {
         style={{
           width: '100%',
           padding: '10px 14px',
-          background: '#faf9f7',
-          border: `0.5px solid ${focused ? '#a84812' : '#d4cfc9'}`,
+          background: '#F5F5F3',
+          border: `0.5px solid ${focused ? '#A85A14' : '#D5D7DA'}`,
           borderRadius: 3,
           fontFamily: 'var(--fc-font-body)',
           fontSize: 16,
           lineHeight: 1.6,
-          color: '#1c1e24',
+          color: '#17181A',
           outline: 'none',
           resize: 'vertical',
-          boxShadow: focused ? '0 0 0 2px rgba(168, 72, 18, 0.12)' : 'none',
+          boxShadow: focused ? '0 0 0 2px rgba(168,90,20, 0.12)' : 'none',
           boxSizing: 'border-box',
         }}
       />
@@ -74,8 +74,8 @@ function ContactForm() {
   const set = k => v => setValues(p => ({ ...p, [k]: v }));
   if (submitted) {
     return (
-      <div style={{ background: '#f0ece5', borderLeft: '2.5px solid #a84812', borderRadius: 0, padding: 28 }}>
-        <p style={{ margin: 0, fontFamily: 'var(--fc-font-body)', fontSize: 17, lineHeight: 1.65, color: '#1c1e24' }}>
+      <div style={{ background: '#FFFFFF', borderLeft: '2.5px solid #A85A14', borderRadius: 0, padding: 28 }}>
+        <p style={{ margin: 0, fontFamily: 'var(--fc-font-body)', fontSize: 17, lineHeight: 1.65, color: '#17181A' }}>
           Got it. You'll hear from Logan. Not a bot. Not a VA. The person who will actually build your project is reading this right now.
         </p>
       </div>
@@ -91,7 +91,7 @@ function ContactForm() {
       <TextArea label="What's frustrating you about your current setup?" value={values.message} onChange={set('message')} placeholder="Tell us what's not working and what you'd like to change." />
       <button type="submit" style={{
         alignSelf: 'flex-start',
-        background: '#a84812', color: '#faf9f7',
+        background: '#A85A14', color: '#F5F5F3',
         border: 'none', borderRadius: 3,
         padding: '12px 26px',
         fontFamily: 'var(--fc-font-body)', fontSize: 13, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase',

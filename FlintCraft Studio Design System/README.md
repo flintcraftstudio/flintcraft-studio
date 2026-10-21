@@ -13,7 +13,7 @@ Positioning line used in collateral: *"As durable as the mountains, and just as 
 
 ## Sources
 
-This system was assembled from the FlintCraft Studio marketing-site repo plus a v1.1 color spec provided directly in the brief.
+This system was assembled from the FlintCraft Studio marketing-site repo plus the v1.1 color spec from the brief; the palette has since moved to v2 (below).
 
 - **Codebase:** `github.com/flintcraftstudio/flintcraft-studio` — Go + templ + Tailwind CSS (standalone binary). Key files read:
   - `design-system.md` — v1.0 system (nine color tokens; superseded on palette by this system)
@@ -21,7 +21,7 @@ This system was assembled from the FlintCraft Studio marketing-site repo plus a 
   - `tailwind/tailwind.config.js` — `fc-*` token names, fluid type plugin, type scale
   - `internal/view/*.templ` — home, services, process, work, contact, nav, footer (canonical component patterns)
   - `logo.svg`, `logo.png`, `logo_wordmark.svg`, `logo_wordmark.png`
-- **Brief supplement:** expanded v1.1 color palette — twelve tokens, splitting body vs. muted text tiers on light and dark surfaces, and introducing Charcoal (highest dark surface).
+- **Palette v2:** eight cool-neutral tokens plus white, replacing the warm twelve-token v1.1 palette. Defined in the repo's `tailwind/tailwind.config.js` and `design-system.md`.
 
 The code patterns shown throughout this system are simplified cosmetic recreations of what ships in the repo — not the production Go + templ source.
 
@@ -33,7 +33,7 @@ Root files:
 
 - `README.md` — this document
 - `SKILL.md` — Agent Skills manifest (used when this folder is bundled as a Claude Code skill)
-- `colors_and_type.css` — CSS variables for the twelve color tokens, spacing, radii, and semantic typography
+- `colors_and_type.css` — CSS variables for the eight color tokens (plus white), spacing, radii, and semantic typography
 - `assets/` — logos (SVG + PNG, silhouette + wordmark)
 - `fonts/` — (none; all type loaded from Google Fonts)
 - `preview/` — design-system review cards (one per concept, registered to the Design System tab)
@@ -76,32 +76,34 @@ Design system tab: every card in `preview/` is registered with `register_assets`
 
 **Eyebrow labels** (short, factual): *Services · Our work · Selected work · Featured · More work · Who we are · Who we work with · How we work · When things shift · What it costs · Common questions*.
 
-**Pull-quote treatment** (Cormorant italic, Ember on light / Spark on dark): used once per section, never twice.
+**Pull-quote treatment** (Cormorant italic, Ember Deep on light / Ember on dark): used once per section, never twice.
 
 ---
 
 ## Visual Foundations
 
-The FlintCraft visual system is **quiet, precise, and intentionally closed.** The identity is carried by typography, negative space, and a single burnt-orange accent against warm neutrals. There are no gradients, no drop shadows, no photographic overlays, no decorative backgrounds, no illustrations beyond the logo.
+The FlintCraft visual system is **quiet, precise, and intentionally closed.** The identity is carried by typography, negative space, and a single ember-orange accent against cool grey neutrals. There are no gradients, no drop shadows, no photographic overlays, no decorative backgrounds, no illustrations beyond the logo.
 
 ### Color
 
-Twelve named tokens, split across three tiers on each surface:
+Eight named tokens plus white, in two tiers of text on each surface:
 
 | Tier | Light surface | Dark surface |
 |---|---|---|
-| Page | Birchwood `#faf9f7` | Obsidian `#1c1e24` |
-| Raised (cards, nav) | Parchment `#f0ece5` | Flint `#363b42` |
-| Highest (modals, popovers, hover) | *(border on parchment)* | Charcoal `#474d55` |
-| Primary text | Obsidian | Birchwood |
-| Body muted | Trail Dust `#4a4038` | Ash `#c4bdb2` |
-| Subtle muted | Bracken `#6b5f52` | Smoke `#96897a` |
-| Accent | Ember `#a84812` | Spark `#e8873b` |
-| Border | Slate Rim `#d4cfc9` | Slate Rim `#d4cfc9` |
+| Page | Chalk `#F5F5F3` | Obsidian `#17181A` |
+| Raised (cards, sections, nav) | White `#FFFFFF` | Flint `#3B3E43` |
+| Highlight | Ember Tint `#FCEEDF` | — |
+| Primary text | Obsidian `#17181A` | Chalk `#F5F5F3` |
+| Body text | Flint `#3B3E43` | Ash `#D5D7DA` |
+| Muted text (captions, eyebrows, metadata) | Slate `#666B72` | Slate Light `#A7ADB5` |
+| Accent | Ember Deep `#A85A14` | Ember `#EE9440` |
+| Border | Ash `#D5D7DA` | Ash at 10–30% opacity |
 
-**Accent rules.** Ember and Spark never cross surfaces — Ember on light, Spark on dark. Ember on Flint or Obsidian fails AA; Spark on Birchwood washes out. On Flint specifically, Spark is only safe at 18px+ or 14px bold; smaller accent text on Flint should use Ash for emphasis instead.
+There is no third dark surface: depth on dark comes from borders, as on light.
 
-**Never.** Trail Dust or Bracken on dark. Ash or Smoke on light. Spark for body-weight text on Flint. Colors outside the set.
+**Accent rules.** Ember Deep and Ember never cross surfaces: Ember Deep on light, Ember on dark. Ember on Chalk is 2.2:1 and washes out; Ember Deep on Obsidian loses contrast. Filled Ember buttons take Obsidian text (7.6:1), never Chalk (2.4:1). Filled Ember Deep buttons take Chalk text (4.65:1). Text on Ember Tint is Obsidian or Flint; Ember Deep on Ember Tint is 4.46:1, so only for large text or rules.
+
+**Never.** Slate on dark (it's under AA on Obsidian and Flint). Slate Light or Ash text on light. Colors outside the set. Every text pairing in the table passes WCAG AA (4.5:1); check any new one.
 
 ### Type
 
@@ -122,14 +124,14 @@ Tight. `3px` for buttons, inputs, badges. `6px` for cards. `20px` pill only for 
 
 ### Borders
 
-All borders are `0.5px` Slate Rim. Two exceptions:
+All borders are `0.5px` Ash. Two exceptions:
 
-- **Accent cards** (testimonials, callouts): `2.5px` left border only. Ember on light, Spark on dark. Radius is `0` — the bar sits flush against the card.
-- **Featured items:** `2px` full border. Ember on light, Spark on dark.
+- **Accent cards** (testimonials, callouts): `2.5px` left border only. Ember Deep on light, Ember on dark. Radius is `0` — the bar sits flush against the card.
+- **Featured items:** `2px` full border. Ember Deep on light, Ember on dark.
 
 ### Backgrounds
 
-Atmosphere comes from section alternation, not decoration. Light sections (Birchwood or Parchment) alternate with dark sections (Obsidian or Flint). Never two darks in a row without a transition.
+Atmosphere comes from section alternation, not decoration. Light sections (Chalk or white) alternate with dark sections (Obsidian or Flint). Never two darks in a row without a transition.
 
 - **No gradients.** The only gradient permitted is a hero scrim (`bg-fc-obsidian/55`) over a full-bleed photograph, and only on the home hero.
 - **No grain, noise, or mesh overlays.**
@@ -138,15 +140,15 @@ Atmosphere comes from section alternation, not decoration. Light sections (Birch
 
 ### Shadows
 
-**None.** No drop shadows, no box-shadows. The system expresses depth through border weight (`0.5px` rule → `0.5px` card border → `2px` featured border → `2.5px` accent bar) and surface alternation (Obsidian → Flint → Charcoal on dark; Birchwood → Parchment → bordered Parchment on light).
+**None.** No drop shadows, no box-shadows. The system expresses depth through border weight (`0.5px` rule → `0.5px` card border → `2px` featured border → `2.5px` accent bar) and surface alternation (Obsidian → Flint on dark; Chalk → white → bordered white on light).
 
-The one exception is the input focus ring: `0 0 0 2px rgba(168, 72, 18, 0.12)`. Functional only.
+The one exception is the input focus ring: `0 0 0 2px rgba(168,90,20, 0.12)`. Functional only.
 
 ### Imagery
 
 Photography is warm, natural, and un-retouched in feel — Montana light, real hands, real interiors, no stock polish. Full-bleed treatments are exceedingly rare. When photography appears, it appears inside a `6px` radius card frame alongside text, not as a backdrop.
 
-The logo is a hand-drawn crosshatched arrowhead — the only illustration in the system. Its amber facet is the source of Ember/Spark.
+The logo is a hand-drawn crosshatched arrowhead — the only illustration in the system. Its amber facet is the source of Ember and Ember Deep.
 
 ### Motion
 
@@ -160,13 +162,14 @@ Restrained. Entrances fade + translate 12–18px on a 700ms `ease-out-expo` curv
 
 | Surface | Hover | Active |
 |---|---|---|
-| Nav link (Bracken) | Parchment — colour only | — |
-| Primary button (Ember) | Darken 8% (Ember-dark `#8f3d0f`) + `translateY(-1px)` | `scale(0.97)` |
-| Outline button | Fill with border colour, text flips to Birchwood | `scale(0.97)` |
-| Ghost button (Ember underline) | `filter: brightness(1.1)` | `scale(0.98)` |
+| Nav link (Ash, on Obsidian) | Chalk — colour only | — |
+| Primary button (Ember Deep on light) | `filter: brightness(0.9)` + `translateY(-1px)` | `scale(0.97)` |
+| Primary button (Ember on dark) | `filter: brightness(1.1)` + `translateY(-1px)` | `scale(0.97)` |
+| Outline button (Ember on dark) | Fill with Ember, text flips to Obsidian | `scale(0.97)` |
+| Ghost button (accent underline) | `filter: brightness(1.1)` | `scale(0.98)` |
 | Card (linked) | No shadow; `translateY(-2px)` | `translateY(0)` |
 | Image in card | `scale(1.02)` over 500ms | — |
-| Input | Slate Rim border → Ember border + `0 0 0 2px rgba(168, 72, 18, 0.12)` focus ring | — |
+| Input | Ash border → Ember Deep border + `0 0 0 2px rgba(168,90,20, 0.12)` focus ring | — |
 
 Brightness and translate are preferred over colour shifts for non-accent elements. Scale-down on press is universal for buttons (`0.97`) and ghost links (`0.98`).
 
@@ -175,16 +178,16 @@ Brightness and translate are preferred over colour shifts for non-accent element
 Effectively none. The only semi-transparent elements:
 
 - Hero image scrims: `bg-fc-obsidian/25` (global tint) and `bg-fc-obsidian/55` (text-side panel).
-- Focus ring: `rgba(168, 72, 18, 0.12)`.
+- Focus ring: `rgba(168,90,20, 0.12)`.
 - Tag chips on dark cards: `border-fc-ash/30`, `bg-fc-ash/20`.
 
 No `backdrop-filter`, no frosted glass, no blurred surfaces.
 
 ### Cards
 
-- **Light card** — `bg-Birchwood` or `bg-Parchment`, `0.5px` Slate Rim border, `6px` radius, `20–24px` internal padding, no shadow.
+- **Light card** — white on a Chalk page, `0.5px` Ash border, `6px` radius, `20–24px` internal padding, no shadow.
 - **Dark card** — `bg-Flint`, `0.5px` border matched to Flint (effectively invisible), `6px` radius, same padding.
-- **Accent card** (testimonial / callout) — `bg-Parchment`, `2.5px` left border Ember (or Spark on dark), radius `0`.
+- **Accent card** (testimonial / callout) — white or Ember Tint, `2.5px` left border Ember Deep (or Ember on dark), radius `0`.
 
 Card anatomy is consistent: eyebrow (uppercase, tracked) → Cormorant title → DM Sans body → `→`-suffix CTA link. Card hover is a `translateY(-2px)` lift and optional border-colour shift to a 30%-opacity accent; never a shadow.
 
@@ -192,9 +195,9 @@ Card anatomy is consistent: eyebrow (uppercase, tracked) → Cormorant title →
 
 - Fixed top nav on Obsidian, scrolls with page.
 - Section padding `5rem` desktop / `3rem` mobile. Top + bottom, matched.
-- Divider rule: `0.5px` Slate Rim, `2.5rem` vertical margin.
-- Accent divider (sparingly): `1px` Ember, `48px` wide, aligned left.
-- Section eyebrow pattern: short `28×1px` Ember rule + `8px` gap + uppercase tracked label + headline.
+- Divider rule: `0.5px` Ash, `2.5rem` vertical margin.
+- Accent divider (sparingly): `1px` Ember Deep (Ember on dark), `48px` wide, aligned left.
+- Section eyebrow pattern: short `28×1px` accent rule (Ember Deep on light, Ember on dark) + `8px` gap + uppercase tracked label + headline.
 
 ---
 
@@ -229,8 +232,8 @@ Both feature hand-drawn crosshatching and an amber facet. Do not recolour the lo
 
 - **Icon set** — Lucide is a substitution for a not-yet-established set. Confirm before shipping production icons.
 - **Hero photography** — real assets not included. Current placeholders are logo watermarks on Obsidian.
-- **Color palette version** — this system uses the **v1.1 twelve-token palette** from the brief. The committed `design-system.md` in the repo is v1.0 (nine tokens, different hex values for Ember/Obsidian/Flint/Ash/Trail Dust). The v1.1 version supersedes it here. If the repo's `design-system.md` is updated, revisit this file.
+- **Color palette version** — this system uses **palette v2** (eight cool-neutral tokens plus white), matching the repo's `design-system.md` and `tailwind/tailwind.config.js`. If either changes, revisit this file and `colors_and_type.css`.
 
 ---
 
-*FlintCraft Studio · Helena, Montana · Design system v1.1*
+*FlintCraft Studio · Helena, Montana · Design system v2*

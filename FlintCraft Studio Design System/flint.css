@@ -75,7 +75,7 @@
   --fc-flint-stroke: 2px;
   position: relative;
   display: inline-block;
-  background: var(--fc-ember);              /* overridden to spark on dark */
+  background: var(--fc-ember-deep);              /* overridden to ember on dark */
   padding: var(--fc-flint-stroke);
 }
 
@@ -109,18 +109,18 @@
 .fc-flint-btn:hover { filter: brightness(1.08); }
 .fc-flint-btn:active { transform: translateY(0.5px); }
 
-.fc-flint-btn--primary-light { background: var(--fc-ember); color: var(--fc-birchwood); }
-.fc-flint-btn--primary-dark  { background: var(--fc-spark); color: var(--fc-obsidian); }
+.fc-flint-btn--primary-light { background: var(--fc-ember-deep); color: var(--fc-chalk); }
+.fc-flint-btn--primary-dark  { background: var(--fc-ember); color: var(--fc-obsidian); }
 
 .fc-flint-btn--outline-light {
-  background: var(--fc-birchwood);
+  background: var(--fc-chalk);
   color: var(--fc-obsidian);
   box-shadow: inset 0 0 0 1.5px var(--fc-obsidian);
 }
 .fc-flint-btn--outline-dark {
   background: transparent;
-  color: var(--fc-birchwood);
-  box-shadow: inset 0 0 0 1.5px var(--fc-charcoal);
+  color: var(--fc-chalk);
+  box-shadow: inset 0 0 0 1.5px var(--fc-flint);
 }
 
 /* ===================================================================
@@ -135,12 +135,12 @@
 }
 
 .fc-flint-card--light {
-  background: var(--fc-parchment);
+  background: var(--fc-white);
   color: var(--fc-obsidian);
 }
 .fc-flint-card--dark {
   background: var(--fc-flint);
-  color: var(--fc-birchwood);
+  color: var(--fc-chalk);
 }
 
 /* Struck edge — a 2.5px accent line following the chipped top-right cut.
@@ -152,12 +152,12 @@
   right: 0;
   width: 24px;
   height: 2.5px;
-  background: var(--fc-ember);
+  background: var(--fc-ember-deep);
   transform-origin: 100% 50%;
   transform: translate(-10px, 6px) rotate(-45deg);
   pointer-events: none;
 }
-.fc-flint-card--dark .fc-flint-card__strike { background: var(--fc-spark); }
+.fc-flint-card--dark .fc-flint-card__strike { background: var(--fc-ember); }
 
 /* Larger chip variant for featured/hero */
 .fc-flint-card--feature .fc-flint-card__strike {
@@ -177,7 +177,7 @@
   text-transform: uppercase;
   padding: 4px 12px;
 }
-.fc-flint-badge--light { background: var(--fc-parchment); color: var(--fc-trail-dust); }
-.fc-flint-badge--dark  { background: var(--fc-charcoal);  color: var(--fc-ash); }
-.fc-flint-badge--accent-light { background: var(--fc-ember); color: var(--fc-birchwood); }
-.fc-flint-badge--accent-dark  { background: var(--fc-spark); color: var(--fc-obsidian); }
+.fc-flint-badge--light { background: var(--fc-white); color: var(--fc-flint); }
+.fc-flint-badge--dark  { background: var(--fc-flint);  color: var(--fc-ash); }
+.fc-flint-badge--accent-light { background: var(--fc-ember-deep); color: var(--fc-chalk); }
+.fc-flint-badge--accent-dark  { background: var(--fc-ember); color: var(--fc-obsidian); }

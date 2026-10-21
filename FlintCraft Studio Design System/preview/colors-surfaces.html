@@ -6,13 +6,13 @@
 <link rel="stylesheet" href="../colors_and_type.css">
 <style>
   html, body { margin: 0; padding: 0; }
-  body { background: var(--fc-birchwood); padding: 24px; box-sizing: border-box; }
+  body { background: var(--fc-chalk); padding: 24px; box-sizing: border-box; }
   .row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
   .sw {
-    border: 0.5px solid var(--fc-slate-rim);
+    border: 0.5px solid var(--fc-ash);
     border-radius: var(--fc-radius-md);
     overflow: hidden;
-    background: var(--fc-birchwood);
+    background: var(--fc-chalk);
   }
   .chip { height: 76px; }
   .meta { padding: 10px 12px 12px; }
@@ -27,13 +27,13 @@
   .hex {
     font-family: 'SF Mono', ui-monospace, Menlo, Consolas, monospace;
     font-size: 11px;
-    color: var(--fc-bracken);
+    color: var(--fc-slate);
     margin-top: 3px;
   }
   .role {
     font-family: var(--fc-font-body);
     font-size: 10px;
-    color: var(--fc-bracken);
+    color: var(--fc-slate);
     margin-top: 6px;
     line-height: 1.4;
     letter-spacing: 0.02em;
@@ -43,51 +43,51 @@
 <body>
   <div class="row">
     <div class="sw">
-      <div class="chip" style="background: #1c1e24"></div>
+      <div class="chip" style="background: #17181A"></div>
       <div class="meta">
         <div class="name">Obsidian</div>
-        <div class="hex">#1c1e24</div>
-        <div class="role">Page · text on light</div>
+        <div class="hex">#17181A</div>
+        <div class="role">Dark page · text on light</div>
       </div>
     </div>
     <div class="sw">
-      <div class="chip" style="background: #363b42"></div>
+      <div class="chip" style="background: #3B3E43"></div>
       <div class="meta">
         <div class="name">Flint</div>
-        <div class="hex">#363b42</div>
-        <div class="role">Raised dark surface</div>
+        <div class="hex">#3B3E43</div>
+        <div class="role">Raised dark surface · body text on light</div>
       </div>
     </div>
     <div class="sw">
-      <div class="chip" style="background: #474d55"></div>
+      <div class="chip" style="background: #F5F5F3; border-bottom: 0.5px solid var(--fc-ash)"></div>
       <div class="meta">
-        <div class="name">Charcoal</div>
-        <div class="hex">#474d55</div>
-        <div class="role">Highest dark · modals</div>
+        <div class="name">Chalk</div>
+        <div class="hex">#F5F5F3</div>
+        <div class="role">Light page · text on dark</div>
       </div>
     </div>
     <div class="sw">
-      <div class="chip" style="background: #faf9f7; border-bottom: 0.5px solid var(--fc-slate-rim)"></div>
+      <div class="chip" style="background: #FFFFFF; border-bottom: 0.5px solid var(--fc-ash)"></div>
       <div class="meta">
-        <div class="name">Birchwood</div>
-        <div class="hex">#faf9f7</div>
-        <div class="role">Page · text on dark</div>
-      </div>
-    </div>
-    <div class="sw">
-      <div class="chip" style="background: #f0ece5; border-bottom: 0.5px solid var(--fc-slate-rim)"></div>
-      <div class="meta">
-        <div class="name">Parchment</div>
-        <div class="hex">#f0ece5</div>
+        <div class="name">White</div>
+        <div class="hex">#FFFFFF</div>
         <div class="role">Raised light surface</div>
       </div>
     </div>
     <div class="sw">
-      <div class="chip" style="background: #d4cfc9"></div>
+      <div class="chip" style="background: #FCEEDF"></div>
       <div class="meta">
-        <div class="name">Slate Rim</div>
-        <div class="hex">#d4cfc9</div>
-        <div class="role">Borders · 0.5px</div>
+        <div class="name">Ember Tint</div>
+        <div class="hex">#FCEEDF</div>
+        <div class="role">Soft accent background · light</div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="chip" style="background: #D5D7DA"></div>
+      <div class="meta">
+        <div class="name">Ash</div>
+        <div class="hex">#D5D7DA</div>
+        <div class="role">Borders · 0.5px · body text on dark</div>
       </div>
     </div>
   </div>

@@ -7,47 +7,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
 
 :root {
-  /* ─── Color Tokens (12) ───────────────────────────────────────────────── */
+  /* ─── Color Tokens (8, plus white) ───────────────────────────────────── */
 
-  /* Dark surfaces */
-  --fc-obsidian:   #1c1e24;  /* page bg · text on light */
-  --fc-flint:      #363b42;  /* raised surface (cards, nav) */
-  --fc-charcoal:   #474d55;  /* highest surface (modals, popovers, hovered nav) */
+  /* Neutrals, darkest to lightest */
+  --fc-obsidian:    #17181A;  /* dark page bg · primary text on light */
+  --fc-flint:       #3B3E43;  /* dark raised surface (cards, nav) · body text on light */
+  --fc-slate:       #666B72;  /* muted text on light — captions, eyebrows, metadata */
+  --fc-slate-light: #A7ADB5;  /* muted text on dark (Obsidian and Flint) */
+  --fc-ash:         #D5D7DA;  /* body text on dark · borders, dividers, rules on light */
+  --fc-chalk:       #F5F5F3;  /* light page bg · primary text on dark */
+  --fc-white:       #FFFFFF;  /* light raised surface (cards, sections) on Chalk */
 
-  /* Dark-mode text */
-  --fc-ash:        #c4bdb2;  /* body / strong muted on dark */
-  --fc-smoke:      #96897a;  /* subtle muted — captions, eyebrows, metadata */
-  --fc-spark:      #e8873b;  /* accent on dark (body text on Obsidian; 18px+/bold on Flint) */
-
-  /* Light surfaces */
-  --fc-birchwood:  #faf9f7;  /* page bg */
-  --fc-parchment:  #f0ece5;  /* raised surface (cards, section backgrounds) */
-
-  /* Light-mode text */
-  --fc-trail-dust: #4a4038;  /* body / strong muted on light */
-  --fc-bracken:    #6b5f52;  /* subtle muted — captions, eyebrows, metadata */
-  --fc-ember:      #a84812;  /* accent on light */
-
-  /* Structure */
-  --fc-slate-rim:  #d4cfc9;  /* borders, dividers, rules */
+  /* Accent */
+  --fc-ember-tint:  #FCEEDF;  /* soft accent background on light */
+  --fc-ember:       #EE9440;  /* accent on dark · Obsidian text on Ember fills */
+  --fc-ember-deep:  #A85A14;  /* accent on light · Chalk text on Ember Deep fills */
 
   /* ─── Semantic tokens — light context ─────────────────────────────────── */
-  --bg-page:          var(--fc-birchwood);
-  --bg-raised:        var(--fc-parchment);
+  --bg-page:          var(--fc-chalk);
+  --bg-raised:        var(--fc-white);
   --fg-primary:       var(--fc-obsidian);
-  --fg-body:          var(--fc-trail-dust);
-  --fg-muted:         var(--fc-bracken);
-  --fg-accent:        var(--fc-ember);
-  --border-rule:      var(--fc-slate-rim);
+  --fg-body:          var(--fc-flint);
+  --fg-muted:         var(--fc-slate);
+  --fg-accent:        var(--fc-ember-deep);
+  --border-rule:      var(--fc-ash);
 
   /* ─── Semantic tokens — dark context ──────────────────────────────────── */
   --bg-page-dark:     var(--fc-obsidian);
   --bg-raised-dark:   var(--fc-flint);
-  --bg-highest-dark:  var(--fc-charcoal);
-  --fg-primary-dark:  var(--fc-birchwood);
+  --bg-highest-dark:  var(--fc-flint);  /* no third dark shade: separate with an Ash/10% border */
+  --fg-primary-dark:  var(--fc-chalk);
   --fg-body-dark:     var(--fc-ash);
-  --fg-muted-dark:    var(--fc-smoke);
-  --fg-accent-dark:   var(--fc-spark);
+  --fg-muted-dark:    var(--fc-slate-light);
+  --fg-accent-dark:   var(--fc-ember);
 
   /* ─── Spacing ─────────────────────────────────────────────────────────── */
   --fc-space-xs:  4px;
@@ -63,11 +55,11 @@
   --fc-radius-pill: 20px;   /* status indicators only */
 
   /* ─── Borders ─────────────────────────────────────────────────────────── */
-  --fc-border:          0.5px solid var(--fc-slate-rim);
-  --fc-border-accent:   2.5px solid var(--fc-ember);      /* accent cards — light */
-  --fc-border-accent-d: 2.5px solid var(--fc-spark);      /* accent cards — dark */
-  --fc-border-feature:  2px solid var(--fc-ember);        /* featured — light */
-  --fc-border-feature-d:2px solid var(--fc-spark);        /* featured — dark */
+  --fc-border:          0.5px solid var(--fc-ash);
+  --fc-border-accent:   2.5px solid var(--fc-ember-deep);      /* accent cards — light */
+  --fc-border-accent-d: 2.5px solid var(--fc-ember);      /* accent cards — dark */
+  --fc-border-feature:  2px solid var(--fc-ember-deep);        /* featured — light */
+  --fc-border-feature-d:2px solid var(--fc-ember);        /* featured — dark */
 
   /* ─── Typefaces ───────────────────────────────────────────────────────── */
   --fc-font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
@@ -99,14 +91,14 @@ body {
   font-size: var(--fc-text-body);
   font-weight: 400;
   line-height: 1.7;
-  color: var(--fc-trail-dust);
-  background: var(--fc-birchwood);
+  color: var(--fc-flint);
+  background: var(--fc-chalk);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: rgba(168, 72, 18, 0.22);
+  background: rgba(168,90,20, 0.22);
   color: var(--fc-obsidian);
 }
 
@@ -126,7 +118,7 @@ h4 { font-size: var(--fc-text-h4); line-height: 1.4; font-weight: 600; letter-sp
 /* Paragraphs + inline */
 p {
   font-family: var(--fc-font-body);
-  color: var(--fc-trail-dust);
+  color: var(--fc-flint);
   line-height: 1.7;
 }
 
@@ -146,11 +138,11 @@ strong, b {
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--fc-bracken);
+  color: var(--fc-slate);
 }
 
 .eyebrow-dark {
-  color: var(--fc-smoke);
+  color: var(--fc-slate-light);
 }
 
 /* Pull-quote / accent display italic */
@@ -159,12 +151,12 @@ strong, b {
   font-style: italic;
   font-size: 18px;
   letter-spacing: 0.02em;
-  color: var(--fc-ember);
+  color: var(--fc-ember-deep);
   line-height: 1.4;
 }
 
 .pull-quote-dark {
-  color: var(--fc-spark);
+  color: var(--fc-ember);
 }
 
 /* Code / mono — fallback; not a brand typeface */
@@ -172,7 +164,7 @@ code, pre, kbd {
   font-family: 'SF Mono', ui-monospace, Menlo, Consolas, monospace;
   font-size: 0.92em;
   color: var(--fc-obsidian);
-  background: var(--fc-parchment);
+  background: var(--fc-white);
   padding: 1px 5px;
   border-radius: var(--fc-radius-sm);
   border: var(--fc-border);
@@ -182,7 +174,7 @@ code, pre, kbd {
 .caption {
   font-family: var(--fc-font-body);
   font-size: var(--fc-text-eyebrow);
-  color: var(--fc-bracken);
+  color: var(--fc-slate);
   line-height: 1.4;
 }
 
@@ -197,7 +189,7 @@ code, pre, kbd {
 
 /* Links */
 a {
-  color: var(--fc-ember);
+  color: var(--fc-ember-deep);
   text-decoration: none;
   transition: filter 0.2s var(--fc-ease-out-quart);
 }
@@ -206,7 +198,7 @@ a:hover { filter: brightness(1.1); }
 /* Horizontal rule */
 hr {
   border: none;
-  border-top: 0.5px solid var(--fc-slate-rim);
+  border-top: 0.5px solid var(--fc-ash);
   margin: 2.5rem 0;
 }
 
@@ -216,11 +208,11 @@ hr {
   color: var(--fc-ash);
 }
 .fc-dark h1, .fc-dark h2, .fc-dark h3, .fc-dark h4, .fc-dark h5, .fc-dark h6 {
-  color: var(--fc-birchwood);
+  color: var(--fc-chalk);
 }
 .fc-dark p { color: var(--fc-ash); }
-.fc-dark strong { color: var(--fc-birchwood); }
-.fc-dark a { color: var(--fc-spark); }
-.fc-dark .eyebrow { color: var(--fc-smoke); }
-.fc-dark .pull-quote { color: var(--fc-spark); }
+.fc-dark strong { color: var(--fc-chalk); }
+.fc-dark a { color: var(--fc-ember); }
+.fc-dark .eyebrow { color: var(--fc-slate-light); }
+.fc-dark .pull-quote { color: var(--fc-ember); }
 .fc-dark hr { border-top-color: var(--fc-flint); }
