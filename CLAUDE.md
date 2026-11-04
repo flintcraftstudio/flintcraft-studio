@@ -95,7 +95,7 @@ Full spec in `./design-system.md`. Key points:
 
 **Typography**: Cormorant Garamond (`font-display`, headlines) + DM Sans (`font-body`, body/UI). Three DM Sans weights only: 300, 400, 500. Cormorant italic reserved for tagline, hero, pull quotes.
 
-**Brand voice**: "Still shaped by hand." (tagline), "Carved for purpose." (hero). Direct, understated. CTA verbs: "Start a project", "See our work".
+**Brand voice**: "Shaped with intent." (tagline), "Carved for purpose." (hero). Direct, understated. CTA verbs: "Start a project", "See our work".
 
 **Layout**: Light/dark section alternation. Max width 1100px (`max-w-content`). Tight radii (3px interactive, 6px containers). No decorative backgrounds.
 

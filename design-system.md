@@ -6,7 +6,7 @@
 ## Brand Identity
 
 **Studio name:** FlintCraft Studio
-**Primary tagline (nav/logo):** *Still shaped by hand.*
+**Primary tagline (nav/logo):** *Shaped with intent.*
 **Hero headline:** *Carved for purpose.*
 **Voice lines (supporting copy):**
 - *Websites worth keeping.*
@@ -135,7 +135,7 @@ Dark bar. Brand name + italic tagline left. Nav links + CTA right.
       FlintCraft Studio
     </div>
     <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 11px; font-style: italic; color: #A7ADB5; letter-spacing: 0.04em;">
-      Still shaped by hand.
+      Shaped with intent.
     </div>
   </div>
   <div style="display: flex; gap: 1.5rem; align-items: center;">

@@ -6,7 +6,7 @@ import "time"
 const SiteName = "FlintCraft Studio"
 
 // Tagline is the brand tagline displayed in the nav.
-const Tagline = "Still shaped by hand."
+const Tagline = "Shaped with intent."
 
 // Contact info
 const (
