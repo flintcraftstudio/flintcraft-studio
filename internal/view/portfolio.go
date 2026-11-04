@@ -197,6 +197,7 @@ var Projects = map[string]Project{
 			"We rebuilt it from the ground up \u2014 brand, copy, and code \u2014 and fixed an NAP inconsistency that was quietly suppressing their local search ranking. The new site was designed to convert: clear service pages, strong calls to action, and copy that speaks to both commercial property managers and residential homeowners.",
 			"The site launched in six weeks. Every line of code was written for them. Every word of copy was written about their specific business, their specific market, their specific strengths.",
 		},
+		// TODO(brief): add Don's last name [ask Don]; also update the homepage pullQuoteDark in home.templ.
 		Quote: &ProjectQuote{
 			Text:        "They understood what we do and built something we\u2019re actually proud to hand out.",
 			Attribution: "Don \u2014 A-Team Asphalt",

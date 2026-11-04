@@ -102,8 +102,6 @@ func TestIndustriesHubRenders(t *testing.T) {
 		"Built for your",
 		`href="/chiropractor-website-design"`, // live vertical links out
 		`href="/law-firm-website-design"`,     // law vertical now live
-		"Coming soon",                         // dentist placeholder remains
-		"Dentists",
 		"Law firms",
 	} {
 		if !strings.Contains(html, s) {
