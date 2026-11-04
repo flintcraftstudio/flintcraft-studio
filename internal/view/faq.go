@@ -79,7 +79,7 @@ var ServicesFAQ = []FAQEntry{
 		{Text: "Most sites launch in four to six weeks. Timeline depends on how quickly you can review and approve — we don't sit on things. The faster you can react, the faster you're live."},
 	}},
 	{"What counts as a monthly change?", []FAQParagraph{
-		{Text: "Copy updates, new photos, team changes, updated hours, added service descriptions, seasonal content. On unlimited-edit plans that means text updates, photo swaps, service and price changes, hours, minor layout adjustments, and up to [four] new portfolio entries a month. New pages, structural redesigns and third-party integrations are quoted separately and priced honestly before we touch them."},
+		{Text: "Copy updates, new photos, team changes, updated hours, added service descriptions, seasonal content. On unlimited-edit plans that means text updates, photo swaps, service and price changes, hours, minor layout adjustments, and up to four new portfolio entries a month. New pages, structural redesigns and third-party integrations are quoted separately and priced honestly before we touch them."},
 	}},
 	{"What about paid ads — is that included?", []FAQParagraph{
 		{Text: "No, but it's available. Google Ads and Facebook campaigns are scoped and managed separately for clients where paid visibility makes sense. We'll tell you in the first conversation whether we think it's worth it for your market."},
