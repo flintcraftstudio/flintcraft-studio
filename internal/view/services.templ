@@ -92,10 +92,13 @@ templ servicesContent() {
 				</h2>
 				<div class="mt-8 space-y-4 text-body text-fc-flint">
 					<p>
-						Most FlintCraft engagements run between $150 and $350 per month, all in. No setup fees, no surprise invoices, no separate hosting bill. One rate covers design, build, hosting, maintenance, updates, and ongoing visibility work.
+						<strong class="font-medium text-fc-obsidian">The build:</strong> most sites run [$1,500–$3,000], one time, depending on page count, copywriting and how much content we're moving. Pay in full or in monthly installments.
 					</p>
 					<p>
-						Where you land in that range depends on a few things — the complexity of your site, how much copy work is involved, your service area, and how active your content needs to be month to month. We scope that honestly in the first conversation.
+						<strong class="font-medium text-fc-obsidian">Hosting and care:</strong> [$75–$240] a month, starting after launch. That covers hosting, security, backups, maintenance and a real person to call. Plans with unlimited edits cover the everyday changes: text, photos, hours, new work for your portfolio.
+					</p>
+					<p>
+						You get a written proposal with exact numbers before anything is signed.
 					</p>
 				</div>
 			</div>
@@ -108,17 +111,14 @@ templ servicesContent() {
 			<div data-reveal class="max-w-2xl">
 				@eyebrowDark("How the relationship works")
 				<h2 class="font-display text-h2-display font-normal text-fc-chalk">
-					Six months. That's all we ask.
+					Pay for the build. Own the site.
 				</h2>
 				<div class="mt-8 space-y-4 text-body text-fc-ash">
 					<p>
-						We don't do month-to-month. Building something right takes time — design, copy, build, launch, and enough runway to see it working. We ask for six months.
+						Your website is a one-time build fee. Pay it up front and the site is yours from day one. Or spread it over three or six months; it costs a little more, since we carry the balance. Either way, once the build is paid off, the site is yours.
 					</p>
 					<p>
-						After that, you stay because it's worth it. Thirty days notice is all it takes to end the engagement. You keep everything — the site, the code, the content. No hostage situations.
-					</p>
-					<p>
-						We're also selective about who we take on. Not because we're precious about it, but because a site we've built wrong for the wrong client doesn't help anyone. The first conversation is as much about fit as it is about scope.
+						After launch, hosting and care are month-to-month. No long contract. Thirty days' notice ends it, and we hand over your site files. You never have to stay because you're stuck. You stay because it's worth it.
 					</p>
 				</div>
 			</div>
@@ -131,12 +131,20 @@ templ servicesContent() {
 			@eyebrow("Common questions")
 			<div data-reveal class="mt-8 max-w-2xl space-y-8">
 				@servicesFaqItem("What does the first conversation look like?", "No pitch, no deck. We look at your current setup before we talk — site, search presence, how you're showing up for the customers you want. When we get on the call we walk through what we see: what's working, what isn't, and what we'd do differently. If it makes sense to work together, we'll tell you. If it doesn't, we'll tell you that too.")
-				@servicesFaqItem("Do I own the site?", "After 18 months of active engagement, yes — fully. The code, the design, everything transfers to you and we'll help with the migration. Before that threshold, you have full use of the site as part of your monthly agreement. The six-month clause still protects you — if it's not working, you can exit with 30 days notice. We're transparent about this from the start. It's in the proposal before anything is signed.")
+				@servicesFaqBlock("Do I own the site?") {
+					<p class="font-medium text-fc-obsidian">Yes. As soon as the build is paid.</p>
+					<p>Your domain, your content, your photos and your customer data are yours from day one, no matter what. The website itself (the design and the code) becomes yours the moment your build fee is paid in full. Pay up front and that's day one.</p>
+					<p>If you ever move the site somewhere else, we transfer the files and source code to the host of your choice within 14 days. Nothing is held back.</p>
+				}
 				@servicesFaqItem("How long does the build take?", "Most sites launch in four to six weeks. Timeline depends on how quickly you can review and approve — we don't sit on things. The faster you can react, the faster you're live.")
-				@servicesFaqItem("What counts as a monthly change?", "Copy updates, new photos, team changes, updated hours, added service descriptions, seasonal content. Anything that takes under an hour. Larger additions — new service lines, structural changes, campaign landing pages — get scoped separately and priced honestly before we touch them.")
+				@servicesFaqItem("What counts as a monthly change?", "Copy updates, new photos, team changes, updated hours, added service descriptions, seasonal content. On unlimited-edit plans that means text updates, photo swaps, service and price changes, hours, minor layout adjustments, and up to [four] new portfolio entries a month. New pages, structural redesigns and third-party integrations are quoted separately and priced honestly before we touch them.")
 				@servicesFaqItem("What about paid ads — is that included?", "No, but it's available. Google Ads and Facebook campaigns are scoped and managed separately for clients where paid visibility makes sense. We'll tell you in the first conversation whether we think it's worth it for your market.")
 				@servicesFaqItem("Do you work with businesses outside Montana?", "Yes. No geographic limit. We're based in Helena and Montana brands are close to our heart, but most of what we do works just as well over a call and a shared screen. If you're in Billings or Birmingham, the process is the same.")
-				@servicesFaqItem("What happens if I want to cancel?", "After the initial six months, thirty days notice. If you've hit the 18-month mark, you keep the site, the code, the content — all of it. We'll handle the transition and make sure nothing gets lost in the handoff. Before 18 months, we return your digital assets and close out the engagement cleanly.")
+				@servicesFaqBlock("What happens if I want to cancel?") {
+					<p><strong class="font-medium text-fc-obsidian">Hosting:</strong> thirty days' written notice, any time. We hand over your site files.</p>
+					<p><strong class="font-medium text-fc-obsidian">If you're on a payment plan:</strong> the remaining build balance is due when hosting ends. Then the site is fully yours.</p>
+					<p><strong class="font-medium text-fc-obsidian">If you cancel during the build:</strong> we bill the time worked at our hourly rate, apply what you've already paid, and refund anything left over. If we're the ones who back out, you get every build payment back.</p>
+				}
 			</div>
 		</div>
 	</section>
@@ -182,5 +190,18 @@ templ servicesFaqItem(question, answer string) {
 			<span class="ml-4 text-fc-slate transition group-open:rotate-45">+</span>
 		</summary>
 		<p class="mt-4 text-body-sm text-fc-flint">{ answer }</p>
+	</details>
+}
+
+// servicesFaqBlock is servicesFaqItem for answers that need more than one paragraph.
+templ servicesFaqBlock(question string) {
+	<details class="group border-t border-fc-ash pt-6">
+		<summary class="flex cursor-pointer items-center justify-between font-display text-h4-display font-normal text-fc-obsidian">
+			{ question }
+			<span class="ml-4 text-fc-slate transition group-open:rotate-45">+</span>
+		</summary>
+		<div class="mt-4 space-y-3 text-body-sm text-fc-flint">
+			{ children... }
+		</div>
 	</details>
 }
