@@ -14,7 +14,7 @@ RUN curl -sL https://github.com/tailwindlabs/tailwindcss/releases/download/v3.4.
     tailwindcss -c tailwind/demos/law.config.js -i tailwind/demos/law.css -o demos/law/static/css/site.css --minify
 
 # Generate templ and build Go binary
-RUN go install github.com/a-h/templ/cmd/templ@latest && \
+RUN go install github.com/a-h/templ/cmd/templ@v0.3.1020 && \
     templ generate
 RUN CGO_ENABLED=0 go build -o /bin/server ./cmd/server
 
