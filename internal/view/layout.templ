@@ -3,32 +3,37 @@ package view
 // Base renders a page. activePath drives nav highlighting and, for most pages,
 // also the canonical URL.
 templ Base(title, description, activePath string, body templ.Component) {
-	@BaseCanonical(title, description, activePath, activePath, body)
+	@Page(PageMeta{Title: title, Description: description, ActivePath: activePath}, body)
 }
 
 // BaseCanonical is Base with an explicit canonical path, for pages whose URL
 // differs from their nav-active path (e.g. an industry landing page highlights
 // the "Industries" nav item but canonicalizes to its own keyword URL).
 templ BaseCanonical(title, description, activePath, canonicalPath string, body templ.Component) {
+	@Page(PageMeta{Title: title, Description: description, ActivePath: activePath, CanonicalPath: canonicalPath}, body)
+}
+
+// Page renders the full document shell from a PageMeta.
+templ Page(m PageMeta, body templ.Component) {
 	<!DOCTYPE html>
 	<html lang="en" class="bg-fc-chalk text-fc-obsidian">
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-			<meta name="description" content={ description }/>
-			<title>{ title } | { SiteName }</title>
+			<meta name="description" content={ m.Description }/>
+			<title>{ m.documentTitle() }</title>
 			if BaseURL != "" {
-				<link rel="canonical" href={ BaseURL + canonicalPath }/>
+				<link rel="canonical" href={ BaseURL + m.canonical() }/>
 				<meta property="og:type" content="website"/>
 				<meta property="og:site_name" content={ SiteName }/>
-				<meta property="og:title" content={ title }/>
-				<meta property="og:description" content={ description }/>
-				<meta property="og:url" content={ BaseURL + canonicalPath }/>
-				<meta property="og:image" content={ BaseURL + "/static/images/logo_wordmark.png" }/>
+				<meta property="og:title" content={ m.Title }/>
+				<meta property="og:description" content={ m.socialDescription() }/>
+				<meta property="og:url" content={ BaseURL + m.canonical() }/>
+				<meta property="og:image" content={ BaseURL + m.image() }/>
 				<meta name="twitter:card" content="summary_large_image"/>
-				<meta name="twitter:title" content={ title }/>
-				<meta name="twitter:description" content={ description }/>
-				<meta name="twitter:image" content={ BaseURL + "/static/images/logo_wordmark.png" }/>
+				<meta name="twitter:title" content={ m.Title }/>
+				<meta name="twitter:description" content={ m.socialDescription() }/>
+				<meta name="twitter:image" content={ BaseURL + m.image() }/>
 			}
 			<!-- Favicons -->
 			<link rel="icon" href="/static/favicon/favicon.ico" sizes="32x32"/>
@@ -54,7 +59,7 @@ templ BaseCanonical(title, description, activePath, canonicalPath string, body t
 			<script src="/static/js/alpine.min.js" defer></script>
 		</head>
 		<body class="min-h-screen font-body text-body font-light antialiased">
-			@Nav(activePath)
+			@Nav(m.ActivePath)
 			<main>
 				@body
 			</main>

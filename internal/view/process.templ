@@ -1,7 +1,12 @@
 package view
 
 templ ProcessPage() {
-	@Base("Process", "Six steps from first call to launch. How FlintCraft Studio builds websites.", "/process", processContent())
+	@Page(PageMeta{
+		Title:             "Our Website Design Process",
+		Description:       "How FlintCraft Studio builds a custom website in six steps, from the first call and market research to checked copy, launch and handoff.",
+		SocialDescription: "Six steps from first call to launch.",
+		ActivePath:        "/process",
+	}, processContent())
 }
 
 templ processContent() {

@@ -1,7 +1,12 @@
 package view
 
 templ ContactPage(errors map[string]string, values map[string]string, success bool) {
-	@Base("Start a Project", "Start a project with FlintCraft Studio. No pitch, no deck. Tell us what you're working on.", "/contact", contactContent(errors, values, success))
+	@Page(PageMeta{
+		Title:             "Start a Website Project",
+		Description:       "Tell us about your business and your current website. Logan or Jaden will reply by the end of the next business day with a few notes on your site.",
+		SocialDescription: "No pitch, no deck. Tell us what you're working on.",
+		ActivePath:        "/contact",
+	}, contactContent(errors, values, success))
 }
 
 templ contactContent(errors map[string]string, values map[string]string, success bool) {

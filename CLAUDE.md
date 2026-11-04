@@ -48,7 +48,7 @@ docker compose up      # builds locally, reads .env, serves on :8080
 
 **Handler pattern**: Handlers in `internal/handler/` return `http.HandlerFunc` closures, keeping dependencies (mailer, config) in closure scope.
 
-**Templating**: `.templ` files compile to gitignored `*_templ.go` via `templ generate`. Marketing pages compose into `Base(title, description, activePath, body)` in `internal/view/layout.templ`. Package-level vars in `view/shared.go` (BaseURL, GtagID, PixelID, TurnstileSiteKey) are set from config in `main.go`.
+**Templating**: `.templ` files compile to gitignored `*_templ.go` via `templ generate`. Marketing pages compose into `Base(title, description, activePath, body)` in `internal/view/layout.templ`. Pages that need more control (full `<title>` override, shorter social description, per-page OG image, custom canonical) use `Page(PageMeta{...}, body)`; `Base`/`BaseCanonical` are thin wrappers over it (`internal/view/meta.go`). The Services FAQ lives as data in `internal/view/faq.go` and drives both the on-page FAQ and its FAQPage JSON-LD. Package-level vars in `view/shared.go` (BaseURL, GtagID, PixelID, TurnstileSiteKey) are set from config in `main.go`.
 
 **Content lives in Go data, not templates**:
 - Portfolio: `internal/view/portfolio.go` — `Projects` map + `ProjectOrder`. `/work/{slug}` and the sitemap read from these.

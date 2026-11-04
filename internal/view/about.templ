@@ -1,7 +1,12 @@
 package view
 
 templ AboutPage() {
-	@Base("About", "FlintCraft Studio is two people in Helena, Montana building custom websites for established businesses.", "/about", aboutContent())
+	@Page(PageMeta{
+		Title:             "About: A Two-Person Web Studio in Helena, MT",
+		Description:       "FlintCraft Studio is two people in Helena, Montana who research, write, build and look after websites for established businesses. Shaped with intent.",
+		SocialDescription: "Two people in Helena, Montana. Shaped with intent.",
+		ActivePath:        "/about",
+	}, aboutContent())
 }
 
 templ aboutContent() {

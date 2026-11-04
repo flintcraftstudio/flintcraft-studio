@@ -18,10 +18,10 @@ import (
 // PostalAddress is a schema.org PostalAddress node.
 type PostalAddress struct {
 	Type            string `json:"@type"` // "PostalAddress"
-	StreetAddress   string `json:"streetAddress"`
+	StreetAddress   string `json:"streetAddress,omitempty"`
 	AddressLocality string `json:"addressLocality"`
 	AddressRegion   string `json:"addressRegion"`
-	PostalCode      string `json:"postalCode"`
+	PostalCode      string `json:"postalCode,omitempty"`
 	AddressCountry  string `json:"addressCountry"`
 }
 
@@ -84,6 +84,8 @@ type LocalBusiness struct {
 	Email           string           `json:"email,omitempty"`
 	PriceRange      string           `json:"priceRange,omitempty"`
 	Image           string           `json:"image,omitempty"`
+	Logo            string           `json:"logo,omitempty"`
+	AreaServed      []string         `json:"areaServed,omitempty"`
 	Address         *PostalAddress   `json:"address,omitempty"`
 	Geo             *GeoCoordinates  `json:"geo,omitempty"`
 	OpeningHours    []OpeningHours   `json:"openingHoursSpecification,omitempty"`

@@ -1,7 +1,13 @@
 package view
 
 templ WorkPage() {
-	@Base("Work", "A selection of recent projects. Real businesses, real problems, real outcomes.", "/work", workContent())
+	@Page(PageMeta{
+		Title:             "Website Case Studies",
+		Description:       "Field reports from recent FlintCraft website projects: the business, what wasn't working, what we built, and what changed.",
+		SocialDescription: "Field reports from recent FlintCraft website projects.",
+		Image:             Projects[ProjectOrder[0]].Screenshot,
+		ActivePath:        "/work",
+	}, workContent())
 }
 
 templ workContent() {

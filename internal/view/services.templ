@@ -1,10 +1,18 @@
 package view
 
+import "github.com/firefly-software-mt/standard-template/internal/structdata"
+
 templ ServicesPage() {
-	@Base("Services", "One relationship. Everything handled. Custom websites for established businesses.", "/services", servicesContent())
+	@Page(PageMeta{
+		Title:             "Website Design, Hosting and Care",
+		Description:       "Website design, copywriting, SEO, hosting and care from a Helena studio. Pay once for the build, own the site, month-to-month after. Shaped with intent.",
+		SocialDescription: "Pay for the build. Own the site. Month-to-month hosting and care after launch.",
+		ActivePath:        "/services",
+	}, servicesContent())
 }
 
 templ servicesContent() {
+	@structdata.Script(faqLD(ServicesFAQ))
 	<!-- Hero -->
 	<section class="bg-fc-chalk py-20 sm:py-28">
 		<div class="mx-auto max-w-content px-6 lg:px-8">
@@ -130,20 +138,8 @@ templ servicesContent() {
 		<div class="mx-auto max-w-content px-6 lg:px-8">
 			@eyebrow("Common questions")
 			<div data-reveal class="mt-8 max-w-2xl space-y-8">
-				@servicesFaqItem("What does the first conversation look like?", "No pitch, no deck. We look at your current setup before we talk — site, search presence, how you're showing up for the customers you want. When we get on the call we walk through what we see: what's working, what isn't, and what we'd do differently. If it makes sense to work together, we'll tell you. If it doesn't, we'll tell you that too.")
-				@servicesFaqBlock("Do I own the site?") {
-					<p class="font-medium text-fc-obsidian">Yes. As soon as the build is paid.</p>
-					<p>Your domain, your content, your photos and your customer data are yours from day one, no matter what. The website itself (the design and the code) becomes yours the moment your build fee is paid in full. Pay up front and that's day one.</p>
-					<p>If you ever move the site somewhere else, we transfer the files and source code to the host of your choice within 14 days. Nothing is held back.</p>
-				}
-				@servicesFaqItem("How long does the build take?", "Most sites launch in four to six weeks. Timeline depends on how quickly you can review and approve — we don't sit on things. The faster you can react, the faster you're live.")
-				@servicesFaqItem("What counts as a monthly change?", "Copy updates, new photos, team changes, updated hours, added service descriptions, seasonal content. On unlimited-edit plans that means text updates, photo swaps, service and price changes, hours, minor layout adjustments, and up to [four] new portfolio entries a month. New pages, structural redesigns and third-party integrations are quoted separately and priced honestly before we touch them.")
-				@servicesFaqItem("What about paid ads — is that included?", "No, but it's available. Google Ads and Facebook campaigns are scoped and managed separately for clients where paid visibility makes sense. We'll tell you in the first conversation whether we think it's worth it for your market.")
-				@servicesFaqItem("Do you work with businesses outside Montana?", "Yes. No geographic limit. We're based in Helena and Montana brands are close to our heart, but most of what we do works just as well over a call and a shared screen. If you're in Billings or Birmingham, the process is the same.")
-				@servicesFaqBlock("What happens if I want to cancel?") {
-					<p><strong class="font-medium text-fc-obsidian">Hosting:</strong> thirty days' written notice, any time. We hand over your site files.</p>
-					<p><strong class="font-medium text-fc-obsidian">If you're on a payment plan:</strong> the remaining build balance is due when hosting ends. Then the site is fully yours.</p>
-					<p><strong class="font-medium text-fc-obsidian">If you cancel during the build:</strong> we bill the time worked at our hourly rate, apply what you've already paid, and refund anything left over. If we're the ones who back out, you get every build payment back.</p>
+				for _, f := range ServicesFAQ {
+					@servicesFaqEntry(f)
 				}
 			</div>
 		</div>
@@ -183,25 +179,24 @@ templ capabilityCard(headline, body string) {
 	</div>
 }
 
-templ servicesFaqItem(question, answer string) {
+templ servicesFaqEntry(f FAQEntry) {
 	<details class="group border-t border-fc-ash pt-6">
 		<summary class="flex cursor-pointer items-center justify-between font-display text-h4-display font-normal text-fc-obsidian">
-			{ question }
-			<span class="ml-4 text-fc-slate transition group-open:rotate-45">+</span>
-		</summary>
-		<p class="mt-4 text-body-sm text-fc-flint">{ answer }</p>
-	</details>
-}
-
-// servicesFaqBlock is servicesFaqItem for answers that need more than one paragraph.
-templ servicesFaqBlock(question string) {
-	<details class="group border-t border-fc-ash pt-6">
-		<summary class="flex cursor-pointer items-center justify-between font-display text-h4-display font-normal text-fc-obsidian">
-			{ question }
+			{ f.Q }
 			<span class="ml-4 text-fc-slate transition group-open:rotate-45">+</span>
 		</summary>
 		<div class="mt-4 space-y-3 text-body-sm text-fc-flint">
-			{ children... }
+			for _, para := range f.A {
+				<p>
+					if para.Lead != "" {
+						<strong class="font-medium text-fc-obsidian">{ para.Lead }</strong>
+						if para.Text != "" {
+							{ " " }
+						}
+					}
+					{ para.Text }
+				</p>
+			}
 		</div>
 	</details>
 }

@@ -1,10 +1,19 @@
 package view
 
+import "github.com/firefly-software-mt/standard-template/internal/structdata"
+
 templ HomePage() {
-	@Base("Home", "Custom websites for businesses that have earned their reputation. Helena, Montana.", "/", homeContent())
+	@Page(PageMeta{
+		Title:             "Custom Websites for Montana Businesses",
+		FullTitle:         "Custom Websites for Montana Businesses | FlintCraft Studio, Helena",
+		Description:       "Custom websites for Montana businesses, researched, written, built and looked after by a two-person studio in Helena. One named person to call.",
+		SocialDescription: "Anyone can generate a website now. Knowing what yours should say, and standing behind it, is the work.",
+		ActivePath:        "/",
+	}, homeContent())
 }
 
 templ homeContent() {
+	@structdata.Script(studioLD())
 	<!-- Hero — specimen case -->
 	<section class="hero-spec">
 		<!-- Headline band — pitch lands first -->

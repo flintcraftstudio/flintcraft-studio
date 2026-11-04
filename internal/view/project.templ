@@ -1,7 +1,13 @@
 package view
 
 templ ProjectPage(p Project) {
-	@Base(p.Client, p.Subtitle, "/work", projectContent(p))
+	@Page(PageMeta{
+		Title:         p.Client,
+		Description:   p.Subtitle,
+		Image:         p.Screenshot,
+		ActivePath:    "/work",
+		CanonicalPath: "/work/" + p.Slug,
+	}, projectContent(p))
 }
 
 templ redesignPanel(label, src, caption, alt string, current bool) {
