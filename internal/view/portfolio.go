@@ -20,6 +20,15 @@ type ProjectImage struct {
 	Alt string
 }
 
+// ProjectRedesign holds a before/after screenshot pair for a rebuild. Optional —
+// only projects that replaced an existing site set it.
+type ProjectRedesign struct {
+	Before        string
+	BeforeCaption string
+	After         string
+	AfterCaption  string
+}
+
 // Project holds all data for a portfolio page.
 type Project struct {
 	Slug             string
@@ -31,6 +40,7 @@ type Project struct {
 	LiveURL          string
 	Screenshot       string
 	ScreenshotMobile string
+	Redesign         *ProjectRedesign
 	HeroVideo        string // optional mp4; takes precedence over Screenshot in the desktop frame
 	HeroVideoWebm    string // optional webm; preferred source if browser supports it
 	Story            []string
@@ -44,6 +54,7 @@ type Project struct {
 
 // ProjectOrder defines the display order on the work listing page.
 var ProjectOrder = []string{
+	"northstar-aluminum",
 	"schluters-metal-art",
 	"rockabilly-roasting",
 	"lo-mo-outfitting",
@@ -55,6 +66,46 @@ var ProjectOrder = []string{
 
 // Projects is the canonical list of portfolio entries.
 var Projects = map[string]Project{
+	"northstar-aluminum": {
+		Slug:             "northstar-aluminum",
+		Client:           "NorthStar Aluminum",
+		Title:            "A contractor licensed for the whole job. A site that finally said so.",
+		Subtitle:         "Full rebuild — structure, copy, and design — for a screen enclosure and outdoor living contractor in Southwest Florida.",
+		Location:         "Screen enclosures & outdoor living · Sarasota, FL",
+		Tags:             []string{"Marketing site", "Design", "SEO"},
+		LiveURL:          "https://northstaraluminumfl.com",
+		Screenshot:       "/static/images/portfolio/northstar_screenshot.webp",
+		ScreenshotMobile: "/static/images/portfolio/northstar_screenshot_mobile.webp",
+		Redesign: &ProjectRedesign{
+			Before:        "/static/images/portfolio/northstar_before.webp",
+			BeforeCaption: "One long template page. A quote form before a single word of proof, and every service buried in walls of text.",
+			After:         "/static/images/portfolio/northstar_after.webp",
+			AfterCaption:  "A page with pace. The claim first, the credentials second, and a dedicated page for every trade NorthStar is licensed to run.",
+		},
+		NextSlug:   "schluters-metal-art",
+		NextClient: "Schluter’s Metal Art",
+		Story: []string{
+			"NorthStar is a licensed general contractor in Sarasota that builds the entire outdoor room — screen enclosures and pool cages, patios and decks, retractable awnings, motorized screens. Most companies in the market sell you a cage or sell you a shade and subcontract the rest. NorthStar doesn’t, and that is the whole argument for hiring them.",
+			"The old site never made that argument. It was a single template page that opened with an instant-quote form — asking for a name, a phone number, and an address before it had given a visitor one reason to trust the company. Below the form sat unbroken paragraphs of service copy, every trade competing on the same page, none of it reachable from navigation. Nothing about it read like a licensed contractor with a permit history.",
+			"We rebuilt it around the proof. The claim leads — one contractor for all of your outdoor living — and the credentials follow immediately: state license number, design wind load, wind-failure record, real Google reviews. Each trade got its own page instead of a paragraph. The permit-and-inspection process is written out plainly, because knowing what to expect is what separates a contractor from a salesman.",
+			"The quote form is still there. It just comes after the reasons to fill it out.",
+		},
+		Results: []ProjectResult{
+			{Value: "4", Unit: "pages", Label: "One per trade, replacing one long page"},
+			{Value: "51", Unit: "reviews", Label: "5.0 rating, finally on the page"},
+			{Value: "125", Unit: "mph", Label: "Wind rating, stated up front"},
+		},
+		Deliverables: []string{
+			"Full site rebuild — no templates, no page builders",
+			"Information architecture — a dedicated page per trade, replacing one scrolling page",
+			"Full copywriting — services, process, credentials, and warranty terms",
+			"Credential and proof design — license, wind rating, and review display",
+			"Photography direction and integration across every service",
+			"Mobile rebuild — navigation, tap targets, and click-to-call",
+			"SEO foundation — meta tags, schema markup, sitemap, service-area pages",
+			"Hosting and SSL on FlintCraft infrastructure",
+		},
+	},
 	"schluters-metal-art": {
 		Slug:             "schluters-metal-art",
 		Client:           "Schluter’s Metal Art",
@@ -204,8 +255,8 @@ var Projects = map[string]Project{
 		LiveURL:          "https://traverhardwoodfloors.com",
 		Screenshot:       "/static/images/portfolio/thf_screenshot.webp",
 		ScreenshotMobile: "/static/images/portfolio/thf_screenshot_mobile.webp",
-		NextSlug:         "schluters-metal-art",
-		NextClient:       "Schluter’s Metal Art",
+		NextSlug:         "northstar-aluminum",
+		NextClient:       "NorthStar Aluminum",
 		Story: []string{
 			"Chris Traver has been laying hardwood floors in western Montana for 18 years. His site didn\u2019t show it. The previous design was functional. But it read like a flooring store, not a craftsman. On a site where the portfolio is the only argument that matters, there were two projects in it.",
 			"The redesign started with the floors themselves \u2014 warm espresso darks, amber light, a palette pulled from aged fir and walnut endgrain. The typography got weight. The layout got wide enough to let photography breathe. Dark sections alternate with light ones so the page has pace, not just content.",
