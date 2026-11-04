@@ -51,3 +51,7 @@ func ReferralLabel(ref string) string {
 		return "one of our industry examples"
 	}
 }
+
+// TimelineOptions are the allowed answers to the contact form's optional
+// "When are you hoping to launch?" select. The handler rejects anything else.
+var TimelineOptions = []string{"Within a month", "1–3 months", "Just exploring"}

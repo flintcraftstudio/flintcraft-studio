@@ -28,6 +28,17 @@ func sanitizeRef(s string) string {
 	return s
 }
 
+// sanitizeTimeline returns s if it is one of view.TimelineOptions, else "".
+func sanitizeTimeline(s string) string {
+	s = strings.TrimSpace(s)
+	for _, opt := range view.TimelineOptions {
+		if s == opt {
+			return s
+		}
+	}
+	return ""
+}
+
 // Contact handles GET /contact and renders the contact form. A ?ref= query
 // (set by industry demo/landing CTAs) is captured so we know the lead came in
 // through a demo — it rides through the form in a hidden field.
@@ -58,6 +69,7 @@ func ContactSubmit(mailer *mail.Client, turnstileSecret string) http.HandlerFunc
 			"phone":    strings.TrimSpace(r.FormValue("phone")),
 			"website":  strings.TrimSpace(r.FormValue("website")),
 			"message":  strings.TrimSpace(r.FormValue("message")),
+			"timeline": sanitizeTimeline(r.FormValue("timeline")),
 			"ref":      sanitizeRef(r.FormValue("ref")),
 		}
 
@@ -96,6 +108,9 @@ func ContactSubmit(mailer *mail.Client, turnstileSecret string) http.HandlerFunc
 			}
 			if values["website"] != "" {
 				body = fmt.Sprintf("%s\nWebsite: %s", body, values["website"])
+			}
+			if values["timeline"] != "" {
+				body = fmt.Sprintf("%s\nHoping to launch: %s", body, values["timeline"])
 			}
 			subject := fmt.Sprintf("Contact form: %s", values["name"])
 			if values["ref"] != "" {

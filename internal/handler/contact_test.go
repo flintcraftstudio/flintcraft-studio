@@ -70,3 +70,56 @@ func TestContactSubmitPreservesRefOnError(t *testing.T) {
 		t.Error("ref not preserved through validation error")
 	}
 }
+
+func TestSanitizeTimeline(t *testing.T) {
+	cases := map[string]string{
+		"Within a month":     "Within a month",
+		" 1–3 months ":       "1–3 months",
+		"Just exploring":     "Just exploring",
+		"":                   "",
+		"yesterday":          "",
+		"<script>x</script>": "",
+		"within a month":     "", // exact match only
+	}
+	for in, want := range cases {
+		if got := sanitizeTimeline(in); got != want {
+			t.Errorf("sanitizeTimeline(%q) = %q, want %q", in, got, want)
+		}
+	}
+}
+
+func TestContactSubmitPreservesTimelineOnError(t *testing.T) {
+	form := url.Values{
+		"email":    {"a@b.co"},
+		"message":  {"hi"},
+		"timeline": {"1–3 months"},
+		// name omitted -> validation error, form re-renders
+	}
+	r := httptest.NewRequest("POST", "/contact", strings.NewReader(form.Encode()))
+	r.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	w := httptest.NewRecorder()
+	ContactSubmit(nil, "").ServeHTTP(w, r)
+
+	if !strings.Contains(w.Body.String(), `value="1–3 months" selected`) {
+		t.Error("timeline selection not preserved through validation error")
+	}
+}
+
+func TestContactSubmitSuccessMessage(t *testing.T) {
+	form := url.Values{
+		"name":    {"Pat"},
+		"email":   {"a@b.co"},
+		"message": {"hi"},
+	}
+	r := httptest.NewRequest("POST", "/contact", strings.NewReader(form.Encode()))
+	r.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	w := httptest.NewRecorder()
+	ContactSubmit(nil, "").ServeHTTP(w, r)
+
+	body := w.Body.String()
+	for _, s := range []string{"reply by end of the next business day", `href="tel:+14068719875"`} {
+		if !strings.Contains(body, s) {
+			t.Errorf("success response missing %q", s)
+		}
+	}
+}
