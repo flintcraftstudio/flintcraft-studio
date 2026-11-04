@@ -195,36 +195,7 @@ templ homeContent() {
 	)
 
 	<!-- Comparison -->
-	<section class="bg-white py-20 sm:py-24">
-		<div data-reveal class="mx-auto max-w-content px-6 lg:px-8">
-			@eyebrow("Why switch")
-			<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
-				Tired of your current setup? You're not alone.
-			</h2>
-			<p class="mb-10 mt-6 max-w-2xl text-body text-fc-flint">
-				A typical small business cobbles together managed hosting, a maintenance plan, a security plugin, a form builder, and a developer they can never get on the phone. That stack still breaks, still looks like a template, and still goes to voicemail when something goes wrong.
-			</p>
-			<div class="overflow-x-auto">
-				<table class="w-full text-left text-body-sm">
-					<thead>
-						<tr class="border-b border-fc-ash">
-							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-slate"></th>
-							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-slate">WordPress / Wix / Squarespace</th>
-							<th class="pb-3 text-eyebrow font-medium uppercase text-fc-ember-deep">FlintCraft</th>
-						</tr>
-					</thead>
-					<tbody class="text-fc-flint">
-						@compRow("Built for your business", "No", "Yes")
-						@compRow("Plugin dependencies", "Many", "None")
-						@compRow("Who maintains it", "Varies — often overseas", "Us. Same people who built it.")
-						@compRow("Response time", "24–72 hours", "Same day")
-						@compRow("SEO approach", "One-size plugin", "Written for your market")
-						@compRow("When it breaks", "Support ticket", "Phone call")
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</section>
+	@comparisonSection(nil)
 
 	<!-- Featured testimonial — lands right before the CTA -->
 	@pullQuoteFeatured(
@@ -298,6 +269,49 @@ templ serviceCard(label, headline, description, ctaLabel, ctaHref string) {
 			{ ctaLabel } &rarr;
 		</a>
 	</div>
+}
+
+// CompRow is one row of the DIY/AI-builder comparison table.
+type CompRow struct {
+	Label, Them, Us string
+}
+
+// comparisonSection is the shared "Why switch" table used on the homepage and
+// industry landing pages. extra rows (industry-specific) are appended last.
+templ comparisonSection(extra []CompRow) {
+	<section class="bg-white py-20 sm:py-24">
+		<div data-reveal class="mx-auto max-w-content px-6 lg:px-8">
+			@eyebrow("Why switch")
+			<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
+				Tired of doing it yourself? You're not alone.
+			</h2>
+			<p class="mb-10 mt-6 max-w-2xl text-body text-fc-flint">
+				Website builders and AI tools make it easy to get something online. Getting something that wins work, stays accurate and has someone behind it is another matter.
+			</p>
+			<div class="overflow-x-auto">
+				<table class="w-full text-left text-body-sm">
+					<thead>
+						<tr class="border-b border-fc-ash">
+							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-slate"><span class="sr-only">Question</span></th>
+							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-slate">DIY / AI builder</th>
+							<th class="pb-3 text-eyebrow font-medium uppercase text-fc-ember-deep">FlintCraft</th>
+						</tr>
+					</thead>
+					<tbody class="text-fc-flint">
+						@compRow("Who writes it", "You, or a prompt", "We do, from research on your market")
+						@compRow("Who checks it's accurate", "Nobody", "You and us, line by line")
+						@compRow("Who keeps it current", "You, when you remember", "We do, as part of your plan")
+						@compRow("When it breaks", "Help docs and forums", "A phone call")
+						@compRow("Who it's built for", "Everyone", "Your customers")
+						@compRow("Contract", "Annual plan", "Month-to-month after the build")
+						for _, r := range extra {
+							@compRow(r.Label, r.Them, r.Us)
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
 }
 
 templ compRow(label, them, us string) {

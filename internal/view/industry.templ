@@ -122,36 +122,8 @@ templ industryContent(d IndustryLanding) {
 		</div>
 	</section>
 
-	<!-- WordPress comparison (shared pattern) -->
-	<section class="bg-white py-20 sm:py-24">
-		<div data-reveal class="mx-auto max-w-content px-6 lg:px-8">
-			@eyebrow("Why not WordPress")
-			<h2 class="font-display text-h2-display font-normal text-fc-obsidian">
-				A custom site, not a rented template
-			</h2>
-			<p class="mb-10 mt-6 max-w-2xl text-body text-fc-flint">
-				The typical { d.Profession } site stacks managed hosting, a maintenance plan, a security plugin, a booking add-on, and a developer who's hard to reach. It still breaks, still looks like a template, and still goes to voicemail.
-			</p>
-			<div class="overflow-x-auto">
-				<table class="w-full text-left text-body-sm">
-					<thead>
-						<tr class="border-b border-fc-ash">
-							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-slate"></th>
-							<th class="pb-3 pr-6 text-eyebrow font-medium uppercase text-fc-slate">WordPress / Wix / Squarespace</th>
-							<th class="pb-3 text-eyebrow font-medium uppercase text-fc-ember-deep">FlintCraft</th>
-						</tr>
-					</thead>
-					<tbody class="text-fc-flint">
-						@compRow("Built for your practice", "No", "Yes")
-						@compRow("Plugin dependencies", "Many", "None")
-						@compRow("Online reviews in search", "Plugin you rent", "Your own structured data")
-						@compRow("Speed", "Sluggish, plugin-bloated", "Sub-second, near-perfect Lighthouse")
-						@compRow("When it breaks", "Support ticket", "Phone call")
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</section>
+	<!-- Comparison (shared with homepage) -->
+	@comparisonSection(d.CompExtra)
 
 	<!-- Local SEO line -->
 	<section class="bg-fc-obsidian py-16">

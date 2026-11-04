@@ -22,10 +22,11 @@ type IndustryLanding struct {
 	KeyPoints       []IndustryPoint
 	Cities          []string
 	FAQ             []IndustryFAQ
-	DemoURL         string // live demo, opened in a new tab
-	DemoLabel       string // short label for the demo, e.g. "Alpine Spine"
-	DemoCaption     string // one line under the preview
-	PreviewImage    string // framed preview visual
+	CompExtra       []CompRow // industry-specific rows appended to the shared comparison table
+	DemoURL         string    // live demo, opened in a new tab
+	DemoLabel       string    // short label for the demo, e.g. "Alpine Spine"
+	DemoCaption     string    // one line under the preview
+	PreviewImage    string    // framed preview visual
 	PreviewAlt      string
 	ContactRef      string // referral tag appended to /contact links, e.g. "chiropractor-landing"
 }
@@ -113,6 +114,9 @@ var IndustryLandings = map[string]IndustryLanding{
 			{"Fast and accessible by default", "Near-perfect Lighthouse scores, sub-second loads, and full keyboard/screen-reader accessibility — built in, not patched on. Nothing to update on Tuesday night."},
 		},
 		Cities: []string{"Helena", "Bozeman", "Missoula", "Billings", "Great Falls", "Kalispell"},
+		CompExtra: []CompRow{
+			{"Online reviews in search", "Plugin you rent", "Your own structured data"},
+		},
 		FAQ: []IndustryFAQ{
 			{"How much does a chiropractor website cost?", "The build: most sites run [$1,500–$3,000], one time, depending on page count, copywriting and how much content we're moving. Pay in full or in monthly installments. Hosting and care: [$75–$240] a month, starting after launch. That covers hosting, security, backups, maintenance and a real person to call. The first conversation is free; we'll give you an honest read before you commit to anything."},
 			{"Do you only work with chiropractors in Helena?", "No — we're based in Helena, Montana and work with chiropractic and wellness practices across the state, including Bozeman, Missoula, Billings, Great Falls, and Kalispell. The work is remote-friendly and the relationship is hands-on either way."},

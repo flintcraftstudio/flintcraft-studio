@@ -41,7 +41,7 @@ func TestChiropractorLandingRenders(t *testing.T) {
 		`href="/demos/chiropractor/"`, // links to live demo
 		`target="_blank"`,             // opens in new tab
 		`href="#see-it"`,              // hero secondary CTA scrolls to proof, not a 3rd demo link
-		"WordPress",                   // comparison
+		"DIY / AI builder",            // comparison
 		"Helena",                      // local SEO cities
 	}
 	for _, s := range must {
