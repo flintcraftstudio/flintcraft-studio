@@ -3,8 +3,10 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
+	"os/exec"
 	"runtime"
 
 	"github.com/magefile/mage/sh"
@@ -110,6 +112,52 @@ func Dev() error {
 		return err
 	}
 	return sh.RunV("go", "run", "./cmd/server")
+}
+
+// templCLI is the templ generator matching go.mod. A newer installed CLI
+// generates code the pinned runtime can't compile (see CLAUDE.md).
+const templCLI = "github.com/a-h/templ/cmd/templ@v0.3.1020"
+
+// Watch is the live-reload dev loop. Open http://localhost:7331 (templ's
+// proxy), not :8080. Only one proxy can hold a port, so when another
+// project's watch has 7331, set PROXY_PORT (e.g. PROXY_PORT=7332).
+// Tailwind rebuilds the site's and every demo's site.css on save; templ
+// regenerates on .templ saves. Go edits restart the server; a site.css
+// rebuild is a watched file too, so it restarts and reloads the browser
+// with the new styles. Text-only .templ edits reload without a restart.
+func Watch(ctx context.Context) error {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	proxyPort := os.Getenv("PROXY_PORT")
+	if proxyPort == "" {
+		proxyPort = "7331"
+	}
+
+	// One watcher per stylesheet: the marketing site, then each demo.
+	// --watch=always keeps Tailwind running when stdin isn't a terminal.
+	sheets := [][3]string{
+		{"./tailwind/tailwind.config.js", "./tailwind/input.css", "./web/static/css/site.css"},
+		{"./tailwind/demos/chiropractor.config.js", "./tailwind/demos/chiropractor.css", "./demos/chiropractor/static/css/site.css"},
+		{"./tailwind/demos/law.config.js", "./tailwind/demos/law.css", "./demos/law/static/css/site.css"},
+	}
+	for _, s := range sheets {
+		tw := exec.CommandContext(ctx, tailwindBinaryPath(), "-c", s[0], "-i", s[1], "-o", s[2], "--watch=always")
+		tw.Stdout, tw.Stderr = os.Stdout, os.Stderr
+		if err := tw.Start(); err != nil {
+			return err
+		}
+		defer func() { _ = tw.Process.Kill() }()
+	}
+
+	return sh.RunV("go", "run", templCLI, "generate", "--watch",
+		"--proxy=http://localhost:"+port,
+		"--proxyport="+proxyPort,
+		"--open-browser=false",
+		"--cmd=go run ./cmd/server",
+		`--watch-pattern=(.+\.go$)|(.+\.templ$)|(.+_templ\.txt$)|(static/css/site\.css$)`,
+	)
 }
 
 // Run starts the server

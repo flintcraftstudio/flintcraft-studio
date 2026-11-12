@@ -43,3 +43,5 @@ demos/*/intake-submissions.log
 # Tailwind
 tailwind/tailwindcss
 tailwind/tailwindcss.exe
+# templ watch dev-mode text files
+*_templ.txt

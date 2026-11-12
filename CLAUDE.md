@@ -15,7 +15,11 @@ One Go binary serves two things:
 ```bash
 # Development
 mage Dev               # templ generate + all CSS (site + every demo), then go run on :8080
-                       # No watcher: re-run after editing .templ files or Tailwind classes
+mage Watch             # live reload: open http://localhost:7331 (templ's proxy), not :8080
+                       # Tailwind watches the site + every demo; .templ saves regenerate
+                       # (text-only edits reload without a restart); Go edits and CSS
+                       # rebuilds restart the server. Uses the pinned templ CLI.
+                       # PORT / PROXY_PORT move it (only one proxy per port).
 
 # One-time setup
 mage InstallTailwind   # Download Tailwind v3.4.17 standalone CLI to ./tailwind/tailwindcss
