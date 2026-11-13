@@ -55,3 +55,7 @@ func ReferralLabel(ref string) string {
 // TimelineOptions are the allowed answers to the contact form's optional
 // "When are you hoping to launch?" select. The handler rejects anything else.
 var TimelineOptions = []string{"Within a month", "1–3 months", "Just exploring"}
+
+// contactErrorFields lists the contact form fields that can carry a
+// validation error, in form order. The error summary links to each by id.
+var contactErrorFields = []string{"name", "email", "message"}
