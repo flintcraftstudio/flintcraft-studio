@@ -46,6 +46,18 @@ golangci-lint run
 docker compose up      # builds locally, reads .env, serves on :8080
 ```
 
+Browser tests live in `e2e/` (Playwright; Node stays in that folder). They build and run their own server on :8093 (pinned templ, all three CSS builds), so they never touch a dev server on :8080 or `mage watch`. The webServer refuses to start if `.env` sets `POSTMARK_SERVER_TOKEN`, because the contact test submits a valid message:
+
+```bash
+cd e2e && npm ci          # first time
+npm test                  # full suite (~35s): htmx swaps and focus on /contact; every marketing route, /work/{slug}, industry landing and both demos on desktop + Pixel 7 for one h1, no console errors, axe WCAG 2.1 AA, and a screenshot baseline
+npm run ui                # Playwright UI mode
+npm run update            # re-take baselines that fail after an intended visual change (check the PNGs, commit them with it)
+npm run report            # HTML report with traces after a failure
+```
+
+Run `npm test` before committing UI work: a screenshot diff after a deliberate visual change means update the baselines; an axe, focus or console-error failure is a real bug. `npm run update` only rewrites screenshots that fail, and a small change (an underline, a slightly lighter colour) can stay under the 1% tolerance. To re-take one route anyway: `npx playwright test pages.spec.ts --update-snapshots=all -g " /contact matches screenshot"`. A new portfolio project, industry landing or demo goes in `work`/`routes` in `e2e/tests/pages.spec.ts`. Screenshots seed `Math.random` and emulate reduced motion, so keep any randomness or layout-changing animation deterministic under both.
+
 ## Architecture
 
 **Routing**: Go 1.22+ pattern-based routing via `http.NewServeMux()` in `cmd/server/main.go`. Routes use method+pattern syntax (e.g., `"GET /{$}"`, `"POST /contact"`). `GET /` at the end is the 404 catch-all.
