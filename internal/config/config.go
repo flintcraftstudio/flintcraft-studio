@@ -7,11 +7,11 @@ import (
 )
 
 type Config struct {
-	Port           int
-	BaseURL        string
-	PostmarkToken  string
-	PostmarkFrom   string
-	PostmarkTo     string
+	Port               int
+	BaseURL            string
+	PostmarkToken      string
+	PostmarkFrom       string
+	PostmarkTo         string
 	PixelID            string
 	GtagID             string
 	TurnstileSiteKey   string
@@ -31,11 +31,11 @@ func Load() (*Config, error) {
 	}
 
 	return &Config{
-		Port:          port,
-		BaseURL:       baseURL,
-		PostmarkToken: os.Getenv("POSTMARK_SERVER_TOKEN"),
-		PostmarkFrom:  os.Getenv("POSTMARK_FROM"),
-		PostmarkTo:    os.Getenv("POSTMARK_TO"),
+		Port:               port,
+		BaseURL:            baseURL,
+		PostmarkToken:      os.Getenv("POSTMARK_SERVER_TOKEN"),
+		PostmarkFrom:       os.Getenv("POSTMARK_FROM"),
+		PostmarkTo:         os.Getenv("POSTMARK_TO"),
 		PixelID:            os.Getenv("PIXEL_ID"),
 		GtagID:             os.Getenv("GTAG_ID"),
 		TurnstileSiteKey:   os.Getenv("TURNSTILE_SITE_KEY"),
