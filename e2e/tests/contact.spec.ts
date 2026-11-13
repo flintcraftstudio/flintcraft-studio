@@ -35,8 +35,15 @@ test('empty submit swaps in the error summary and focuses it', async ({ page }) 
   await expect(summary).toContainText('Name is required.');
   await expect(summary).toContainText('Email is required.');
   await expect(summary).toContainText('Message is required.');
-  // The inline error stays under each field too.
-  await expect(page.locator('#name ~ p')).toHaveText('Name is required.');
+  // Each field is marked invalid and described by its inline error.
+  for (const [id, msg] of [
+    ['name', 'Name is required.'],
+    ['email', 'Email is required.'],
+    ['message', 'Message is required.'],
+  ]) {
+    await expect(page.locator(`#${id}`)).toHaveAttribute('aria-invalid', 'true');
+    await expect(page.locator(`#${id}`)).toHaveAccessibleDescription(msg);
+  }
   expect(await stillSameWindow(page), 'form should swap via htmx, not reload').toBe(true);
 });
 
@@ -52,6 +59,10 @@ test('bad email is rejected and typed values are kept', async ({ page }) => {
   await expect(summary).toContainText('Enter a valid email address.');
   await expect(summary).toBeFocused();
   await expect(summary).not.toContainText('Name is required.');
+  await expect(page.locator('#email')).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#email')).toHaveAccessibleDescription('Enter a valid email address.');
+  await expect(page.locator('#name')).not.toHaveAttribute('aria-invalid');
+  await expect(page.locator('#message')).not.toHaveAttribute('aria-invalid');
   await expect(page.locator('#name')).toHaveValue('Jordan');
   await expect(page.locator('#message')).toHaveValue('We need a new site.');
 });

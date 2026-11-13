@@ -123,3 +123,26 @@ func TestContactSubmitSuccessMessage(t *testing.T) {
 		}
 	}
 }
+
+func TestContactSubmitMarksOnlyInvalidFields(t *testing.T) {
+	form := url.Values{
+		"name":    {"Jordan"},
+		"email":   {"not-an-email"},
+		"message": {"hi"},
+	}
+	r := httptest.NewRequest("POST", "/contact", strings.NewReader(form.Encode()))
+	r.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	w := httptest.NewRecorder()
+	ContactSubmit(nil, "").ServeHTTP(w, r)
+	body := w.Body.String()
+
+	if !strings.Contains(body, `aria-invalid="true" aria-describedby="email-error"`) {
+		t.Error("email input not marked invalid and linked to its error")
+	}
+	if !strings.Contains(body, `id="email-error"`) {
+		t.Error("email error has no id for aria-describedby")
+	}
+	if n := strings.Count(body, `aria-invalid`); n != 1 {
+		t.Errorf("aria-invalid appears %d times, want 1 (only email)", n)
+	}
+}
